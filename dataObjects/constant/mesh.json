@@ -4,7 +4,7 @@
     "description":  "Mesh specification",
     "dimensions" : [
 	{ "name" : "N", "descriptions" : "Mesh size" },
-	{ "name" : "I", "descriptions" : "Boundary I" }
+	{ "name" : "I", "descriptions" : "Boundary I" },
 	{ "name" : "J", "descriptions" : "Boundary J" }
     ],
     "properties" : [
@@ -23,5 +23,6 @@
 	    "type" : "integer",
 	    "unit" : "",
 	    "dim"  : "I,J"
+	}
     ] 
 }
