@@ -1,0 +1,24 @@
+{
+    
+    "name":            "fluid",
+    "version":          "0.0.1",
+    "description":    "Fluid and turbulence properties",
+    "viscosity":
+    {
+      "model":           "constant",
+      "value":           0,
+      "units":             
+      {
+        "type":          "SI",
+        "name":         "Pa.s",
+        "value":         [1 -1 -1 0 0 0 0],
+      }
+    },
+
+    "turbulenceModel":
+    {
+      "name":          "none",
+     "active":          false
+    }
+
+}

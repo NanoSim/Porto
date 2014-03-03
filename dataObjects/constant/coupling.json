@@ -1,0 +1,27 @@
+{
+    
+    "name":            "coupling",
+    "version":          "0.0.1",
+    "description":    "List of coupling models used during the simulation",
+    "couplingMode": "defaultImplicit",
+    "forceModels":             
+     {
+       "dragModel":   
+        {
+            "name":     "none"
+        },
+       "liftModel":   
+        {
+            "name":     "none",
+        }
+     }
+
+    "heatTransferModels":             
+     {
+       "model":   
+        {
+            "name":     "none"
+        }
+     }
+
+}

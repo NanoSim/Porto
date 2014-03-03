@@ -1,0 +1,108 @@
+{
+    
+    "name":            "solution",
+    "version":          "0.0.1",
+    "description":    "List of solvers, solver settings, and machine used to obtain simulation results",
+     "type":            "stringList",
+     "machine": 
+     {
+       "type":                "string",
+       "architecture":     "notSpecified",
+       "required":          true
+     },
+    "fluidSolver":             
+     {
+       "pressureSolver":  
+        {
+            "name":            "pressureSolver",
+            "tolerance":  
+            {
+              "type":       "double",
+              "minimum": 0,
+               "required":  true
+            },
+            "relativeTolerance":  
+            {
+              "type":       "double",
+              "minimum": 0,
+               "required":  true
+            },
+
+
+            "toleranceFinal":  
+            {
+              "type":       "double",
+              "minimum": 0,
+              "required":  false
+            },
+            "relativeToleranceFinal":  
+            {
+              "type":       "double",
+              "minimum": 0,
+              "required":  false
+            },
+
+            "maxIterations":  
+            {
+              "type":       "double",
+              "minimum": 0,
+            }
+        },
+
+       "velocitySolver":  
+        {
+            "name":     "velocitySolver",
+            "tolerance":  
+            {
+              "type":       "double",
+              "minimum": 0,
+               "required":  true
+            },
+            "relativeTolerance":  
+            {
+              "type":       "double",
+              "minimum": 0,
+               "required":  true
+            },
+
+
+            "toleranceFinal":  
+            {
+              "type":       "double",
+              "minimum": 0,
+              "required":  false
+            },
+            "relativeToleranceFinal":  
+            {
+              "type":       "double",
+              "minimum": 0,
+              "required":  false
+            },
+
+            "maxIterations":  
+            {
+              "type":       "double",
+              "minimum": 0,
+            }
+        }
+
+
+     },
+
+    "particleSolver":             
+     {
+       "integrator":  
+        {
+            "name":     "integrator",
+            "tolerance":  
+            {
+              "type":       "double",
+              "minimum": 0,
+               "required":  true
+            },
+        }
+     },
+
+     "required":       true
+
+}

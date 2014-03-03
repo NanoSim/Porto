@@ -1,0 +1,7 @@
+{
+    
+    "name":            "snapshot",
+    "version":          "0.0.1",
+    "description":    "Snapshot of a simulation result",
+    "time":             0,
+} 

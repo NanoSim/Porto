@@ -1,0 +1,49 @@
+{
+    
+    "name":            "schemes",
+    "version":          "0.0.1",
+    "description":    "List of schemes that were used to discretize the system of equations",
+    "fluidSchemes":             
+     {
+       "timeDerivatives": 
+       {
+            "type":     "string",
+            "required": true
+       },   
+       "gradients": 
+       {
+            "type":     "string",
+            "required": true
+       },   
+       "divergence": 
+       {
+            "type":     "string",
+            "required": true
+       },   
+       "laplacian": 
+       {
+            "type":     "string",
+            "required": true
+       },   
+       "interpolation": 
+       {
+            "type":     "string",
+            "required": true
+       }   
+     },
+
+    "particleSchemes":             
+     {
+       "timeDerivatives": 
+       {
+            "type":     "string",
+            "required": true
+       },
+       "interpolation": 
+       {
+            "type":     "string",
+            "required": true
+       }   
+     }
+
+}

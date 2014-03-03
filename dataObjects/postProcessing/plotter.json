@@ -1,0 +1,11 @@
+ {
+    "name":            "plotter",
+    "version":          "0.0.1",
+    "description":    "Identify  input script for automatic postprocessing and plotting of results. This important for test harness integration.",
+    "inputScript":
+    {
+        "type":         "string",
+        "location":    "location",
+        "required":     false
+    }
+} 

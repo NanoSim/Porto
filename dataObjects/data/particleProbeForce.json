@@ -1,0 +1,16 @@
+{
+    
+    "name":            "particleProbeForce",
+    "version":          "0.0.1",
+    "description":    "Force data on a per particle basis, e.g., to construct a drag model",
+    "dimension":     "Np x Dspace",
+    "Dspace":          3,
+    "type":              "double",
+    "units":             
+     {
+       "type":          "SI",
+       "value":         [1 1 -2 0 0 0 0],
+       "name":         "Newton"
+     },
+     "required":       false
+}

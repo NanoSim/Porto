@@ -1,0 +1,8 @@
+{
+    
+    "name":            "fluidVelocityField",
+    "version":          "0.0.1",
+    "description":    "Data with fluid velocity information",
+    "time":             0,
+    "isAveraged":    false
+} 

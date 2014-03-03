@@ -1,0 +1,16 @@
+{
+    
+    "name":            "mesh",
+    "version":          "0.0.1",
+    "description":    "Mesh specification",
+    "meshModel":    "blockMesh",
+    "units":             
+     {
+       "type":          "SI",
+       "name":         "Meters",
+       "value":         [0 1 0 0 0 0 0],
+     },
+    "meshDataLocation":     "constant/polyMesh",
+    "bounds":                       [[0 1] [0 1] [0 1]],
+
+}

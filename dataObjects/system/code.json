@@ -1,0 +1,11 @@
+ {
+    "name":            "code",
+    "version":          "0.0.1",
+    "description":    "Description of code used to generate simulation results",
+     "codeVersion": 
+     {
+       "type":       "string",
+       "required":  true
+     },
+     "required":       true
+} 

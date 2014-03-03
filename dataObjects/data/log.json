@@ -1,0 +1,7 @@
+{
+    "name":            "log",
+    "version":          "0.0.1",
+    "description":    "Text file with log from the simulation run",
+     "type":            "string",
+     "required":       true
+} 
