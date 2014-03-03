@@ -1,24 +1,22 @@
 {
     
-    "name":            "fluid",
-    "version":          "0.0.1",
-    "description":    "Fluid and turbulence properties",
-    "viscosity":
-    {
-      "model":           "constant",
-      "value":           0,
-      "units":             
-      {
-        "type":          "SI",
-        "name":         "Pa.s",
-        "value":         [1 -1 -1 0 0 0 0],
-      }
-    },
-
-    "turbulenceModel":
-    {
-      "name":          "none",
-     "active":          false
-    }
-
+    "name":         "Fluid",
+    "version":      "0.0.2",
+    "description":  "Fluid and turbulence properties",   
+    "dimensions" : [
+	{ "name" : "N", "descriptions" : "Mesh size" },
+    ],
+    "properties": [
+	{ 
+	    "name" : "viscosity",
+	    "type" : "Double",
+	    "dim"  : "N",
+	    "unit" : "Pa.s"
+	},
+	{ 
+	    "name" : "turbulenceModel",
+	    "type" : "boolean",
+	    "description" : "Could this be a separate entity?"
+	}
+    ]
 }
