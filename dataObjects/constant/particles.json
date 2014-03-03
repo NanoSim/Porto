@@ -1,28 +1,21 @@
-{
-    
-    "name":            "particles",
-    "version":          "0.0.1",
-    "description":    "Particle properties",
-    "diameter":
-    {
-        "model":        "constant",
-        "value":           100e-6,
-        "units":             
-        {
-          "type":          "SI",
-          "name":         "Meter",
-          "value":         [0 1 0 0 0 0 0],
-     },
-
-    "density":
-    {
-        "model":        "constant",
-        "value":           1000,
-        "units":             
-        {
-          "type":          "SI",
-          "name":         "KilogramPerCubicMeter",
-          "value":         [1 -3 0 0 0 0 0],
-     }
+{   
+    "name"       :  "Particles",
+    "version"    :  "0.0.2",
+    "description":  "Particle properties"
+    "dimensions" : [
+	{ "name" : "N", "descriptions" : "Mesh size" },
+    ],
+    "properties" : [
+	{
+	    "name" : "diameter",
+	    "dim"  : "N",
+	    "unit" : "m"
+	},
+	{
+	    "name" : "density",
+	    "dim"  : "N",
+	    "unit" : "kg/m^3"
+	}
+    ]
 
 }

@@ -1,16 +1,16 @@
-{
-    
-    "name":            "environment",
-    "version":          "0.0.1",
-    "description":    "Environmental data, like gravity",
-    "gravity":
-    {
-        "units":             
-      {
-           "type":          "SI",
-           "name":         "Newton",
-           "value":         [1 1 -2 0 0 0 0],
-       }
-    }
-
+{    
+    "name":         "Environment",
+    "version":      "0.0.2",
+    "description":  "Environmental data, like gravity",
+    "dimensions" : [
+	{ "name" : "N", "descriptions" : "Mesh size" },
+    ],
+    "properties" : [
+	{ 
+	    "name" : "gravity",
+	    "type" : "Double",
+	    "unit" : "Newton",
+	    "dim"  : "N"
+	}
+    ]
 }

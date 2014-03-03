@@ -1,16 +1,27 @@
-{
-    
-    "name":            "mesh",
-    "version":          "0.0.1",
-    "description":    "Mesh specification",
-    "meshModel":    "blockMesh",
-    "units":             
-     {
-       "type":          "SI",
-       "name":         "Meters",
-       "value":         [0 1 0 0 0 0 0],
-     },
-    "meshDataLocation":     "constant/polyMesh",
-    "bounds":                       [[0 1] [0 1] [0 1]],
-
+{    
+    "name":         "Mesh",
+    "version":      "0.0.2",
+    "description":  "Mesh specification",
+    "dimensions" : [
+	{ "name" : "N", "descriptions" : "Mesh size" },
+	{ "name" : "I", "descriptions" : "Boundary I" }
+	{ "name" : "J", "descriptions" : "Boundary J" }
+    ],
+    "properties" : [
+	{ 
+	    "name" : "blockMesh",
+	    "type" : "Double",
+	    "dim"  : "N",
+	    "unit" : "m"
+	},
+	{
+	    "name" : "meshDataLocation",
+	    "type" : "string"
+	},
+	{
+	    "name" : "bounds",
+	    "type" : "integer",
+	    "unit" : "",
+	    "dim"  : "I,J"
+    ] 
 }
