@@ -3,7 +3,7 @@
     "version":      "0.0.2",
     "description":  "Environmental data, like gravity",
     "dimensions" : [
-	{ "name" : "N", "descriptions" : "Mesh size" },
+	{ "name" : "N", "descriptions" : "Mesh size" }
     ],
     "properties" : [
 	{ 
