@@ -4,7 +4,7 @@
     "version":      "0.0.2",
     "description":  "Fluid and turbulence properties",   
     "dimensions" : [
-	{ "name" : "N", "descriptions" : "Mesh size" },
+	{ "name" : "N", "descriptions" : "Mesh size" }
     ],
     "properties": [
 	{ 
