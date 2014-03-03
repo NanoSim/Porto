@@ -1,0 +1,19 @@
+{
+    "name" : "Porto",
+    "version" : "0.0.1",
+    "description" : "The Porto multi-scale framework",
+    "homepage" : "https://github.com/NanoSim/Porto",
+    "authors" : ["Thomas F. Hagelien <thomas.hagelien@sintef.no>","Radl, Stefan <radl@tugraz.at>"],
+    "bugs" : {
+	"web" : "https://github.com/NanoSim/Porto/issues"
+    },
+    "repositories" : [
+	{
+	    "type" : "git",
+	    "url" : "git@github.com:NanoSim/Porto.git"
+	}
+    ],
+    "dependencies" : "[]",
+    "main" : "",
+    "keywords" : ["multiscale", "framework", "eu", "simulation"]
+}
