@@ -2,6 +2,12 @@
  * Macro
  * Declare the Macro module
  * \Class Macro
+ *
+ * The defmacro function stores a function expansion function as a
+ * closure, that when applied with given arguments expands as runtime
+ *
+ * note: this function is not used, but it just illustrates the
+ * possibility.
  */
 
 function defmacro(f)
@@ -13,6 +19,10 @@ function defmacro(f)
     return fn;
 }
 
+/*! \fn expandFile(filename,ext)
+ *  \param string filename Input file
+ *  \param object ext An optional argument that allows a custom object to be submitted to the expand function
+ */
 function expandFile (filename, ext) 
 {
     var buffer = readFile(filename);
@@ -21,6 +31,15 @@ function expandFile (filename, ext)
     return undefined;
 };
 
+/*! \fn bmatch(text)
+ * A bracket-matcher
+ *
+ * The bmatch function (bracket match) will check that the first
+ * character of the text buffer is the start-character '{' bmatch will
+ * then search through the buffer until it reaches the end-character
+ * '}'. bmatch allows nested brackets at multiple levels, and will
+ * ignore quoted brackets and brackets that resides inside of strings (\" \")
+ */
 function bmatch(text) {
     "use strict";
     var buffer = '',
@@ -75,6 +94,16 @@ function bmatch(text) {
     return undefined;
 };
 
+/*! \fn isStruct(text)
+ *  the isStruct function will match if the text is in this format:
+ *  @<keyword>(<parameters>){<body>}
+ *
+ *  Example:
+ *  @for (var i = 0; i < 10; ++i) { I can count to $i }
+ *
+ *  \param string text Input buffer
+ */
+
 function isStruct(text) {
     "use strict";
     var re = /^@([\w\.\$\_]+)\s*\(([^\)]*)\)\s*\{/,
@@ -89,6 +118,12 @@ function isStruct(text) {
     return undefined;
 };
 
+/*! \fn isBlock(text)
+ * the isBlock will match if the text is in this format:
+ * @{ <body> }
+ *
+ * \param string text Input buffer
+ */
 function isBlock(text) {
     "use strict";
     var re = /^@({).*/,
@@ -100,6 +135,16 @@ function isBlock(text) {
     return undefined;
 };
 
+/*! \fn isValue(text)
+ * the isValue will match if the text is in this format:
+ * @<keyword>
+ * @<keyword>;
+ * @<keyword-with-dot-or-underscore>
+ * @<keyword-with-dot-or-underscore>
+ * @<some-function>(<arg>);
+ *
+ * \param string text Input buffer
+ */
 function isValue(text) {
     "use strict";
     var re = /(^@[\w\.\$\_]+\s*\([^\)]*\)[\;]?)|(^@[\w\.\$\_\[\]]+[\;]?)/,
@@ -110,6 +155,19 @@ function isValue(text) {
     return undefined;
 };
 
+/*! \fn expand(text, ext)
+ *
+ * expand will take the input string 'text' and an optional object ext
+ * and evaluate expressions that matches the isStruct, isBlock or
+ * isValue patterns. The result from the evalution with replace the
+ * input-expression in the text. Text that doesn't match the patterns is
+ * left as-is.
+ * 
+ * It is also possible to pass an object to expand. This will make the
+ * object visible from inside the expander through the named object 'extra'
+ * example:
+ * expand("My name is @extra.name", {name: "John Doe"});
+ */
 function expand(text, ext) {
     "use strict";
     var re = /(@[\w\.\$\_]+)|(@[\{])/,
@@ -155,6 +213,9 @@ function expand(text, ext) {
     return(buffer);
 };
 
+/*! \fn matchStruct(exp, ext)
+  Matches a struct pattern and sends the arguments into mfunc
+ */
 function matchStruct(exp, ext) {
     "use strict";
     var re = /^@([\w\.\$\_]+)\s*\(([^\)]*)\)[\s\n]*\{/,
@@ -163,11 +224,19 @@ function matchStruct(exp, ext) {
     return mfunc(hits[1], hits[2], bmatch(rest)[0].replace(/^([\s]*[\n]+)/, '').replace(/\\/g, '\\\\'), ext);
 };
 
+/*! \fn matchBlock(exp, ext)
+ * Sends the entire expression to vfunc for evaluation.
+ */
 function matchBlock(exp, ext) {
     "use strict";
     return vfunc(exp, ext);
 }
 
+/*! \fn matchValue(exp, ext)
+ * 
+ * Check if the expresiion is a function or a symbol, and pass the
+ * hits on to vfunc.
+ */
 function matchValue(exp, ext) {    
     "use strict";
 
@@ -191,6 +260,12 @@ function matchValue(exp, ext) {
     return undefined;
 };
 
+/*! \fn vfunc(expr, ext)
+ * 
+ * The vfunc is a simple expander, as it only has to evaluate the
+ * expression given. if 'ext' is given, a local variable named "extra"
+ * is created containing the ext-object stringified.
+ */
 function vfunc(expr,ext) {
     "use strict";
     var b = (ext !== undefined ? "var extra=" + JSON.stringify(ext) + ";" : '') +
@@ -198,6 +273,22 @@ function vfunc(expr,ext) {
     return eval(b);
 }
 
+/*! \fn mfunc(fn, expr, body, ext)
+ *
+ * The mfunc (macro function) is the heart of the macro expander
+ * utility for expanding nested structs. It creates a buffer that
+ * contains all the function definitions (defined in this scope),
+ * along with a function that is defined by the struct
+ * @<function>()... When the buffer is evaluated, the structures
+ * defined in the body itself gets evaluated, sharing the scope of the
+ * level before, this allowing for nested structures like this:
+ * 
+ * @for(var i = 0; i < 10; ++i) {
+ *   @for(var j = 0; i < 10; ++j) {
+ *     This is tabel[@i][@j]
+ *   }
+ * }
+ */
 function mfunc(fn, expr, body, ext) {
     var b = "{\nvar xs=[],\n" +
 	    "extra=" + JSON.stringify(ext) + ";\n\t" +
@@ -221,3 +312,5 @@ function mfunc(fn, expr, body, ext) {
 exports.defmacro = defmacro;
 exports.expandFile = expandFile;
 exports.expand = expand;
+
+exports.debug = { isValue: isValue, isStruct : isStruct };

@@ -1,8 +1,9 @@
-var soft = soft || {};  
+var porto = porto || {};  
 var $macro = require(":/res/macro.js");
 var expand = $macro.expand;
 var expandFile = $macro.expandFile;
 var defmacro = $macro.defmacro;
+var macrodebug = $macro.debug;
 
 if( !String.prototype.trim) {
     String.prototype.trim = function(){return this.replace(/^\s+|\s+$/g, '');};
