@@ -1,0 +1,14 @@
+{
+    "name": "MyFirst",
+    "version": "1.0",
+    "author": "Thomas F. Hagelien",
+    "dimensions":[
+	{"name":"N"},
+	{"name":"M"}
+    ],
+    "properties":[
+	{"name":"len", "type":"integer", "unit":"cm"},
+	{"name":"y", "type":"integer", "unit":"m"},
+	{"name":"xs", "type":"integer", "dims":"N,M", "unit": "m"}
+    ]
+}

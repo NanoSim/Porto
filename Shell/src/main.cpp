@@ -348,13 +348,13 @@ int main(int argc, char **argv)
   QCoreApplication app(argc,argv);
 
   QProcessEnvironment const &env = QProcessEnvironment::systemEnvironment();
-  if( env.contains("ECMASH_MODULES") ) {
+  if( env.contains("PORTO_MODULES") ) {
 #ifdef WIN32
     QChar const separator(';');
 #else
     QChar const separator(':');
 #endif
-    foreach( QString const & p, env.value("ECMASH_MODULES").split(separator) ) {
+    foreach( QString const & p, env.value("PORTO_MODULES").split(separator) ) {
       app.addLibraryPath(p);
     }
   }
