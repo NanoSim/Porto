@@ -1,3 +1,17 @@
+function Entity(entityObj) {
+    this.obj = entityObj;
+    if( this.obj.__version__  === undefined) throw ("Illegal entity version");  
+}
+
+Entity.prototype.version = function() {
+    return this.obj.__version__;
+}
+
+Entity.prototype.name = function() {
+    return this.obj.__name__;
+}
+
+
 /*! instance will try to create an object based on a given meta-entity
  *  (specified by name and version number)
 */
@@ -31,4 +45,6 @@ instance = function(name, version) {
     return output;
 };
 
+
 exports.instance = instance;
+exports.Entity = Entity;
