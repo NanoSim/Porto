@@ -92,7 +92,11 @@ function mainrepl()
 }
 
 function __main__(args) {
-    var message = "Porto Shell. version 0.0.1\n" +
+    var message = 
+	" ____  __ ____ ____ __  \n"+
+	"(  _ \\/  (  _ (_  _/  \\ \n"+
+	" ) __(  O )   / )((  O )\n"+
+	"(__)  \\__(__\\_)(__)\\__/  version 0.1\n"+
 	"Copyright (c) SINTEF, 2014\n\n" +
 	"For help, type :help\n";
     print(message);
