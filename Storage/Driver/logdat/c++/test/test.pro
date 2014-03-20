@@ -4,11 +4,14 @@ INCLUDEPATH += .
 DEPENDPATH  += .
 CONFIG      += console
 CONFIG      += gtest
-CONFIG      *= debug_and_release
+CONFIG      += debug_and_release
 CONFIG      += c++11
 
-debug:DESTDIR   = debug
-release:DESTDIR = release
+CONFIG(debug, debug|release){
+  DESTDIR = debug
+} else {
+  DESTDIR = release
+}
 
 OBJECTS_DIR = $$DESTDIR/.obj
 MOC_DIR     = $$DESTDIR/.moc

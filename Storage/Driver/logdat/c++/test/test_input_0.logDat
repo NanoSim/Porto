@@ -1,4 +1,4 @@
-#processor: 0
+#processor: 1
 #index   time      ||  vectorData:     archimedesIBForce   ||   scalarData:      ||  position
 0	0.001   ||   0   0   0   ||   ||   4   4   4
 0	0.002   ||   0   0   0   ||   ||   4   4   4
