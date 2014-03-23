@@ -1,0 +1,4 @@
+{
+    "sayHello": "function(){print('Hello');}",
+    "sayBye": "function(){print('bye');}"
+}
