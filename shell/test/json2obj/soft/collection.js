@@ -66,6 +66,10 @@ Collection.prototype.registerEntity = function(entity_, label_) {
     this.obj.entities.push(entityObj);    
 }
 
+Collection.prototype.accept = function(visitor) {
+    return visitor.visit(this);
+}
+
 Collection.prototype.registerRelationship = function(fromLabel, toLabel, relationshipType)
 {
     var relationshipObj = {

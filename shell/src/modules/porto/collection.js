@@ -77,4 +77,8 @@ Collection.prototype.registerRelationship = function(fromLabel, toLabel, relatio
     this.obj.relationships.push(relationshipObj);
 }
 
+Collection.prototype.accept = function(visitor) {
+    return visitor.visit(this);
+}
+
 exports.Collection = Collection;

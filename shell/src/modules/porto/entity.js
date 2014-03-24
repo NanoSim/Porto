@@ -11,12 +11,16 @@ Entity.prototype.name = function() {
     return this.obj.__name__;
 }
 
+Entity.prototype.accept = function(visitor) {
+    return visitor.visit(this);
+};
+
 
 /*! instance will try to create an object based on a given meta-entity
  *  (specified by name and version number)
 */
 
-instance = function(name, version) {
+Entity.instance = function(name, version) {
     var json = readFile(name + '_' + version + '.json');
     if(json === undefined) throw ("Undefined Enitity");
 
@@ -45,6 +49,4 @@ instance = function(name, version) {
     return output;
 };
 
-
-exports.instance = instance;
 exports.Entity = Entity;
