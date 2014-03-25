@@ -358,7 +358,7 @@ int main(int argc, char **argv)
       app.addLibraryPath(p);
     }
   }
-  qDebug() << qPrintable(QCoreApplication::libraryPaths().join("\n"));
+  // qDebug() << qPrintable(QCoreApplication::libraryPaths().join("\n"));
     
   QScriptEngine engine;  
   engine.globalObject().setProperty("__global__", engine.globalObject());
