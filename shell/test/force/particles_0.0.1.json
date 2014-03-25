@@ -1,25 +1,25 @@
 {
-    "name"        : "particles",
-    "version"     : "0.0.1",
-    "domain"      : "nanosim.filtered",
-    "description" : "Particle Properties",
-    "dimensions"  : [
-	{ 
-	    "name": "N" 
-	}
-    ],
-    "properties"  : [
-	{ 
-	    "name": "diameter",
-	    "type": "double",
-	    "unit": "m",
-	    "dims": "N"
-	},
-	{
-	    "name": "density",
-	    "type": "double",
-	    "unit": "kg/m^3",
-	    "dims": "N"
-	}
-    ]
+    "description": "Particle Properties", 
+    "dimensions": [
+        {
+            "name": "N"
+        }
+    ], 
+    "domain": "nanosim.filtered", 
+    "name": "particles", 
+    "properties": [
+        {
+            "dims": "N", 
+            "name": "diameter", 
+            "type": "double", 
+            "unit": "m"
+        }, 
+        {
+            "dims": "N", 
+            "name": "density", 
+            "type": "double", 
+            "unit": "kg/m^3"
+        }
+    ], 
+    "version": "0.0.1"
 }
