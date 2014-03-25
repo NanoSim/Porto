@@ -177,4 +177,4 @@ Base = Base.extend({
     }
 });
 
-exports.Base = Base;
+exports = Base;

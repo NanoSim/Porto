@@ -92,14 +92,25 @@ function mainrepl()
 }
 
 function __main__(args) {
-    var message = 
-	" ____  __ ____ ____ __  \n"+
-	"(  _ \\/  (  _ (_  _/  \\ \n"+
-	" ) __(  O )   / )((  O )\n"+
-	"(__)  \\__(__\\_)(__)\\__/  version 0.1\n"+
-	"Copyright (c) SINTEF, 2014\n\n" +
-	"For help, type :help\n";
-    print(message);
-    mainrepl();
+    if( args.length > 1 )
+    {
+	args.slice(1).map(function(fn){
+	    load(fn); 
+	    if(__main__ !== undefined) {
+		__main__();
+	    }});
+	
+    } else {
+	var message = 
+	    " ____  __ ____ ____ __  \n"+
+	    "(  _ \\/  (  _ (_  _/  \\ \n"+
+	    " ) __(  O )   / )((  O )\n"+
+	    "(__)  \\__(__\\_)(__)\\__/  version 0.1\n"+
+	    "Copyright (c) SINTEF, 2014\n\n" +
+	    "For help, type :help\n";
+	
+	print(message);
+	mainrepl();
+    }
     return 0;
 }

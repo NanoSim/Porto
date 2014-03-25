@@ -9,7 +9,7 @@ CONFIG      += debug_and_release
 QT          -= gui
 QT          += script
 QT          += concurrent
-
+relase:DEFINES += QT_NO_DEBUG_OUTPUT
 
 debug:DESTDIR   = debug
 release:DESTDIR = release

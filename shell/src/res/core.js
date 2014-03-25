@@ -19,6 +19,7 @@ if( !String.prototype.regexIndexOf) {
 function doc(fn) {
     if( fn["^doc"] !== undefined )
 	print( fn["^doc"] );
+    return "\n";
 }
 
 

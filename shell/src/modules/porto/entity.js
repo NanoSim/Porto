@@ -3,6 +3,9 @@ function Entity(entityObj) {
     if( this.obj.__version__  === undefined) throw ("Illegal entity version");  
 }
 
+Entity["^doc"] = 
+"\nThe Entity class provides an interface to a formally defined datatype";
+
 Entity.prototype.version = function() {
     return this.obj.__version__;
 }
@@ -49,4 +52,4 @@ Entity.instance = function(name, version) {
     return output;
 };
 
-exports.Entity = Entity;
+exports = Entity;

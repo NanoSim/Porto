@@ -10,7 +10,9 @@
  * possibility.
  */
 
-function defmacro(f)
+Macro = function() {};
+
+Macro.defmacro = function(f)
 {
     var fn = function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
 	      return eval(f(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
@@ -23,11 +25,11 @@ function defmacro(f)
  *  \param string filename Input file
  *  \param object ext An optional argument that allows a custom object to be submitted to the expand function
  */
-function expandFile (filename, ext) 
+Macro.expandFile = function (filename, ext) 
 {
     var buffer = readFile(filename);
     if( buffer.length > 0 )
-	return(expand(buffer, ext));
+	return(Macro.expand(buffer, ext));
     return undefined;
 };
 
@@ -168,7 +170,7 @@ function isValue(text) {
  * example:
  * expand("My name is @extra.name", {name: "John Doe"});
  */
-function expand(text, ext) {
+Macro.expand = function(text, ext) {
     "use strict";
     var re = /(@[\w\.\$\_]+)|(@[\{])/,
 	buffer = '',
@@ -303,14 +305,11 @@ function mfunc(fn, expr, body, ext) {
 	    mfunc + ";\n\t" +
 	    bmatch + ";\n\t" +	    
 	    fn + "(" + expr + "){" +
-	    "xs.push(expand('" + 
+	    "xs.push(Macro.expand('" + 
             body.replace(/\n/g,'\\n').replace(/\"/g,'\\\"').replace(/\'/g,'\\\'') + 
             "',extra));};xs.join('');}";
     return eval(b);
 }
 
-exports.defmacro = defmacro;
-exports.expandFile = expandFile;
-exports.expand = expand;
-
+exports = Macro
 exports.debug = { isValue: isValue, isStruct : isStruct };

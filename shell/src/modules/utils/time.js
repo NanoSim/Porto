@@ -21,4 +21,4 @@ Time.prototype.restart = function()
 };
 
 
-exports.Time = Time;
+exports = Time;

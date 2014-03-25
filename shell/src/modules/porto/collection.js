@@ -15,6 +15,14 @@ function Collection(collObj) {
     if( this.obj.dimensionMap   === undefined) throw ("undefined dimension-map array in collection");
 }
 
+Collection["^doc"] = 
+"\nThe Collection class is a utility for encaptulating a collection" +
+"\nobject and providing a simple API for working on collections" +
+"\n" +
+"\nCollection are the definitions of sets of entities (including other " +
+"\ncollections), by defining parent collections, entities," +
+"\nrelationships and dimensionality maps.";
+
 Collection.prototype.object = function() {
     return this.obj;
 }
@@ -81,4 +89,4 @@ Collection.prototype.accept = function(visitor) {
     return visitor.visit(this);
 }
 
-exports.Collection = Collection;
+exports = Collection;
