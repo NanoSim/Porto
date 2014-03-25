@@ -31,8 +31,19 @@ Entity.instance = function(name, version) {
     var output = {
 	__name__: name,
 	__version__: version,
-	uuid: uuidgen().substr(1,36)
+	uuid: uuidgen().substr(1,36),
+	dimensions: (function(){
+	    var ret = {};
+	    obj.dimensions.map(function(dim){
+		ret[dim.name] = (dim.value == undefined ? 0 : dim.value);
+	    });	   
+	return ret;
+	    
+	})()
     };
+
+     
+    /* Create setters and getters for the properties */
     obj.properties.map(function(prop){
 	if(prop.dims !== undefined) {
 	    output[prop.name] = [];
