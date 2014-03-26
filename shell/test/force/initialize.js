@@ -1,4 +1,5 @@
-Entity = require('porto.entity');
+Entity      = require('porto.entity');
+Collection  = require('porto.collection');
 JSONStorage = require('porto.storage.jsonstorage').jsonStorage;
 
 __main__ = function()
@@ -8,5 +9,11 @@ __main__ = function()
     
     particles.diameter = 100e-6;
     particles.density  = 1000;
-    storage.commit(particles);
+    var id = particles.uuid;
+    print('ParticleEntityId ' + id);
+
+    var mycase = Entity.instance( 'collection', '1.0') );
+    var collection = new Collection( mycase );
+    print('CollectionId ' + collection.uuid());
+						      
 }
