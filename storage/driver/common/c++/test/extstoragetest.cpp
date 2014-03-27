@@ -41,3 +41,15 @@ TEST_F(ExternalStorageTest, readScalars)
    driver->readInt("MPL", &mpl);
    EXPECT_EQ(mpl, 42);
 }
+
+TEST_F(ExternalStorageTest, readVectors)
+{
+  ExternalStorage storage = ExternalStorage::addExternalStorageDriver("MyStorage");
+  auto driver = storage.driver();
+  double *someContainer;
+  const int rank = 2;
+  const int dims[rank] = {3,3};
+  someContainer = new double[9];
+  bool isOk = driver->readDoubleArray("foobar", rank, dims, someContainer);
+  ASSERT_TRUE(isOk);
+}

@@ -1,21 +1,21 @@
 #ifndef EXTERNALSTORAGE_H_DEF
 #define EXTERNALSTORAGE_H_DEF
 
-#include "iexternalstorage.h"
+#include "iexternalstoragedriver.h"
 
 class ExternalStorage
 {
 private:
-   ExternalStorage(IExternalStorage *istorage);
+   ExternalStorage(IExternalStorageDriver *istorage);
 
 public:
    ExternalStorage();
    virtual ~ExternalStorage();
 
-   static void registerExternalStorageDriver(char const *name, IExternalStorage *istorage);
+   static void registerExternalStorageDriver(char const *name, IExternalStorageDriver *istorage);
    static ExternalStorage addExternalStorageDriver(char const *name);
 
-   IExternalStorage *driver();
+   IExternalStorageDriver *driver();
 
 private:
    class ExternalStoragePrivate;

@@ -1,8 +1,8 @@
 #ifndef MYSTORAGE_H_DEF
 #define MYSTORAGE_H_DEF
-#include <iexternalstorage.h>
+#include <iexternalstoragedriver.h>
 
-class MyStorage : public IExternalStorage
+class MyStorage : public IExternalStorageDriver
 {
 public:
    MyStorage(){}

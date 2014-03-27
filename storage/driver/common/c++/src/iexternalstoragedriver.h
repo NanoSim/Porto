@@ -1,11 +1,11 @@
-#ifndef IEXTERNALSTORAGE_H_DEF
-#define IEXTERNALSTORAGE_H_DEF
+#ifndef IEXTERNALSTORAGEDRIVER_H_DEF
+#define IEXTERNALSTORAGEDRIVER_H_DEF
 
-class IExternalStorage
+class IExternalStorageDriver
 {
 public:
-   IExternalStorage();
-   virtual ~IExternalStorage() = 0; 
+   IExternalStorageDriver();
+   virtual ~IExternalStorageDriver() = 0; 
 
    virtual bool readDouble(char const* propertyName, double *target) = 0;
    virtual bool readInt(char const* propertyName, int *target) = 0;
@@ -15,6 +15,7 @@ public:
    virtual bool getDimensions(char const* propertyName, int *target) = 0;
    virtual int getNumProperties() = 0;
    virtual bool getPropertyName(int index, char *target) = 0;
-}; // class IExternalStorage
+}; // class IExternalStorageDriver
 
-#endif // IEXTERNALSTORAGE_H_DEF
+
+#endif // IEXTERNALSTORAGEDRIVER_H_DEF

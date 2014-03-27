@@ -9,7 +9,7 @@ class ExternalStorage :: ExternalStoragePrivate
 {
    friend class ExternalStorage;
 
-   ExternalStoragePrivate(IExternalStorage *storage)
+   ExternalStoragePrivate(IExternalStorageDriver *storage)
       : storage(storage)
    {}
 
@@ -18,10 +18,10 @@ class ExternalStorage :: ExternalStoragePrivate
       storage = 0;
    }
 
-   IExternalStorage *storage;
+   IExternalStorageDriver *storage;
 };
 
-ExternalStorage :: ExternalStorage(IExternalStorage *istorage)
+ExternalStorage :: ExternalStorage(IExternalStorageDriver *istorage)
    : d(new ExternalStoragePrivate(istorage))
 {}
 
@@ -32,7 +32,7 @@ ExternalStorage :: ExternalStorage()
 ExternalStorage :: ~ExternalStorage()
 {}
 
-void ExternalStorage :: registerExternalStorageDriver(char const *name, IExternalStorage *istorage)
+void ExternalStorage :: registerExternalStorageDriver(char const *name, IExternalStorageDriver *istorage)
 {
    Q_CHECK_PTR(qApp);
    if (qApp->property(name).isValid()) {
@@ -49,7 +49,7 @@ ExternalStorage ExternalStorage :: addExternalStorageDriver(char const *name)
    QVariant v = qApp->property(name);
 
    if(v.isValid()) {
-      IExternalStorage *storage = (IExternalStorage*)v.value<void *>();
+      IExternalStorageDriver *storage = (IExternalStorageDriver*)v.value<void *>();
       return ExternalStorage(storage);
    }	 
    
@@ -57,7 +57,7 @@ ExternalStorage ExternalStorage :: addExternalStorageDriver(char const *name)
    return ExternalStorage();
 }
 
-IExternalStorage *ExternalStorage :: driver()
+IExternalStorageDriver *ExternalStorage :: driver()
 {
    if(!d)
       return 0;

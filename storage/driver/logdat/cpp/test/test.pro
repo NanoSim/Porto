@@ -19,7 +19,7 @@ RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
 include(../src/logdata.pri)
-include(../../../common/c++/src/common.pri)
+include(../../../common/cpp/src/common.pri)
 
 # Input
 SOURCES += logdattest.cpp \

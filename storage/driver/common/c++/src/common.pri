@@ -1,8 +1,8 @@
 DEPENDPATH   += $$PWD
 INCLUDEPATH  += $$PWD
 
-HEADERS      += $$PWD/iexternalstorage.h \ 
+HEADERS      += $$PWD/iexternalstoragedriver.h \ 
                 $$PWD/externalstorage.h 
 
-SOURCES      += $$PWD/iexternalstorage.cpp \
+SOURCES      += $$PWD/iexternalstoragedriver.cpp \
                 $$PWD/externalstorage.cpp
