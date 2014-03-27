@@ -1,9 +1,9 @@
 #ifndef LOGDATAEXTERNALSTORGE_H_DEF
 #define LOGDATAEXTERNALSTORGE_H_DEF
 
-#include <iexternalstorage.h>
+#include <iexternalstoragedriver.h>
 
-class LogDataExternalStorage : public IExternalStorage
+class LogDataExternalStorage : public IExternalStorageDriver
 {
   class LogDataExternalStoragePrivate;
   LogDataExternalStoragePrivate *d;

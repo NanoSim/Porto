@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
 CONFIG  += ordered
 CONFIG  += silent
-SUBDIRS += driver/common/c++/test \
-           driver/logdat/c++/test
+SUBDIRS += driver/common/cpp/test \
+           driver/logdat/cpp/test

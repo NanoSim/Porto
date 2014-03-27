@@ -1,4 +1,5 @@
 #include <QtGlobal>
+#include <QVector>
 #include <gtest/gtest.h>
 #include <logdatareader.h>
 
@@ -49,5 +50,4 @@ TEST_F( LogDataReaderTest, Contents )
   EXPECT_TRUE( log.vectorData[0] == QVector<double>({0,0,0}) );
   EXPECT_TRUE( log.position[0] == QVector<double>({4,4,4}) );
   EXPECT_FALSE(log.position[0] == QVector<double>({3,3,3}) );
-
 }
