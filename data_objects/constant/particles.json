@@ -11,7 +11,8 @@
         {
           "type":          "SI",
           "name":         "Meter",
-          "value":         [0 1 0 0 0 0 0],
+          "value":         [0 1 0 0 0 0 0]
+        }
      },
 
     "density":
@@ -22,7 +23,8 @@
         {
           "type":          "SI",
           "name":         "KilogramPerCubicMeter",
-          "value":         [1 -3 0 0 0 0 0],
+          "value":         [1 -3 0 0 0 0 0]
+        }
      }
 
 }

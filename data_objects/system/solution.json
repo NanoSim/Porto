@@ -10,6 +10,7 @@
        "architecture":     "notSpecified",
        "required":          true
      },
+     
     "fluidSolver":             
      {
        "pressureSolver":  
@@ -102,7 +103,28 @@
             },
         }
      },
-
+     
+     "subParticleTransport":
+     {
+       "integrator":  
+        {
+            "name":     "integrator",
+        },
+        
+        "algorithm":  
+        {
+            "name":     "integrationAlgorithm",
+            "type":     "double",
+            "tolerance":  
+            {
+              "type":       "double",
+              "relative": 0,
+              "absolute": 0,
+               "required":  true
+            },
+        }
+     },
+     
      "required":       true
 
 }
