@@ -10,9 +10,10 @@ TranslatorDemo.prototype.visit = function(entity)
 {    
 }
 
-function createTranslator(sourceInfo, destinationInfo)
+TranslatorDemo.createTranslator = function(sourceInfo, destinationInfo)
 {
     return new TranslatorDemo;
 }
 
-exports.createTranslator = createTranslator;
+exports = TranslatorDemo
+

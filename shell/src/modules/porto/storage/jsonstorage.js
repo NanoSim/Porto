@@ -17,5 +17,5 @@ jsonStorage = function(){
     };
 };
 
-exports.jsonStorage = jsonStorage;
+exports = jsonStorage;
 

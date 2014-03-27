@@ -1,5 +1,5 @@
 TEMPLATE     = app
-TARGET       = logdatatest
+TARGET       = externalstoragetest
 INCLUDEPATH += .
 DEPENDPATH  += .
 CONFIG      += console
@@ -18,12 +18,10 @@ MOC_DIR     = $$DESTDIR/.moc
 RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
-include(../src/logdata.pri)
-include(../../../common/c++/src/common.pri)
+include(../src/common.pri)
 
 # Input
-SOURCES += logdattest.cpp \
-           logdataexternalstoragetest.cpp
+SOURCES += extstoragetest.cpp
 
 win32:QMAKE_POST_LINK = $(DESTDIR_TARGET)
 unix:QMAKE_POST_LINK  = ./$(TARGET)
