@@ -7,10 +7,8 @@
 #include <QThreadPool>
 #include <QtCore>
 
-
 #include "sys.h"
 
-// o-oh a global object
 QFutureSynchronizer<QScriptValue> futureSynchronizer;
 
 QString read(const QString &filename)
@@ -127,6 +125,16 @@ QScriptValue sysWaitForFinished(QScriptContext *context, QScriptEngine *engine)
   Q_UNUSED(context);
   futureSynchronizer.waitForFinished();
   return engine->undefinedValue();
+}
+
+QScriptValue externalStorageAddExternalStorageDriver(QScriptContext *context, QScriptEngine *engine)
+{
+  qWarning() << "Unimplemented!";
+  if(context->argumentCount() < 1)
+    context->throwError(QString("Invalid argument"));
+  
+  auto const driverName = context->argument(0).toString();
+  return engine->undefinedValue();  
 }
 
 QScriptValue writeline(QScriptContext *context, QScriptEngine *engine)
@@ -360,6 +368,9 @@ int main(int argc, char **argv)
   }
   // qDebug() << qPrintable(QCoreApplication::libraryPaths().join("\n"));
     
+  /*
+   * Base
+   */
   QScriptEngine engine;  
   engine.globalObject().setProperty("__global__", engine.globalObject());
   QScriptValue readlineFunction = engine.newFunction(readline);
@@ -395,7 +406,9 @@ int main(int argc, char **argv)
   QScriptValue errorMessageFunction = engine.newFunction(errorMessage);
   engine.globalObject().setProperty("errorMessage", errorMessageFunction);
 
-
+  /*
+   * Sys
+   */
   QScriptValue sysObject = engine.newObject();
   engine.globalObject().setProperty("sys", sysObject);
   QScriptValue sysExecFunction = engine.newFunction(sysExec);
@@ -416,6 +429,17 @@ int main(int argc, char **argv)
   QScriptValue sysSyncInfo = engine.newFunction(syncInfo);
   sysObject.setProperty("info", sysSyncInfo);
 
+  /*
+   * External Storage
+   */
+  QScriptValue externalStorageObject = engine.newObject();
+  engine.globalObject().setProperty("ExternalStorage", externalStorageObject);
+  QScriptValue externalStorageAddExternalStorageDriverFunction = engine.newFunction(externalStorageAddExternalStorageDriver);
+  externalStorageObject.setProperty("addExternalStorageDriver", externalStorageAddExternalStorageDriverFunction);
+  
+  /* 
+   *
+   */
   QScriptProgram program(read(":/res/repl.js"), "repl.js");
   QScriptValue result = engine.evaluate(program);
   if (reportError(&engine, result)) return 1;
