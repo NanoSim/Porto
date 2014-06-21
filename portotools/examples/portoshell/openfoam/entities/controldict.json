@@ -1,0 +1,71 @@
+{
+    "name"        : "controlDict",
+    "version"     : "0.1",
+    "description" : "Time and data input/output control",
+    "properties"  : [
+	{
+	    "name": "application",
+	    "type": "string"
+	},
+	{
+	    "name": "startFrom",
+	    "type": "string"
+	},
+	{
+	    "name": "startTime",
+	    "type": "double"
+	},
+	{
+	    "name": "stopAt",
+	    "type": "string"
+	},
+	{
+	    "name": "endTime",
+            "type": "double"
+	},
+	{
+	    "name": "deltaT",
+	    "type": "double"
+	},
+	{
+	    "name": "writeControl",
+	    "type": "string"
+	},
+	{
+	    "name": "writeInterval",
+	    "type": "double"
+	},
+	{
+	    "name": "purgeWrite",
+	    "type": "integer"
+	},
+	{
+	    "name": "writeFormat",
+	    "type": "string"
+	},
+	{
+	    "name": "writePrecision",
+	    "type": "integer"
+	},
+	{
+	    "name": "writeCompression",
+	    "type": "string"
+	},
+	{
+	    "name": "timeFormat",
+	    "type": "string"
+	},
+	{
+	    "name": "timePrecision",
+	    "type": "integer"
+	},
+	{
+	    "name": "runTimeModifiable",
+	    "type": "string"
+	},
+	{
+	    "name": "adjustTimeStep",
+	    "type": "string"
+	}
+    ]
+}

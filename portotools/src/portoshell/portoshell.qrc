@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/" >
+    <file>resources/core.js</file>
+    <file>resources/repl.js</file>
+    <file>resources/macro.js</file>
+  </qresource>
+</RCC>

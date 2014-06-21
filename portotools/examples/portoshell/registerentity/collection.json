@@ -1,0 +1,52 @@
+{
+    "name": "Collection",
+    "version": "1.0-RC-3",
+    "dimensions": [
+        {
+            "name": "D",
+            "description": "The number of defined dimensions"
+        },
+        {
+            "name": "E",
+            "description": "The number of defined entities"
+        },
+        {
+            "name": "R",
+            "description": "The number of defined relationsships"
+        },
+        {
+            "name": "M",
+            "description": "The number of defined dim-maps"
+        }
+    ],
+    "properties": [
+        {
+            "name": "__name__",
+            "type": "string"
+        },
+        {
+             "name": "__version__",
+             "type": "string"
+        },
+        {
+            "name": "dimensions",
+            "dims": "D",
+            "type": "dimensions-object"
+        },
+        {
+            "name": "entities",
+            "dims": "E",
+            "type": "entities-object"
+        },
+        {
+            "name": "relations",
+            "dims": "R",
+            "type": "relations-object"
+        },
+        {
+            "name": "dimmap",
+            "dims": "M",
+            "type": "dimmap-object"
+        }
+    ]
+}

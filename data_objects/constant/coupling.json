@@ -22,14 +22,6 @@
         {
             "name":     "none"
         }
-     },
-     
-    "subParticleTransportModels":             
-     {
-       "model":   
-        {
-            "name":     "none"
-        }
      }
 
 }

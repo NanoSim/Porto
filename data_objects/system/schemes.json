@@ -44,14 +44,6 @@
             "type":     "string",
             "required": true
        }   
-     },
-     
-    "subParticleTransportShemes":
-     {
-       "timeDerivatives": 
-       {
-            "type":     "string",
-            "required": true
-       }   
      }
+
 }
