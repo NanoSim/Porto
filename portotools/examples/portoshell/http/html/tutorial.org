@@ -2,8 +2,6 @@
 #+AUTHOR: Thomas Hagelien
 #+LANGUAGE: en
 
-Dette er en test
-
 * A brief introduction to portoshell
 
 Portoshell is a scripting tool for performing various tasks related to
