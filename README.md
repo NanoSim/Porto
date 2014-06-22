@@ -33,8 +33,9 @@ installed:
 * valgrind [Valgrind Home](http://valgrind.org/) (optional)
 * Google Closure Compiler [Google Developers](https://developers.google.com/closure/compiler/) (optional)
 
+Be sure you have included the bin and lib directories of the above software tools in the PATH and LD_LIBRARY_PATH of your operating system!
 
-Define the following environmental variables in your .bashrc/.cshrc
+Define the following environmental variables in your .bashrc or .cshrc
 
 	PORTOBASE          = <path>/Porto/portobase
 	LD_LIBRARY_PATH    = $PORTOBASE/lib:$PORTOBASE/bin/plugins:$LD_LIBRARY_PATH
@@ -44,12 +45,15 @@ Define the following environmental variables in your .bashrc/.cshrc
     BSON_LIBRARY_PATH  = <path/to/libbson>
     MONGO_LIBRARY_PATH = <path/to/libmongo>
 
+and be sure they are exported.
 
 Build and install the application like this:
 
-    cd <path>/Porto
-	qmake
-	make install
+>   cd <path>/Porto
+
+>	qmake
+
+>	make install
 
 You should now have the following files:
 
@@ -59,5 +63,7 @@ You should now have the following files:
     $PORTOBASE/include/porto.h
     $PORTOBASE/include/portons.h
     $PORTOBASE/include/scriptengine.h
+
+## THIS IS UNCLEAR!
 
 To run the unittests, run qmake && make in the test-directories
