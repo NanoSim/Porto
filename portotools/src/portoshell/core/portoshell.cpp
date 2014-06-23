@@ -456,15 +456,30 @@ int startRepl (porto::ScriptEngine const &e)
    QString programFile = (QCoreApplication::arguments().count() < 2 ?
 			  QString(":/resources/repl.js") :
 			  QCoreApplication::arguments()[1]);
- 
-   QScriptProgram program(read(programFile), programFile);
+
+   QFile file(programFile);
+   if (!file.open (QIODevice::ReadOnly | QIODevice::Text)) {
+     QTextStream(stderr) << file.errorString() << endl;
+     return 1;
+   }
+   QTextStream in(&file);
+   QString buffer;
+   auto header = in.readLine();
+   if (!header.contains(QRegExp("^[#!/]{1}.*$"))) {
+     buffer = header;
+   }
+   
+   buffer += in.readAll();
+   QScriptProgram program(buffer, programFile);
    auto result = engine->evaluate(program);
-   if (reportError(engine, result)) return 1;      
+   if (reportError(engine, result)) {
+     return 1;
+   }
    
    auto mainFunction = engine->globalObject().property("__main__");
    auto argList = qScriptValueFromSequence(engine, QCoreApplication::arguments().mid(1));
    auto args = QScriptValueList() << argList;
-   auto mainReturn = mainFunction.call (engine->globalObject(), args);  
+   auto mainReturn = mainFunction.call (QScriptValue(), args);  
    
    return mainReturn.toInteger();  
 }
