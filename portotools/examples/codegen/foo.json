@@ -1,0 +1,8 @@
+{
+    "name": "foo",
+    "version": "1.0-SNAPSHOT-1",
+    "properties":[
+	{ "name": "something", "type": "integer" },
+	{ "name": "baz", "type": "string" }
+    ]
+}

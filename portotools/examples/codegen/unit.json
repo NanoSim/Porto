@@ -1,0 +1,35 @@
+{
+    "name": "unit",
+    "version": "1.0-SNAPSHOT-1",
+    "description": "Unit definitions",
+    "properties": [
+        {
+            "name": "abbreviation",
+            "type": "string"
+        },
+        {
+            "name": "code",
+            "type": "string"
+        },
+        {
+            "name": "conversionMultiplier",
+            "type": "double"
+        },
+        {
+            "name": "conversionOffset",
+            "type": "double"
+        },
+        {
+            "name": "quantityKind",
+            "type": "string"
+        },
+        {
+            "name": "symbol",
+            "type": "string"
+        },
+        {
+            "name": "unit",
+            "type": "string"
+        }
+    ]
+}
