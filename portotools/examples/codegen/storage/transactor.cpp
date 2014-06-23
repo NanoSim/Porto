@@ -42,7 +42,7 @@ void Transactor :: store()
    }
 }
 
-void Transactor :: retrieve()
+void Transactor :: fetch()
 {
    auto it = d->storageObjectList.begin();
    for(auto entity : d->entityList) {

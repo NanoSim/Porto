@@ -845,6 +845,622 @@ The last step is to generate the code that makes the controlDict.
 Running this script will create a completely heatly OpenFOAM
 controlDict dictionary file.
 
+* Developing C++ w/code generation
+
+Working in a scripting environment is effective and powerful, but when
+it comes to production code we're ofte more interested in working with
+compiled languanges such as C++, Fortran and Java. By bringing in the
+same elements from Porto scripting into these languages we unleash the
+true power of data-centric development. Being able to instanciate,
+store and retrieve entites directly in the numerical simulators, we
+reduce the unnecessary boilerplate code and IO infrastucture. Ideally
+our models should be developed to just one thing, and do it well -
+compute!
+
+** Background and design
+Our meta-data for defining entities can be used with the Porto.MVC
+framework to generate a code representation of the entity. In this
+tutorial we'll focus on C++. Let's start with our unit-entity again
+and see if we can come up a simple, but reasonable design for a C++
+structure that can be used.
+
+#+BEGIN_SRC C++
+class Unit : public IEntity
+{
+public:
+    Unit();
+    virtual ~Unit();
+
+    std::string abbreviation;
+    std::string code;
+    double conversionMultiplier;
+    double conversionOffset;
+    std::string quantityKind;
+    std::string symbol;
+    std::string unit;
+};
+#+END_SRC
+
+Ok, so we're violating the first principle of OO-programming: "Data
+should be hidden". Feel free to experiment with an implementation with
+setters and getters. What you gain is zero - and setters/getters are
+OO-antipatterns. However, this is the data-centric approach, and the
+key strategy is to put the data up front.
+
+In the back-end of our C++ framework we want to instanciate a Storage
+class that can take as a parameter a /driver/ type, together with some
+optional arguments. To do this in a generic way I propose to implement
+the framework using the Named Parameter Idiom. This way we can write
+code like this:
+
+#+BEGIN_SRC
+   Storage storage = connect("mongodb")
+      .addOption("database", "porto")
+      .addOption("collection", "mystorage");
+
+#+END_SRC
+
+To illustrate how generic this approach is, we can use the same interface to
+instanciate a storage based on a mysql-database:
+
+#+BEGIN_SRC
+   Storage storage = connect("mysql")
+      .addOption("user",    "dbuser")
+      .addOption("password, "secret")
+      .addOption("hostName","localhost")
+      .addOption("port",    3306);
+   ...
+#+END_SRC
+
+Ok, so we have our storage. But we do not want every instance of the
+entities we include in our system to be register with a storage
+class. The main idea is that the entities themself are
+/IO-agnostic/. To be able to do this, we introduce the concept of a
+data /Transactor/. The /Transactor/ is created given a reference to
+the storage. Internally it maintains a list of registered entities. An
+entity can belong to none or many different transactors at the same
+time. This enable us to define things such as loggers where some data
+points should be stored frequently to a local textfile, while the
+entire state of the software might be stored only at the end of the
+simulation.
+
+#+BEGIN_SRC
+class Transactor
+{
+   Transactor(){}
+   Transactor(Storage const &storage);
+   
+public:
+   ~Transactor();
+   static Transactor create(Storage const &storage);
+   void add(IEntity *entity);
+   void store();
+   void fetch();
+
+private:
+   class Private;
+   Private *d;
+};
+
+#+END_SRC
+
+So our program might now look like this
+
+
+#+BEGIN_SRC
+#include <Porto>
+#include "unit.h"
+int main(int, char**)
+{
+   Storage storage = StorageCreator::connect("mongodb")
+      .addOption("database", "porto")
+      .addOption("collection", "mystorage");
+
+   auto transactor = Transactor::create(storage);
+
+   Unit unit; // Instanciate our unit-entity
+   transactor.add(&unit); // append unit to a transactor list
+ 
+   ...
+
+#+END_SRC
+
+Let's fill up with some data:
+
+#+BEGIN_SRC C++
+   Unit unit;
+
+   unit.abbreviation         = "Gy/s";
+   unit.code                 = "0780";
+   unit.conversionMultiplier = 1.0e0;
+   unit.conversionOffset     = 0.0;
+   unit.quantityKind         = "quantity:AbsorbedDoseRate";
+   unit.symbol               = "Gy/s";
+   unit.unit                 = "GrayPerSecond";
+
+#+END_SRC
+
+
+Our entity is not quite finished yet. We need to include some code
+that actually feeds the storage datamodel with the contents of the
+entity. Since we do not want to expose this to the entity class we can
+implement a helper class that knows the structure/schema of our entity
+
+#+BEGIN_SRC C++
+class UnitStore
+{
+public:
+   static bool set(Unit const *e, StorageObject &obj);
+   static bool get(Unit *e, StorageObject const &obj);
+};
+
+#+END_SRC
+
+A first attempt on an implementation of this could look like this:
+
+#+BEGIN_SRC C++
+bool UnitStore :: set(const Unit *e, StorageObject &obj)
+{
+  obj.insert("abbreviation", StorageValue(e->abbreviation));
+  obj.insert("code", StorageValue(e->code));
+  obj.insert("conversionMultiplier", StorageValue(e->conversionMultiplier));
+  obj.insert("conversionOffset", StorageValue(e->conversionOffset));
+  obj.insert("quantityKind", StorageValue(e->quantityKind));
+  obj.insert("symbol", StorageValue(e->symbol));
+  obj.insert("unit", StorageValue(e->unit));		    
+  return true;
+}
+
+bool UnitStore :: get(Unit *e, StorageObject const &obj)
+{
+  e->abbreviation = obj.find("abbreviation").toString();
+  e->code = obj.find("code").toString();
+  e->conversionMultiplier = obj.find("conversionMultiplier").toDouble();
+  e->conversionOffset = obj.find("conversionOffset").toDouble();
+  e->quantityKind = obj.find("quantityKind").toString();
+  e->symbol = obj.find("symbol").toString();
+  e->unit = obj.find("unit").toString();
+  return true;
+}
+
+#+END_SRC
+
+To finish up the code, we should be able to just call /store/ from the transactor:
+
+#+BEGIN_SRC C++
+   ...
+   transactor.store();
+   return EXIT_SUCCESS;
+}
+#+END_SRC
+
+The storage/transactor infrastructure is/will be a part of the
+portobase library. This chapter will focus on how we use registered
+entities in our simulation code with very little effort (i.e. avoiding
+to implement the classes manually etc)
+
+** Generic Code Generation script
+
+We're able to implement shell-application using Porto scripting, so
+let's do that to implement a generic Porto-MVC code generator utility.
+
+   1. Read a meta-data schema from file
+   2. Create a porto.mvc generator based on the meta-data object and a view-file
+   3. Send the code back to stdout
+
+
+
+#+BEGIN_SRC js
+#!/usr/bin/env portoshell
+
+__main__ = function (args){    
+    var name = args[1];
+    var viewfile = args[2];
+    fs.readFile(name + ".json", function(err, data){
+	if (err) throw (err);
+        generate = require('porto.mvc').create({
+	    model: JSON.parse(data),
+	    view: viewfile
+	});
+	console.log(generate({filename: name}));
+    });
+};
+#+END_SRC
+
+This will work, but if our input schema is faulted or the
+view-template contains errors, we will not be easily able to find out
+where it went wrong.
+
+#+BEGIN_SRC js
+#!/usr/bin/env portoshell
+
+__main__ = function (args){    
+    var name = args[1];
+    var viewfile = args[2];
+    fs.readFile(name + ".json", function(err, data){
+	if (err) throw (err);
+	try {
+	    generate = require('porto.mvc').create({
+		model: JSON.parse(data),
+		view: viewfile
+	    });
+	} catch (e) {
+	    console.error(e);
+	    return;
+	}
+	try {
+	    console.log(generate({filename: name}));
+	} catch (e) {
+	    console.error(e);
+	}
+    });
+};
+
+#+END_SRC
+
+This is a little better. At least we will now get some hints of what
+went wrong. If you want to go even further you can even include the
+entity-schema validator.
+  
+** Create view-templates for c++ and header codes
+
+If we assume for now that our entities can only have scalar values,
+and we're limited to numbers and strings, we can define a template
+that generates our header file (including the Store-helper)
+
+#+BEGIN_SRC js
+@{
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+function typeToCppType(type) {
+  var typemap = {
+    "integer": "int",
+    "int"    : "int",
+    "double" : "double",
+    "string" : "std::string",
+    "boolean": "bool"
+  };
+  return typemap[type];
+}
+propertyList = porto.model.properties.map(function(prop){
+  return typeToCppType(prop.type) + " " + prop.name + ";";
+}).join("\n  ");
+Classname = capitalize(porto.model.name);
+undefined
+}
+/*
+ * Generated by Porto @{new Date().toString()} 
+ */
+
+#ifndef @{porto.bag.filename.toUpperCase()}_H_DEF
+#define @{porto.bag.filename.toUpperCase()}_H_DEF
+
+#include "ientity.h"
+#include <string>
+
+class @Classname : public IEntity
+{
+public:
+  @{Classname}();
+  @{Classname}(@{Classname} const &other);
+  virtual ~@{Classname}();
+
+  static std::string _version();
+  static std::string _name();
+  @propertyList
+
+protected:
+   virtual bool store(StorageObject &storageObject);
+   virtual bool restore(StorageObject const &storageObject);
+};
+
+class @{Classname}Store
+{
+public:
+   static bool set(@{Classname} const *e, StorageObject &obj);
+   static bool get(@{Classname} *e, StorageObject const &obj);
+};
+
+#endif
+
+#+END_SRC
+
+A full implementation view-template can be implemented like this:
+
+
+#+BEGIN_SRC js
+@{
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+function typeToCppType(type) {
+  var typemap = {
+    "integer": "int",
+    "int"    : "int",
+    "double" : "double",
+    "string" : "std::string",
+    "boolean": "bool"
+  };
+  return typemap[type];
+}
+
+function typeToConvType(type) {
+  var typemap = {
+    "integer" : "toInt",
+    "string"  : "toString",
+    "double"  : "toDouble"
+  };
+  return typemap[type];
+}
+
+CopyConstructorParams = porto.model.properties.map(function(prop){
+  return prop.name + " (other." + prop.name + ")"
+}).join("\n  , ");
+
+
+SetFuncBody = porto.model.properties.map(function(prop){
+  return "obj.insert(\"" + prop.name + "\", StorageValue(e->"+ prop.name + "));";
+}).join("\n  ");
+
+GetFuncBody = porto.model.properties.map(function(prop){
+  return "e->" + prop.name + " = obj.find(\""+ prop.name +"\")." + typeToConvType(prop.type) + "();"
+}).join("\n  ");
+
+Classname = capitalize(porto.model.name);
+undefined
+}
+/*
+ * A Generated by Porto @{new Date().toString()}
+ */
+
+#include "@{porto.bag.filename}.h"
+#include "storageobject.h"
+#include "storagevalue.h"
+#include <iostream>
+#include <string>
+
+@Classname :: @{Classname}()
+{}
+
+@Classname :: @{Classname}(@{Classname} const &other)
+  : @CopyConstructorParams
+{}
+
+@Classname :: ~@{Classname}()
+{}
+
+std::string @Classname :: _version()
+{
+  return std::string("@{porto.model.version}");
+}
+
+std::string @Classname :: _name()
+{
+  return std::string("@{porto.model.name}");
+}
+
+bool @Classname :: store(StorageObject &obj)
+{
+   return @{Classname}Store::set(this, obj);
+}
+
+bool @Classname :: restore(StorageObject const &obj)
+{
+   return @{Classname}Store::get(this, obj);
+}
+
+bool @{Classname}Store :: set(const @{Classname} *e, StorageObject &obj)
+{
+  obj.insert("__name__", StorageValue(e->_name()));
+  obj.insert("__version__", StorageValue(e->_version()));
+  @SetFuncBody		    
+  return true;
+}
+
+bool @{Classname}Store :: get(@{Classname} *e, StorageObject const &obj)
+{
+  auto name = obj.find("__name__").toString();
+  auto version = obj.find("__version__").toString();
+  @GetFuncBody
+  return true;
+}
+
+#+END_SRC
+
+By running this through the code generator we should be able to produce the final result:
+
+#+BEGIN_SRC sh
+   $ ./genxx.js unit entity.hxxjs
+#+END_SRC
+
+Should produce this result:
+
+#+BEGIN_SRC C++
+/*
+ * Generated by Porto Mon Jun 23 2014 21:25:47 GMT+0200 (CEST) 
+ */
+
+#ifndef UNIT_H_DEF
+#define UNIT_H_DEF
+
+#include "ientity.h"
+#include <string>
+
+class Unit : public IEntity
+{
+public:
+  Unit();
+  Unit(Unit const &other);
+  virtual ~Unit();
+
+  static std::string _version();
+  static std::string _name();
+  std::string abbreviation;
+  std::string code;
+  double conversionMultiplier;
+  double conversionOffset;
+  std::string quantityKind;
+  std::string symbol;
+  std::string unit;
+
+protected:
+   virtual bool store(StorageObject &storageObject);
+   virtual bool restore(StorageObject const &storageObject);
+};
+
+class UnitStore
+{
+public:
+   static bool set(Unit const *e, StorageObject &obj);
+   static bool get(Unit *e, StorageObject const &obj);
+};
+
+#endif
+
+#+END_SRC
+
+Let's generate the implementation file as well
+
+#+BEGIN_SRC sh
+   $ ./genxx.js unit entity.cxxjs
+#+END_SRC
+
+Results in this
+#+BEGIN_SRC C++
+/*
+ * A Generated by Porto Mon Jun 23 2014 21:27:28 GMT+0200 (CEST)
+ */
+
+#include "unit.h"
+#include "storageobject.h"
+#include "storagevalue.h"
+#include <iostream>
+#include <string>
+
+Unit :: Unit()
+{}
+
+Unit :: Unit(Unit const &other)
+  : abbreviation (other.abbreviation)
+  , code (other.code)
+  , conversionMultiplier (other.conversionMultiplier)
+  , conversionOffset (other.conversionOffset)
+  , quantityKind (other.quantityKind)
+  , symbol (other.symbol)
+  , unit (other.unit)
+{}
+
+Unit :: ~Unit()
+{}
+
+std::string Unit :: _version()
+{
+  return std::string("1.0-SNAPSHOT-1");
+}
+
+std::string Unit :: _name()
+{
+  return std::string("unit");
+}
+
+bool Unit :: store(StorageObject &obj)
+{
+   return UnitStore::set(this, obj);
+}
+
+bool Unit :: restore(StorageObject const &obj)
+{
+   return UnitStore::get(this, obj);
+}
+
+bool UnitStore :: set(const Unit *e, StorageObject &obj)
+{
+  obj.insert("__name__", StorageValue(e->_name()));
+  obj.insert("__version__", StorageValue(e->_version()));
+  obj.insert("abbreviation", StorageValue(e->abbreviation));
+  obj.insert("code", StorageValue(e->code));
+  obj.insert("conversionMultiplier", StorageValue(e->conversionMultiplier));
+  obj.insert("conversionOffset", StorageValue(e->conversionOffset));
+  obj.insert("quantityKind", StorageValue(e->quantityKind));
+  obj.insert("symbol", StorageValue(e->symbol));
+  obj.insert("unit", StorageValue(e->unit));		    
+  return true;
+}
+
+bool UnitStore :: get(Unit *e, StorageObject const &obj)
+{
+  auto name = obj.find("__name__").toString();
+  auto version = obj.find("__version__").toString();
+  e->abbreviation = obj.find("abbreviation").toString();
+  e->code = obj.find("code").toString();
+  e->conversionMultiplier = obj.find("conversionMultiplier").toDouble();
+  e->conversionOffset = obj.find("conversionOffset").toDouble();
+  e->quantityKind = obj.find("quantityKind").toString();
+  e->symbol = obj.find("symbol").toString();
+  e->unit = obj.find("unit").toString();
+  return true;
+}
+#+END_SRC
+
+** Run the entity code-generator compile time
+
+The qmake utility can be extended with custom compilers and
+generators. To define our new code generator we can define this in the
+qmake .pro file.
+
+#+BEGIN_SRC js
+# Code Generators
+entitygencxx.name     = "entity build"
+entitygencxx.output   = ${QMAKE_FILE_BASE}.cpp
+entitygencxx.commands = $$PWD/genxx.js ${QMAKE_FILE_BASE} $$ENTITY_CPP_VIEW > ${QMAKE_FILE_OUT}
+entitygencxx.input    = ENTITY
+entitygencxx.depends  = ${QMAKE_FILE_BASE}.h 
+entitygencxx.variable_out = SOURCES
+entitygencxx.dependency_type = TYPE_C
+ 
+entitygenhxx.name     = "entity header"
+entitygenhxx.output   = ${QMAKE_FILE_BASE}.h
+entitygenhxx.commands = $$PWD/genxx.js ${QMAKE_FILE_BASE} $$ENTITY_H_VIEW > ${QMAKE_FILE_OUT}
+entitygenhxx.input    = ENTITY
+entitygenhxx.depends  = $$ENTITY $$ENTITY_H_VIEW $$ENTITY_CPP_VIEW
+entitygenhxx.variable_out = HEADERS
+entitygenhxx.dependency_type = TYPE_C
+
+QMAKE_EXTRA_COMPILERS += entitygenhxx entitygencxx
+#+END_SRC
+
+Details about how to customize and setup your own
+QMAKE_EXTRA_COMPILERS can be found in the Qt manual.
+
+To define /unit/ as part of our sources we can simply define a
+.pro-file like this:
+
+#+BEGIN_SRC
+
+TARGET  = cppdemo
+INCLUDEPATH = .
+DEPENDPATH  = .
+CONFIG += c++11 porto
+ENTITY += unit.json
+
+ENTITY += unit.json
+SOURCES += main.cpp
+#+END_SRC
+
+** Rapid development with data
+
+Whenever we need to change or add a parameter in our model, we can
+simply perform this operation in the .json file - and then just /use/
+that parameter in the code without thinking about how it got
+there. When we are satisfied with the entity, we can give it a
+reasonable name and version number and register with the utility
+/register-entity-sh/. Then we will be able to transparently access the
+stored state of the running simulation from other applications or
+scripts. There are vast number of usages of this. By using the
+UDP-module in the next chapter can be one way of triggering
+background-processes during simulation.
+
 
 * Using UDP to communicate and run external processes
 

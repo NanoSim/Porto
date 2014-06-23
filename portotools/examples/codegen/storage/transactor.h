@@ -13,7 +13,7 @@ public:
    static Transactor create(Storage const &storage);
    void add(IEntity *entity);
    void store();
-   void retrieve();
+   void fetch();
 
 private:
    class Private;
