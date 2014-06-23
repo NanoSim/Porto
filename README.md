@@ -64,6 +64,6 @@ You should now have the following files:
     $PORTOBASE/include/portons.h
     $PORTOBASE/include/scriptengine.h
 
-## THIS IS UNCLEAR!
+## Where to go from here
 
-To run the unittests, run qmake && make in the test-directories
+To get started with Porto-development, please find the introductory [Porto Tutorial](doc/tutorial.org)
