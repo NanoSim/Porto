@@ -13,7 +13,7 @@ on the JavaScript language, please consult your nearest google search
 engine.
 
 In addition the being ECMA-262 compatible, the Portoshell also
-supports custom extensions. These comes in different flavours:
+supports custom extensions. These come in different flavors:
 
  -  Standard build-in utility extensions (modules)
  -  External modules (written JavaScript)
@@ -30,7 +30,7 @@ Add the current moment of writing, the Porto standard build-in modules are
   - Httpd Module 
 
 These modules are considered core featured and provide functionality
-to increase producitivy.
+to increase productivity.
 
 ** External modules 
 The external JavaScript modules are extensions that are easy to
@@ -93,7 +93,7 @@ external modules:
 The last method of extending Portoshell is through pre-compiled
 plugins that are loaded at startup. These plugins can provide access
 to C/C++/++ libraries through C++/Scripting interfaces. Details of how
-this is performed is beyond the scope of this tutorial. There is
+this is performed are beyond the scope of this tutorial. There is
 currently only on plug-in available in Porto, namely the
 /MongoDB-plugin/ which gives a low-level access to the mongodb
 C-driver API.
@@ -156,7 +156,7 @@ written.
 Now you have the fundamentals covered to get started working with data
 and metadata. Meta-data is a high-level description of data that
 identifies how data from any source can be interpreted. Meta-data
-should be uniquely indentified with a name and version
+should be uniquely identified with a name and version
 number. Furthermore, the metadata should defined a list of properties
 that identifies names, type, units, dimensions etc for each element.
 
@@ -275,7 +275,7 @@ hard-coded to be the database: '/meta/', collection: '/entities/' in a
 mongodb server running on /localhost/. Don't worry if you don't
 understand the rest of the script.
 
-The file /all-units.json/ is a collection of all the documented units
+The file [[portotools/examples/portoshell/registerentity/units.json][/units.json/]] is a collection of all the documented units
 available from [[qudt.org][qudt.org]]. Our goal now is to create an instance of the
 entity /Unit/, fill it with the contents of the existing data, and
 store the data as an entity in MongoDB.
@@ -385,7 +385,7 @@ us, based on meta-data. In other languages, the code generation might
 have to be performed compile-time, and included in the code-base. This
 is, however, semantically equal to what we've shown here. The key
 concept is that '/meta-data/' defines the schema, the storage driver
-is completely seperated from the implementation of the Entity
+is completely separated from the implementation of the Entity
 instance, and the correct coupling can be performed runtime, giving
 extreme flexibility.
 
@@ -397,7 +397,7 @@ communicated between processes that work with the same data.
 
 Our storage device have defined both read and write operations, so we
 can reuse our storage from the previous example. To read back data
-(from a different application) we can simply instanciate our entity
+(from a different application) we can simply instantiate our entity
 with the UUID generated be the instance.
 
 #+BEGIN_SRC js
@@ -413,7 +413,7 @@ with the UUID generated be the instance.
 
 Notice that working Porto doesn't really require the developer to
 fight a lot of different APIs. Hiding the boilerplate code in
-configuration files leaves the developers to simply instanciate a
+configuration files leaves the developers to simply instantiate a
 class/module/object and start working with the data in a language
 native way.
 
@@ -421,13 +421,13 @@ There is another important thing to consider as well. In our client
 code we have said (made a contract) that we want to use the entity
 /unit:1.0-SNAPHOT-1/. However, we don't say anything about the source
 type. This is one of the more sophisticated features of the Porto
-design. If the datasource that stored the contents of the entity with
+design. If the data source that stored the contents of the entity with
 the id= '/8dd10147-d0b9-48ee-ae9b-2ef41d56add9/', was of a different
 kind, the framework would notice that the client entity and source
 entity was different, and it would search for an explicit
-/translator/. The translators are simply code that accepts a given
+ /translator/. The translators are simply code that accepts a given
 entity type and returns a different one. The client code will never
-have to include its own version control to accomodate for changes in
+have to include its own version control to accommodate for changes in
 file formats etc. We can simply just state /what/ entity we want to
 use, and that's the end of that. 
 
@@ -488,7 +488,7 @@ var unitsJSON = fs.readFile('units.json', function(err, data){
     /* Parse the external file into a javascript object */
     var obj = JSON.parse(data);
 
-    /* Instanciate a new Collection class */
+    /* Instantiate a new Collection class */
     var unitLibrary = new Collection();
     unitLibrary.setName('UnitCollection');
     unitLibrary.setVersion('1.0');
@@ -525,7 +525,7 @@ argument. Every property connected to bag will be available in the
 view template js-code. In addition to /bag/, the porto.model - defined
 in the /create(obj)/ function call, will be available.
 
-Let's create an example where we instanciate our unit library that we
+Let's create an example where we instantiate our unit library that we
 just stored. Then we pass the collection contents to the view template
 which expands the contents from the MongoDB and into a HTML-document,
 that will present the unit library as tables.
@@ -539,7 +539,7 @@ that will present the unit library as tables.
 
     Collection = require('soft.collection').db(driverInfo);
 
-    /* Instanciate our unitLibrary collection */
+    /* Instantiate our unitLibrary collection */
     var collectionID = '79fe6b02-7b9e-4339-b238-983333b37552';
     var unitLibrary  = new Collection(collectionID);
 
@@ -596,7 +596,7 @@ In this chapter we've touched upon some key features of Porto:1
   - Defining meta-data schemas and storing them in a database
   - Creating instances of entities that are bound the meta-data schema
   - Creating collections of entities
-  - Storing and retreiving data using the generic storage interface
+  - Storing and retrieving data using the generic storage interface
   - Generating code based on data contents stored in the MongoDB database
 
 * Working with OpenFOAM
@@ -716,9 +716,9 @@ do this by using the utility /register-entity.sh/.
 #+END_SRC
 
 
-** Instanciate an ControlDict entity
+** Instantiate an ControlDict entity
 
-Now that we have the meta-data available, we can instanciate the
+Now that we have the meta-data available, we can instantiate the
 ControlDict object and give it some data:
 
 #+BEGIN_SRC js
@@ -848,12 +848,12 @@ controlDict dictionary file.
 * Developing C++ w/code generation
 
 Working in a scripting environment is effective and powerful, but when
-it comes to production code we're ofte more interested in working with
-compiled languanges such as C++, Fortran and Java. By bringing in the
+it comes to production code we're often more interested in working with
+compiled languages such as C++, Fortran and Java. By bringing in the
 same elements from Porto scripting into these languages we unleash the
-true power of data-centric development. Being able to instanciate,
-store and retrieve entites directly in the numerical simulators, we
-reduce the unnecessary boilerplate code and IO infrastucture. Ideally
+true power of data-centric development. Being able to instantiate,
+store and retrieve entities directly in the numerical simulators, we
+reduce the unnecessary boilerplate code and IO infrastructure. Ideally
 our models should be developed to just one thing, and do it well -
 compute!
 
@@ -884,10 +884,10 @@ public:
 Ok, so we're violating the first principle of OO-programming: "Data
 should be hidden". Feel free to experiment with an implementation with
 setters and getters. What you gain is zero - and setters/getters are
-OO-antipatterns. However, this is the data-centric approach, and the
+OO-anti patterns. However, this is the data-centric approach, and the
 key strategy is to put the data up front.
 
-In the back-end of our C++ framework we want to instanciate a Storage
+In the back-end of our C++ framework we want to instantiate a Storage
 class that can take as a parameter a /driver/ type, together with some
 optional arguments. To do this in a generic way I propose to implement
 the framework using the Named Parameter Idiom. This way we can write
@@ -901,7 +901,7 @@ code like this:
 #+END_SRC
 
 To illustrate how generic this approach is, we can use the same interface to
-instanciate a storage based on a mysql-database:
+instantiate a storage based on a mysql-database:
 
 #+BEGIN_SRC
    Storage storage = connect("mysql")
@@ -914,13 +914,13 @@ instanciate a storage based on a mysql-database:
 
 Ok, so we have our storage. But we do not want every instance of the
 entities we include in our system to be register with a storage
-class. The main idea is that the entities themself are
+class. The main idea is that the entities themselves are
 /IO-agnostic/. To be able to do this, we introduce the concept of a
 data /Transactor/. The /Transactor/ is created given a reference to
 the storage. Internally it maintains a list of registered entities. An
 entity can belong to none or many different transactors at the same
 time. This enable us to define things such as loggers where some data
-points should be stored frequently to a local textfile, while the
+points should be stored frequently to a local text file, while the
 entire state of the software might be stored only at the end of the
 simulation.
 
@@ -958,7 +958,7 @@ int main(int, char**)
 
    auto transactor = Transactor::create(storage);
 
-   Unit unit; // Instanciate our unit-entity
+   Unit unit; // Instantiate our unit-entity
    transactor.add(&unit); // append unit to a transactor list
  
    ...
@@ -982,7 +982,7 @@ Let's fill up with some data:
 
 
 Our entity is not quite finished yet. We need to include some code
-that actually feeds the storage datamodel with the contents of the
+that actually feeds the storage data model with the contents of the
 entity. Since we do not want to expose this to the entity class we can
 implement a helper class that knows the structure/schema of our entity
 
@@ -1442,7 +1442,6 @@ TARGET  = cppdemo
 INCLUDEPATH = .
 DEPENDPATH  = .
 CONFIG += c++11 porto
-ENTITY += unit.json
 
 ENTITY += unit.json
 SOURCES += main.cpp
@@ -1451,7 +1450,7 @@ SOURCES += main.cpp
 ** Rapid development with data
 
 Whenever we need to change or add a parameter in our model, we can
-simply perform this operation in the .json file - and then just /use/
+simply perform this operation in the .json file - and then just use
 that parameter in the code without thinking about how it got
 there. When we are satisfied with the entity, we can give it a
 reasonable name and version number and register with the utility
@@ -1466,7 +1465,7 @@ background-processes during simulation.
 
 The Porto framework is not limited to just storing and retrieving
 data. It can also be utilized for controlling the process
-workflows. One syncronization mechanism that is supported is [[http://en.wikipedia.org/wiki/User_Datagram_Protocol][User
+workflows. One synchronization mechanism that is supported is [[http://en.wikipedia.org/wiki/User_Datagram_Protocol][User
 Datagram Protocol]]. This a lightweight protocol with no handshaking and
 setup. UDP works by emitting datagrams. The datagram can be any
 text. In our example code, we want to create to script
@@ -1474,7 +1473,7 @@ applications. One is the client-code that emits a JSON datagram that
 contains some info, along with a program w/arguments that it wants the
 receiver to run.
 
-The other is the server code. This is a scipt application that creates
+The other is the server code. This is a script application that creates
 a callback that is called when it receives a datagram. It will then
 parse the datagram and execute the application. Note that this method
 of calling remote procedure is *not* recommended due to the security
@@ -1499,11 +1498,11 @@ When executed, this script will simply emit the datagram and exit. The
 server code is a bit more elaborate and contains some features of
 Porto that has not yet been discussed. The server is a script that
 should set up an event loop. The event loop makes it possible to
-create asyncrounous callbacks that is build in the Qt signal/slot
+create asynchrounous callbacks that is build in the Qt signal/slot
 mechanism, and is a build-in utility class called /EventLoop/.
 
 In addition we also need to use the utility class /Process/ which can
-control the execution of an application, with asyncronous callback to
+control the execution of an application, with asynchronous callback to
 catch output coming from stdout, stderr, along with messages giving
 the status of the running application, and a callback for the
 termination of the application.
@@ -1525,7 +1524,7 @@ __main__ = function (args)
 	    var o = JSON.parse(datagram.datagram);
 	    print(o.name, o.version, o.program);
 
-            /* Instanciate a new Process and create callbacks for when the process
+            /* Instantiate a new Process and create callbacks for when the process
                starts, have available standard output contents, and termination.
              */ 
 	    var proc = new Process();
@@ -1562,7 +1561,7 @@ __main__ = function (args)
 #+END_SRC
 
 The module udpsocket.js is just a simple high-level function that
-instanciates the UdpSocket and pass it to a function argument.
+instantiates the UdpSocket and pass it to a function argument.
 
 #+BEGIN_SRC js
 exports.create = function(fn) {
@@ -1597,7 +1596,7 @@ functionality available in /Porto/, in the build-in utility HttpServer.
 By pointing the browser to http://localhost:8081 we should now be able
 to view the contents defined under the given root directory. 
 
-Note hoewever, that is not a production web server, and it is limited
+Note however, that is not a production web server, and it is limited
 to GET requests of type text/html.
 
 * Final notes
@@ -1614,7 +1613,7 @@ more fun, and inspire new ideas.
 Also note that Porto is in a *very early stage of development*. Do not
 expect everything to be smooth and easy, but please make a note of
 annoyances, problems, improvement suggestions, and feel free to make
-these requirements for the development interation.
+these requirements for the development iteration.
 
 Thomas Hagelien
 Trondheim 2014
