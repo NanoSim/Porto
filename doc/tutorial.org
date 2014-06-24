@@ -275,7 +275,7 @@ hard-coded to be the database: '/meta/', collection: '/entities/' in a
 mongodb server running on /localhost/. Don't worry if you don't
 understand the rest of the script.
 
-The file [[portotools/examples/portoshell/registerentity/units.json][/units.json/]] is a collection of all the documented units
+The file [[https://github.com/NanoSim/Porto/blob/master/portotools/examples/portoshell/registerentity/units.json][units.json]] is a collection of all the documented units
 available from [[qudt.org][qudt.org]]. Our goal now is to create an instance of the
 entity /Unit/, fill it with the contents of the existing data, and
 store the data as an entity in MongoDB.
