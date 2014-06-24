@@ -1,6 +1,6 @@
 # Porto
 
-The Porto platform, based on SOFT (SINTEF Open Framework and Tools)
+The Porto platform, based on SOFT5 (SINTEF Open Framework and Tools)
 will provide a lightweight and flexible system for data and workflow
 management. The prevalent way of working with multi-scale model
 development is not data-agnostic. This complicates the adoption of new
@@ -16,10 +16,6 @@ model formulations, effectively removing the need for redundant
 simulations of the same problem. In addition, the seamless integration
 of statistical analysis tools will significantly speed up the model
 development process, which is currently a tedious and cumbersome task.
-
-
-[See the NanoSim project page on Confluence for more information](https://confluence.code.sintef.no/x/dIJb)
-
 
 ## Installation
 
@@ -49,12 +45,10 @@ and be sure they are exported.
 
 Build and install the application like this:
 
->   cd <path>/Porto
-
->	qmake
-
->	make install
-
+    cd <path>/Porto
+	qmake
+	make install
+	
 You should now have the following files:
 
     $PORTOBASE/bin/portoshell
