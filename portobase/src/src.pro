@@ -25,8 +25,8 @@ MOC_DIR     = $$DESTDIR/.moc
 RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
-HEADERS += portons.h porto.h scriptengine.h storage.h
-SOURCES += porto.cpp scriptengine.cpp storage.cpp
+HEADERS += portons.h porto.h scriptengine.h
+SOURCES += porto.cpp scriptengine.cpp
 
 target.path = $$(PORTOBASE)/lib
 headers.path = $$(PORTOBASE)/include
