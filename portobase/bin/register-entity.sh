@@ -17,6 +17,7 @@ __main__ = function (args)
 	    database: 'meta',
 	    collection: 'entities'
 	});
+    args.shift();
     args.forEach(function(file){
 	fs.readFile(file, function(err, data) {
 	    if (err) {
