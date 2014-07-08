@@ -1,0 +1,49 @@
+isEmpty( fortran_compiler ) {
+
+  fortran_link {             # CONFIG += fortran_link is specified
+    !isEmpty( SOURCES ) {    # If there are files specified i
+      fortran_compiler = true
+    }
+  }
+
+  fortran_compiler = ifort
+  
+  # Define debug and relase flags 
+  CONFIG(shared, shared|static) {
+    LIBSFLAG = dll
+  } else {
+    LIBSFLAG = static
+  }
+
+  # Define Fortran compile flags
+  release:FFLAGS = /nologo module:$${MODULE_DIR} /MD /object:"$(OBJECTS_DIR)\\" /Fd"Release/vc100.pdb" /libs:$$LIBSFLAG /threads /c
+  debug:FFLAGS   = /nologo /debug:full /MDd /Od /stand:f03 /warn:declarations /warn:unused /warn:ignore_loc /warn:truncated_source /warn:uncalled /warn:interfaces /module:$${MODULE_DIR} /object:"$(OBJECTS_DIR)\\" /Fd"Debug\\vc100.pdb" /traceback /check:bounds /libs:$$LIBSFLAG /threads /dbglibs /c  
+
+    # Set up the compiler directives
+  debug:objdir = debug$${DIR_SEPARATOR}
+  release:objdir = release$${DIR_SEPARATOR}
+
+  win32:f90.output = $$objdir$${DIR_SEPARATOR}${QMAKE_FILE_BASE}.obj
+  unix:f90.output = $$objdir$${DIR_SEPARATOR}${QMAKE_FILE_BASE}.o
+  f90.input  = F90SOURCES
+
+  # If MODULE_DIR is specified, create if neccessary and and to INCLUDEPATH
+  !isEmpty( MODULE_DIR ) {
+    f90.commands =    @$(CHK_DIR_EXISTS) $${MODULE_DIR} $(MKDIR) $${MODULE_DIR} $$escape_expand(\\n\\t)
+    INCLUDEPATH += $${MODULE_DIR}
+  }
+
+  # Set up build command
+  f90.commands  += $$fortran_compiler
+  f90.commands += $(INCPATH)
+  f90.commands += $${FFLAGS} ${QMAKE_FILE_IN}
+  f90.commands += -o ${QMAKE_FILE_OUT}
+  f90.clean    += $${MODULE_DIR}\\*__genmod.* $${MODULE_DIR}\\*.mod *.cod *__genmod.* $(OBJECTS_DIR)\\*.obj $(OBJECTS_DIR)\\*.pdb *.asm *.lst *.map *.dyn *.dpi *.tmp *.log *.ilk *.exe $(OBJECTS_DIR)\\*.lib $(OBJECTS_DIR)\\*.dll
+
+  f90.CONFIG += target_predeps
+  f90.dependency_type = TYPE_C
+  QMAKE_EXTRA_COMPILERS += f90
+  
+} else {
+  !build_pass:error(Fortran compiler ($$fortran_compiler) already defined. Please check your CONFIG settings)
+}
