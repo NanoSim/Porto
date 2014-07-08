@@ -10,9 +10,11 @@ isEmpty( fortran_compiler ) {
   
   # Define debug and relase flags 
   CONFIG(shared, shared|static) {
-    LIBSFLAG = dll
+    win32:LIBSFLAG = dll
+    linux:LIBSFLAG = -shared-intel
   } else {
-    LIBSFLAG = static
+    win32:LIBSFLAG = static
+    linux:LIBSFLAG = -static-intel
   }
 
   # Define Fortran compile flags
@@ -20,8 +22,8 @@ isEmpty( fortran_compiler ) {
     release:FFLAGS = /nologo /module:$${MODULE_DIR} /MD /object:"$(OBJECTS_DIR)\\" /Fd"Release/vc100.pdb" /libs:$$LIBSFLAG /threads /c
     debug:FFLAGS   = /nologo /debug:full /MDd /Od /stand:f03 /warn:declarations /warn:unused /warn:ignore_loc /warn:truncated_source /warn:uncalled /warn:interfaces /module:$${MODULE_DIR} /object:"$(OBJECTS_DIR)\\" /Fd"Debug\\vc100.pdb" /traceback /check:bounds /libs:$$LIBSFLAG /threads /dbglibs /c  
   } else { 
-    release:FFLAGS = -nologo -module $${MODULE_DIR} -object:"$(OBJECTS_DIR)\\" -libs:$$LIBSFLAG -threads -c
-    debug:FFLAGS   = -nologo -debug:full -Od -stand:f03 -warn:all -module $${MODULE_DIR} -object:"$(OBJECTS_DIR)\\" -traceback -check:bounds -libs:$$LIBSFLAG -threads -dbglibs -c  
+    release:FFLAGS = -nologo -module $${MODULE_DIR} -stand f03 $$LIBSFLAG -threads -c
+    debug:FFLAGS   = -nologo -debug:full -Od -stand f03 -warn:all -module $${MODULE_DIR} -traceback -check:bounds $$LIBSFLAG -threads -dbglibs -c  
   }
     # Set up the compiler directives
   debug:objdir = debug$${DIR_SEPARATOR}
@@ -33,7 +35,7 @@ isEmpty( fortran_compiler ) {
 
   # If MODULE_DIR is specified, create if neccessary and and to INCLUDEPATH
   !isEmpty( MODULE_DIR ) {
-    f90.commands =    @$(CHK_DIR_EXISTS) $${MODULE_DIR} $(MKDIR) $${MODULE_DIR} $$escape_expand(\\n\\t)
+    f90.commands = @$(CHK_DIR_EXISTS) $${MODULE_DIR} || $(MKDIR) $${MODULE_DIR} $$escape_expand(\\n\\t)
     INCLUDEPATH += $${MODULE_DIR}
   }
 
