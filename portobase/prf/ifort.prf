@@ -16,9 +16,13 @@ isEmpty( fortran_compiler ) {
   }
 
   # Define Fortran compile flags
-  release:FFLAGS = /nologo module:$${MODULE_DIR} /MD /object:"$(OBJECTS_DIR)\\" /Fd"Release/vc100.pdb" /libs:$$LIBSFLAG /threads /c
-  debug:FFLAGS   = /nologo /debug:full /MDd /Od /stand:f03 /warn:declarations /warn:unused /warn:ignore_loc /warn:truncated_source /warn:uncalled /warn:interfaces /module:$${MODULE_DIR} /object:"$(OBJECTS_DIR)\\" /Fd"Debug\\vc100.pdb" /traceback /check:bounds /libs:$$LIBSFLAG /threads /dbglibs /c  
-
+  CONFIG(win32,win32|linux) {
+    release:FFLAGS = /nologo /module:$${MODULE_DIR} /MD /object:"$(OBJECTS_DIR)\\" /Fd"Release/vc100.pdb" /libs:$$LIBSFLAG /threads /c
+    debug:FFLAGS   = /nologo /debug:full /MDd /Od /stand:f03 /warn:declarations /warn:unused /warn:ignore_loc /warn:truncated_source /warn:uncalled /warn:interfaces /module:$${MODULE_DIR} /object:"$(OBJECTS_DIR)\\" /Fd"Debug\\vc100.pdb" /traceback /check:bounds /libs:$$LIBSFLAG /threads /dbglibs /c  
+  } else { 
+    release:FFLAGS = -nologo -module $${MODULE_DIR} -object:"$(OBJECTS_DIR)\\" -libs:$$LIBSFLAG -threads -c
+    debug:FFLAGS   = -nologo -debug:full -Od -stand:f03 -warn:all -module $${MODULE_DIR} -object:"$(OBJECTS_DIR)\\" -traceback -check:bounds -libs:$$LIBSFLAG -threads -dbglibs -c  
+  }
     # Set up the compiler directives
   debug:objdir = debug$${DIR_SEPARATOR}
   release:objdir = release$${DIR_SEPARATOR}
