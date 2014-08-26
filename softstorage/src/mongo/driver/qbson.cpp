@@ -1,7 +1,7 @@
 #include <bson.h>
 #include "qbson.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 BSON_BEGIN_NAMESPACE
 
 static void bsonDeleter (bson_t *ptr)
@@ -98,5 +98,5 @@ bson_t* Bson :: data() const
 }
 
 BSON_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 

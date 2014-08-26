@@ -4,17 +4,17 @@
 #include <QObject>
 #include <QScopedPointer>
 
-namespace porto {
+namespace soft {
    class ScriptEngine;
 }
 
-inline void initScriptResource() { Q_INIT_RESOURCE(portoshell); }
+inline void initScriptResource() { Q_INIT_RESOURCE(softshell); }
 
 class Utils : public QObject
 {
    Q_OBJECT
 public:
-   Utils(porto::ScriptEngine const &engine, QObject * parent = nullptr);
+   Utils(soft::ScriptEngine const &engine, QObject * parent = nullptr);
    virtual ~Utils();
 
 private:

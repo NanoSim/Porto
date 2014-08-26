@@ -3,9 +3,9 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Porto tutorial</title>
+<title>Soft tutorial</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="Porto tutorial"/>
+<meta name="title" content="Soft tutorial"/>
 <meta name="generator" content="Org-mode"/>
 <meta name="generated" content="2014-06-20T18:48+0200"/>
 <meta name="author" content="Thomas Hagelien"/>
@@ -115,7 +115,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="content">
-<h1 class="title">Porto tutorial</h1>
+<h1 class="title">Soft tutorial</h1>
 
 <p>Dette er en test
 </p>
@@ -124,7 +124,7 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 A brief introduction to portoshell</a>
+<li><a href="#sec-1">1 A brief introduction to softshell</a>
 <ul>
 <li><a href="#sec-1-1">1.1 Standard Build in utility extensions</a></li>
 <li><a href="#sec-1-2">1.2 External modules</a></li>
@@ -139,7 +139,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3-3">3.3 Storing data to the database</a></li>
 <li><a href="#sec-3-4">3.4 Reading data back from a database</a></li>
 <li><a href="#sec-3-5">3.5 Introducing Collections</a></li>
-<li><a href="#sec-3-6">3.6 Introducing the Porto MVC code generator</a></li>
+<li><a href="#sec-3-6">3.6 Introducing the Soft MVC code generator</a></li>
 <li><a href="#sec-3-7">3.7 Summary</a></li>
 </ul>
 </li>
@@ -160,12 +160,12 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> A brief introduction to portoshell</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> A brief introduction to softshell</h2>
 <div class="outline-text-2" id="text-1">
 
 
 <p>
-Portoshell is a scripting tool for performing various tasks related to
+Softshell is a scripting tool for performing various tasks related to
 the NanoSim platform development, data and process management and
 simulator connectivity. The scripting language is based on ECMAScript,
 better known as JavaScript (although the language is not related to
@@ -174,7 +174,7 @@ on the JavaScript language, please consult your nearest google search
 engine.
 </p>
 <p>
-In addition the being ECMA-262 compatible, the Portoshell also
+In addition the being ECMA-262 compatible, the Softshell also
 supports custom extensions. These comes in different flavours:
 </p>
 <ul>
@@ -194,7 +194,7 @@ supports custom extensions. These comes in different flavours:
 <h3 id="sec-1-1"><span class="section-number-3">1.1</span> Standard Build in utility extensions</h3>
 <div class="outline-text-3" id="text-1-1">
 
-<p>Add the current moment of writing, the Porto standard build-in modules are
+<p>Add the current moment of writing, the Soft standard build-in modules are
 </p><ul>
 <li>Process Module
 </li>
@@ -242,7 +242,7 @@ The modulename can either be a javascript file, or a modulename including namesp
 
 
 
-<pre class="example">require ('porto.mvc');  // fetching a registered module
+<pre class="example">require ('soft.mvc');  // fetching a registered module
 </pre>
 
 
@@ -263,7 +263,7 @@ naming pollution and provides nice module APIs.
 
 <pre class="example">(function (mymodule){
   mymodule.hello = function (){ 
-    console.log ("Hello Porto Modules!");
+    console.log ("Hello Soft Modules!");
   }
 })(exports);
 </pre>
@@ -271,7 +271,7 @@ naming pollution and provides nice module APIs.
 
 
 <pre class="example">require('mymodule.js').hello();
-// =&gt; Hello Porto Modules!
+// =&gt; Hello Soft Modules!
 </pre>
 
 
@@ -286,15 +286,15 @@ external modules:
 <tr><th scope="col" class="left">Module</th><th scope="col" class="left">Description</th></tr>
 </thead>
 <tbody>
-<tr><td class="left">porto.entity</td><td class="left"><i>Simplifies working with entities</i></td></tr>
-<tr><td class="left">porto.collection</td><td class="left"><i>Defines the API for Collections</i></td></tr>
-<tr><td class="left">porto.macro</td><td class="left"><i>Macro expansion module</i></td></tr>
-<tr><td class="left">porto.mvc</td><td class="left"><i>Model View Controller code generator framework</i></td></tr>
-<tr><td class="left">porto.storage</td><td class="left"><i>Storage context class with factory</i></td></tr>
-<tr><td class="left">porto.storage.json</td><td class="left"><i>Experimental ultralight JSON storage extension</i></td></tr>
-<tr><td class="left">porto.storage.mongo</td><td class="left"><i>MongoDB wrapper utility</i></td></tr>
-<tr><td class="left">porto.utils.metastore</td><td class="left"><i>Utility for storing metadata in the metadata database</i></td></tr>
-<tr><td class="left">porto.factory.entity</td><td class="left"><i>Factory for dynamic runtime generation of entity classes</i></td></tr>
+<tr><td class="left">soft.entity</td><td class="left"><i>Simplifies working with entities</i></td></tr>
+<tr><td class="left">soft.collection</td><td class="left"><i>Defines the API for Collections</i></td></tr>
+<tr><td class="left">soft.macro</td><td class="left"><i>Macro expansion module</i></td></tr>
+<tr><td class="left">soft.mvc</td><td class="left"><i>Model View Controller code generator framework</i></td></tr>
+<tr><td class="left">soft.storage</td><td class="left"><i>Storage context class with factory</i></td></tr>
+<tr><td class="left">soft.storage.json</td><td class="left"><i>Experimental ultralight JSON storage extension</i></td></tr>
+<tr><td class="left">soft.storage.mongo</td><td class="left"><i>MongoDB wrapper utility</i></td></tr>
+<tr><td class="left">soft.utils.metastore</td><td class="left"><i>Utility for storing metadata in the metadata database</i></td></tr>
+<tr><td class="left">soft.factory.entity</td><td class="left"><i>Factory for dynamic runtime generation of entity classes</i></td></tr>
 </tbody>
 </table>
 
@@ -308,11 +308,11 @@ external modules:
 <h3 id="sec-1-3"><span class="section-number-3">1.3</span> Plugin-in support (C++)</h3>
 <div class="outline-text-3" id="text-1-3">
 
-<p>The last method of extending Portoshell is through pre-compiled
+<p>The last method of extending Softshell is through pre-compiled
 plugins that are loaded at startup. These plugins can provide access
 to C/C++/++ libraries through C++/Scripting interfaces. Details of how
 this is performed is beyond the scope of this tutorial. There is
-currently only on plug-in available in Porto, namely the
+currently only on plug-in available in Soft, namely the
 <i>MongoDB-plugin</i> which gives a low-level access to the mongodb
 C-driver API.
 </p>
@@ -328,7 +328,7 @@ C-driver API.
 
 
 <p>
-In this section you will be introduced to scripting in portoshell. We'll start with the cliché hello-world:
+In this section you will be introduced to scripting in softshell. We'll start with the cliché hello-world:
 </p>
 
 
@@ -346,7 +346,7 @@ To execute this script from command-line, save this script to a file <i>hello.js
 
 
 
-<pre class="example">portoshell hello.js
+<pre class="example">softshell hello.js
 </pre>
 
 
@@ -364,15 +364,15 @@ The key idea here is that the script file will need to have defined an entry bod
 that will be called from the script engine. 
 </p>
 <p>
-If no arguments are given to portoshell, you will start the interactive
+If no arguments are given to softshell, you will start the interactive
 REPL (Read-evaluate-print-loop). This is a useful environment for
 experimenting and interactive development.
 </p>
 
 
 
-<pre class="example">$ portoshell
-PortoShell 0.1.32
+<pre class="example">$ softshell
+SoftShell 0.1.32
 Source license: LGPLv3
 
 For help, type :help
@@ -508,12 +508,12 @@ definitions","properties":[{"name":"abbreviation","type":"string"},
 The <i>register-entity.sh</i> script is a utility that inserts a json-file
 into MongoDB. If we take a look at the file <i>register-entity.sh</i>, you
 will find that this is not a regular shell-script at all, but a script
-that actually gets run by portoshell
+that actually gets run by softshell
 </p>
 
 
 
-<pre class="example">#!/usr/bin/env portoshell
+<pre class="example">#!/usr/bin/env softshell
 
 /*
  * register-entity.sh
@@ -526,7 +526,7 @@ __main__ = function (args)
            console.error("fatal error: no input files");
            return undefined;
        }
-    var metaStorage = require ('porto.utils.metastore').connect(
+    var metaStorage = require ('soft.utils.metastore').connect(
         {
             uri: 'mongodb://localhost',
             database: 'meta',
@@ -575,7 +575,7 @@ Creating an entity of type unit can now be performed runtime in the scripting en
 
 
 
-<pre class="example">var entity = require('porto.entity').db(driverInfo);   
+<pre class="example">var entity = require('soft.entity').db(driverInfo);   
 Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
 </pre>
 
@@ -613,14 +613,14 @@ used for storage and data retrieval.
 <pre class="example">/* connectivity information */
 var driverInfo = {
     driver:     'mongodb',
-    database:   'porto',
+    database:   'soft',
     collection: 'units'
 };
 </pre>
 
 
 <p>
-In this case we want to store our data in a database called '<i>porto</i>',
+In this case we want to store our data in a database called '<i>soft</i>',
 in a collection we call '<i>mydata</i>'.  Let's fill an entity with some
 data and store the contents to the database:
 </p>
@@ -674,12 +674,12 @@ The complete example should now look like this:
 <pre class="example">/* connectivity information */
 var driverInfo = {
     driver:     'mongodb',
-    database:   'porto',
+    database:   'soft',
     collection: 'units'
 };
 
 /* Entity creator */
-var entity = require('porto.entity').db(driverInfo);   
+var entity = require('soft.entity').db(driverInfo);   
 Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
 
 var u = new Unit();
@@ -736,7 +736,7 @@ with the UUID generated be the instance.
 8dd10147-d0b9-48ee-ae9b-2ef41d56add9 */
 
 var id = '8dd10147-d0b9-48ee-ae9b-2ef41d56add9';
-var entity = require('porto.entity').db(driverInfo);   
+var entity = require('soft.entity').db(driverInfo);   
 Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
 
 var u = new Unit(id);    
@@ -744,7 +744,7 @@ var u = new Unit(id);
 
 
 <p>
-Notice that working Porto doesn't really require the developer to
+Notice that working Soft doesn't really require the developer to
 fight a lot of different APIs. Hiding the boilerplate code in
 configuration files leaves the developers to simply instanciate a
 class/module/object and start working with the data in a language
@@ -754,7 +754,7 @@ native way.
 There is another important thing to consider as well. In our client
 code we have said (made a contract) that we want to use the entity
 <i>unit:1.0-SNAPHOT-1</i>. However, we don't say anything about the source
-type. This is one of the more sophisticated features of the Porto
+type. This is one of the more sophisticated features of the Soft
 design. If the datasource that stored the contents of the entity with
 the id= '<i>8dd10147-d0b9-48ee-ae9b-2ef41d56add9</i>', was of a different
 kind, the framework would notice that the client entity and source
@@ -780,12 +780,12 @@ contains information about other entities and their relations. One of
 the key design principles of the Proto data centric design is the
 separation of data (entities) and structures (relations). The
 Collection constructor is defined in the external module
-'/porto.collection'/.
+'/soft.collection'/.
 </p>
 
 
 
-<pre class="example">Collection = require('porto.collection').db(driverInfo);
+<pre class="example">Collection = require('soft.collection').db(driverInfo);
 var myCollection = new Collection();
 </pre>
 
@@ -842,13 +842,13 @@ Let's create a script that does the following
     /* connectivity information */
     var driverInfo = {
         driver:     'mongodb',
-        database:   'porto',
+        database:   'soft',
         collection: 'units'
     };
 
     /* Entity and Collection creators */
-    Collection = require('porto.collection').db(driverInfo);
-    var entity = require('porto.entity').db(driverInfo);   
+    Collection = require('soft.collection').db(driverInfo);
+    var entity = require('soft.entity').db(driverInfo);   
     Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
 
     /* Parse the external file into a javascript object */
@@ -885,19 +885,19 @@ Let's create a script that does the following
 </div>
 
 <div id="outline-container-3-6" class="outline-3">
-<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Introducing the Porto MVC code generator</h3>
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Introducing the Soft MVC code generator</h3>
 <div class="outline-text-3" id="text-3-6">
 
 
 <p>
 The code generator is implemented in the external module
-'porto.mvc'. This module contains only one function (<i>create()</i>),
+'soft.mvc'. This module contains only one function (<i>create()</i>),
 which takes as the argument a model (object) and a view (template
 file), and returns a new function that will expand the
 javascript-markup contents of the view template and return a
 string. The generate method takes a '<i>bag</i>' object as an optional
 argument. Every property connected to bag will be available in the
-view template js-code. In addition to <i>bag</i>, the porto.model - defined
+view template js-code. In addition to <i>bag</i>, the soft.model - defined
 in the <i>create(obj)</i> function call, will be available.
 </p>
 <p>
@@ -911,7 +911,7 @@ that will present the unit library as tables.
 
 <pre class="example">var driverInfo = {
     driver: 'mongodb',
-    database: 'porto',
+    database: 'soft',
     collection: 'units'
 };
 
@@ -942,7 +942,7 @@ We will also need our template. It looks a bit ugly, but hey - it is what it is:
 
 
 <pre class="example">@{
-  var entity = require('soft.entity').db(porto.bag);
+  var entity = require('soft.entity').db(soft.bag);
   Unit = entity.using('unit', '1.0-SNAPSHOT-1');
   createTable = function(unit){
     return "&lt;table style=\"width:300px\"&gt;&lt;tr&gt;&lt;th colspan=\"2\"&gt;unit:" +
@@ -959,9 +959,9 @@ We will also need our template. It looks a bit ugly, but hey - it is what it is:
   &lt;link rel="stylesheet" type="text/css" href="http://www.qudt.org/qudt/owl/1.0.0/styles/nexiom.css"/&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;Generated from @{porto.model.__name__} version @{porto.model.__version__}&lt;/h1&gt;
+    &lt;h1&gt;Generated from @{soft.model.__name__} version @{soft.model.__version__}&lt;/h1&gt;
     The original data is available from &lt;a href="http://www.qudt.org"&gt;qudt&lt;/a&gt;
-    @{porto.model.entities.map(function(obj){
+    @{soft.model.entities.map(function(obj){
       var unit = new Unit(obj.uid);
       return createTable(unit);
     }).join("&lt;br/&gt;");}
@@ -984,7 +984,7 @@ Run the script and enjoy the results.
 
 
 <p>
-In this chapter we've touched upon some key features of Porto:1
+In this chapter we've touched upon some key features of Soft:1
 </p><ul>
 <li>Defining meta-data schemas and storing them in a database
 </li>
@@ -1010,9 +1010,9 @@ In this chapter we've touched upon some key features of Porto:1
 
 
 <p>
-In this chapter we show how Porto can be used to generate inputs for
+In this chapter we show how Soft can be used to generate inputs for
 OpenFOAM. This is a partial example and should be extended to a
-complete simulation environment run from within Porto.
+complete simulation environment run from within Soft.
 </p>
 
 </div>
@@ -1165,7 +1165,7 @@ ControlDict object and give it some data:
 
 <pre class="example">var entity = require('soft.entity').db({
   driver:     'mongodb',
-  database:   'porto',
+  database:   'soft',
   collection: 'openfoam'
 });
 
@@ -1223,7 +1223,7 @@ The next step is to make a template view for the file to be generated.
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 |-----------------------------------------------------------------------------|
-    Generated by Porto @{new Date().toString()}
+    Generated by Soft @{new Date().toString()}
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -1234,37 +1234,37 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     @{porto.model.application};
+application     @{soft.model.application};
 
-startFrom       @{porto.model.startFrom};
+startFrom       @{soft.model.startFrom};
 
-startTime       @{porto.model.startTime};
+startTime       @{soft.model.startTime};
 
-stopAt          @{porto.model.stopAt};
+stopAt          @{soft.model.stopAt};
 
-endTime         @{porto.model.endTime};
+endTime         @{soft.model.endTime};
 
-deltaT          @{porto.model.deltaT};
+deltaT          @{soft.model.deltaT};
 
-writeControl    @{porto.model.writeControl};
+writeControl    @{soft.model.writeControl};
 
-writeInterval   @{porto.model.writeInterval};
+writeInterval   @{soft.model.writeInterval};
 
-purgeWrite      @{porto.model.purgeWrite};
+purgeWrite      @{soft.model.purgeWrite};
 
-writeFormat     @{porto.model.writeFormat};
+writeFormat     @{soft.model.writeFormat};
 
-writePrecision  @{porto.model.writePrecision};
+writePrecision  @{soft.model.writePrecision};
 
-writeCompression @{porto.model.writeCompression};
+writeCompression @{soft.model.writeCompression};
 
-timeFormat      @{porto.model.timeFormat};
+timeFormat      @{soft.model.timeFormat};
 
-timePrecision   @{porto.model.timePrecision};
+timePrecision   @{soft.model.timePrecision};
 
-runTimeModifiable @{porto.model.runTimeModifiable};
+runTimeModifiable @{soft.model.runTimeModifiable};
 
-adjustTimeStep  @{porto.model.adjustTimeStep};
+adjustTimeStep  @{soft.model.adjustTimeStep};
 
 // ************************************************************************* //
 
@@ -1289,7 +1289,7 @@ The last step is to generate the code that makes the controlDict.
 <pre class="example">
 var entity = require('soft.entity').db({
   driver:     'mongodb',
-  database:   'porto',
+  database:   'soft',
   collection: 'openfoam'});
 
 ControlDict = entity.using('controlDict', '0.1');
@@ -1322,7 +1322,7 @@ controlDict dictionary file.
 
 
 <p>
-The Porto framework is not limited to just storing and retrieving
+The Soft framework is not limited to just storing and retrieving
 data. It can also be utilized for controlling the process
 workflows. One syncronization mechanism that is supported is <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">User Datagram Protocol</a>. This a lightweight protocol with no handshaking and
 setup. UDP works by emitting datagrams. The datagram can be any
@@ -1360,7 +1360,7 @@ UdpSocket is a build-in utility class, and does not require us to call <i>requir
 <p>
 When executed, this script will simply emit the datagram and exit. The
 server code is a bit more elaborate and contains some features of
-Porto that has not yet been discussed. The server is a script that
+Soft that has not yet been discussed. The server is a script that
 should set up an event loop. The event loop makes it possible to
 create asyncrounous callbacks that is build in the Qt signal/slot
 mechanism, and is a build-in utility class called <i>EventLoop</i>.
@@ -1457,9 +1457,9 @@ instanciates the UdpSocket and pass it to a function argument.
 Working in a scripting shell environment is sometimes not practical
 when it comes to presenting information. Creating or generating HTML
 for presenting contents is therefore good options. One could also
-consider to build <i>Porto User Interfaces</i> as web services. This
+consider to build <i>Soft User Interfaces</i> as web services. This
 chapter will demonstrate the functionality of the tiny webserver
-functionality available in <i>Porto</i>, in the build-in utility HttpServer.
+functionality available in <i>Soft</i>, in the build-in utility HttpServer.
 </p>
 
 
@@ -1495,8 +1495,8 @@ to GET requests of type text/html.
 
 <p>
 This tutorial/overview was intended to give the reader some hands-on
-to get started on working with Porto. There are many more things that
-Porto is able to do in terms of features, but the key concepts are the
+to get started on working with Soft. There are many more things that
+Soft is able to do in terms of features, but the key concepts are the
 most important. I wish this document has left the reader with a little
 deeper understanding of the data-centric design philosophy, and also
 inspiration to contribute and extend the framework to fit other tasks
@@ -1504,7 +1504,7 @@ and activities. After all, software is supposed to make work easier,
 more fun, and inspire new ideas.
 </p>
 <p>
-Also note that Porto is in a <b>very early stage of development</b>. Do not
+Also note that Soft is in a <b>very early stage of development</b>. Do not
 expect everything to be smooth and easy, but please make a note of
 annoyances, problems, improvement suggestions, and feel free to make
 these requirements for the development interation.

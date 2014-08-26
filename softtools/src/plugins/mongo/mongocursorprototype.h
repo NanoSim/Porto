@@ -6,7 +6,7 @@
 #include <QScriptValue>
 #include <qmongocursor.h>
 
-using porto::mongo::Cursor;
+using soft::mongo::Cursor;
 class MongoCursorPrototype : public QObject
 			   , public QScriptable
 {

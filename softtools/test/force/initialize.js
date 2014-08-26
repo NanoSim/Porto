@@ -1,6 +1,6 @@
-Entity      = require('porto.entity');
-Collection  = require('porto.collection');
-JSONStorage = require('porto.storage.jsonstorage').jsonStorage;
+Entity      = require('soft.entity');
+Collection  = require('soft.collection');
+JSONStorage = require('soft.storage.jsonstorage').jsonStorage;
 
 __main__ = function()
 {

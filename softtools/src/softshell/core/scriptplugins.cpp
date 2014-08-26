@@ -1,6 +1,6 @@
 #include <QtCore>
 #include <QtScript>
-#include <Porto>
+#include <Soft>
 
 #include "isoftplugin.h"
 #include "scriptplugins.h"
@@ -14,7 +14,7 @@ class ScriptPlugins :: Private
    QList<QPluginLoader*> plugins;
 };
 
-ScriptPlugins :: ScriptPlugins(porto::ScriptEngine const &e, QObject *parent)
+ScriptPlugins :: ScriptPlugins(soft::ScriptEngine const &e, QObject *parent)
    : QObject(parent)
    , d( new ::ScriptPlugins::Private() )
 {

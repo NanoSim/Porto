@@ -1,18 +1,18 @@
 isEmpty (core_pri_defined)
 {
 
-INCLUDEPATH += $$PWD $$(PORTOBASE)/include
+INCLUDEPATH += $$PWD $$(SOFTBASE)/include
 DEPENDPATH  += $$PWD
 
 include(../../plugins/common/common.pri)
 
 HEADERS += $$PWD/scriptplugins.h \
-           $$PWD/portoshell.h     \
+           $$PWD/softshell.h     \
            $$PWD/protocall.h     \
 	   $$PWD/automodule.h    
 
 SOURCES += $$PWD/scriptplugins.cpp \
-           $$PWD/portoshell.cpp     \ 
+           $$PWD/softshell.cpp     \ 
 	   $$PWD/automodule.cpp
 
 core_pri_defined = true

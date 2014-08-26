@@ -1,4 +1,4 @@
-#include <Porto>
+#include <Soft>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include "utils.h"
@@ -10,7 +10,7 @@
 #include "filesystem.h"
 #include "filesystemwatcher.h"
 #include "httpd.h"
-using porto::ScriptEngine;
+using soft::ScriptEngine;
 
 class Utils::Private
 {

@@ -1,5 +1,5 @@
-INCLUDEPATH   += . $$(PORTOBASE)/include $$PWD
-DEPENDPATH    += . $$(PORTOBASE)/include $$PWD
+INCLUDEPATH   += . $$(SOFTBASE)/include $$PWD
+DEPENDPATH    += . $$(SOFTBASE)/include $$PWD
 
 # Input
 HEADERS += $$PWD/mongoclientprototype.h \

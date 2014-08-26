@@ -9,9 +9,9 @@
 #include <QtScript>
 #include <QtCore>
 
-using porto::mongo::Client;
-using porto::mongo::WriteConcern;
-using porto::mongo::ReadPrefs;
+using soft::mongo::Client;
+using soft::mongo::WriteConcern;
+using soft::mongo::ReadPrefs;
 
 MongoClientPrototype :: MongoClientPrototype(QObject *parent)
    : QObject (parent)

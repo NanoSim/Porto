@@ -6,9 +6,9 @@
 #include <qmongocollection.h>
 #include "mongocollectionprototype.h"
 
-using porto::bson::Bson;
-using porto::mongo::Collection;
-using porto::mongo::ReadPrefs;
+using soft::bson::Bson;
+using soft::mongo::Collection;
+using soft::mongo::ReadPrefs;
 
 namespace {
 static Bson* bsonFromScriptValue(QScriptValue const &bson, MongoCollectionPrototype *parent)

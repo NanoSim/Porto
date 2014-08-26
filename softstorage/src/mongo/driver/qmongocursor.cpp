@@ -1,10 +1,10 @@
 #include "qmongocursor.h"
 #include <iostream>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 
 static void cursorDeleter(mongoc_cursor_t *ptr)
 {
@@ -83,4 +83,4 @@ void Cursor :: destroy()
 }
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

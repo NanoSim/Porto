@@ -1,4 +1,4 @@
-$create = require('porto.mvc').create;
+$create = require('soft.mvc').create;
 
 ForceModelGenerator = function(obj) {
     this.obj = obj;

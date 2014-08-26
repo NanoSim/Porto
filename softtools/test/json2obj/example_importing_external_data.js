@@ -1,6 +1,6 @@
-instance    = require('porto.entity').instance;
-Collection  = require('porto.collection').Collection;
-jsonStorage = require('porto.storage.jsonstorage').jsonStorage;
+instance    = require('soft.entity').instance;
+Collection  = require('soft.collection').Collection;
+jsonStorage = require('soft.storage.jsonstorage').jsonStorage;
 
 var storage = jsonStorage();
 

@@ -5,7 +5,7 @@
 #include "qmongodatabase.h"
 #include "mongodatabaseprototype.h"
 
-using porto::mongo::Database;
+using soft::mongo::Database;
 
 MongoDatabasePrototype :: MongoDatabasePrototype (QObject *parent)
   : QObject (parent)

@@ -2,7 +2,7 @@
 #include "qmongogridfs.h"
 #include "qmongogridfsfileopt.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 
@@ -65,4 +65,4 @@ bool GridFSFile :: setMd5(const char* md5)
 
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

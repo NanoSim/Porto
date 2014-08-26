@@ -6,7 +6,7 @@
 #include <QScriptValue>
 #include <qmongoclient.h>
 
-using porto::mongo::Client;
+using soft::mongo::Client;
 class MongoClientPrototype : public QObject, 
 			     public QScriptable
 {

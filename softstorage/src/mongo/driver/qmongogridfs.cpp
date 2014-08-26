@@ -1,6 +1,6 @@
 #include "qmongogridfs.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 static void gridfsDeleter(mongoc_gridfs_t *ptr)
@@ -39,4 +39,4 @@ bool GridFS :: drop()
 }
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

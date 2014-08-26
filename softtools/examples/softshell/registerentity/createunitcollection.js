@@ -7,13 +7,13 @@ var unitsJSON = fs.readFile('units.json', function(err, data){
     /* connectivity information */
     var driverInfo = {
 	driver:     'mongodb',
-	database:   'porto',
+	database:   'soft',
 	collection: 'units'
     };
 
     /* Entity and Collection creators */
-    Collection = require('porto.collection').db(driverInfo);
-    var entity = require('porto.entity').db(driverInfo);   
+    Collection = require('soft.collection').db(driverInfo);
+    var entity = require('soft.entity').db(driverInfo);   
     Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
 
     /* Parse the external file into a javascript object */

@@ -2,7 +2,7 @@
 # Register metadata.
 
 
-portoshell can run a script with arguments given it contains a function:
+softshell can run a script with arguments given it contains a function:
 
 	__main__ = function (args) {
 		...
@@ -10,7 +10,7 @@ portoshell can run a script with arguments given it contains a function:
 
 To call this method from the command shell, you can simply type
 
-	$ portoshell myscript.js argument1 argument2
+	$ softshell myscript.js argument1 argument2
 
 The method 'register.js' takes meta-entity declarations as arguments
 and uploads these into the meta-database in mongodb. An example of
@@ -58,7 +58,7 @@ this is the definition of the unit-entity:
 The name of this file is 'unit.json'. To insert this file into the
 meta-database, the procedure is:
 
-	$ portoshell register.js units.json
+	$ softshell register.js units.json
 
 	2014/06/14 15:00:40.0110: [18265]: INFO: cluster: Client
 	initialized in direct mode.
@@ -74,7 +74,7 @@ meta-database, the procedure is:
 Creating an entity of type unit can now be performed runtime in the
 scripting environment:
 
-	Unit = require('porto.factory.entity').createEntity('unit', '1.0-SNAPSHOT-1');
+	Unit = require('soft.factory.entity').createEntity('unit', '1.0-SNAPSHOT-1');
 	var u = new Unit();
 
 The variable 'u' is now holding a new instance of the class 'Unit'. It
@@ -82,7 +82,7 @@ is also possible to call createEntity with a callback function that
 will capture errors and the class definition (the function that
 creates the class passed as text).
 
-	Unit = require('porto.factory.entity').createEntity('unit', '1.0-SNAPSHOT-1',
+	Unit = require('soft.factory.entity').createEntity('unit', '1.0-SNAPSHOT-1',
 		function(err, source){
 			if (err) throw (err);
 			console.log (source);
@@ -95,14 +95,14 @@ of different locations. The storage-module contains a factory pattern
 that allows us to specify the name of the driver we want to use,
 together with other info.
 
-	var storage = require('porto.storage').connect({
+	var storage = require('soft.storage').connect({
         driver: "mongodb",
         uri: "mongodb://localhost",
-        database: "porto",
+        database: "soft",
         collection: "mydata"
     });
 
-In this case we want to store our data in a database called 'porto',
+In this case we want to store our data in a database called 'soft',
 in a collection we call 'mydata'.
 
 Let's fill an entity with some data and store the contents to the
@@ -151,7 +151,7 @@ By hiding all details about storage and entity factories, and just
 exposing the entity class, we can simplify working with the data:
 
 	/* Connect the entity-instance generator to a datasource */
-	var entitydb = require('porto.entity').db({
+	var entitydb = require('soft.entity').db({
         driver: "mongodb",
         database: "newdb",
         collection: "newcoll"

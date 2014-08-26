@@ -1,6 +1,6 @@
 isEmpty (utils_ptr_defined)
 {
-INCLUDEPATH += $$PWD $$(PORTOBASE)/include
+INCLUDEPATH += $$PWD $$(SOFTBASE)/include
 DEPENDPATH  += $$PWD
 
 HEADERS += $$PWD/utils.h \

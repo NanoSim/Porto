@@ -1,8 +1,8 @@
 ///////////// Example application
 
-Collection  = require('porto.collection').Collection;
-jsonStorage = require('porto.storage.jsonstorage').jsonStorage;
-instance    = require('porto.entity').instance;
+Collection  = require('soft.collection').Collection;
+jsonStorage = require('soft.storage.jsonstorage').jsonStorage;
+instance    = require('soft.entity').instance;
 
 
 // Create a simple JSON-based storage class that will be used as database

@@ -1,12 +1,12 @@
 /* Connect the entity-instance generator to a datasource */
 
-var entitydb = require('porto.entity').db({
+var entitydb = require('soft.entity').db({
     driver: "mongodb",
     database: "newdb",
     collection: "newcoll"
 });
 
-Collection = require('porto.collection').db({
+Collection = require('soft.collection').db({
     driver: "mongodb",
     database: "test",
     collection: "collections"

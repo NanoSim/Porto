@@ -2,10 +2,10 @@
 #include "qmongogridfsfile.h"
 #include "qbson.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
-using PORTO_NAMESPACE::BSON_NAMESPACE::Bson;
+using SOFT_NAMESPACE::BSON_NAMESPACE::Bson;
 
 class GridFSFileOpt :: Private
 {
@@ -102,4 +102,4 @@ quint32 GridFSFileOpt :: chunkSize() const
 
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

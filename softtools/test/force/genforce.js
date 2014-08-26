@@ -1,9 +1,9 @@
-//Collection    = require('porto.collection').Collection;
-//Entity        = require('porto.entity').Entity;
-//Storage       = require('porto.storage.jsonstorage').jsonStorage;
-Time          = require('porto.utils.time').Time;
-ExtStorage    = require('porto.storage.external').ExternalStorage;
-//createFromExt = require('porto.storage.external').createEntityFromExternalSource;
+//Collection    = require('soft.collection').Collection;
+//Entity        = require('soft.entity').Entity;
+//Storage       = require('soft.storage.jsonstorage').jsonStorage;
+Time          = require('soft.utils.time').Time;
+ExtStorage    = require('soft.storage.external').ExternalStorage;
+//createFromExt = require('soft.storage.external').createEntityFromExternalSource;
 
 var time = new Time();
 /* Set up an external datasource with the registered driver 'LogData' */

@@ -1,6 +1,6 @@
 #include "qmongoreadprefs.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 static void readPrefsDeleter(mongoc_read_prefs_t *ptr)
@@ -53,4 +53,4 @@ void ReadPrefs :: setMode (const ReadMode &readMode)
 
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

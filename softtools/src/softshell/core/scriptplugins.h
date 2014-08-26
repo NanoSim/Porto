@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QScopedPointer>
 
-namespace porto { 
+namespace soft { 
    class ScriptEngine;
 }
 class QScriptEngine;
@@ -13,7 +13,7 @@ class ScriptPlugins : public QObject
    Q_OBJECT
 
 public:
-   ScriptPlugins(porto::ScriptEngine const &engine, QObject * parent = 0);
+   ScriptPlugins(soft::ScriptEngine const &engine, QObject * parent = 0);
    virtual ~ScriptPlugins();
 
 protected:

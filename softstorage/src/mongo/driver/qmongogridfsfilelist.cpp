@@ -1,6 +1,6 @@
 #include "qmongogridfsfilelist.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 static void gridFSFileListDeleter (mongoc_gridfs_file_list_t *ptr)
@@ -31,4 +31,4 @@ GridFSFileList :: ~GridFSFileList ()
 {}
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

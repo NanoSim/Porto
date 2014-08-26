@@ -1,14 +1,14 @@
-#include <Porto>
+#include <Soft>
 
 #include "utils.h"
-#include "portoshell.h"
+#include "softshell.h"
 #include "scriptplugins.h"
 
 int main(int argc, char *argv[])
 {
   initScriptResource();
-  porto::init(argc, argv);
-  porto::ScriptEngine engine;
+  soft::init(argc, argv);
+  soft::ScriptEngine engine;
 
   Utils utilities (engine);
   ScriptPlugins plugins(engine);; 

@@ -5,15 +5,15 @@ repl.command = {};
 
 load(":/resources/core.js");
 
-porto_version = "PortoShell 0.1.33";
-porto_license = "Source license: LGPLv3";
+soft_version = "SoftShell 0.1.33";
+soft_license = "Source license: LGPLv3";
 
 function showHelp()
 {
     var message = 
-	porto_version + "\n" +
-	porto_license + "\n\n" +
-	"Welcome to Porto Shell\n" +
+	soft_version + "\n" +
+	soft_license + "\n\n" +
+	"Welcome to Soft Shell\n" +
 	"Shell commands:\n" +
 	":h                      This message\n"+
 	":ld <file>              Load and evaluate file <file>\n" +
@@ -94,8 +94,8 @@ function mainrepl()
 
 function __main__() {
     var message = 
-	porto_version + "\n" +
-	porto_license + "\n\n" +
+	soft_version + "\n" +
+	soft_license + "\n\n" +
 	"For help, type :help\n";
     
     print(message);

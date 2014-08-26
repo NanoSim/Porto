@@ -2,12 +2,12 @@
 #include <mongoc.h>
 #include <iostream>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 bool Collection :: Undefined = false;
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 
 static void collectionDeleter(mongoc_collection_t *ptr)
 {
@@ -280,4 +280,4 @@ bool Collection :: save(Bson* document)
 }
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

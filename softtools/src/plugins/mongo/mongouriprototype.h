@@ -6,7 +6,7 @@
 #include <QScriptValue>
 #include <qmongouri.h>
 
-using porto::mongo::Uri;
+using soft::mongo::Uri;
 class MongoUriPrototype : public QObject
 			, public QScriptable
 {

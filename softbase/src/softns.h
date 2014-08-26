@@ -1,10 +1,10 @@
-#ifndef PORTONS_H_DEF
-#define PORTONS_H_DEF
+#ifndef SOFTNS_H_DEF
+#define SOFTNS_H_DEF
 
-#if !defined (PORTO_NAMESPACE)
-# define PORTO_NAMESPACE porto
-# define PORTO_BEGIN_NAMESPACE namespace PORTO_NAMESPACE {
-# define PORTO_END_NAMESPACE }
+#if !defined (SOFT_NAMESPACE)
+# define SOFT_NAMESPACE soft
+# define SOFT_BEGIN_NAMESPACE namespace SOFT_NAMESPACE {
+# define SOFT_END_NAMESPACE }
 #endif
 
 #if !defined (ANONYMOUS_NAMESPACE)
@@ -13,4 +13,4 @@
 # define ANONYMOUS_END_NAMESPACE }
 #endif
 
-#endif // PORTONS_H_DEF
+#endif // SOFTNS_H_DEF

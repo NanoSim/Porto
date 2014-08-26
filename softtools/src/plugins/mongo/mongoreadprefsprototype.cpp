@@ -3,7 +3,7 @@
 
 #include "mongoreadprefsprototype.h"
 
-using porto::mongo::ReadPrefs;
+using soft::mongo::ReadPrefs;
 
 MongoReadPrefsPrototype :: MongoReadPrefsPrototype (QObject *parent)
   : QObject (parent)

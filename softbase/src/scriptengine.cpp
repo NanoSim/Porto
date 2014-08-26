@@ -4,7 +4,7 @@
 #include <QtCore/QString>
 #include "scriptengine.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 
 class ScriptEngine::Private
 {
@@ -40,4 +40,4 @@ void *ScriptEngine :: ref() const
 }
 
 
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

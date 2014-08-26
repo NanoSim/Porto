@@ -1,10 +1,10 @@
-isEmpty(porto_storage_logdata_defined) {
-  load(porto_paths)
+isEmpty(soft_storage_logdata_defined) {
+  load(soft_paths)
 
   DEPENDPATH  += $$PWD
   INCLUDEPATH += $$PWD
 
-  include($$PORTO_STORAGE_EXTERNAL/src/common/common.pri)
+  include($$SOFT_STORAGE_EXTERNAL/src/common/common.pri)
 
   HEADERS     += $$PWD/logdata.h \ 
                $$PWD/logdatareader.h \
@@ -13,5 +13,5 @@ isEmpty(porto_storage_logdata_defined) {
   SOURCES     += $$PWD/logdatareader.cpp \
 	       $$PWD/logdataexternalstorage.cpp
 
-  porto_storage_logdata_defined = true
+  soft_storage_logdata_defined = true
 }

@@ -1,8 +1,8 @@
-#include <Porto>
+#include <Soft>
 #include <QtScript>
 #include <QtCore>
 
-#include "portons.h"
+#include "softns.h"
 
 ANONYMOUS_BEGIN_NAMESPACE
 
@@ -377,17 +377,17 @@ QScriptValue load(QScriptContext *context, QScriptEngine *engine)
    return context->throwError("Could not open " + filename + " for reading.");
 }
 
-void loadPortoModule()
+void loadSoftModule()
 {
    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/modules");
    QProcessEnvironment const &env = QProcessEnvironment::systemEnvironment();
-   if( env.contains("PORTO_MODULES") ) {
+   if( env.contains("SOFT_MODULES") ) {
 #ifdef WIN32
       QChar const separator(';');
 #else
       QChar const separator(':');
 #endif
-      foreach( QString const & p, env.value("PORTO_MODULES").split(separator) ) {
+      foreach( QString const & p, env.value("SOFT_MODULES").split(separator) ) {
 	 qDebug() << "MODULES:" << p;
 	 qApp->addLibraryPath(p);
       }
@@ -446,11 +446,11 @@ void registerBase(QScriptEngine *engine)
 
 ANONYMOUS_END_NAMESPACE
 
-int startRepl (porto::ScriptEngine const &e)
+int startRepl (soft::ScriptEngine const &e)
 {
    auto engine = static_cast<QScriptEngine*>(e.ref());
    
-   loadPortoModule();
+   loadSoftModule();
    registerBase(engine);
    
    QString programFile = (QCoreApplication::arguments().count() < 2 ?

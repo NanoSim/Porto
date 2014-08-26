@@ -1,7 +1,7 @@
 TEMPLATE       = lib
 CONFIG        += plugin
-INCLUDEPATH   += . $$(PORTOBASE)/include
-DEPENDPATH    += . $$(PORTOBASE)/include
+INCLUDEPATH   += . $$(SOFTBASE)/include
+DEPENDPATH    += . $$(SOFTBASE)/include
 CONFIG        += debug_and_release
 CONFIG        += c++11
 CONFIG        += bson 
@@ -28,7 +28,7 @@ RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
 include(../common/common.pri)
-include($$(PORTOBASE)/../portostorage/src/mongo/driver/driver.pri)
+include($$(SOFTBASE)/../softstorage/src/mongo/driver/driver.pri)
 include(mongoprototypes.pri)
 
 # Input
@@ -36,5 +36,5 @@ HEADERS += mongoplugin.h
 SOURCES += mongoplugin.cpp 
 
 # Install
-target.path = $$(PORTOBASE)/bin/plugins
+target.path = $$(SOFTBASE)/bin/plugins
 INSTALLS   += target

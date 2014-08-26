@@ -24,25 +24,25 @@
 #include "mongoreadprefsprototype.h"
 #include "mongocursorprototype.h"
 
-using porto::mongo::Client;
-using porto::mongo::Collection;
-using porto::mongo::Database;
-using porto::mongo::WriteConcern;
-using porto::mongo::ReadPrefs;
-using porto::mongo::GridFS;
-using porto::mongo::Uri;
-using porto::mongo::Cursor;
-using porto::bson::Bson;
+using soft::mongo::Client;
+using soft::mongo::Collection;
+using soft::mongo::Database;
+using soft::mongo::WriteConcern;
+using soft::mongo::ReadPrefs;
+using soft::mongo::GridFS;
+using soft::mongo::Uri;
+using soft::mongo::Cursor;
+using soft::bson::Bson;
 
-Q_DECLARE_METATYPE (porto::mongo::Client*)
-Q_DECLARE_METATYPE (porto::mongo::Collection*)
-Q_DECLARE_METATYPE (porto::mongo::Database*)
-Q_DECLARE_METATYPE (porto::mongo::WriteConcern*)
-Q_DECLARE_METATYPE (porto::mongo::ReadPrefs*)
-Q_DECLARE_METATYPE (porto::mongo::GridFS*)
-Q_DECLARE_METATYPE (porto::mongo::Uri*)
-Q_DECLARE_METATYPE (porto::mongo::Cursor*)
-Q_DECLARE_METATYPE (porto::bson::Bson*)
+Q_DECLARE_METATYPE (soft::mongo::Client*)
+Q_DECLARE_METATYPE (soft::mongo::Collection*)
+Q_DECLARE_METATYPE (soft::mongo::Database*)
+Q_DECLARE_METATYPE (soft::mongo::WriteConcern*)
+Q_DECLARE_METATYPE (soft::mongo::ReadPrefs*)
+Q_DECLARE_METATYPE (soft::mongo::GridFS*)
+Q_DECLARE_METATYPE (soft::mongo::Uri*)
+Q_DECLARE_METATYPE (soft::mongo::Cursor*)
+Q_DECLARE_METATYPE (soft::bson::Bson*)
 
 MongoPlugin :: ~MongoPlugin()
 {}
@@ -109,7 +109,7 @@ static void registerConstructor (QScriptEngine *engine,
 
 void MongoPlugin :: registerPlugin (QScriptEngine *engine)
 {
-   porto::mongo::initialize();
+   soft::mongo::initialize();
 
    registerPrototype<MongoClientPrototype,     Client>     (engine);
    registerPrototype<MongoCollectionPrototype, Collection> (engine);

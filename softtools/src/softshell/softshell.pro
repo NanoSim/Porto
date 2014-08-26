@@ -1,5 +1,5 @@
 TEMPLATE     = app
-TARGET       = portoshell
+TARGET       = softshell
 INCLUDEPATH += . 
 DEPENDPATH  += . resources/
 
@@ -7,7 +7,7 @@ CONFIG      -= window
 CONFIG      += console
 CONFIG      += c++11
 CONFIG      += debug_and_release
-CONFIG      += porto
+CONFIG      += soft
 CONFIG      += pretty
 
 QT         += gui
@@ -38,8 +38,8 @@ include(core/core.pri)
 include(utils/utils.pri)
 
 SOURCES += main.cpp
-RESOURCES += portoshell.qrc
+RESOURCES += softshell.qrc
 
 # Install
-target.path = $$(PORTOBASE)/bin
+target.path = $$(SOFTBASE)/bin
 INSTALLS   += target

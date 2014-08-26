@@ -1,6 +1,6 @@
 #include "qmongowriteconcern.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 static void writeConcernDeleter(mongoc_write_concern_t *ptr)
@@ -53,4 +53,4 @@ bool WriteConcern :: setW (qint32 w)
 }
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

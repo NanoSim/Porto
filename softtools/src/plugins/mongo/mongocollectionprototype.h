@@ -7,7 +7,7 @@
 #include <qmongoqueryflags.h>
 #include <qmongocollection.h>
 
-using porto::mongo::Collection;
+using soft::mongo::Collection;
 class MongoCollectionPrototype : public QObject,
 				 public QScriptable
 {

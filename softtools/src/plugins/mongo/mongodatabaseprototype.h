@@ -6,7 +6,7 @@
 #include <QScriptValue>
 #include <qmongodatabase.h>
 
-using porto::mongo::Database;
+using soft::mongo::Database;
 class MongoDatabasePrototype : public QObject
 			     , public QScriptable
 {

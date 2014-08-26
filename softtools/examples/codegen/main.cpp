@@ -9,7 +9,7 @@ using std::endl;
 Transactor setupStorage()
 {
    Storage storage = StorageCreator::connect("mongodb")
-      .addOption("database", "porto")
+      .addOption("database", "soft")
       .addOption("collection", "mystorage");
 
    return Transactor::create(storage);

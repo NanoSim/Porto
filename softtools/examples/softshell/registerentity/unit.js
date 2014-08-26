@@ -1,12 +1,12 @@
 (function (){
-    var storage = require('porto.storage').connect({
+    var storage = require('soft.storage').connect({
 	driver: "mongodb",
 	uri: "mongodb://localhost",
-	database: "porto5",
+	database: "soft5",
 	collection: "units"
     });    
 
-    Unit = require('porto.factory.entity').createEntity('unit', '1.0-SNAPSHOT-1',
+    Unit = require('soft.factory.entity').createEntity('unit', '1.0-SNAPSHOT-1',
 						       function(err)
 						       {
 							   if (err) throw (err);

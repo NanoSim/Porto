@@ -1,15 +1,15 @@
-#ifndef PORTO_H_DEF
-#define PORTO_H_DEF
-#include "portons.h"
+#ifndef SOFT_H_DEF
+#define SOFT_H_DEF
+#include "softns.h"
 #include <string>
 #include <list>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 
 void init(int &argc, char *argv[]);
 std::string applicationDirPath();
 std::list<std::string> arguments();
 
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 
-#endif // PORTO_H_DEF
+#endif // SOFT_H_DEF

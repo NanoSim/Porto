@@ -6,7 +6,7 @@
 #include <QScriptValue>
 #include <qmongoreadprefs.h>
 
-using porto::mongo::ReadPrefs;
+using soft::mongo::ReadPrefs;
 class MongoReadPrefsPrototype : public QObject
 			      , public QScriptable
 {

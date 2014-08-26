@@ -3,7 +3,7 @@
 #include <QtScript>
 #include <QtCore>
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 
 BsonPrototype :: BsonPrototype(QObject *parent)
    : QObject(parent)

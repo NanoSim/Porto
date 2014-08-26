@@ -3,7 +3,7 @@
 
 #include "mongocursorprototype.h"
 
-using porto::mongo::Cursor;
+using soft::mongo::Cursor;
 
 MongoCursorPrototype :: MongoCursorPrototype (QObject *parent)
    : QObject (parent)

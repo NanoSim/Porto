@@ -2,11 +2,11 @@
 __main__ = (function()
 {
     Time    = require('utils.time');
-    AutoRun = require('porto.autorun');
+    AutoRun = require('soft.autorun');
     
     setMessage = function(obj) {
 	// Add a message element
-	obj.message = 'Hello Porto.AutoRun!';
+	obj.message = 'Hello Soft.AutoRun!';
     };
     
     displayMessage = function(obj) {

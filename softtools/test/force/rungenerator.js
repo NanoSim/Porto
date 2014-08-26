@@ -1,7 +1,7 @@
 include('forcemodelgenerator.js')
 
-Storage    = require('porto.storage.jsonstorage').jsonStorage;
-Collection = require('porto.collection');
+Storage    = require('soft.storage.jsonstorage').jsonStorage;
+Collection = require('soft.collection');
 
 generateForceModel = function(collectionId, storage) 
 {

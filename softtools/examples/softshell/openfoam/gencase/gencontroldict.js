@@ -1,7 +1,7 @@
 
-var entity = require('porto.entity').db({
+var entity = require('soft.entity').db({
     driver:     'mongodb',
-    database:   'porto',
+    database:   'soft',
     collection: 'openfoam'
 });
 

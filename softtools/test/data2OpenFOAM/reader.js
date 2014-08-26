@@ -1,4 +1,4 @@
-importData = require('porto.storage.importer').importData;
+importData = require('soft.storage.importer').importData;
 
 /* Define the external data source with a URL and a schema
  */

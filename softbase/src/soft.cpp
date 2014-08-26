@@ -1,8 +1,8 @@
-#include "porto.h"
+#include "soft.h"
 #include <QtCore/QCoreApplication>
 #include <QtCore/QStringList>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 
 static QCoreApplication* app = nullptr;
 
@@ -27,4 +27,4 @@ std::list<std::string> arguments()
    return retval;
 }
 
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

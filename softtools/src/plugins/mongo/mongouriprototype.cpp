@@ -3,7 +3,7 @@
 
 #include "mongouriprototype.h"
 
-using porto::mongo::Uri;
+using soft::mongo::Uri;
 
 MongoUriPrototype :: MongoUriPrototype (QObject *parent)
   : QObject (parent)

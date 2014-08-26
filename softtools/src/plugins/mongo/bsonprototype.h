@@ -6,7 +6,7 @@
 #include <QScriptValue>
 #include <qbson.h>
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 class BsonPrototype : public QObject,
 		      public QScriptable
 {

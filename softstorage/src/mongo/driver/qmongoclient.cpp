@@ -7,7 +7,7 @@
 #include "qmongocursor.h"
 #include <iostream>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 static void clientDeleter(mongoc_client_t *ptr)
@@ -99,8 +99,8 @@ QStringList Client :: databaseNames() const
 }
 
 Cursor* Client :: command(const char* dbname,
-                         porto::bson::Bson* query,
-                         porto::bson::Bson* fields)
+                         soft::bson::Bson* query,
+                         soft::bson::Bson* fields)
 {
    mongoc_read_prefs_t *read_prefs
        = mongoc_read_prefs_new(MONGOC_READ_PRIMARY);   
@@ -120,8 +120,8 @@ Cursor* Client :: command(const char* dbname,
 }
                                                       
 bool Client :: commandSimple(const char* dbname,
-                   porto::bson::Bson* command,
-                   porto::bson::Bson** reply)
+                   soft::bson::Bson* command,
+                   soft::bson::Bson** reply)
 {
    bson_error_t error;
    bson_t* replyOut = bson_new();
@@ -137,7 +137,7 @@ bool Client :: commandSimple(const char* dbname,
    mongoc_read_prefs_destroy(read_prefs);
    *reply = nullptr;
    if(ret)
-     *reply = new porto::bson::Bson(replyOut, this);
+     *reply = new soft::bson::Bson(replyOut, this);
    else
       bson_destroy(replyOut);
    return ret; 
@@ -181,4 +181,4 @@ void Client :: setReadPrefs (ReadPrefs const * readPrefs)
 }
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

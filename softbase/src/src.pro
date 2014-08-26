@@ -5,7 +5,7 @@ DEPENDPATH  += .
 CONFIG      += debug_and_release
 CONFIG      += c++11
 CONFIG      += pretty
-TARGET       = $$qtLibraryTarget(porto)
+TARGET       = $$qtLibraryTarget(soft)
 QT          += script
 
 *-g++* {
@@ -25,10 +25,10 @@ MOC_DIR     = $$DESTDIR/.moc
 RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
-HEADERS += portons.h porto.h scriptengine.h
-SOURCES += porto.cpp scriptengine.cpp
+HEADERS += softns.h soft.h scriptengine.h
+SOURCES += soft.cpp scriptengine.cpp
 
-target.path = $$(PORTOBASE)/lib
-headers.path = $$(PORTOBASE)/include
-headers.files = $$HEADERS Porto
+target.path = $$(SOFTBASE)/lib
+headers.path = $$(SOFTBASE)/include
+headers.files = $$HEADERS Soft
 INSTALLS += headers target

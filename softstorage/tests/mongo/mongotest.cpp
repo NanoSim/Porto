@@ -4,8 +4,8 @@
 
 #include "qmongo"
 
-using porto::mongo::Client;
-using namespace porto;
+using soft::mongo::Client;
+using namespace soft;
 using bson::Bson;
 using mongo::Uri;
 
@@ -77,7 +77,7 @@ TEST_F(MongoTest, client_collection)
 
 TEST_F(MongoTest, client_database)
 {
-   auto * database = client->database("porto");
+   auto * database = client->database("soft");
    ASSERT_TRUE (database != nullptr);
 }
 
@@ -700,7 +700,7 @@ TEST_F(MongoTest, database_drop)
 
 TEST_F(MongoTest, mongoclient_gridfs)
 {
-  auto gridfs = client->gridFS("porto", "myprefix");
+  auto gridfs = client->gridFS("soft", "myprefix");
   ASSERT_TRUE (gridfs != nullptr);
 }
 

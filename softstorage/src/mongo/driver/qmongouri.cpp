@@ -2,10 +2,10 @@
 #include "qmongouri.h"
 #include "qmongowriteconcern.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 
 static void uriDeleter(mongoc_uri_t *ptr)
 {
@@ -103,4 +103,4 @@ WriteConcern *Uri :: writeConcern() const
 }
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

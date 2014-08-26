@@ -1,4 +1,4 @@
-var porto = porto || {};  
+var soft = soft || {};  
 
 /*
   The find() method returns a value in the array, if an element in the

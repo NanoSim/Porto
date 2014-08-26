@@ -9,7 +9,7 @@ protected:
    virtual void SetUp() {
       if( QCoreApplication::instance() == 0 ) {
 	 int argc = 1;
-	 const char *argv[2] = { "portoapp", NULL };
+	 const char *argv[2] = { "softapp", NULL };
 	 app = new QCoreApplication(argc, const_cast<char**>(argv));
 	 
 	 ExternalStorage::registerExternalStorageDriver("MyStorage", new MyStorage());

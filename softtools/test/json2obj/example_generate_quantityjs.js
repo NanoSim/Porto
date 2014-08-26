@@ -1,4 +1,4 @@
-$mvc = require('porto.mvc');
+$mvc = require('soft.mvc');
 
 var json = readFile('example_1.0.json');
 var obj = JSON.parse(json);

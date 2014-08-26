@@ -1,5 +1,5 @@
 @{
-  var entity = require('porto.entity').db(porto.bag);
+  var entity = require('soft.entity').db(soft.bag);
   Unit = entity.using('unit', '1.0-SNAPSHOT-1');
   createTable = function(unit){
     return "<table style=\"width:300px\"><tr><th colspan=\"2\">unit:" +
@@ -16,9 +16,9 @@
   <link rel="stylesheet" type="text/css" href="http://www.qudt.org/qudt/owl/1.0.0/styles/nexiom.css"/>
   </head>
   <body>
-    <h1>Generated from @{porto.model.__name__} version @{porto.model.__version__}</h1>
+    <h1>Generated from @{soft.model.__name__} version @{soft.model.__version__}</h1>
     The original data is available from <a href="http://www.qudt.org">qudt</a>
-    @{porto.model.entities.map(function(obj){
+    @{soft.model.entities.map(function(obj){
       var unit = new Unit(obj.uid);
       return createTable(unit);
     }).join("<br/>");}

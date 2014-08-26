@@ -1,11 +1,11 @@
-$MVC = require('porto.mvc');
+$MVC = require('soft.mvc');
 
 ForceModelGenerator = function(obj) {
     this.obj = obj;
 };
 
 ForceModelGenerator["^doc"] = 
-"\nThe ForceModelGenerator is an example generator that uses porto.mvc to " +
+"\nThe ForceModelGenerator is an example generator that uses soft.mvc to " +
 "\ncombine an input object with a template view                           " +
 "\n                                                                       " +
 "\nprovides:                                                              " +

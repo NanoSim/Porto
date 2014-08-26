@@ -1,7 +1,7 @@
 isEmpty(mongo_driver_defined) {
 
-DEPENDPATH  += $$PWD $$(PORTOBASE)/include
-INCLUDEPATH += $$PWD $$(PORTOBASE)/include
+DEPENDPATH  += $$PWD $$(SOFTBASE)/include
+INCLUDEPATH += $$PWD $$(SOFTBASE)/include
 
 HEADERS  += $$PWD/mongons.h                 \
 	    $$PWD/qmongoinitialize.h        \

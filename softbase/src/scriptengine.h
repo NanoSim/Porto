@@ -1,10 +1,10 @@
 #ifndef SCRIPTENGINE_H_DEF
 #define SCRIPTENGINE_H_DEF
-#include "portons.h"
+#include "softns.h"
 
 #include <string>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 
 class ScriptEngine
 {
@@ -21,5 +21,5 @@ private:
    Private *d;
 };
 
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 #endif // SCRIPTENGINE_H_DEF
