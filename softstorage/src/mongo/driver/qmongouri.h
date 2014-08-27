@@ -7,7 +7,7 @@
 #include "mongons.h"
 #include "qbson.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 class WriteConcern;
@@ -30,7 +30,7 @@ public:
    QString password() const;
    QString string() const;
    QStringList hosts() const;
-   porto::bson::Bson options() const;
+   soft::bson::Bson options() const;
    WriteConcern *writeConcern() const;
 
 private:
@@ -38,4 +38,4 @@ private:
 }; // class Uri
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

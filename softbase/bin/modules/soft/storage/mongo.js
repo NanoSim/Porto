@@ -7,7 +7,7 @@
 
     Driver = function(options) {
 	this.uri        = options.uri || "mongodb://localhost";
-	this.database   = options.database || "porto";
+	this.database   = options.database || "soft";
 	this.collection = options.collection || "default";
 
 	this.mongoclient = new MongoClient(this.uri);

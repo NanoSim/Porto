@@ -1,5 +1,5 @@
 /*
-  Adopted for Porto, 2014 - Thomas Hagelien
+  Adopted for Soft, 2014 - Thomas Hagelien
   See weblog for usage:
   http://dean.edwards.name/weblog/2006/03/base/
 */

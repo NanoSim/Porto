@@ -5,7 +5,7 @@
 #include <mongoc.h>
 #include "mongons.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 class GridFS : public QObject
@@ -27,4 +27,4 @@ private:
 };
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE

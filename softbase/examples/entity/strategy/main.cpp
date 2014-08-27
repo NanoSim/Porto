@@ -8,7 +8,7 @@
 int main (int, char *argv[])
 {
    Storage storage = StorageCreator::connect("mongodb")
-      .addOption("database", "porto")
+      .addOption("database", "soft")
       .addOption("collection", "mystorage");
 
    auto transactor = Transactor::create(storage);

@@ -1,10 +1,10 @@
 (function (entity){
     function Entity(driverInfo)
     {
-	var storage = require('porto.storage').connect(driverInfo);    	
+	var storage = require('soft.storage').connect(driverInfo);    	
 	
 	this.using = function (entityName, entityVersion) {
-	    A = require('porto.factory.entity').createEntity(entityName, entityVersion,
+	    A = require('soft.factory.entity').createEntity(entityName, entityVersion,
 							    function(err)
 							    {
 								if (err) throw (err);

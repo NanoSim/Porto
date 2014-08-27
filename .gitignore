@@ -3,5 +3,5 @@
 [Rr]elease/
 [Mm]akefile*
 *~
-portobase/include/Porto
-portobase/include/*.h
+softbase/include/Soft
+softbase/include/*.h

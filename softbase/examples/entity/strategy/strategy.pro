@@ -4,7 +4,7 @@ INCLUDEPATH += .
 CONFIG += c++11
 CONFIG += debug_and_release
 
-# CONFIG += porto
+# CONFIG += soft
 QT     -= core
 
 *-g++* {

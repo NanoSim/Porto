@@ -1,17 +1,17 @@
-//#include <Porto>
+//#include <Soft>
 #include <iostream>
 #include "unit.h"
 
 int main (int argc, char *argv[])
 {
-//   porto::init(argc, argv);
+//   soft::init(argc, argv);
 
    auto storage = createStorage("mongodb")
-      .addOption("database", "porto")
+      .addOption("database", "soft")
       .addOption("collection", "mystorage");
 
 #if 0
-   auto transactor = porto::createTransactor(storage);
+   auto transactor = soft::createTransactor(storage);
 #endif
 
    Unit unit;

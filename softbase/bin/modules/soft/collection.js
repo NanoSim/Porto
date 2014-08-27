@@ -1,7 +1,7 @@
 (function (collection){
     collection.db = function(driverInfo) {
 
-	var colldb = require('porto.entity').db(driverInfo);
+	var colldb = require('soft.entity').db(driverInfo);
 	
 	Collection = colldb.using('Collection', '1.0-RC-3');
 	

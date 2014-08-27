@@ -9,7 +9,7 @@
 #include "qbson.h"
 #include "qmongouri.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
 class Collection;
@@ -42,12 +42,12 @@ public:
    QStringList databaseNames() const;
    
    Cursor *command(const char* dbname,
-                   porto::bson::Bson* query,
-                   porto::bson::Bson* fields);
+                   soft::bson::Bson* query,
+                   soft::bson::Bson* fields);
                                                     
    bool commandSimple(const char* dbname,
-                      porto::bson::Bson* command,
-                      porto::bson::Bson** reply);
+                      soft::bson::Bson* command,
+                      soft::bson::Bson** reply);
  
    void destroy();
 
@@ -60,6 +60,6 @@ private:
 };
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QMONGOCLIENT_H_DEF

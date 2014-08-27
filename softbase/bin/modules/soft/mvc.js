@@ -1,7 +1,7 @@
 (function (mvc){
-    var porto = porto || {};  
+    var soft = soft || {};  
     mvc.create = function (obj) {
-	var expand = require('porto.macro').expand;
+	var expand = require('soft.macro').expand;
 	
 	if( obj.model === undefined )
 	    throw ("Missing model in object");
@@ -15,16 +15,16 @@
 		    throw ("Illegal file", obj.view);
 		
 		if( typeof obj.model == 'object' ) {
-		    porto.model = obj.model;
+		    soft.model = obj.model;
 		}
 		else {
 		    var json = readFile(obj.model);
 		    if (json == undefined)
 			throw ("Illegal file", obj.model);
 		    
-		    porto.model = JSON.parse(json);
+		    soft.model = JSON.parse(json);
 		}
-		porto.bag = bag;
+		soft.bag = bag;
 		return expand(view);
 	};	
     }

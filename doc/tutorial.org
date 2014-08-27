@@ -1,10 +1,10 @@
-#+TITLE: Porto tutorial
+#+TITLE: Soft tutorial
 #+AUTHOR: Thomas Hagelien
 #+LANGUAGE: en
 
-* A brief introduction to portoshell
+* A brief introduction to softshell
 
-Portoshell is a scripting tool for performing various tasks related to
+Softshell is a scripting tool for performing various tasks related to
 the NanoSim platform development, data and process management and
 simulator connectivity. The scripting language is based on ECMAScript,
 better known as JavaScript (although the language is not related to

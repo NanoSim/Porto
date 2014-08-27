@@ -7,7 +7,7 @@
 #include "mongons.h"
 #include <bson.h>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 
 MONGO_BEGIN_NAMESPACE
 class Client;
@@ -40,13 +40,13 @@ protected:
   bson_t* data() const;
 
 private:
-  friend class PORTO_NAMESPACE::MONGO_NAMESPACE::GridFSFileOpt;
-  friend class PORTO_NAMESPACE::MONGO_NAMESPACE::Client;
-  friend class PORTO_NAMESPACE::MONGO_NAMESPACE::Collection;
+  friend class SOFT_NAMESPACE::MONGO_NAMESPACE::GridFSFileOpt;
+  friend class SOFT_NAMESPACE::MONGO_NAMESPACE::Client;
+  friend class SOFT_NAMESPACE::MONGO_NAMESPACE::Collection;
   std::shared_ptr<bson_t> bson;
 };
 
 BSON_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QBSON_H_DEF

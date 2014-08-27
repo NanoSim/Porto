@@ -10,10 +10,10 @@
 #include "qmongoreadprefs.h"
 #include <QVector>
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 
 class Collection : public QObject
 {
@@ -67,5 +67,5 @@ private:
 };
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 

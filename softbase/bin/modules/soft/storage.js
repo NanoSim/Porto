@@ -18,11 +18,11 @@
 	switch (options.driver) {
 	case "mongo":
 	case "mongodb":
-	    MongoDriver = require('porto.storage.mongo').driver();
+	    MongoDriver = require('soft.storage.mongo').driver();
 	    return new MongoDriver(options);
 	    break;
 	case "json":
-	    var JsonDriver = require('porto.storage.json').Driver;
+	    var JsonDriver = require('soft.storage.json').Driver;
 	    return new JsonDriver (options);
 	    break;
 	default:

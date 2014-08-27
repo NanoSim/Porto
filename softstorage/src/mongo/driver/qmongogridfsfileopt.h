@@ -7,7 +7,7 @@
 #include "qbson.h"
 #include "qmongogridfsfileopt.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 class GridFSFile;
 
@@ -21,8 +21,8 @@ public:
    GridFSFileOpt(const char* md5 = nullptr,
                  const char* filename = nullptr,
                  const char* contentType = nullptr,
-                 const PORTO_NAMESPACE::BSON_NAMESPACE::Bson& aliases =  PORTO_NAMESPACE::BSON_NAMESPACE::Bson(),
-                 const PORTO_NAMESPACE::BSON_NAMESPACE::Bson& metadata = PORTO_NAMESPACE::BSON_NAMESPACE::Bson(),
+                 const SOFT_NAMESPACE::BSON_NAMESPACE::Bson& aliases =  SOFT_NAMESPACE::BSON_NAMESPACE::Bson(),
+                 const SOFT_NAMESPACE::BSON_NAMESPACE::Bson& metadata = SOFT_NAMESPACE::BSON_NAMESPACE::Bson(),
                  quint32 chunkSize = 0);
    GridFSFileOpt (GridFSFileOpt const & other);
    GridFSFileOpt (GridFSFileOpt && other);
@@ -46,5 +46,5 @@ private:
 }; // class GridFSFileOpt
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 

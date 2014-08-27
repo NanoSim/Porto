@@ -1,4 +1,4 @@
-#!/usr/bin/env portoshell
+#!/usr/bin/env softshell
 
 __main__ = function (args){    
     var name = args[1];
@@ -6,7 +6,7 @@ __main__ = function (args){
     fs.readFile(name + ".json", function(err, data){
 	if (err) throw (err);
 	try {
-	    generate = require('porto.mvc').create({
+	    generate = require('soft.mvc').create({
 		model: JSON.parse(data),
 		view: viewfile
 	    });

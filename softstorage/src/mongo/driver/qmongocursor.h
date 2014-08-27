@@ -6,10 +6,10 @@
 #include "mongons.h"
 #include "qbson.h"
 
-PORTO_BEGIN_NAMESPACE
+SOFT_BEGIN_NAMESPACE
 MONGO_BEGIN_NAMESPACE
 
-using porto::bson::Bson;
+using soft::bson::Bson;
 class Cursor : public QObject
 {
    Q_OBJECT
@@ -37,5 +37,5 @@ private:
 }; // class Cursor
 
 MONGO_END_NAMESPACE
-PORTO_END_NAMESPACE
+SOFT_END_NAMESPACE
 

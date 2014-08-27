@@ -1,5 +1,5 @@
-Entity           = require('porto.entity').Entity;
-createTranslator = require('porto.visitor.translator').createTranslator;
+Entity           = require('soft.entity').Entity;
+createTranslator = require('soft.visitor.translator').createTranslator;
 
 function ExternalStorage(obj)
 {

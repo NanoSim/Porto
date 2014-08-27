@@ -1,7 +1,7 @@
 /* jshint proto: true */
 
 /**
- * Modified for the Porto environment
+ * Modified for the Soft environment
 *  Thomas F. Hagelien - SINTEF Materials & Chemistry
  */
 

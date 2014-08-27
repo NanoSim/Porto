@@ -1,7 +1,7 @@
 #ifndef MONGONAMESPACE_H_DEF
 #define MONGONAMESPACE_H_DEF
 
-#include "portons.h"
+#include "softns.h"
 
 # define MONGO_NAMESPACE mongo
 # define MONGO_BEGIN_NAMESPACE namespace MONGO_NAMESPACE {

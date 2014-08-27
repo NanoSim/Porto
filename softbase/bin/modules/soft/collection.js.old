@@ -10,7 +10,7 @@ function Collection() {
     this.obj = undefined;
 
     if( arguments.length == 0 ) {
-	this.obj = require('porto.entity').instance('collection', '1.0');
+	this.obj = require('soft.entity').instance('collection', '1.0');
 
     } else if ( arguments.length > 0 && typeof arguments[0] === 'object' ) {
 	this.obj = arguments[0];

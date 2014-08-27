@@ -1,4 +1,4 @@
-#!/usr/bin/env portoshell
+#!/usr/bin/env softshell
 
 /*
  * register-entity.sh
@@ -11,7 +11,7 @@ __main__ = function (args)
 	   console.error("fatal error: no input files");
 	   return undefined;
        }
-    var metaStorage = require ('porto.utils.metastore').connect(
+    var metaStorage = require ('soft.utils.metastore').connect(
 	{
 	    uri: 'mongodb://localhost',
 	    database: 'meta',

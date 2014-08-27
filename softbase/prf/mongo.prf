@@ -1,4 +1,4 @@
-INCLUDEPATH += $$(PORTOBASE)/include/3rdparty/libmongoc-1.0
-DEPENDPATH  += $$(PORTOBASE)/include/3rdparty/libmongoc-1.0
+INCLUDEPATH += $$(SOFTBASE)/include/3rdparty/libmongoc-1.0
+DEPENDPATH  += $$(SOFTBASE)/include/3rdparty/libmongoc-1.0
 LIBS        *= -L$$(MONGO_LIBRARY_PATH)
 LIBS        *= -lmongoc-1.0

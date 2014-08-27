@@ -16,7 +16,7 @@ This use case describes how to run and analyze fixed Bed simulations in order to
 | Stakeholders and Interests          | Engineers and researchers that fixed bed simulations and need to rely on closures |
 | Preconditions                       | Physical and chemical data, particle properties, as well as boundary conditions are defined.  |
 | Success Guarantee                   | Derived closures agree with available data, effect of numerical parameters, e.g., grid resolution, is small |
-| Main Success Scenario               | Simulation have completed with no errors, data for closures is analyzed by C3PO, and model is handed over to Porto for further processing  |
+| Main Success Scenario               | Simulation have completed with no errors, data for closures is analyzed by C3PO, and model is handed over to Soft for further processing  |
 | Extensions                          | -  |
 | Special Requirements                | none |
 | Technology and Data Variations List | Compressed, uncompressed data, final report on key results |
