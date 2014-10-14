@@ -14,8 +14,12 @@
 	var e = (isString (entity) ? 
 		 JSON.stringify (JSON.parse (entity)) : 
 		 JSON.stringify (entity));
-	print (e);
+//	print (e);
 	return this.collection.insert(e);
+    };
+
+    Container.prototype.query = function (expr) {
+	return this.collection.find(expr);
     };
     
     Container.prototype.find = function(entityName, entityVersion) {

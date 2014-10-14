@@ -5,7 +5,7 @@ repl.command = {};
 
 load(":/resources/core.js");
 
-soft_version = "SoftShell 0.1.33";
+soft_version = "SoftShell 0.1.35 - MinGW i686-w64";
 soft_license = "Source license: LGPLv3";
 
 function showHelp()

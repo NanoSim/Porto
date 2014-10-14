@@ -1,8 +1,10 @@
+#include <QtCore/QCoreApplication>
 #include <QtCore/QTextStream>
 #include <QtCore/QTimer>
 #include <QtScript>
 
 #include "console.h"
+#include "utils.h"
 
 QString read(const QString &filename)
 {
@@ -39,6 +41,11 @@ QScriptValue exceptionBacktrace(QScriptContext *, QScriptEngine *engine)
    return engine->undefinedValue();
 }
 
+QScriptValue quitShell(QScriptContext *, QScriptEngine *engine)
+{
+  qApp->quit();
+  return engine->undefinedValue();
+}
 
 QScriptValue writeline(QScriptContext *context, QScriptEngine *engine)
 {
@@ -439,14 +446,14 @@ void registerBase(QScriptEngine *engine)
    registerFunction(engine, "isObject", isObject);
    registerFunction(engine, "isQObject", isQObject);
    registerFunction(engine, "isQMetaObject", isQMetaObject);
-
+   registerFunction(engine, "exit", quitShell);
 }
 
 class Console :: Private
 {
   friend class Console;
-
   QScriptEngine *engine;
+  Utils *utils;
 };
 
 Console :: Console (QObject *parent)
@@ -454,8 +461,9 @@ Console :: Console (QObject *parent)
   , d (new Console::Private)
 {
   d->engine = new QScriptEngine(this);
-  loadSoftModule();
   registerBase(d->engine);
+
+  d->utils = new Utils(d->engine, this);
 }
 
 Console :: ~Console()
@@ -465,6 +473,10 @@ Console :: ~Console()
 
 void Console :: write (QString const &data)
 {
-  auto res = d->engine->evaluate(data);
-  QTextStream(stdout) << res.toString() << endl << "> ";  
+  if (!data.isEmpty()) {
+    auto res = d->engine->evaluate(data);
+    QTextStream(stdout) << res.toString() << endl;
+  }
+
+  QTextStream(stdout) << "> ";  
 }

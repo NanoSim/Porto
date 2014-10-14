@@ -4,8 +4,8 @@ INCLUDEPATH += $$PWD $$(SOFTBASE)/include
 DEPENDPATH  += $$PWD
 
 HEADERS += $$PWD/utils.h \
-           $$PWD/process.h \
-           $$PWD/processprototype.h \
+           $$PWD/procs.h \
+           $$PWD/procsprototype.h \
 	   $$PWD/application.h \
 	   $$PWD/applicationprototype.h \
            $$PWD/eventloop.h \
@@ -21,8 +21,8 @@ HEADERS += $$PWD/utils.h \
 	   $$PWD/httpdprototype.h 
 
 SOURCES += $$PWD/utils.cpp \	      
-           $$PWD/process.cpp \
-           $$PWD/processprototype.cpp \
+           $$PWD/procs.cpp \
+           $$PWD/procsprototype.cpp \
 	   $$PWD/application.cpp \
 	   $$PWD/applicationprototype.cpp \
            $$PWD/eventloop.cpp \

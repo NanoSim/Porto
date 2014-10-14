@@ -5,7 +5,7 @@
 #include "scriptplugins.h"
 
 int main(int argc, char *argv[])
-{
+{  
   initScriptResource();
   soft::init(argc, argv);
   soft::ScriptEngine engine;

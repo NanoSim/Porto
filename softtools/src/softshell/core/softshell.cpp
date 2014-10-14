@@ -1,4 +1,5 @@
 #include <Soft>
+#include <QtGlobal>
 #include <QtScript>
 #include <QtCore>
 
@@ -408,6 +409,20 @@ static void registerFunction (QScriptEngine *engine,
    engine->globalObject().setProperty(name, scriptFunction);
 }
 
+template <class Function>
+static void registerFunction (QScriptEngine *engine, 
+			      QString const & name, 
+			      Function fn, 
+			      QScriptValue *obj,
+			      QString const & doc = QString())
+{
+   auto scriptFunction = engine->newFunction(fn);
+   if (!doc.isEmpty()) {
+      scriptFunction.setProperty("^doc", doc);
+   }
+   obj->setProperty(name, scriptFunction);
+}
+
 void registerBase(QScriptEngine *engine)
 {
    engine->globalObject().setProperty("__global__", engine->globalObject());
@@ -456,7 +471,7 @@ int startRepl (soft::ScriptEngine const &e)
    QString programFile = (QCoreApplication::arguments().count() < 2 ?
 			  QString(":/resources/repl.js") :
 			  QCoreApplication::arguments()[1]);
-
+   
    QFile file(programFile);
    if (!file.open (QIODevice::ReadOnly | QIODevice::Text)) {
      QTextStream(stderr) << file.errorString() << endl;

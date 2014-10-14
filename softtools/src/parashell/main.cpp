@@ -9,7 +9,6 @@
 int main (int argc, char **argv)
 {
   QCoreApplication app(argc, argv);
-
   QScopedPointer<QThread> readerThread (new QThread);
   QScopedPointer<QThread> consoleThread (new QThread);
   QScopedPointer<Prompt> prompt (new Prompt);
@@ -25,4 +24,4 @@ int main (int argc, char **argv)
   readerThread->start();
 
   return app.exec();
-}
+ }

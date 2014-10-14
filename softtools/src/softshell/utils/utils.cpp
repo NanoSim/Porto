@@ -2,7 +2,7 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 #include "utils.h"
-#include "process.h"
+#include "procs.h"
 #include "application.h"
 #include "eventloop.h"
 #include "udpsocket.h"
@@ -16,7 +16,7 @@ class Utils::Private
 {
    friend class Utils;
    Private(QScriptEngine *engine)
-      : process     (new Process     (engine))
+      : procs       (new Process     (engine))
       , application (new Application (engine))
       , eventLoop   (new EventLoop   (engine))
       , udpSocket   (new UdpSocket   (engine))
@@ -26,7 +26,7 @@ class Utils::Private
       , fileSystemWatcher (new FileSystemWatcher (engine))
    {}
   
-   QScopedPointer<Process>     process;
+   QScopedPointer<Process>     procs;
    QScopedPointer<Application> application;
    QScopedPointer<EventLoop>   eventLoop;
    QScopedPointer<UdpSocket>   udpSocket;

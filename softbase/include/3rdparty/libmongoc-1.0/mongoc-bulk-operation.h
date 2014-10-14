@@ -31,7 +31,7 @@ typedef struct _mongoc_bulk_operation_t mongoc_bulk_operation_t;
 
 
 void mongoc_bulk_operation_destroy     (mongoc_bulk_operation_t       *bulk);
-bool mongoc_bulk_operation_execute     (mongoc_bulk_operation_t       *bulk,
+uint32_t mongoc_bulk_operation_execute (mongoc_bulk_operation_t       *bulk,
                                         bson_t                        *reply,
                                         bson_error_t                  *error);
 void mongoc_bulk_operation_delete      (mongoc_bulk_operation_t       *bulk,
@@ -58,6 +58,24 @@ void mongoc_bulk_operation_update_one  (mongoc_bulk_operation_t       *bulk,
                                         const bson_t                  *selector,
                                         const bson_t                  *document,
                                         bool                           upsert);
+
+
+/*
+ * The following functions are really only useful by language bindings and
+ * those wanting to replay a bulk operation to a number of clients or
+ * collections.
+ */
+mongoc_bulk_operation_t *mongoc_bulk_operation_new               (bool                          ordered);
+void                     mongoc_bulk_operation_set_write_concern (mongoc_bulk_operation_t      *bulk,
+                                                                  const mongoc_write_concern_t *write_concern);
+void                     mongoc_bulk_operation_set_database      (mongoc_bulk_operation_t      *bulk,
+                                                                  const char                   *database);
+void                     mongoc_bulk_operation_set_collection    (mongoc_bulk_operation_t      *bulk,
+                                                                  const char                   *collection);
+void                     mongoc_bulk_operation_set_client        (mongoc_bulk_operation_t      *bulk,
+                                                                  void                         *client);
+void                     mongoc_bulk_operation_set_hint          (mongoc_bulk_operation_t      *bulk,
+                                                                  uint32_t                      hint);
 
 
 BSON_END_DECLS

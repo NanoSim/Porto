@@ -7,7 +7,7 @@
 
 __main__ = function (args)
 {
-    if (args.length == 0) {
+    if (args.length <= 1) {
 	   console.error("fatal error: no input files");
 	   return undefined;
        }

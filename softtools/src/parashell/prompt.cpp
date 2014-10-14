@@ -46,12 +46,14 @@ Prompt :: Prompt (QObject *parent)
 
 void Prompt :: start()
 {
+  QTextStream(stdout) << "ParaShell v0.1" << endl;
+  QTextStream(stdout) << "\n> ";
+
 #if !defined(NOSOCKET)
   read();
 #else
   QEventLoop loop;
   QTimer timer;
-  QTextStream(stdout) << "started" << endl;
   connect(&timer, SIGNAL(timeout()), this, SLOT(read()), Qt::DirectConnection);
   timer.start(100);
   loop.exec();
@@ -70,7 +72,6 @@ QString Prompt :: getMessage()
 
 void Prompt :: read()
 {
-  //  QTextStream(stdout) << "> ";
   QTextStream qin (stdin);
   d->buffer = qin.readLine();
   emit ready(d->buffer);
