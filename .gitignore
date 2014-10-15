@@ -2,6 +2,13 @@
 [Dd]ebug/
 [Rr]elease/
 [Mm]akefile*
+*.o
+*.a
+*.zip
+*.Debug
+*.Release
 *~
+softbase/include/3rdparty
+softtools/src/parashell
 softbase/include/Soft
 softbase/include/*.h

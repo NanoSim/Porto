@@ -47,7 +47,6 @@ namespace console {
     QTextStream(stderr) << context->backtrace().join("\n") << endl;
     return engine->undefinedValue();
   }
-  
 
 } // end of namespace
 
