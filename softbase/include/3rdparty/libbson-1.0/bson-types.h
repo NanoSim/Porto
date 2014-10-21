@@ -120,7 +120,7 @@ typedef struct _bson_context_t bson_context_t;
  * This structure is meant to fit in two sequential 64-byte cachelines.
  */
 BSON_ALIGNED_BEGIN (128)
-typedef struct _bson_t
+typedef struct
 {
    uint32_t flags;        /* Internal flags for the bson_t. */
    uint32_t len;          /* Length of BSON data. */
@@ -247,11 +247,9 @@ typedef enum
  *--------------------------------------------------------------------------
  */
 
-BSON_ALIGNED_BEGIN (8)
 typedef struct _bson_value_t
 {
    bson_type_t           value_type;
-   int32_t               padding;
    union {
       bson_oid_t         v_oid;
       int64_t            v_int64;
@@ -265,16 +263,16 @@ typedef struct _bson_value_t
          uint32_t        increment;
       } v_timestamp;
       struct {
-         char           *str;
          uint32_t        len;
+         char           *str;
       } v_utf8;
       struct {
-         uint8_t        *data;
          uint32_t        data_len;
+         uint8_t        *data;
       } v_doc;
       struct {
-         uint8_t        *data;
          uint32_t        data_len;
+         uint8_t        *data;
          bson_subtype_t  subtype;
       } v_binary;
       struct {
@@ -287,22 +285,21 @@ typedef struct _bson_value_t
          bson_oid_t      oid;
       } v_dbpointer;
       struct {
-         char           *code;
          uint32_t        code_len;
+         char           *code;
       } v_code;
       struct {
-         char           *code;
-         uint8_t        *scope_data;
          uint32_t        code_len;
+         char           *code;
          uint32_t        scope_len;
+         uint8_t        *scope_data;
       } v_codewscope;
       struct {
-         char           *symbol;
          uint32_t        len;
+         char           *symbol;
       } v_symbol;
    } value;
-} bson_value_t
-BSON_ALIGNED_END (8);
+} bson_value_t;
 
 
 /**
@@ -343,12 +340,13 @@ BSON_ALIGNED_END (128);
  * memory allocations under certain circumstances such as reading from an
  * incoming mongo packet.
  */
-
+BSON_ALIGNED_BEGIN (128)
 typedef struct
 {
    uint32_t type;
    /*< private >*/
-} bson_reader_t;
+} bson_reader_t
+BSON_ALIGNED_END (128);
 
 
 /**
@@ -366,7 +364,6 @@ typedef struct
  * You may pre-maturely stop the visitation of fields by returning true in your
  * visitor. Returning false will continue visitation to further fields.
  */
-BSON_ALIGNED_BEGIN (8)
 typedef struct
 {
    bool (*visit_before)     (const bson_iter_t *iter,
@@ -466,18 +463,15 @@ typedef struct
                              void              *data);
 
    void *padding[9];
-} bson_visitor_t
-BSON_ALIGNED_END (8);
+} bson_visitor_t;
 
 
-BSON_ALIGNED_BEGIN (8)
-typedef struct _bson_error_t
+typedef struct
 {
    uint32_t domain;
    uint32_t code;
    char     message[504];
-} bson_error_t
-BSON_ALIGNED_END (8);
+} bson_error_t;
 
 
 BSON_STATIC_ASSERT (sizeof (bson_error_t) == 512);

@@ -8,7 +8,8 @@ ProcessPrototype :: ProcessPrototype (QObject *parent)
 {   
   QProcess *process = qscriptvalue_cast <QProcess*> (thisObject ());
   if(process) {
-    connect (process, SIGNAL (finished (int, QProcess::ExitStatus)), SIGNAL (finished (int)));
+    connect (process, SIGNAL (finished (int, QProcess::ExitStatus)),                SIGNAL (finished (int, int)));
+    connect (process, SIGNAL (error(QProcess::ProcessError)), SIGNAL (error(int)));
     connect (process, SIGNAL (readyReadStandardError ()),  SIGNAL (readyReadStandardError ()));
     connect (process, SIGNAL (readyReadStandardOutput ()), SIGNAL (readyReadStandardOutput ()));
     connect (process, SIGNAL (started ()),                 SIGNAL (started ()));

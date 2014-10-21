@@ -35,7 +35,8 @@ public slots:
    QScriptValue writeln(QString const & buffer);
 
 signals:
-   void finished(int);
+   void finished(int, int);
+   void error(int);
    void readyReadStandardError();
    void readyReadStandardOutput();
    void started();
