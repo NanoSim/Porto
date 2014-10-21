@@ -36,6 +36,7 @@ public slots:
 
 signals:
    void finished(int, int);
+   void finished(int);
    void error(int);
    void readyReadStandardError();
    void readyReadStandardOutput();

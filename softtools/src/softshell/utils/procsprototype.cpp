@@ -13,6 +13,7 @@ ProcessPrototype :: ProcessPrototype (QObject *parent)
     connect (process, SIGNAL (readyReadStandardError ()),  SIGNAL (readyReadStandardError ()));
     connect (process, SIGNAL (readyReadStandardOutput ()), SIGNAL (readyReadStandardOutput ()));
     connect (process, SIGNAL (started ()),                 SIGNAL (started ()));
+    connect (process, SIGNAL (error (QProcess::ProcessError)), SIGNAL (error (int)));
   }
 }
 
