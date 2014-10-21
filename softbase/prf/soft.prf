@@ -1,4 +1,4 @@
 LIBS += -L$$(SOFTBASE)/lib
-LIBS += -lsoft0
+LIBS += -lsoft
 DEPENDPATH += $$(SOFTBASE)/include
 INCLUDEPATH += $$(SOFTBASE)/include
