@@ -10,6 +10,7 @@
 #include "filesystem.h"
 #include "filesystemwatcher.h"
 #include "httpd.h"
+#include "hostinfo.h"
 using soft::ScriptEngine;
 
 class Utils::Private
@@ -24,6 +25,8 @@ class Utils::Private
       , httpd       (new Httpd       (engine))
       , fileSystem  (new FileSystem  (engine))
       , fileSystemWatcher (new FileSystemWatcher (engine))
+      , hostInfo    (new HostInfo    (engine))
+	
    {}
   
    QScopedPointer<Process>     procs;
@@ -34,6 +37,7 @@ class Utils::Private
    QScopedPointer<Httpd>       httpd;
    QScopedPointer<FileSystem>  fileSystem;
    QScopedPointer<FileSystemWatcher> fileSystemWatcher;
+   QScopedPointer<HostInfo> hostInfo;
 };
 
 Utils :: Utils (ScriptEngine const &engine, QObject *parent)

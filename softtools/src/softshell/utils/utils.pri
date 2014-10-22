@@ -18,7 +18,9 @@ HEADERS += $$PWD/utils.h \
 	   $$PWD/filesystemwatcherprototype.h \
 	   $$PWD/httpserver.h \
 	   $$PWD/httpd.h \
-	   $$PWD/httpdprototype.h 
+	   $$PWD/httpdprototype.h \
+	   $$PWD/hostinfo.h 
+
 
 SOURCES += $$PWD/utils.cpp \	      
            $$PWD/procs.cpp \
@@ -35,8 +37,8 @@ SOURCES += $$PWD/utils.cpp \
 	   $$PWD/filesystemwatcherprototype.cpp \
 	   $$PWD/httpserver.cpp \
 	   $$PWD/httpd.cpp \
-	   $$PWD/httpdprototype.cpp
-
+	   $$PWD/httpdprototype.cpp \
+  	   $$PWD/hostinfo.cpp 
 
 
 utils_ptr_defined = true
