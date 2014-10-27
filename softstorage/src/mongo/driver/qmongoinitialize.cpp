@@ -9,5 +9,10 @@ void initialize()
    mongoc_init();
 }
 
+void cleanup()
+{
+  mongoc_cleanup();
+}
+
 MONGO_END_NAMESPACE
 SOFT_END_NAMESPACE

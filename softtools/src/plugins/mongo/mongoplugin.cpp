@@ -45,7 +45,9 @@ Q_DECLARE_METATYPE (soft::mongo::Cursor*)
 Q_DECLARE_METATYPE (soft::bson::Bson*)
 
 MongoPlugin :: ~MongoPlugin()
-{}
+{
+  soft::mongo::cleanup();
+}
 
 static QScriptValue createMongoCollection (QScriptContext *, QScriptEngine *engine)
 {

@@ -199,3 +199,10 @@ Array.prototype.Iterator = function() {
 	return count;
     };
 };
+
+man = function(module) {
+    for (var i in module) {
+	print(i, ":", module[i]["^doc"]);
+    }
+}
+
