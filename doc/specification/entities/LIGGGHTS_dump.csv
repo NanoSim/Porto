@@ -1,0 +1,7 @@
+Entity (Dataset) Name:;LIGGGHTS_dump;Snapshot of a LIGGGHTS simulation containing the (essential) state of a particle simulation;;;
+Dimensions:;nParticles;Number of particles within the simulation;;;
+;nProperties;Number of per-particle properties dumped to the dump file;;;
+Properties:;TIMESTEP;int;-;1;Time step the snapshot was collected
+;NUMBER OF ATOMS;int;-;1;The number of particles within the simulation
+;BOX BOUNDS;char / double;-;1;Boundaries applied in the simulation, as well as bounds of the simulation box
+;ATOMS;char / double;-;nParticles, nProperties;String containing description of the per-particle properties, array of the per-particle properties
