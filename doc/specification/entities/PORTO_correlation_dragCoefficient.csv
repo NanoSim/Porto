@@ -1,0 +1,9 @@
+Entity (Dataset) Name:;PORTO_correlation_dragCoefficient;Correlation for the drag coefficient to be used in Euler-Euler Simulations;;;
+Dimensions:;nParams;Number of the parameters required to specify the correlation;;;
+;nInfluence;Number of variables that influence the correlation;;;
+Properties:;name;char;-;1;Name of the data entity
+;version;char;-;1;Version of the drag correlation
+;code origin;char;-;1;Code name, version that was used to produce data for the correlation
+;nameInfluenceVariables;char;-;nInfluence;Name of variables that influence the correlation
+;eqnType;char;-;nInfluence;Name of the function used to interpret parameters and compute the result of the correlation
+;data;double;-;nParams, nInfluence;The actual particle radius
