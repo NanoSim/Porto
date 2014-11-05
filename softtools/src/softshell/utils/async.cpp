@@ -33,6 +33,7 @@ Async :: Async (QObject *parent)
 Async :: ~Async()
 {}
 
+
 void Async :: processQueue()
 {
   while( !d->functionList.isEmpty() ) {
@@ -42,12 +43,17 @@ void Async :: processQueue()
   }
 }
 
+
 void Async :: asyncEval (QScriptValue fn)
 {
   if (!fn.isFunction()) {
     d->engine->currentContext()->throwError(QScriptContext::TypeError, "Arguments to Async.eval must be of type 'function'");
     return;
   }
+
+  //  auto res = fn.call(fn, QScriptValueList());
+  //  emit (result (res));
+
   d->functionList.append(fn);
 }
 

@@ -11,6 +11,8 @@
 #include "filesystemwatcher.h"
 #include "httpd.h"
 #include "hostinfo.h"
+#include "concurrent.h"
+#include "asyncinterface.h"
 using soft::ScriptEngine;
 
 class Utils::Private
@@ -26,7 +28,8 @@ class Utils::Private
       , fileSystem  (new FileSystem  (engine))
       , fileSystemWatcher (new FileSystemWatcher (engine))
       , hostInfo    (new HostInfo    (engine))
-	
+      , concurrent  (new Concurrent  (engine))
+      , async       (new AsyncInterface (engine))
    {}
   
    QScopedPointer<Process>     procs;
@@ -38,6 +41,8 @@ class Utils::Private
    QScopedPointer<FileSystem>  fileSystem;
    QScopedPointer<FileSystemWatcher> fileSystemWatcher;
    QScopedPointer<HostInfo> hostInfo;
+   QScopedPointer<Concurrent> concurrent;
+   QScopedPointer<AsyncInterface> async;
 };
 
 Utils :: Utils (ScriptEngine const &engine, QObject *parent)

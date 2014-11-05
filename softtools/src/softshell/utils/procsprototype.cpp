@@ -195,3 +195,24 @@ QScriptValue ProcessPrototype :: writeln (QString const &buffer)
       return p->write(ba.constData());
     });			    
 }
+
+QScriptValue ProcessPrototype :: closeReadChannel(ProcessChannel &channel)
+{
+  return protocall_void<QProcess>(thisObject(), this->parent(),
+				  [channel](QProcess *process)
+				  -> void
+    {
+      process->closeReadChannel((QProcess::ProcessChannel)channel);
+    });
+}
+
+QScriptValue ProcessPrototype :: closeWriteChannel()
+{
+  return protocall_void<QProcess>(thisObject(), this->parent(),
+				  [](QProcess *process)
+				  -> void
+    {
+      process->closeWriteChannel();
+    });
+}
+

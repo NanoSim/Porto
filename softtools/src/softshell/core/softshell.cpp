@@ -378,6 +378,30 @@ QScriptValue load(QScriptContext *context, QScriptEngine *engine)
    return context->throwError("Could not open " + filename + " for reading.");
 }
 
+QScriptValue clearExceptions (QScriptContext *ctx, QScriptEngine *engine)
+{
+  Q_UNUSED(ctx);
+  engine->clearExceptions();
+  return engine->undefinedValue();
+}
+
+QScriptValue collectGarbage (QScriptContext *ctx, QScriptEngine *engine)
+{
+  Q_UNUSED(ctx);
+  engine->collectGarbage();
+  return engine->undefinedValue();
+}
+
+QScriptValue reportAdditionalMemoryCost (QScriptContext *ctx, QScriptEngine *engine)
+{
+  if (ctx->argumentCount() != 1)
+    return ctx->throwError("reportAdditionalMemoryCost(int) missing argument");
+
+  auto size = ctx->argument(0).toInt32();
+  engine->reportAdditionalMemoryCost(size);
+  return engine->undefinedValue();
+}
+
 void loadSoftModule()
 {
    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/modules");
@@ -442,6 +466,9 @@ void registerBase(QScriptEngine *engine)
    registerFunction(engine, "isErrorSyntax", isErrorSyntax);
    registerFunction(engine, "isIncompleteSyntax", isIncompleteSyntax);
    registerFunction(engine, "errorMessage", errorMessage);
+   registerFunction(engine, "clearExceptions", clearExceptions, "Clears any uncaught exceptions");
+   registerFunction(engine, "collectGarbage", collectGarbage, "Runs the garbage collector");
+   registerFunction(engine, "reportAdditionalMemoryCost", reportAdditionalMemoryCost, "Reports and additional memory cost of the given size, measured in bytes, to the garbage collector");
 
    registerFunction(engine, "isArray", isArray);
    registerFunction(engine, "isBool", isBool);

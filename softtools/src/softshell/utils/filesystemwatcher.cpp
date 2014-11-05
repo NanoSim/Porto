@@ -2,7 +2,7 @@
 #include <QScriptContext>
 #include <QEventLoop>
 #include <QFileSystemWatcher>
-
+#include <QTextStream>
 #include "filesystemwatcher.h"
 #include "filesystemwatcherprototype.h"
 
@@ -11,7 +11,8 @@ Q_DECLARE_METATYPE(QFileSystemWatcher*)
 class FileSystemWatcher::Private
 {
    friend class FileSystemWatcher;
-   Private() {}
+   Private() {
+   }
 
    FileSystemWatcherPrototype *proto;
 };
@@ -30,12 +31,13 @@ static QScriptValue createFileSystemWatcher(QScriptContext *context, QScriptEngi
       return engine->undefinedValue();
    }
    Q_CHECK_PTR (fsw);
-   return engine->newQObject (fsw, QScriptEngine::ScriptOwnership);
+   return engine->newQObject (fsw, QScriptEngine::AutoOwnership);
 }
 
 FileSystemWatcher :: FileSystemWatcher (QObject *parent)
    : QObject (parent)
-{}
+{
+}
 
 FileSystemWatcher :: FileSystemWatcher (QScriptEngine *engine)
    : QObject (engine)
@@ -51,5 +53,7 @@ FileSystemWatcher :: FileSystemWatcher (QScriptEngine *engine)
    global.setProperty ("FileSystemWatcher", metaObj);
 }
 
+
 FileSystemWatcher :: ~FileSystemWatcher()
-{}
+{
+}

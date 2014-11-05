@@ -19,8 +19,14 @@ HEADERS += $$PWD/utils.h \
 	   $$PWD/httpserver.h \
 	   $$PWD/httpd.h \
 	   $$PWD/httpdprototype.h \
-	   $$PWD/hostinfo.h 
-
+	   $$PWD/hostinfo.h \
+	   $$PWD/concurrent.h \
+	   $$PWD/memtest.h \
+	   $$PWD/memtestinterface.h \
+	   $$PWD/memtestprototype.h \
+	   $$PWD/async.h \
+	   $$PWD/asyncinterface.h \
+	   $$PWD/asyncprototype.h
 
 SOURCES += $$PWD/utils.cpp \	      
            $$PWD/procs.cpp \
@@ -38,7 +44,14 @@ SOURCES += $$PWD/utils.cpp \
 	   $$PWD/httpserver.cpp \
 	   $$PWD/httpd.cpp \
 	   $$PWD/httpdprototype.cpp \
-  	   $$PWD/hostinfo.cpp 
+  	   $$PWD/hostinfo.cpp \
+           $$PWD/concurrent.cpp \
+	   $$PWD/memtest.cpp \
+	   $$PWD/memtestinterface.cpp \
+	   $$PWD/memtestprototype.cpp \
+	   $$PWD/async.cpp \
+	   $$PWD/asyncinterface.cpp \
+	   $$PWD/asyncprototype.cpp
 
 
 utils_ptr_defined = true
