@@ -21,9 +21,9 @@ HEADERS += $$PWD/utils.h \
 	   $$PWD/httpdprototype.h \
 	   $$PWD/hostinfo.h \
 	   $$PWD/concurrent.h \
-	   $$PWD/memtest.h \
-	   $$PWD/memtestinterface.h \
-	   $$PWD/memtestprototype.h \
+#	   $$PWD/memtest.h \
+#	   $$PWD/memtestinterface.h \
+#	   $$PWD/memtestprototype.h \
 	   $$PWD/async.h \
 	   $$PWD/asyncinterface.h \
 	   $$PWD/asyncprototype.h
@@ -46,9 +46,9 @@ SOURCES += $$PWD/utils.cpp \
 	   $$PWD/httpdprototype.cpp \
   	   $$PWD/hostinfo.cpp \
            $$PWD/concurrent.cpp \
-	   $$PWD/memtest.cpp \
-	   $$PWD/memtestinterface.cpp \
-	   $$PWD/memtestprototype.cpp \
+#	   $$PWD/memtest.cpp \
+#	   $$PWD/memtestinterface.cpp \
+#	   $$PWD/memtestprototype.cpp \
 	   $$PWD/async.cpp \
 	   $$PWD/asyncinterface.cpp \
 	   $$PWD/asyncprototype.cpp
