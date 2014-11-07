@@ -6,7 +6,6 @@
 FileSystemWatcherPrototype :: FileSystemWatcherPrototype (QObject *parent)
    : QObject (parent)
 {
-  QTextStream(stdout) << "FileSystemWatcherPrototype :: FileSystemWatcherPrototype\n";
    auto fs = qscriptvalue_cast <QFileSystemWatcher*> (thisObject());
    if (fs) {
       connect (fs, SIGNAL(directoryChanged(const QString&)), SIGNAL(directoryChanged(const QString&)));
