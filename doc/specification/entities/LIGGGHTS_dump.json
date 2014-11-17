@@ -1,0 +1,48 @@
+{
+  "name": "LIGGGHTS_dump",
+  "description": "Snapshot of a LIGGGHTS simulation containing the (essential) state of a particle simulation",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nParticles",
+      "description": "Number of particles within the simulation"
+    },
+    {
+      "name": "nProperties",
+      "description": "Number of per-particle properties dumped to the dump file"
+    }
+  ],
+  "properties": [
+    {
+      "name": "TIMESTEP",
+      "type": "int",
+      "unit": "-",
+      "dims": [],
+      "description": "Time step the snapshot was collected"
+    },
+    {
+      "name": "NUMBER OF ATOMS",
+      "type": "int",
+      "unit": "-",
+      "dims": [],
+      "description": "The number of particles within the simulation"
+    },
+    {
+      "name": "BOX BOUNDS",
+      "type": "char / double",
+      "unit": "-",
+      "dims": [],
+      "description": "Boundaries applied in the simulation, as well as bounds of the simulation box"
+    },
+    {
+      "name": "ATOMS",
+      "type": "char / double",
+      "unit": "-",
+      "dims": [
+        "nParticles",
+        "nProperties"
+      ],
+      "description": "String containing description of the per-particle properties, array of the per-particle properties"
+    }
+  ]
+}

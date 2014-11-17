@@ -1,0 +1,29 @@
+{
+  "name": "PASCAL_averageParticleData_T",
+  "description": "Snapshot of the average particle temperature in HDF5 or JSON format",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nParticles",
+      "description": "Number of particles within the simulation"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the entity"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "K",
+      "dims": [
+        "nParticles"
+      ],
+      "description": "The actual (volume-averaged) particle temperature"
+    }
+  ]
+}
