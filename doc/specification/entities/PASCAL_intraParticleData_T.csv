@@ -1,5 +1,5 @@
 Entity (Dataset) Name:;PASCAL_intraParticle_T;Snapshot of a intra-particle temperature field in HDF5 or JSON format;;;
 Dimensions:;nParticles;Number of particles within the simulation;;;
 ;nGrid;Number of grid points within a single particle;;;
-Properties:;name;char;-;1;Name of the equation the data entity belongs to
+Properties:;name;char;-;;Name of the equation the data entity belongs to
 ;data;double;K;nParticles, nGrid;The actual intra-particle temperature (at each grid point)

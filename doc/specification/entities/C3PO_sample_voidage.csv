@@ -1,4 +1,4 @@
 Entity (Dataset) Name:;C3PO_sample_voidage;Set of samples for the local voidage experienced by each particle in JSON or HDF5 format;;;
 Dimensions:;nSamples;Number of samples drawn;;;
-Properties:;name;char;-;1;Name of the entity
-;data;double;1;nSamples;A list of scalars representing the voidage experienced by each sampled particle
+Properties:;name;char;-;;Name of the entity
+;data;double;;nSamples;A list of scalars representing the voidage experienced by each sampled particle

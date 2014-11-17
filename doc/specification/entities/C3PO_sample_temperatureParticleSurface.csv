@@ -1,4 +1,4 @@
 Entity (Dataset) Name:;C3PO_sample_temperatureParticleSurface;Set of samples for the particle surface temperature in JSON or HDF5 format;;;
 Dimensions:;nSamples;Number of samples drawn;;;
-Properties:;name;char;-;1;Name of the entity
+Properties:;name;char;-;;Name of the entity
 ;data;double;K;nSamples;A list of scalars representing the particle surface temperature

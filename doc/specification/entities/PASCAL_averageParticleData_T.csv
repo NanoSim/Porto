@@ -1,4 +1,4 @@
 Entity (Dataset) Name:;PASCAL_averageParticleData_T;Snapshot of the average particle temperature in HDF5 or JSON format;;;
 Dimensions:;nParticles;Number of particles within the simulation;;;
-Properties:;name;char;-;1;Name of the entity
+Properties:;name;char;-;;Name of the entity
 ;data;double;K;nParticles;The actual (volume-averaged) particle temperature

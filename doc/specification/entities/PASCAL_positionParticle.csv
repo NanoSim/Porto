@@ -1,4 +1,4 @@
 Entity (Dataset) Name:;PASCAL_positionParticle;Snapshot of the current particle positions in HDF5 or JSON format;;;
 Dimensions:;nParticles;Number of particles within the simulation;;;
-Properties:;name;char;-;1;Name of the data entity
+Properties:;name;char;-;;Name of the data entity
 ;data;double;m;nParticles, 3;The actual particle position
