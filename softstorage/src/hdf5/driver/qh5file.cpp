@@ -1,0 +1,42 @@
+#include <QString>
+#include <QtDebug>
+#include "qh5file.h"
+
+QH5File :: QH5File (QObject *parent)
+  : QObject (parent)
+  , fileId (H5T_NATIVE_HERR)
+{}
+
+QH5File :: QH5File (QString const &filename, QObject *parent)
+  : QObject (parent)
+  , fileId (H5T_NATIVE_HERR)
+  , name (filename)
+{}
+
+QH5File ::  ~QH5File()
+{
+  if (fileId != H5T_NATIVE_HERR) {
+    auto status = H5Fclose(fileId);
+    qDebug() << "closing" << status;
+    Q_UNUSED (status);
+  }
+}
+
+bool QH5File :: create(QString const &filename)
+{
+  fileId = H5Fcreate(qPrintable(filename),
+		     H5F_ACC_TRUNC,
+		     H5P_DEFAULT,
+		     H5P_DEFAULT);
+  return true;
+}
+
+bool QH5File :: create()
+{
+  return this->create(name);
+}
+
+hid_t QH5File :: id() const
+{
+  return this->fileId;
+}
