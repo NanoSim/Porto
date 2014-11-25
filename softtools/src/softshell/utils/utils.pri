@@ -26,7 +26,8 @@ HEADERS += $$PWD/utils.h \
 #	   $$PWD/memtestprototype.h \
 	   $$PWD/async.h \
 	   $$PWD/asyncinterface.h \
-	   $$PWD/asyncprototype.h
+	   $$PWD/asyncprototype.h \
+	   $$PWD/base64.h
 
 SOURCES += $$PWD/utils.cpp \	      
            $$PWD/procs.cpp \
@@ -51,7 +52,8 @@ SOURCES += $$PWD/utils.cpp \
 #	   $$PWD/memtestprototype.cpp \
 	   $$PWD/async.cpp \
 	   $$PWD/asyncinterface.cpp \
-	   $$PWD/asyncprototype.cpp
+	   $$PWD/asyncprototype.cpp \
+  	   $$PWD/base64.cpp
 
 
 utils_ptr_defined = true

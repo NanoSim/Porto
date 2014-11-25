@@ -13,6 +13,7 @@
 #include "hostinfo.h"
 #include "concurrent.h"
 #include "asyncinterface.h"
+#include "base64.h"
 using soft::ScriptEngine;
 
 class Utils::Private
@@ -30,6 +31,7 @@ class Utils::Private
       , hostInfo    (new HostInfo    (engine))
       , concurrent  (new Concurrent  (engine))
       , async       (new AsyncInterface (engine))
+      , base64      (new Base64      (engine))
    {}
   
    QScopedPointer<Process>     procs;
@@ -40,9 +42,10 @@ class Utils::Private
    QScopedPointer<Httpd>       httpd;
    QScopedPointer<FileSystem>  fileSystem;
    QScopedPointer<FileSystemWatcher> fileSystemWatcher;
-   QScopedPointer<HostInfo> hostInfo;
-   QScopedPointer<Concurrent> concurrent;
+   QScopedPointer<HostInfo>    hostInfo;
+   QScopedPointer<Concurrent>  concurrent;
    QScopedPointer<AsyncInterface> async;
+   QScopedPointer<Base64>       base64;
 };
 
 Utils :: Utils (ScriptEngine const &engine, QObject *parent)
