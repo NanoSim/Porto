@@ -3,7 +3,7 @@
 
 QH5Group :: QH5Group (QObject *parent)
   : QObject (parent)
-  , groupId (-1)
+  , groupId (H5T_NATIVE_HERR)
 {}
 
 QH5Group :: QH5Group (QH5File *file, QString const &groupName, QObject *parent)
@@ -19,6 +19,11 @@ QH5Group :: QH5Group (QH5File *file, QString const &groupName, QObject *parent)
 QString QH5Group :: name() const
 {
   return groupName;
+}
+
+hid_t QH5Group :: id() const
+{
+   return groupId;
 }
 
 QH5Group :: ~QH5Group()

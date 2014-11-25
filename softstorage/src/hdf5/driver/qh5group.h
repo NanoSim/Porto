@@ -14,7 +14,7 @@ public:
 		     
 public slots:
   QString name() const;
-  
+
 protected:
   hid_t id() const;
 

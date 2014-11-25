@@ -2,6 +2,7 @@
 #define QH5_H_DEF
 
 #include <QObject>
+#include <QVariantMap>
 #include "qh5dataspace.h"
 #include "qh5dataset.h"
 #include "qh5file.h"
@@ -23,7 +24,8 @@ public slots:
   QH5Dataset *createDataset(QString const &path, QH5Group *group, QH5Dataspace *dataspace, QH5Datatype dtype);
   QH5Dataset *createDataset(QString const &path, QString const &groupName, QH5Dataspace *dataspace, QH5Datatype dtype);
   QH5Group *createGroup(QString const &groupName);
-  bool write (QString const &path, QVariant const &v);
+  bool write (QString const &path, QVariant const &v, QVariantMap const &attributes = QVariantMap());
+  bool addGroup (QString const &key, QVariantMap const &map = QVariantMap());
 private:
   class Private;
   Private *d;
