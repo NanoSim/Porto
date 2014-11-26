@@ -18,11 +18,11 @@ public:
   
 		
 public slots:
-  bool create(QString const &name);
+  bool create(QString const &name, QVariantMap const &map = QVariantMap());
   QH5Dataspace *createSimpleDataspace(QVector<int> const &dims);
-  QH5Dataset *createDataset(QString const &path, QH5Dataspace *dataspace, QH5Datatype dtype);
-  QH5Dataset *createDataset(QString const &path, QH5Group *group, QH5Dataspace *dataspace, QH5Datatype dtype);
-  QH5Dataset *createDataset(QString const &path, QString const &groupName, QH5Dataspace *dataspace, QH5Datatype dtype);
+  QH5Dataset *createDataset(QString const &path, QH5Dataspace *dataspace, QH5Datatype::Type dtype);
+  QH5Dataset *createDataset(QString const &path, QH5Group *group, QH5Dataspace *dataspace, QH5Datatype::Type dtype);
+  QH5Dataset *createDataset(QString const &path, QString const &groupName, QH5Dataspace *dataspace, QH5Datatype::Type dtype);
   QH5Group *createGroup(QString const &groupName);
   bool write (QString const &path, QVariant const &v, QVariantMap const &attributes = QVariantMap());
   bool addGroup (QString const &key, QVariantMap const &map = QVariantMap());

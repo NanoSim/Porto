@@ -14,7 +14,7 @@ class QH5Dataset : public QObject
    Q_OBJECT
 public:
    explicit QH5Dataset (QObject *parent = nullptr);
-  QH5Dataset (QH5File *file, QH5Dataspace *dataspace, QString const &path, QH5Datatype dtype, QObject *parent = nullptr);
+  QH5Dataset (QH5File *file, QH5Dataspace *dataspace, QString const &path, QH5Datatype::Type dtype, QObject *parent = nullptr);
    QH5Dataset (QH5Dataset &&other);
    QH5Dataset &operator=(QH5Dataset const &other);
    virtual ~QH5Dataset();
@@ -28,8 +28,9 @@ protected:
   
 private:
    friend class QH5;
+   friend class QH5Attribute;
    hid_t datasetId;
-   QH5Datatype datatype;
+   QH5Datatype::Type datatype;
 };
 
 #endif // QH5DATASET_H_DEF

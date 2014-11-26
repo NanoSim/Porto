@@ -3,17 +3,40 @@
 #include <hdf5.h>
 #include "qh5.h"
 
-static bool writeAttribute(QString const &key, QVariant const &value, hid_t dataset)
+
+static bool writeAttributeString (hid_t dataset, QString const &key, QString const &value)
 {
-   auto buffer = value.toString();
-   auto aid = H5Screate (H5S_SCALAR);
+   auto dataspace = H5Screate (H5S_SCALAR);
    auto datatype = H5Tcopy(H5T_C_S1);
-   H5Tset_size(datatype, buffer.length());
-   auto attr = H5Acreate(dataset, qPrintable(key), datatype, aid, H5P_DEFAULT,H5P_DEFAULT);
-   auto status = H5Awrite(attr, datatype, buffer.toLocal8Bit().constData());
-   H5Sclose (aid);
+   H5Tset_size(datatype, value.length());
+   auto attr = H5Acreate(dataset, qPrintable(key), datatype, dataspace, H5P_DEFAULT,H5P_DEFAULT);
+   auto status = H5Awrite(attr, datatype, value.toLocal8Bit().constData());
+   H5Sclose (dataspace);
    H5Aclose (attr);
    return (status >= 0);
+}
+
+static bool writeAttributeInt (hid_t dataset, QString const &key, int value)
+{
+  auto datatype = H5T_STD_I32LE;
+  auto dataspace = H5Screate (H5S_SCALAR);
+  auto attr = H5Acreate(dataset, qPrintable(key), datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT);
+  auto status = H5Awrite(attr, datatype, &value);
+  H5Aclose(attr);
+  H5Sclose(dataspace);
+  return (status >= 0);
+}
+
+static bool writeAttribute (hid_t dataset, QString const &key, QVariant const &value)
+{
+  switch (value.type()) {
+  case QMetaType::QString:
+    return writeAttributeString (dataset, key, value.toString());
+  case QMetaType::Int:
+    return writeAttributeInt (dataset, key, value.toInt());
+  default:
+    return false;
+  } 
 }
 
 static bool writeString(hid_t file_id, QString const &path, QString const &buff, QVariantMap const &attr)
@@ -27,7 +50,7 @@ static bool writeString(hid_t file_id, QString const &path, QString const &buff,
    auto status = H5Dwrite(dataset, datatype, H5S_ALL, H5S_ALL, H5P_DEFAULT, buff.toLocal8Bit().constData());
 
    for (auto a : attr.keys()) {
-      writeAttribute(a, attr[a], dataset);
+     writeAttribute(dataset, a, attr[a]);
    }
 
    H5Dclose(dataset);
@@ -115,10 +138,15 @@ QH5 :: ~QH5()
    delete d;
 }
 
-bool QH5 :: create(QString const &filename)
+bool QH5 :: create(QString const &filename, QVariantMap const &map)
 {
    d->file = new QH5File(filename, this);
    d->file->create();
+
+   for (auto key : map.keys()) {
+     writeAttribute(d->file->id(), key, map.value(key));
+   }
+
    return true;
 }
 
@@ -128,19 +156,19 @@ QH5Dataspace *QH5 :: createSimpleDataspace(QVector<int> const &dims)
    return dataspace;
 }
 
-QH5Dataset *QH5 :: createDataset(QString const &path, QH5Dataspace *dataspace, QH5Datatype dtype)
+QH5Dataset *QH5 :: createDataset(QString const &path, QH5Dataspace *dataspace, QH5Datatype::Type dtype)
 {
    auto dataset = new QH5Dataset(d->file, dataspace, path, dtype, this);
    return dataset;
 }
 
-QH5Dataset *QH5 :: createDataset(QString const &path, QH5Group *group, QH5Dataspace *dataspace, QH5Datatype dtype)
+QH5Dataset *QH5 :: createDataset(QString const &path, QH5Group *group, QH5Dataspace *dataspace, QH5Datatype::Type dtype)
 {
    auto dataset = createDataset(group->name() + "/" + path, dataspace, dtype);
    return dataset;
 }
 
-QH5Dataset *QH5 :: createDataset(QString const &path, QString const &groupName, QH5Dataspace *dataspace, QH5Datatype dtype)
+QH5Dataset *QH5 :: createDataset(QString const &path, QString const &groupName, QH5Dataspace *dataspace, QH5Datatype::Type dtype)
 {
    auto group = new QH5Group (d->file, groupName, this);
    auto dataset = createDataset(path, group, dataspace, dtype);
@@ -159,7 +187,7 @@ bool QH5 :: addGroup (QString const &groupName, QVariantMap const &map)
    auto group = new QH5Group (d->file, groupName, this);
 
    for (auto key : map.keys()) {
-      writeAttribute(key, map.value(key), group->id());
+     writeAttribute(group->id(), key, map.value(key));
    }
 
    return true;
