@@ -1,5 +1,7 @@
-INCLUDEPATH += $$PWD
-DEPENDPATH  += $$PWD
+isEmpty (h5driver_defined) {
+
+INCLUDEPATH += $$PWD $$(SOFTBASE)/include
+DEPENDPATH  += $$PWD $$(SOFTBASE)/include
 
 HEADERS += $$PWD/qh5.h \
            $$PWD/qh5file.h \
@@ -18,3 +20,6 @@ SOURCES += $$PWD/qh5.cpp \
 	   $$PWD/qh5group.cpp \
 	   $$PWD/qh5property.cpp \
 	   $$PWD/qh5attribute.cpp
+
+h5driver_defined = true
+}

@@ -30,8 +30,10 @@
 	    if(property.dims != undefined) {
 		def += "this."+property.name+"=[];";
 	    }});
+
 	def +=  "isString(id) && isFunction(this.read) && this.read()};" + 
 	    "b.prototype.accept=function(v){return v.visit(this);};";
+	
 	obj.properties.forEach (function (property) {
 	    var pname = property.name.charAt(0).toUpperCase() + property.name.slice(1),
 		setter = "set" + pname,

@@ -1,4 +1,5 @@
 TEMPLATE   = subdirs
 CONFIG    += ordered
-SUBDIRS    = mongo 
+SUBDIRS    = mongo \
+             hdf5
 

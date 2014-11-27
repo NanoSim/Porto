@@ -23,6 +23,7 @@
 #include "mongouriprototype.h"
 #include "mongoreadprefsprototype.h"
 #include "mongocursorprototype.h"
+#include "register.hh"
 
 using soft::mongo::Client;
 using soft::mongo::Collection;
@@ -34,15 +35,15 @@ using soft::mongo::Uri;
 using soft::mongo::Cursor;
 using soft::bson::Bson;
 
-Q_DECLARE_METATYPE (soft::mongo::Client*)
-Q_DECLARE_METATYPE (soft::mongo::Collection*)
-Q_DECLARE_METATYPE (soft::mongo::Database*)
-Q_DECLARE_METATYPE (soft::mongo::WriteConcern*)
-Q_DECLARE_METATYPE (soft::mongo::ReadPrefs*)
-Q_DECLARE_METATYPE (soft::mongo::GridFS*)
-Q_DECLARE_METATYPE (soft::mongo::Uri*)
-Q_DECLARE_METATYPE (soft::mongo::Cursor*)
-Q_DECLARE_METATYPE (soft::bson::Bson*)
+Q_DECLARE_METATYPE (Client*)
+Q_DECLARE_METATYPE (Collection*)
+Q_DECLARE_METATYPE (Database*)
+Q_DECLARE_METATYPE (WriteConcern*)
+Q_DECLARE_METATYPE (ReadPrefs*)
+Q_DECLARE_METATYPE (GridFS*)
+Q_DECLARE_METATYPE (Uri*)
+Q_DECLARE_METATYPE (Cursor*)
+Q_DECLARE_METATYPE (Bson*)
 
 MongoPlugin :: ~MongoPlugin()
 {
@@ -52,13 +53,6 @@ MongoPlugin :: ~MongoPlugin()
 static QScriptValue createMongoCollection (QScriptContext *, QScriptEngine *engine)
 {
   auto cls = new Collection();
-  return engine->newQObject(cls, QScriptEngine::ScriptOwnership);
-}
-
-template <class T>
-static QScriptValue creator (QScriptContext *, QScriptEngine *engine)
-{
-  auto cls = new T();
   return engine->newQObject(cls, QScriptEngine::ScriptOwnership);
 }
 
@@ -82,32 +76,6 @@ static QScriptValue createMongoClient (QScriptContext *ctx, QScriptEngine *engin
   return engine->newQObject(c, QScriptEngine::ScriptOwnership);
 }
 
-template <class T>
-QScriptValue objectContructor(QScriptContext *ctx,
-			      QScriptEngine *e)
-{   
-   auto parent = ctx->argument(0).toQObject(); 
-   auto object = q_check_ptr (new T(parent));
-   return e->newQObject(object, QScriptEngine::ScriptOwnership);   
-}
-
-template <class P, class T>
-static void registerPrototype (QScriptEngine *engine)
-{
-   auto prototype = q_check_ptr (new P (engine));
-   engine->setDefaultPrototype (qMetaTypeId <T*> (),
-				engine->newQObject (prototype));
-}
-
-template <class T, class Fn>
-static void registerConstructor (QScriptEngine *engine,
-				 QString const & name,
-				 Fn construct)
-{
-   auto ctor    = engine->newFunction(construct);
-   auto metaObj = engine->newQMetaObject(&T::staticMetaObject, ctor);
-   engine->globalObject().setProperty(name, metaObj);
-}
 
 void MongoPlugin :: registerPlugin (QScriptEngine *engine)
 {
