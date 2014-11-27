@@ -3,6 +3,8 @@
 #include <hdf5.h>
 #include "qh5.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 static bool writeAttributeString (hid_t dataset, QString const &key, QString const &value)
 {
@@ -210,3 +212,6 @@ bool QH5 :: write (QString const &path, QVariant const &value, QVariantMap const
 	 return false;
    }
 }
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

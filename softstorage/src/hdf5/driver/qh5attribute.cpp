@@ -4,6 +4,9 @@
 #include "qh5dataspace.h"
 #include "qh5datatype.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
+
 QH5Attribute :: QH5Attribute (QObject *parent)
   : QObject (parent)
   , attributeId (H5T_NATIVE_HERR)
@@ -32,3 +35,5 @@ QH5Attribute :: ~QH5Attribute()
   }
 }
 
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

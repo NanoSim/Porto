@@ -5,6 +5,8 @@
 #include <hdf5.h>
 #include "qh5dataspace.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 QH5Dataspace :: QH5Dataspace (QObject *parent)
   : QObject (parent)
@@ -36,3 +38,6 @@ QH5Dataspace :: QH5Dataspace (QVector<int> const &dims, QObject * parent)
 	return H5Screate_simple(dims.size(), &sizes[0], nullptr);	
      }())
 {}
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

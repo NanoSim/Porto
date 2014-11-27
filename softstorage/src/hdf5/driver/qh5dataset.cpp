@@ -3,6 +3,9 @@
 #include "qh5dataspace.h"
 #include "qh5dataset.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
+
 QH5Dataset :: QH5Dataset (QObject *parent)
   : QObject (parent)
   , datasetId (H5T_NATIVE_HERR)
@@ -66,3 +69,6 @@ bool QH5Dataset :: read (void *data)
 			  data);
    return (status >= 0);
 }
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

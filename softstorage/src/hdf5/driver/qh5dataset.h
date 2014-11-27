@@ -4,10 +4,15 @@
 #include <QObject>
 #include <hdf5.h>
 #include "qh5datatype.h"
+#include "h5ns.h"
+
+class QString;
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5Dataspace;
 class QH5File;
-class QString;
 
 class QH5Dataset : public QObject
 {
@@ -32,5 +37,8 @@ private:
    hid_t datasetId;
    QH5Datatype::Type datatype;
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5DATASET_H_DEF

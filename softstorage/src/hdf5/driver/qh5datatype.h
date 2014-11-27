@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <hdf5.h>
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5Datatype : public QObject
 {
@@ -25,5 +29,8 @@ public slots:
 private:
   hid_t datatypeId;
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5DATATYPE_H_DEF

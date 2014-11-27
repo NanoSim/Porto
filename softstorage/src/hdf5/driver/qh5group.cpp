@@ -1,6 +1,9 @@
 #include "qh5file.h"
 #include "qh5group.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
+
 QH5Group :: QH5Group (QObject *parent)
   : QObject (parent)
   , groupId (H5T_NATIVE_HERR)
@@ -33,3 +36,6 @@ QH5Group :: ~QH5Group()
     Q_UNUSED(status);
   }
 }
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

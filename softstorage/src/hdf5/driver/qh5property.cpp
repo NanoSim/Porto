@@ -1,5 +1,8 @@
 #include "qh5property.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
+
 QH5Property :: QH5Property (QObject *parent)
   : QObject (parent)
   , propertyId (-1)
@@ -23,3 +26,5 @@ hid_t QH5Property :: id() const
   return propertyId;
 }
 
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QString>
 #include <hdf5.h>
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5File : public QObject
 {
@@ -28,5 +32,8 @@ private:
   QString name; 
 
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5FILE_H_DEF

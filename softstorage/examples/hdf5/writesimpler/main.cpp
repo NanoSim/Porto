@@ -1,6 +1,8 @@
 #include <QtCore>
 #include "qh5.h"
 
+using namespace soft::hdf5;
+
 int main()
 {
   QH5 h5;

@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <hdf5.h>
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5Property : public QObject
 {
@@ -20,5 +24,8 @@ private:
   explicit QH5Property (QObject *parent = nullptr);
   hid_t propertyId;  
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5PROPERTY_H_DEF

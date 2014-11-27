@@ -2,6 +2,9 @@
 #include <QtDebug>
 #include "qh5file.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
+
 QH5File :: QH5File (QObject *parent)
   : QObject (parent)
   , fileId (H5T_NATIVE_HERR)
@@ -40,3 +43,6 @@ hid_t QH5File :: id() const
 {
   return this->fileId;
 }
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE

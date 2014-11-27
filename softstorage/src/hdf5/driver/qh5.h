@@ -8,6 +8,10 @@
 #include "qh5file.h"
 #include "qh5datatype.h"
 #include "qh5group.h"
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5 : public QObject
 {
@@ -30,5 +34,8 @@ private:
   class Private;
   Private *d;
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5_H_DEF

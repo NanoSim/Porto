@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <hdf5.h>
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5File;
 class QH5Group : public QObject
@@ -23,5 +27,8 @@ private:
   hid_t groupId;
   QString const groupName;
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5GROUP_H_DEF

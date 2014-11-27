@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <hdf5.h>
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5Dataset;
 class QH5Dataspace;
@@ -27,5 +31,8 @@ protected:
 private:
   hid_t attributeId;
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5ATTRIBUTE_H_DEF

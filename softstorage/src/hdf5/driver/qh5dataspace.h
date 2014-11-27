@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QVector>
 #include <hdf5.h>
+#include "h5ns.h"
+
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
 
 class QH5Dataspace : public QObject
 { 
@@ -23,5 +27,8 @@ protected:
 private:
   hid_t dataspaceId;
 };
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
 
 #endif // QH5DATASPACE_H_DEF

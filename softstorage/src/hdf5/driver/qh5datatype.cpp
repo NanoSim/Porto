@@ -1,5 +1,8 @@
 #include "qh5datatype.h"
 
+SOFT_BEGIN_NAMESPACE
+H5_BEGIN_NAMESPACE
+
 QH5Datatype :: QH5Datatype (QObject *parent)
   : QObject (parent)
   , datatypeId (H5T_NATIVE_HERR)
@@ -83,3 +86,6 @@ hid_t QH5Datatype :: toH5MemoryType(QH5Datatype::Type type)
 	return H5T_NATIVE_HERR;
    }
 }
+
+H5_END_NAMESPACE
+SOFT_END_NAMESPACE
