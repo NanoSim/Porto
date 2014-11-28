@@ -12,20 +12,29 @@ H5_BEGIN_NAMESPACE
 class QH5File : public QObject
 {
   Q_OBJECT
-
+  Q_ENUMS (HandleFlag)
+  
 public:
   explicit QH5File (QObject *parent = nullptr);
   QH5File (hid_t id, QObject *parent = nullptr);
   QH5File (QString const &filename, QObject *parent = nullptr);
   virtual ~QH5File();
 
+  enum HandleFlag {Undefined = -1, ReadWrite, ReadOnly};
+				       
+public slots:
   bool create(QString const &filename);
+  bool open(QString const &filename);
   bool create();
+  HandleFlag intent() const;
+  bool flush();
+  int objectCount() const;
 
 protected:
   friend class QH5;
   friend class QH5Dataset;
   friend class QH5Group;
+
 public:
   hid_t id() const;
   void setId(hid_t i);

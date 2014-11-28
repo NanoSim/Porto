@@ -11,7 +11,7 @@ H5_BEGIN_NAMESPACE
 class QH5Datatype : public QObject
 {
   Q_OBJECT
-  Q_ENUMS (Type);
+  Q_ENUMS (Type)
 public:
   explicit QH5Datatype (QObject *parent = nullptr);
   QH5Datatype (hid_t i, QObject *parent = nullptr);

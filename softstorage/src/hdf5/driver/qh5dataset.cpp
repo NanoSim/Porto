@@ -29,16 +29,28 @@ hid_t QH5Dataset :: id() const
   return this->datasetId;
 }
 
+static hid_t openDataset(QH5File *file, QH5Dataspace *dataspace, QString const &path, QH5Datatype::Type dtype)
+{
+  QTextStream(stderr) << "opening dataset: " << endl;
+  if (file->intent() == QH5File::ReadWrite) {
+    return H5Dcreate (file->id(),
+		      qPrintable(path),
+		      QH5Datatype::toH5FileType(dtype),
+		      dataspace->id(),
+		      H5P_DEFAULT,
+		      H5P_DEFAULT,
+		      H5P_DEFAULT);
+  }
+  else {
+    return H5Dopen2 (file->id(),
+		     qPrintable(path),
+		     H5P_DEFAULT);
+  }
+}
 
 QH5Dataset :: QH5Dataset (QH5File *file, QH5Dataspace *dataspace, QString const &path, QH5Datatype::Type dtype, QObject *parent)
   : QObject (parent)
-  , datasetId (H5Dcreate (file->id(),
-			  qPrintable(path),
-			  QH5Datatype::toH5FileType(dtype),
-			  dataspace->id(),
-			  H5P_DEFAULT,
-			  H5P_DEFAULT,
-			  H5P_DEFAULT))
+  , datasetId (openDataset (file, dataspace, path, dtype))
   , datatype(dtype)
 {}
 

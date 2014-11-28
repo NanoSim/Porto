@@ -2,6 +2,7 @@
 #include <QtDebug>
 #include "qh5file.h"
 
+
 SOFT_BEGIN_NAMESPACE
 H5_BEGIN_NAMESPACE
 
@@ -21,6 +22,16 @@ QH5File :: QH5File (QString const &filename, QObject *parent)
   , name (filename)
 {}
 
+QH5File::HandleFlag QH5File :: intent() const
+{ 
+  unsigned intent;
+  auto err = H5Fget_intent(fileId, &intent);
+  QTextStream(stderr) << "*intent: " << intent << err << endl;
+  if (err < 0) return QH5File::Undefined;
+  if (intent == H5F_ACC_RDWR) return QH5File::ReadWrite;
+  return QH5File::ReadOnly;
+}
+
 QH5File ::  ~QH5File()
 {
   if (fileId != H5T_NATIVE_HERR) {
@@ -37,6 +48,26 @@ bool QH5File :: create(QString const &filename)
 		     H5P_DEFAULT,
 		     H5P_DEFAULT);
   return true;
+}
+
+bool QH5File :: open (QString const &filename)
+{
+  fileId = H5Fopen(qPrintable(filename),
+		   H5F_ACC_RDONLY,
+		   H5P_DEFAULT);
+  return (fileId >= 0);
+}
+
+int QH5File :: objectCount() const
+{
+  auto size = H5Fget_obj_count (fileId, H5F_OBJ_ALL);
+  return size;
+}
+
+bool QH5File :: flush()
+{
+  auto status = H5Fflush (fileId, H5F_SCOPE_GLOBAL);
+  return (status >= 0);
 }
 
 bool QH5File :: create()
