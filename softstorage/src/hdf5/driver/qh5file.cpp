@@ -10,6 +10,11 @@ QH5File :: QH5File (QObject *parent)
   , fileId (H5T_NATIVE_HERR)
 {}
 
+QH5File :: QH5File (hid_t id, QObject *parent)
+   : QObject (parent)
+   , fileId (id)
+{}
+
 QH5File :: QH5File (QString const &filename, QObject *parent)
   : QObject (parent)
   , fileId (H5T_NATIVE_HERR)
@@ -42,6 +47,11 @@ bool QH5File :: create()
 hid_t QH5File :: id() const
 {
   return this->fileId;
+}
+
+void QH5File :: setId(hid_t i)
+{
+   this->fileId = i;
 }
 
 H5_END_NAMESPACE

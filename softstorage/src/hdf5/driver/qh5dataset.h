@@ -29,6 +29,8 @@ public slots:
    bool read (void *data);
 
 protected:
+
+public:
    hid_t id() const;
   
 private:

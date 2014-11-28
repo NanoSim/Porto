@@ -22,6 +22,7 @@ protected:
   friend class QH5;
   friend class QH5Dataset;
   friend class QH5Attribute;
+public:
   hid_t id() const;
   
 private:

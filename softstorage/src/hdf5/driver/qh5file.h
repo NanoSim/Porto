@@ -15,6 +15,7 @@ class QH5File : public QObject
 
 public:
   explicit QH5File (QObject *parent = nullptr);
+  QH5File (hid_t id, QObject *parent = nullptr);
   QH5File (QString const &filename, QObject *parent = nullptr);
   virtual ~QH5File();
 
@@ -25,7 +26,9 @@ protected:
   friend class QH5;
   friend class QH5Dataset;
   friend class QH5Group;
+public:
   hid_t id() const;
+  void setId(hid_t i);
 
 private:
   hid_t fileId;

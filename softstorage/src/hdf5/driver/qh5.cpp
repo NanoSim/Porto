@@ -63,7 +63,7 @@ static bool writeString(hid_t file_id, QString const &path, QString const &buff,
 
 static bool writeStringList(hid_t file_id, QString const &path, QStringList const &xs)
 {
-   qDebug() << "writing string" << xs;
+   QTextStream(stderr) << "writing string" << xs.join(",") << endl;
    auto datatype = H5Tcopy(H5T_C_S1);
    H5Tset_size (datatype, H5T_VARIABLE);
 
@@ -94,7 +94,7 @@ static bool writeStringList(hid_t file_id, QString const &path, QStringList cons
 
 static bool writeInt(hid_t file_id, QString const &path, int value)
 {
-   qDebug() << "write int" << value;
+   QTextStream(stderr) << "write int" << value << endl;
    auto datatype  = H5T_STD_I32LE;
    auto dataspace = H5Screate(H5S_SCALAR);
    auto dataset   = H5Dcreate(file_id, qPrintable(path), datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
@@ -106,7 +106,7 @@ static bool writeInt(hid_t file_id, QString const &path, int value)
 
 static bool writeDouble(hid_t file_id, QString const &path, double const & value)
 {
-   qDebug() << "write double" << value;
+   QTextStream(stderr) << "write double" << value << endl;
    auto datatype  = H5T_IEEE_F64LE;
    auto dataspace = H5Screate(H5S_SCALAR);
    auto dataset   = H5Dcreate(file_id, qPrintable(path), datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
@@ -116,6 +116,43 @@ static bool writeDouble(hid_t file_id, QString const &path, double const & value
    return (status >= 0); 
 }
 
+static QVector<int> getListDims(QVariant const &v)
+{
+   if (v.type() == QMetaType::QVariantList) {
+      QTextStream (stderr) << "dims#" << v.toList().count() << endl;
+      QVector<int> dim = QVector<int>() << v.toList().count() << getListDims(v.toList().first());
+      return dim;
+   }
+   return QVector<int>();
+}
+
+template <class T>
+QVector<T> stdFlat (QVariant const &value) 
+{
+   QVector<T> vector;
+   if (value.type() !=QMetaType::QVariantList) {
+      vector.append (value.value<T>());
+   } else {
+      for (auto v : value.toList()) {
+	 vector << stdFlat<T> (v);
+      }
+   }
+   return vector;
+}
+
+static bool writeVariantList(hid_t file_id, QString const &path, QVariantList const &list)
+{
+   auto dims      = getListDims(list);
+   auto dataspace = new QH5Dataspace(dims);
+   auto file      = new QH5File(file_id, dataspace);
+   auto dataset   = new QH5Dataset(file, dataspace, path, QH5Datatype::Int32, dataspace); 
+   auto qvec      = stdFlat<int>(list);
+   auto ptr       = qvec.data();
+   auto status    = dataset->write(ptr);
+
+   delete dataspace;
+   return (status >= 0);
+}
 
 class QH5::Private {
    friend class QH5;
@@ -195,7 +232,6 @@ bool QH5 :: addGroup (QString const &groupName, QVariantMap const &map)
    return true;
 }
 
-
 bool QH5 :: write (QString const &path, QVariant const &value, QVariantMap const &attributes)
 {
    switch (value.type()) {
@@ -207,10 +243,24 @@ bool QH5 :: write (QString const &path, QVariant const &value, QVariantMap const
 	 return writeDouble(d->file->id(), path, value.toDouble());
       case QMetaType::QStringList:
 	 return writeStringList(d->file->id(), path, value.toStringList());  
+      case QMetaType::QVariantList:
+	 return writeVariantList(d->file->id(), path, value.toList());
       default:
-	 qDebug() << "Undefined type";
+	 QTextStream(stderr) << "Undefined type";
 	 return false;
    }
+}
+
+bool QH5 :: describeType (QVariant const &v)
+{
+   QTextStream(stdout) << v.typeName();
+   if (v.type() == QMetaType::QVariantList) {
+      QTextStream(stdout) << "[" << v.toList().count() << "] ";
+      return describeType (v.toList().first());
+   }
+   QTextStream(stdout) << "\n";
+   return true;
+
 }
 
 H5_END_NAMESPACE

@@ -47,7 +47,6 @@ void H5Plugin :: registerPlugin (QScriptEngine *engine)
    registerConstructor<QH5Group>     (engine, "H5Group",     creator<QH5Group>);
    registerConstructor<QH5Attribute> (engine, "H5Attribute", creator<QH5Attribute>);
    registerConstructor<QH5Dataspace> (engine, "H5Dataspace", creator<QH5Dataspace>);
-   registerConstructor<QH5File>      (engine, "H5File",      creator<QH5File>);
-   
+   registerConstructor<QH5File>      (engine, "H5File",      creator<QH5File>);  
 }
 

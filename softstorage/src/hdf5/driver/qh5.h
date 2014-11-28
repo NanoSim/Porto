@@ -30,6 +30,7 @@ public slots:
   QH5Group *createGroup(QString const &groupName);
   bool write (QString const &path, QVariant const &v, QVariantMap const &attributes = QVariantMap());
   bool addGroup (QString const &key, QVariantMap const &map = QVariantMap());
+  static bool describeType (QVariant const &v);
 private:
   class Private;
   Private *d;
