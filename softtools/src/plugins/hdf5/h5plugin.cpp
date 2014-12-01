@@ -40,7 +40,7 @@ H5Plugin :: ~H5Plugin()
 
 void H5Plugin :: registerPlugin (QScriptEngine *engine)
 {
-//   registerPrototype<QH5Prototype, QH5> (engine);
+ //   registerPrototype<QH5Prototype, QH5> (engine);
    registerConstructor<QH5>          (engine, "H5",          creator<QH5>);
    registerConstructor<QH5Dataset>   (engine, "H5Dataset",   creator<QH5Dataset>);
    registerConstructor<QH5Datatype>  (engine, "H5Datatype",  creator<QH5Datatype>);

@@ -34,8 +34,12 @@ public slots:
   bool close();
   bool info();
   QStringList datasets();
+  QVariant readArray (QString const &key);
+  QVariant readStringArray (QString const &key) const;
+  bool readString (QString const &key);
   bool infoDataset (QString const &datasetName);
   bool infoDataset2 (QString const &datasetName);
+
   static bool describeType (QVariant const &v);
 
 private:

@@ -26,7 +26,6 @@ QH5File::HandleFlag QH5File :: intent() const
 { 
   unsigned intent;
   auto err = H5Fget_intent(fileId, &intent);
-  QTextStream(stderr) << "*intent: " << intent << err << endl;
   if (err < 0) return QH5File::Undefined;
   if (intent == H5F_ACC_RDWR) return QH5File::ReadWrite;
   return QH5File::ReadOnly;

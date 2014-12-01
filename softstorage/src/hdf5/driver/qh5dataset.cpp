@@ -31,7 +31,6 @@ hid_t QH5Dataset :: id() const
 
 static hid_t openDataset(QH5File *file, QH5Dataspace *dataspace, QString const &path, QH5Datatype::Type dtype)
 {
-  QTextStream(stderr) << "opening dataset: " << endl;
   if (file->intent() == QH5File::ReadWrite) {
     return H5Dcreate (file->id(),
 		      qPrintable(path),
