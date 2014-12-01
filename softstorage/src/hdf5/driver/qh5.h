@@ -33,8 +33,11 @@ public slots:
   bool addGroup (QString const &key, QVariantMap const &map = QVariantMap());
   bool close();
   bool info();
+  QStringList datasets();
+  bool infoDataset (QString const &datasetName);
+  bool infoDataset2 (QString const &datasetName);
   static bool describeType (QVariant const &v);
-  
+
 private:
   class Private;
   Private *d;

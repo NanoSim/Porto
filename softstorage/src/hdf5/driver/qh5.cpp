@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <vector>
 #include <hdf5.h>
+#include <memory>
 #include "qh5.h"
 
 SOFT_BEGIN_NAMESPACE
@@ -244,6 +245,7 @@ class QH5::Private {
    {}
 
    QH5File *file;
+  QStringList ret;
 };
 
 QH5 :: QH5 (QObject *parent)
@@ -389,6 +391,122 @@ bool QH5 :: info()
 
   status = H5Lvisit (d->file->id(), H5_INDEX_NAME, H5_ITER_NATIVE, op_L, nullptr);
   return (status <= 0);
+}
+
+bool QH5 :: infoDataset2 (QString const &datasetName)
+{
+  //  hsize_t dims[10];
+  auto dataset      = H5Dopen2(d->file->id(), qPrintable (datasetName), H5P_DEFAULT);
+  auto datatype     = H5Dget_type (dataset);
+  auto dclass       = H5Tget_class(datatype);
+  auto filespace    = H5Dget_space(dataset);
+  auto rank         = H5Sget_simple_extent_ndims(filespace);
+  std::unique_ptr<hsize_t[]> dims(new hsize_t[rank]);
+  auto status_n     = H5Sget_simple_extent_dims(filespace, dims.get(), nullptr);
+
+
+  hsize_t stot = 1;
+  QTextStream(stdout) << datasetName << " - rank: " << rank << ", dims:";
+  for (int i = 0; i < rank; ++i) {
+    stot *= dims[i];
+    QTextStream(stdout) << dims[i] << " ";
+  }
+
+  QVector<double> data(stot);
+
+  auto memspace     = H5Screate_simple(rank, dims.get(), nullptr);
+
+  hid_t status;
+  
+
+  switch (dclass) {    
+  case H5T_FLOAT:
+
+    status = H5Dread(dataset, H5T_NATIVE_DOUBLE, memspace, filespace, H5P_DEFAULT, data.data());
+    QTextStream(stdout) << ", value; [";
+    for (auto v : data) {
+      QTextStream(stdout) << v << " ";
+    }
+    QTextStream(stdout) << "]";
+    
+    break;
+  default:
+    break;
+  }
+
+
+  QTextStream(stdout) << "\n";
+  return true;
+}
+
+bool QH5 :: infoDataset (QString const &datasetName)
+{
+  auto dataset = H5Dopen2(d->file->id(), qPrintable (datasetName), H5P_DEFAULT);
+  auto datatype = H5Dget_type (dataset);
+  auto dclass   = H5Tget_class(datatype);
+  QTextStream(stdout) << datasetName;
+  switch (dclass) {
+  case H5T_INTEGER:
+    QTextStream(stdout) << " (int)";
+    break;
+  case H5T_FLOAT:
+    QTextStream(stdout) << " (float)";
+    break;
+  case H5T_STRING:
+    QTextStream(stdout) << " (string)";
+    break;
+  case H5T_BITFIELD:
+    QTextStream(stdout) << " (bitfield)";
+    break;
+  case H5T_OPAQUE:
+    QTextStream(stdout) << " (opaque)";
+    break;
+  case H5T_COMPOUND:
+    QTextStream(stdout) << " (compound)";
+    break;
+  case H5T_REFERENCE:
+    QTextStream(stdout) << " (reference)";
+    break;
+  case H5T_ENUM:
+    QTextStream(stdout) << " (enum)";
+    break;
+  case H5T_VLEN:
+    QTextStream(stdout) << " (vlen)";
+    break;
+  case H5T_ARRAY:
+  default:
+    QTextStream(stdout) << " (array)";
+    break;
+
+  }
+
+  auto size = H5Tget_size(datatype);
+  QTextStream(stdout) << " (size: " <<  size << ")";
+  QTextStream(stdout) << "\n";
+  return true;
+}
+
+QStringList lst;
+herr_t myop(hid_t loc_id, const char *name, const H5L_info_t *info,void *op_data)
+{  
+  H5O_info_t  infobuf;
+  auto status = H5Oget_info_by_name (loc_id, name, &infobuf, H5P_DEFAULT);
+  switch (infobuf.type) {
+  case H5O_TYPE_DATASET:
+    lst << name;
+    break;    
+  default:
+    break;
+  }
+  return status;
+}
+
+QStringList QH5 :: datasets() 
+{
+  lst.clear();
+
+  herr_t status = H5Lvisit(d->file->id(), H5_INDEX_NAME, H5_ITER_NATIVE, myop, nullptr);
+  return lst;
 }
 
 bool QH5 :: close()
