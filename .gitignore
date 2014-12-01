@@ -8,6 +8,7 @@
 *.Debug
 *.Release
 *~
+moc_*.cpp
 softbase/include/3rdparty
 softtools/src/parashell
 softbase/include/Soft
