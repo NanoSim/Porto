@@ -30,16 +30,11 @@ public slots:
   QH5Dataset *createDataset(QString const &path, QString const &groupName, QH5Dataspace *dataspace, QH5Datatype::Type dtype);
   QH5Group *createGroup(QString const &groupName);
   bool write (QString const &path, QVariant const &v, QVariantMap const &attributes = QVariantMap());
+  QVariant read (QString const &key); 
   bool addGroup (QString const &key, QVariantMap const &map = QVariantMap());
   bool close();
   bool info();
   QStringList datasets();
-  QVariant readArray (QString const &key);
-  QVariant readStringArray (QString const &key) const;
-  bool readString (QString const &key);
-  bool infoDataset (QString const &datasetName);
-  bool infoDataset2 (QString const &datasetName);
-
   static bool describeType (QVariant const &v);
 
 private:
