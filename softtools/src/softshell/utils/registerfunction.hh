@@ -1,3 +1,6 @@
+#ifndef REGISTER_FUNCTION
+#define REGISTER_FUNCTION
+
 template <class Function>
 static void registerFunction (QScriptEngine *engine, 
 			      QString const & name, 
@@ -11,3 +14,5 @@ static void registerFunction (QScriptEngine *engine,
    }
    obj->setProperty(name, scriptFunction);
 }
+
+#endif // REGISTER_FUNCTION

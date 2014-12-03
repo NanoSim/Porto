@@ -40,13 +40,11 @@
     });
     
     proc["started()"].connect (function (){
-	print(progname, " started...");
 	proc.write(code);
 	proc.writeln("exit");
     });
     
     proc["finished(int)"].connect (function (exitCode) {
-	print(progname, "ended with exit code", exitCode);
 	event.quit();
     });
     

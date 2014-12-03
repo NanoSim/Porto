@@ -3,7 +3,8 @@ isEmpty (h5driver_defined) {
 INCLUDEPATH += $$PWD $$(SOFTBASE)/include
 DEPENDPATH  += $$PWD $$(SOFTBASE)/include
 
-HEADERS += $$PWD/qh5.h \
+HEADERS += $$PWD/h5ns.h \
+           $$PWD/qh5.h \
            $$PWD/qh5file.h \
            $$PWD/qh5dataset.h \
 	   $$PWD/qh5dataspace.h \

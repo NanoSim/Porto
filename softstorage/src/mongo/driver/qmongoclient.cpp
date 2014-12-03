@@ -180,5 +180,15 @@ void Client :: setReadPrefs (ReadPrefs const * readPrefs)
       (client.get(), readPrefs->data());
 }
 
+void Client :: initialize()
+{
+  mongoc_init();
+}
+
+void Client :: cleanup()
+{
+  mongoc_cleanup();
+}
+
 MONGO_END_NAMESPACE
 SOFT_END_NAMESPACE

@@ -29,7 +29,8 @@ public slots:
   HandleFlag intent() const;
   bool flush();
   int objectCount() const;
-
+  bool close();
+  
 protected:
   friend class QH5;
   friend class QH5Dataset;

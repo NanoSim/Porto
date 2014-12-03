@@ -5,17 +5,8 @@
 #include <functional>
 #include <mongons.h>
 
+#include <QMongo>
 #include "mongoplugin.h"
-#include "qbson.h" 
-#include "qmongoinitialize.h"
-#include "qmongoclient.h"
-#include "qmongocollection.h"
-#include "qmongodatabase.h"
-#include "qmongowriteconcern.h"
-#include "qmongoreadprefs.h"
-#include "qmongogridfs.h"
-#include "qmongouri.h"
-#include "qmongocursor.h"
 #include "bsonprototype.h"
 #include "mongoclientprototype.h"
 #include "mongocollectionprototype.h"
@@ -35,15 +26,15 @@ using soft::mongo::Uri;
 using soft::mongo::Cursor;
 using soft::bson::Bson;
 
-Q_DECLARE_METATYPE (Client*)
-Q_DECLARE_METATYPE (Collection*)
-Q_DECLARE_METATYPE (Database*)
-Q_DECLARE_METATYPE (WriteConcern*)
-Q_DECLARE_METATYPE (ReadPrefs*)
-Q_DECLARE_METATYPE (GridFS*)
-Q_DECLARE_METATYPE (Uri*)
-Q_DECLARE_METATYPE (Cursor*)
-Q_DECLARE_METATYPE (Bson*)
+Q_DECLARE_METATYPE (soft::mongo::Client*)
+Q_DECLARE_METATYPE (soft::mongo::Collection*)
+Q_DECLARE_METATYPE (soft::mongo::Database*)
+Q_DECLARE_METATYPE (soft::mongo::WriteConcern*)
+Q_DECLARE_METATYPE (soft::mongo::ReadPrefs*)
+Q_DECLARE_METATYPE (soft::mongo::GridFS*)
+Q_DECLARE_METATYPE (soft::mongo::Uri*)
+Q_DECLARE_METATYPE (soft::mongo::Cursor*)
+Q_DECLARE_METATYPE (soft::mongo::Bson*)
 
 MongoPlugin :: ~MongoPlugin()
 {

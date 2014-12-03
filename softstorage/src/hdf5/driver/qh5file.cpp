@@ -84,5 +84,13 @@ void QH5File :: setId(hid_t i)
    this->fileId = i;
 }
 
+bool QH5File :: close()
+{
+  auto status = H5Fclose(fileId);
+  fileId = H5T_NATIVE_HERR;
+
+  return (status >= 0);
+}
+
 H5_END_NAMESPACE
 SOFT_END_NAMESPACE

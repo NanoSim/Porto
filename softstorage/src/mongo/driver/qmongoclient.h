@@ -31,6 +31,8 @@ public:
    Client (Client && other);
    virtual ~Client();
 
+   static void initialize();
+   static void cleanup();
    WriteConcern *writeConcern ();
    void setWriteConcern (WriteConcern const * writeConcern);
    ReadPrefs *readPrefs();

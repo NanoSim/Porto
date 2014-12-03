@@ -4,8 +4,7 @@ INCLUDEPATH   += . $$(SOFTBASE)/include
 DEPENDPATH    += . $$(SOFTBASE)/include
 CONFIG        += debug_and_release
 CONFIG        += c++11
-CONFIG        += bson 
-CONFIG        += mongo
+CONFIG        += softmongo
 CONFIG        += pretty
 QT            += script
 TARGET         = $$qtLibraryTarget(mongoplugin)
@@ -28,7 +27,6 @@ RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
 include(../common/common.pri)
-include($$(SOFTBASE)/../softstorage/src/mongo/driver/driver.pri)
 include(mongoprototypes.pri)
 
 # Input
