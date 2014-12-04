@@ -34,7 +34,7 @@ Q_DECLARE_METATYPE (soft::mongo::ReadPrefs*)
 Q_DECLARE_METATYPE (soft::mongo::GridFS*)
 Q_DECLARE_METATYPE (soft::mongo::Uri*)
 Q_DECLARE_METATYPE (soft::mongo::Cursor*)
-Q_DECLARE_METATYPE (soft::mongo::Bson*)
+Q_DECLARE_METATYPE (soft::bson::Bson*)
 
 MongoPlugin :: ~MongoPlugin()
 {
