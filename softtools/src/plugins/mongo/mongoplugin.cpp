@@ -38,7 +38,7 @@ Q_DECLARE_METATYPE (soft::mongo::Bson*)
 
 MongoPlugin :: ~MongoPlugin()
 {
-  soft::mongo::cleanup();
+  Client::cleanup();
 }
 
 static QScriptValue createMongoCollection (QScriptContext *, QScriptEngine *engine)
@@ -70,7 +70,7 @@ static QScriptValue createMongoClient (QScriptContext *ctx, QScriptEngine *engin
 
 void MongoPlugin :: registerPlugin (QScriptEngine *engine)
 {
-   soft::mongo::initialize();
+   Client::initialize();
 
    registerPrototype<MongoClientPrototype,     Client>     (engine);
    registerPrototype<MongoCollectionPrototype, Collection> (engine);
