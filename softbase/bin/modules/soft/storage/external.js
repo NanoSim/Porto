@@ -8,10 +8,10 @@
 	url    = connectInfo.url;
 
 	var module = 'soft.storage.external.' + driver;
-	print (module);
+//	print (module);
 	if (isValidModule(module)) {
 	    ext = require(module);
-	    print (ext.name() + " [" + ext.version() + "]");
+//	    print (ext.name() + " [" + ext.version() + "]");
 	} else {
 	    throw ("Undefined driver");
 	}

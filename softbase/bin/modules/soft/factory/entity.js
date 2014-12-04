@@ -35,9 +35,8 @@
 	def += "if (Object.prototype.toString.call(arg) === '[object String]') {"+
 	    "this.id = arg;isFunction(this.read) && this.read();}else {this.id = uuidgen().substr(1, 36);"+
 	    "if (Object.prototype.toString.call(arg) === '[object Object]') {"+
-	    "if (arg.__name__ !== undefined && arg.__version__ !== undefined) {"+
 	    "if (arg.__name__ !== this.__name__ || arg.__version__ !== this.__version__) {"+
-	    "this.translate(arg);}}}}};";
+	    "isFunction(this.translate) && this.translate(arg);}}}};";
 	
 
 	def += "b.prototype.accept=function(v){return v.visit(this);};";	
@@ -57,10 +56,11 @@
 	}).join(",") + "};};";
 	def += "b.prototype.translate = function(a){require('soft.translator').translate(a,this);};";
 	def += "return b.prototype.constructor;})();";
-	
+
 	if (isFunction(callback)){
 	    callback(undefined, def);
 	}
+
 	return eval(def);
     };
 
