@@ -43,7 +43,7 @@ void ScriptPlugins :: load(QScriptEngine *engine)
 	    auto pluginPtr = qobject_cast<ISoftPlugin*>(loader->instance());
 	    if( pluginPtr ) {
 	       pluginPtr->registerPlugin(engine);
-	       QTextStream(stdout) << "[loaded: " << file << "]\n";
+//	       QTextStream(stdout) << "[loaded: " << file << "]\n";
 	    }
 	    else {
 	      QTextStream(stdout) << "failed to register";
