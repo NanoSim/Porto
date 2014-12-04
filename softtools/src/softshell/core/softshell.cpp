@@ -107,6 +107,13 @@ QScriptValue uuidgen(QScriptContext *context, QScriptEngine *engine)
    return ret;
 }
 
+QScriptValue isValidModule(QScriptContext *context, QScriptEngine *engine)
+{
+   if(context->argumentCount() != 1) return QScriptValue(false);
+   const QString moduleName = context->argument(0).toString(); 
+   return QScriptValue (!findModule(moduleName).isEmpty());
+}
+
 QScriptValue require(QScriptContext *context, QScriptEngine *engine)
 {
    if(context->argumentCount() != 1) return engine->undefinedValue();
@@ -461,6 +468,7 @@ void registerBase(QScriptEngine *engine)
    registerFunction(engine, "exceptionBacktrace", exceptionBacktrace);
    registerFunction(engine, "uuidgen", uuidgen);
    registerFunction(engine, "require", require);
+   registerFunction(engine, "isValidModule", isValidModule, "Check if a module is present");
    registerFunction(engine, "writeFile", writeFile, "Syntax: writeFile( path, buffer )");
    registerFunction(engine, "isValidSyntax", isValidSyntax);
    registerFunction(engine, "isErrorSyntax", isErrorSyntax);
