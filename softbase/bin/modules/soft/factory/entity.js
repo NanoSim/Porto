@@ -23,17 +23,24 @@
 	}
 	
 	var obj = JSON.parse(bson.asString());
-	var def = "(function(){function b(id){this.id = void 0 == id ? " + 
-	    "uuidgen().substr(1, 36) : id; this.__name__='"+ entityName +
-	    "'; this.__version__='" + entityVersion+"';";
+
+	var def = "(function(){function b(arg){" +
+	    "this.__name__='" + entityName +"';" +
+	    "this.__version__='"+ entityVersion +"';";
 	obj.properties.forEach (function (property){
 	    if(property.dims != undefined) {
 		def += "this."+property.name+"=[];";
 	    }});
 
-	def +=  "isString(id) && isFunction(this.read) && this.read()};" + 
-	    "b.prototype.accept=function(v){return v.visit(this);};";
+	def += "if (Object.prototype.toString.call(arg) === '[object String]') {"+
+	    "this.id = arg;isFunction(this.read) && this.read();}else {this.id = uuidgen().substr(1, 36);"+
+	    "if (Object.prototype.toString.call(arg) === '[object Object]') {"+
+	    "if (arg.__name__ !== undefined && arg.__version__ !== undefined) {"+
+	    "if (arg.__name__ !== this.__name__ || arg.__version__ !== this.__version__) {"+
+	    "this.translate(arg);}}}}};";
 	
+
+	def += "b.prototype.accept=function(v){return v.visit(this);};";	
 	obj.properties.forEach (function (property) {
 	    var pname = property.name.charAt(0).toUpperCase() + property.name.slice(1),
 		setter = "set" + pname,
@@ -48,6 +55,7 @@
 	def += "b.prototype.get = function() {return {" + obj.properties.map (function (prop) {
 	    return prop.name + ":" + "this." + prop.name;
 	}).join(",") + "};};";
+	def += "b.prototype.translate = function(a){require('soft.translator').translate(a,this);};";
 	def += "return b.prototype.constructor;})();";
 	
 	if (isFunction(callback)){

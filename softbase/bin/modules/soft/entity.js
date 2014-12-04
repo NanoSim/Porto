@@ -18,8 +18,15 @@
 		var self = this;
 		storage.read(this.id, function(bson){
 		    if (isQObject(bson)) {
-			self.set(JSON.parse(bson.asString()));
-		    }
+			var obj = JSON.parse(bson.asString());
+			if (obj.__name__ !== this.__name__ || obj.__version__ !== this.__version__) {
+			    this.translate(obj);
+			}
+			else {
+			    print(JSON.stringify(obj));
+			    self.set(obj);
+			}
+ 		    }
 		});
 	    };
 	    

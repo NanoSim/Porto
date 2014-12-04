@@ -1,39 +1,43 @@
-Entity           = require('soft.entity').Entity;
-createTranslator = require('soft.visitor.translator').createTranslator;
+(function (external){
+    var driver = 'default',
+	url = 'default',
+	ext = null;
+    
+    external.connect = function(connectInfo){
+	driver = connectInfo.driver;
+	url    = connectInfo.url;
 
-function ExternalStorage(obj)
-{
-    this.url = obj.url;
-    this.driver = obj.driver;
-}
+	var module = 'soft.storage.external.' + driver;
+	print (module);
+	if (isValidModule(module)) {
+	    ext = require(module);
+	    print (ext.name() + " [" + ext.version() + "]");
+	} else {
+	    throw ("Undefined driver");
+	}
 
-ExternalStorage.create = function(obj)
-{
-    return new ExternalStorage(obj);
-}
+	return external;
+    };
 
-ExternalStorage.prototype.connect = function(obj)
-{
-    print( this.url, this.driver );
-    return true;
-}
+    external.using = function (entityName, entityVersion) {
+	A = require('soft.factory.extentity').createEntity(entityName,
+							   entityVersion);
 
+	A.prototype.getFromSource = function(key) {
+	    ext.open(url);
+	    return ext.read(key);
+	    ext.close();
+	};
+		
+	return A;
+    };
+    
+    external.open = function(){
+	return ext.open(url);
+    };
 
-/*!
- * createEntityFromExternalSource
- * Creates an entity initialized from an external source
- * @tparam Uuid id Unique identifier of the source data
- * @tparam Storage storage The storage context class for the external resource
- * @tparam StringVector sourceInfo Contains the name and version of the source entity
- * @tparam StringVector destinationInfo Contains the name and version of the destination entity
- */
-function createEntityFromExternalSource(id, storage, sourceInfo, destinationInfo)
-{
-    var logger = storage.fetch(sourceInfo, id);
-    var translator = createTranslator(sourceInfo, destinationInfo);
-    var entity = new Entity( logger.accept(translator) );
-    return entity;
-}
-
-exports.ExternalStorage = ExternalStorage;
-exports.createEntityFromExternalSource = createEntityFromExternalSource;
+    external.close = function(){
+	return ext.close();
+    };
+    
+})(exports);

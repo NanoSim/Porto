@@ -1,3 +1,4 @@
+#include <QtDebug>
 #include "qmongoclient.h"
 #include "qmongocollection.h"
 #include "qmongodatabase.h"
@@ -180,8 +181,18 @@ void Client :: setReadPrefs (ReadPrefs const * readPrefs)
       (client.get(), readPrefs->data());
 }
 
+
+void my_handler (mongoc_log_level_t  log_level,
+		 const char         *log_domain,
+		 const char         *message,
+		 void               * /*user_data*/)
+{
+  //  qDebug() << "LOG: " << log_level << log_domain << message;
+}
+
 void Client :: initialize()
 {
+  mongoc_log_set_handler(my_handler, nullptr);
   mongoc_init();
 }
 
