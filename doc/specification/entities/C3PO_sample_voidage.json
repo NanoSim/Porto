@@ -1,0 +1,29 @@
+{
+  "name": "C3PO_sample_voidage",
+  "description": "Set of samples for the local voidage experienced by each particle in JSON or HDF5 format",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nSamples",
+      "description": "Number of samples drawn"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the entity"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "",
+      "dims": [
+        "nSamples"
+      ],
+      "description": "A list of scalars representing the voidage experienced by each sampled particle"
+    }
+  ]
+}

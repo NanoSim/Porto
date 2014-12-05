@@ -1,0 +1,34 @@
+{
+  "name": "PASCAL_intraParticle_T",
+  "description": "Snapshot of a intra-particle temperature field in HDF5 or JSON format",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nParticles",
+      "description": "Number of particles within the simulation"
+    },
+    {
+      "name": "nGrid",
+      "description": "Number of grid points within a single particle"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the equation the data entity belongs to"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "K",
+      "dims": [
+        "nParticles",
+        "nGrid"
+      ],
+      "description": "The actual intra-particle temperature (at each grid point)"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+Entity (Dataset) Name:;OF_particle_position;Snapshot of particle positions in OpenFOAM format (i.e., 'FoamFile' format);;;
+Dimensions:;nParticles;Number of particles within the simulation;;;
+Properties:;version ;char;-;;Specifies the version of the FoamFile format
+;format ;char;-;;File format (either ascii or binary)
+;class;char;-;;The corresponding OpenFOAM class the entity is based on
+;location;char;-;;Time directory the entity is residing in
+;object;char;-;;The name of the entity
+;data;double;m;nParticles, 3;List of vectors representing particle positions

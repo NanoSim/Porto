@@ -1,0 +1,29 @@
+{
+  "name": "PASCAL_fluxParticle_T",
+  "description": "Snapshot of the total heat flux leaving/entering the particle in HDF5 or JSON format",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nParticles",
+      "description": "Number of particles within the simulation"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the entity"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "W",
+      "dims": [
+        "nParticles"
+      ],
+      "description": "The actual total heat flux"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "name": "OpenFOAM_flowField_U",
+  "description": "Snapshot of a velocity field in OpenFOAM format (i.e., 'FoamFile' format)",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nCells",
+      "description": "Number of cells"
+    }
+  ],
+  "properties": [
+    {
+      "name": "version",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Specifies the version of the FoamFile format"
+    },
+    {
+      "name": "format",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "File format (either ascii or binary)"
+    },
+    {
+      "name": "class",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "The corresponding OpenFOAM class the entity is based on"
+    },
+    {
+      "name": "location",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Time directory the entity is residing in"
+    },
+    {
+      "name": "object",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "The name of the entity"
+    },
+    {
+      "name": "dimensions",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "String specifying the SI units of the entity"
+    },
+    {
+      "name": "internalField",
+      "type": "double",
+      "unit": "m/s",
+      "dims": [
+        "nCells"
+      ],
+      "description": "List of scalars containing the actual fluid velocity for each cell"
+    }
+  ]
+}

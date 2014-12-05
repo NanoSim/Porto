@@ -1,0 +1,4 @@
+Entity (Dataset) Name:;PASCAL_radiusParticle;Snapshot of the current particle radius in HDF5 or JSON format;;;
+Dimensions:;nParticles;Number of particles within the simulation;;;
+Properties:;name;char;-;;Name of the data entity
+;data;double;m;nParticles;The actual particle radius

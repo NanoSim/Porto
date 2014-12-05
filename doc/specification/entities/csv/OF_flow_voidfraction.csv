@@ -1,0 +1,9 @@
+Entity (Dataset) Name:;OpenFOAM_flowField_voidfraction;Snapshot of a voidfraction field in OpenFOAM format (i.e., 'FoamFile' format);;;
+Dimensions:;nCells;Number of cells;;;
+Properties:;version ;char;-;;Specifies the version of the FoamFile format
+;format ;char;-;;File format (either ascii or binary)
+;class;char;-;;The corresponding OpenFOAM class the entity is based on
+;location;char;-;;Time directory the entity is residing in
+;object;char;-;;The name of the entity
+;dimensions ;char;-;;String specifying the SI units of the entity
+;internalField;double;;nCells;List of scalars containing the actual voidfraction for each cell

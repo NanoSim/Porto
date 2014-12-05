@@ -1,0 +1,30 @@
+{
+  "name": "PASCAL_positionParticle",
+  "description": "Snapshot of the current particle positions in HDF5 or JSON format",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nParticles",
+      "description": "Number of particles within the simulation"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the data entity"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "m",
+      "dims": [
+        "nParticles",
+        "3"
+      ],
+      "description": "The actual particle position"
+    }
+  ]
+}
