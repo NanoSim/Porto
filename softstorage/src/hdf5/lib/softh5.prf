@@ -1,6 +1,0 @@
-isEmpty (softh5_defined) {
-  CONFIG *= soft
-  CONFIG *= hdf5
-  LIBS   += -lsofth5  
-  softh5_defined = true
-}

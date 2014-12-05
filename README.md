@@ -1,12 +1,12 @@
-# Soft
+# Porto
 
-The Soft platform, based on SOFT5 (SINTEF Open Framework and Tools)
+The Porto platform, based on SOFT5 (SINTEF Open Framework and Tools)
 will provide a lightweight and flexible system for data and workflow
 management. The prevalent way of working with multi-scale model
 development is not data-agnostic. This complicates the adoption of new
 software and various workflows, as data has to be fitted to every
 transitional phase. Existing systems that do embrace unified access to
-the data are often relying on predefined schemas. Soft will overcome
+the data are often relying on predefined schemas. Porto will overcome
 these limitations by adopting technology from exemplary projects,
 tailored to fit the needs of the NanoSim project. The key benefit of
 the unified data access is the ability for offline-analysis of big
@@ -19,7 +19,7 @@ development process, which is currently a tedious and cumbersome task.
 
 ## Installation
 
-This guide assumes that the following software has been configured and
+This guide assumes that the following portoware has been configured and
 installed:
 
 * Qt 5.x  [Qt Downloads](http://qt-project.org/downloads)
@@ -29,14 +29,14 @@ installed:
 * valgrind [Valgrind Home](http://valgrind.org/) (optional)
 * Google Closure Compiler [Google Developers](https://developers.google.com/closure/compiler/) (optional)
 
-Be sure you have included the bin and lib directories of the above software tools in the PATH and LD_LIBRARY_PATH of your operating system!
+Be sure you have included the bin and lib directories of the above portoware tools in the PATH and LD_LIBRARY_PATH of your operating system!
 
 Define the following environmental variables in your .bashrc or .cshrc
 
-	SOFTBASE          = <path>/Soft/softbase
-	LD_LIBRARY_PATH    = $SOFTBASE/lib:$SOFTBASE/bin/plugins:$LD_LIBRARY_PATH
-	PATH               = $SOFTBASE/bin:$PATH
-	QMAKEFEATURES      = $SOFTBASE/prf:$QMAKEFEATURES
+	PORTOBASE          = <path>/Porto/portobase
+	LD_LIBRARY_PATH    = $PORTOBASE/lib:$PORTOBASE/bin/plugins:$LD_LIBRARY_PATH
+	PATH               = $PORTOBASE/bin:$PATH
+	QMAKEFEATURES      = $PORTOBASE/prf:$QMAKEFEATURES
     GTEST_LIBRARY_PATH = <path/to/gtest-lib>
     BSON_LIBRARY_PATH  = <path/to/libbson>
     MONGO_LIBRARY_PATH = <path/to/libmongo>
@@ -45,19 +45,19 @@ and be sure they are exported.
 
 Build and install the application like this:
 
-    cd <path>/Soft
+    cd <path>/Porto
 	qmake
 	make install
 	
 You should now have the following files:
 
-    $SOFTBASE/bin/softshell
-    $SOFTBASE/bin/plugins/libmongoplugin.so
-    $SOFTBASE/include/Soft
-    $SOFTBASE/include/soft.h
-    $SOFTBASE/include/softns.h
-    $SOFTBASE/include/scriptengine.h
+    $PORTOBASE/bin/portoshell
+    $PORTOBASE/bin/plugins/libmongoplugin.so
+    $PORTOBASE/include/Porto
+    $PORTOBASE/include/porto.h
+    $PORTOBASE/include/portons.h
+    $PORTOBASE/include/scriptengine.h
 
 ## Where to go from here
 
-To get started with Soft-development, please find the introductory [Soft Tutorial](doc/tutorial.org)
+To get started with Porto-development, please find the introductory [Porto Tutorial](doc/tutorial.org)

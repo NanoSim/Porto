@@ -1,0 +1,6 @@
+isEmpty (portomongo_defined) {
+  CONFIG *= porto
+  CONFIG *= mongo bson
+  LIBS   += -lportomongo
+  portomongo_defined = true
+}

@@ -1,5 +1,0 @@
-INCLUDEPATH += $$(SOFTBASE)/include/3rdparty
-DEPENDPATH  += $$(SOFTBASE)/include/3rdparty/gtest
-LIBS        += -L$$(GTEST_LIBRARY_PATH)
-LIBS        += -lgtest -lgtest_main
-

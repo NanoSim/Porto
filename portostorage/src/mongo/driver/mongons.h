@@ -1,0 +1,14 @@
+#ifndef MONGONAMESPACE_H_DEF
+#define MONGONAMESPACE_H_DEF
+
+#include "portons.h"
+
+# define MONGO_NAMESPACE mongo
+# define MONGO_BEGIN_NAMESPACE namespace MONGO_NAMESPACE {
+# define MONGO_END_NAMESPACE }
+
+# define BSON_NAMESPACE bson
+# define BSON_BEGIN_NAMESPACE namespace BSON_NAMESPACE {
+# define BSON_END_NAMESPACE }
+
+#endif // MONGONAMESPACE_H_DEF
