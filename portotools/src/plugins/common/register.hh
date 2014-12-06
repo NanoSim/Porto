@@ -35,5 +35,16 @@ static void registerConstructor (QScriptEngine *engine,
    engine->globalObject().setProperty(name, metaObj);
 }
 
+template <class T, class Fn>
+static void registerConstructor (QScriptEngine *engine,
+				 QScriptValue &obj,
+				 QString const & name,
+				 Fn construct)
+{
+   auto ctor    = engine->newFunction(construct);
+   auto metaObj = engine->newQMetaObject(&T::staticMetaObject, ctor);
+   obj.setProperty(name, metaObj);
+}
+
 
 #endif // REGISTER_HH
