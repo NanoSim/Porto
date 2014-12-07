@@ -7,6 +7,7 @@ CONFIG        += c++11
 CONFIG        += portomongo
 CONFIG        += pretty
 CONFIG        += gsl
+CONFIG        += doxygen
 QT            += script
 TARGET         = $$qtLibraryTarget(gslplugin)
 
@@ -32,6 +33,8 @@ include(../common/common.pri)
 include(gslsource.pri)
 HEADERS += gslplugin.h 
 SOURCES += gslplugin.cpp 
+
+DOXYPATH = $$PWD/doc
 
 # Install
 target.path = $$(PORTOBASE)/bin/plugins
