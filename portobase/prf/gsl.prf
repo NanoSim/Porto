@@ -1,0 +1,4 @@
+isEmpty (gslDefined) {
+  LIBS += -lgsl -lgslcblas
+  gslDefined = true
+}
