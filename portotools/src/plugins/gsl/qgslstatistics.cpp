@@ -5,8 +5,7 @@
 #include "qgslstatistics.h"
 
 /**
-  @headerfile <qgslstatistics.h>
-  @title Statistical functions 
+  @class QGSLStatistics
   @brief Basic statistical functions
   
   The basic statistical functions include routines to compute the mean,

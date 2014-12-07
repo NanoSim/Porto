@@ -2,6 +2,34 @@
 #include "qgslconstants.h"
 #include <gsl/gsl_math.h>
 
+/**
+ @class QGSLConstants
+
+ @brief The standard BSD mathematical constants
+
+ The library ensures that the standard BSD mathematical
+ constants are defined. For reference, here is a list of the
+ constants:
+ 
+ \li \c M_E The base of exponentials, \f$e\f$
+ \li \c M_LOG2E The base-2 logarithm of \f$e\f$, \f$\log_2 (e)\f$
+ \li \c M_LOG10E The base-10 logarithm of \f$e\f$, \f$\log_10 (e)\f$
+ \li \c M_SQRT2 The square root of two, \f$\sqrt 2\f$
+ \li \c M_SQRT1_2 The square root of one-half, \f$\sqrt{1/2}\f$
+ \li \c M_SQRT3 The square root of three, \f$\sqrt 3\f$
+ \li \c M_PI The constant pi, \f$\pi\f$
+ \li \c M_PI_2 Pi divided by two, \f$\pi/2\f$
+ \li \c M_PI_4 Pi divided by four, \f$\pi/4\f$
+ \li \c M_SQRTPI The square root of pi, \f$\sqrt\pi\f$
+ \li \c M_2_SQRTPI Two divided by the square root of pi, \f$2/\sqrt\pi\f$
+ \li \c M_1_PI The reciprocal of pi, \f$1/\pi\f$
+ \li \c M_2_PI Twice the reciprocal of pi, \f$2/\pi\f$
+ \li \c M_LN10 The natural logarithm of ten, \f$\ln(10)\f$
+ \li \c M_LN2 The natural logarithm of two, \f$\ln(2)\f$
+ \li \c M_LNPI The natural logarithm of pi, \f$\ln(\pi)\f$
+ \li \c M_EULER Euler’s constant, \f$\gamma\f$
+*/
+
 PORTO_BEGIN_NAMESPACE
 GSL_BEGIN_NAMESPACE
 

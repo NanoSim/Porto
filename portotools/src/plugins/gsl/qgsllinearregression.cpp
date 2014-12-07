@@ -4,9 +4,11 @@
 #include "qgsllinearregression.h"
 
 /**
-   @headerfile <qgsllinearregression.h>
-   @title Least-Squares Fitting
-   @brief Library for simple one- or two-parameter regression and multiple-parameter fits.
+   @class QGSLLinearRegression
+   @brief Library for simple one- or two-parameter regression and multiple-parameter fits.   
+   
+   Least Square Fitting
+   ====================
 
    This class contains routines for performing least squares fits to
    experimental data using linear combinations of functions. The data
@@ -15,6 +17,24 @@
    parameters and their associated covariance matrix. For unweighted
    data the covariance matrix is estimated from the scatter of the
    points, giving a variance-covariance matrix.
+
+   JavaScript Usage Example
+   ------------------------
+   @code{.js}
+   var x = [1970, 1980, 1990, 2000],
+       y = [  12,   11,   14,   13],
+       w = [ 0.1,  0.2,  0.3,  0.4],
+       n = x.length;
+
+   var fn = gsl.fit.wlinear (x, w, y, function(c0, c1, cov00, cov01, cov11, chisq) {
+       print ("best fit: Y = ", c0, "+", c1, "x");
+   });
+
+   var value = fn(1985);
+   print ("y(1985) = ", value);
+   @endcode
+
+
  */
 
 PORTO_BEGIN_NAMESPACE
@@ -32,6 +52,8 @@ QGSLLinearRegression :: ~QGSLLinearRegression()
 {}
 
 /**
+   @brief Computes the best-fit linear regression coefficients
+
    This function computes the best-fit linear regression coefficients
    \f$(c0,c1)\f$ of the model \f$Y = c_0 + c_1 X\f$ for the dataset
    \f$(x, y)\f$, two vectors of length n. The errors on \f$y\f$ are
@@ -58,6 +80,7 @@ int QGSLLinearRegression :: linear (QVariantList const &data1, QVariantList cons
 }
 
 /**
+   @broef Computes the best-fit linear regression coefficients
    This function computes the best-fit linear regression coefficients
    \f$(c0,c1)\f$ of the model \f$Y = c_0 + c_1 X\f$ for the weighted
    dataset \f$(x, y)\f$, two vectors of length n. The vector \f$w\f$,
@@ -78,6 +101,8 @@ int QGSLLinearRegression :: wlinear (QVariantList const &xdata, QVariantList con
 }
 
 /**
+   @brief compute a fittet function
+
    This function uses the best-fit linear regression coefficients c0,
    c1 and their covariance cov00, cov01, cov11 to compute the fitted
    function y and its standard deviation y_err for the model \f$Y = c_0 +
@@ -89,6 +114,8 @@ int QGSLLinearRegression :: linearEst (double x, double c0, double c1, double co
 }
 
 /**
+   @brief Computes the best-fit linear regression coefficient
+
    This function computes the best-fit linear regression coefficient
    @a c1 of the model \f$Y = c_1 X\f$ for the datasets (@a xdata, @a
    ydata), two vectors of length \f$n\f$. The errors on y are assumed
@@ -108,6 +135,7 @@ int QGSLLinearRegression :: mul (QVariantList const &xdata,QVariantList const &y
 }
 
 /**
+   @brief Computes the best-fit linear regression coefficient
    This function computes the best-fit linear regression coefficient
    @a c1 of the model \f$Y = c_1 X\f$ for the weighted datasets (@a
    xdata, @a ydata), two vectors of length n. The vector @a wdata, of

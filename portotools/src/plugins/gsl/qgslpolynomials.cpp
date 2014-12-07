@@ -1,3 +1,13 @@
+/**
+   @class QGSLPolynomials
+   @brief Functions for evaluating and solving polynomials. 
+
+   There are routines for finding real and complex roots of quadratic
+   and cubic equations using analytic methods. An iterative polynomial
+   solver is also available for finding the roots of general
+   polynomials with real coefficients (of any order).
+ */
+
 #include "qgslpolynomials.h"
 #include <gsl/gsl_poly.h>
 

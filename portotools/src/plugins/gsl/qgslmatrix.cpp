@@ -3,7 +3,10 @@
 PORTO_BEGIN_NAMESPACE
 GSL_BEGIN_NAMESPACE
 
-
+/**
+   @class QGSLMatrix
+   @brief A class representing a Matrix datatype
+ */
 
 gsl_matrix *QGSLMatrix :: variantListToMatrix (QVariantList const &xs)
 {   

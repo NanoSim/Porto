@@ -1,3 +1,11 @@
+/**
+   @mainpage GSL Plugin
+
+   This is a Porto plugin that wraps the GNU Scientific Library and
+   for Qt/C++ utilization and scriptability.
+
+ */
+
 #include <QScriptEngine>
 #include <QScriptContext>
 #include <QScriptValue>

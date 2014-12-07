@@ -3,6 +3,10 @@
 PORTO_BEGIN_NAMESPACE
 GSL_BEGIN_NAMESPACE
 
+/**
+   @class QGSLVector
+   @brief A class representing a Vector datatype
+ */
 
 static gsl_vector *variantListToVector (QVariantList const &xs)
 {
