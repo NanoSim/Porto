@@ -27,6 +27,7 @@ public slots:
    QScriptValue program() const;
    QScriptValue setProgram(QString const & program);
    QScriptValue start();
+   QScriptValue startDetached(QString const & command);
    QScriptValue readAllStandardError();
    QScriptValue readAllStandardOutput();  
    QScriptValue waitForStarted(int msecs = 30000);

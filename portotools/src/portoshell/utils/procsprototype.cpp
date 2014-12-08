@@ -100,6 +100,15 @@ QScriptValue ProcessPrototype :: setProgram(QString const & program)
     });
 }
 
+QScriptValue ProcessPrototype :: startDetached(QString const & command)
+{
+  return protocall<QProcess>(thisObject(), this->parent(),
+			     [&command](QProcess *p)
+			     -> bool
+    {
+      return p->startDetached(command);
+    });
+}
 
 QScriptValue ProcessPrototype :: start()
 {
