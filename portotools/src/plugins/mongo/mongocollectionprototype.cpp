@@ -88,7 +88,7 @@ QScriptValue MongoCollectionPrototype :: aggregate(QMongoQueryFlags::QueryFlags 
   resulting cursor structure.
 
 */
-QScriptValue command (QMongoQueryFlags::QueryFlags const &flags, quint32 skip, quint32 limit, quint32 batch_size, QScriptValue const &query, QScriptValue const &fields, QScriptValue const & readPrefs)
+QScriptValue MongoCollectionPrototype :: command (QMongoQueryFlags::QueryFlags const &flags, quint32 skip, quint32 limit, quint32 batch_size, QScriptValue const &query, QScriptValue const &fields, QScriptValue const & readPrefs)
 {
   Q_UNUSED(flags);
   Q_UNUSED(skip);

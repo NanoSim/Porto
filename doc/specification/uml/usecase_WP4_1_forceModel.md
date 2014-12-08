@@ -1,4 +1,4 @@
-# Use Case Porto - WP4 - 1 - Force Model Development
+# Use Case Soft - WP4 - 1 - Force Model Development
 
 This use case describes how a model for the fluid-particle interaction force can be developed based on data from Direct Numerical Simulations.
 
@@ -13,7 +13,7 @@ This use case describes how a model for the fluid-particle interaction force can
 | Success Guarantee                   | Force Model has been benchmarked against reference data, DNS is converged (grid dependency effects have been assesst), DNS code has been verified     |
 | Main Success Scenario               | No grid effects affect results, DNS results compare favourable with reference data, DNS results follow expected trend   |
 | Extensions                          | Grid dependency detected, large deviation to reference data              |
-| Special Requirements                | Porto module need to be able to handle large amounts of data (up to 5GB per case)  |
+| Special Requirements                | Soft module need to be able to handle large amounts of data (up to 5GB per case)  |
 | Technology and Data Variations List | Binary, compressed, uncompressed data, as well as text and images |
 | Frequency of Occurrence             | Peak Usage: analyze 5 DNS cases per day; need ca. 20-100 DNS runs to develop a full model     |
 | Miscellaneous  	                  | Interface to filtering tool "C3PO" not yet defined.           |

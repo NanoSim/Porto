@@ -14,7 +14,9 @@ FileSystemWatcherPrototype :: FileSystemWatcherPrototype (QObject *parent)
 }
 
 FileSystemWatcherPrototype :: ~FileSystemWatcherPrototype()
-{}
+{
+  QTextStream(stdout) << "FileSystemWatcherPrototype :: ~FileSystemWatcherPrototype()\n";
+}
 
 QScriptValue FileSystemWatcherPrototype :: addPath(QString const &path)
 {

@@ -5,7 +5,7 @@ repl.command = {};
 
 load(":/resources/core.js");
 
-porto_version = "PortoShell 0.1.33";
+porto_version = "PortoShell 0.2.12";
 porto_license = "Source license: LGPLv3";
 
 function showHelp()

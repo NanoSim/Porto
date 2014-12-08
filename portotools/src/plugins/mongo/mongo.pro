@@ -4,8 +4,7 @@ INCLUDEPATH   += . $$(PORTOBASE)/include
 DEPENDPATH    += . $$(PORTOBASE)/include
 CONFIG        += debug_and_release
 CONFIG        += c++11
-CONFIG        += bson 
-CONFIG        += mongo
+CONFIG        += portomongo
 CONFIG        += pretty
 QT            += script
 TARGET         = $$qtLibraryTarget(mongoplugin)
@@ -28,7 +27,6 @@ RCC_DIR     = $$DESTDIR/.rcc
 UI_DIR      = $$DESTDIR/.ui
 
 include(../common/common.pri)
-include($$(PORTOBASE)/../portostorage/src/mongo/driver/driver.pri)
 include(mongoprototypes.pri)
 
 # Input

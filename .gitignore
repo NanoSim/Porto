@@ -2,6 +2,14 @@
 [Dd]ebug/
 [Rr]elease/
 [Mm]akefile*
+*.o
+*.a
+*.zip
+*.Debug
+*.Release
 *~
+moc_*.cpp
+portobase/include/3rdparty
+portotools/src/parashell
 portobase/include/Porto
 portobase/include/*.h

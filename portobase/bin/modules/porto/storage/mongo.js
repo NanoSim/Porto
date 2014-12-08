@@ -11,7 +11,6 @@
 	this.collection = options.collection || "default";
 
 	this.mongoclient = new MongoClient(this.uri);
-	print("connecting to",this.database, this.collection);
 	this.mongocollection = this.mongoclient.collection (this.database,this.collection);
     }
 
@@ -64,7 +63,6 @@
 	    return;
 	}
 	*/
-
 	var result = this.mongocollection.insert(entity);
 	if (isFunction(callback)) {
 	    return callback(result);

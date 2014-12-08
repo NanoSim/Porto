@@ -5,17 +5,8 @@
 #include <functional>
 #include <mongons.h>
 
+#include <QMongo>
 #include "mongoplugin.h"
-#include "qbson.h" 
-#include "qmongoinitialize.h"
-#include "qmongoclient.h"
-#include "qmongocollection.h"
-#include "qmongodatabase.h"
-#include "qmongowriteconcern.h"
-#include "qmongoreadprefs.h"
-#include "qmongogridfs.h"
-#include "qmongouri.h"
-#include "qmongocursor.h"
 #include "bsonprototype.h"
 #include "mongoclientprototype.h"
 #include "mongocollectionprototype.h"
@@ -23,6 +14,7 @@
 #include "mongouriprototype.h"
 #include "mongoreadprefsprototype.h"
 #include "mongocursorprototype.h"
+#include "register.hh"
 
 using porto::mongo::Client;
 using porto::mongo::Collection;
@@ -45,18 +37,13 @@ Q_DECLARE_METATYPE (porto::mongo::Cursor*)
 Q_DECLARE_METATYPE (porto::bson::Bson*)
 
 MongoPlugin :: ~MongoPlugin()
-{}
+{
+  Client::cleanup();
+}
 
 static QScriptValue createMongoCollection (QScriptContext *, QScriptEngine *engine)
 {
   auto cls = new Collection();
-  return engine->newQObject(cls, QScriptEngine::ScriptOwnership);
-}
-
-template <class T>
-static QScriptValue creator (QScriptContext *, QScriptEngine *engine)
-{
-  auto cls = new T();
   return engine->newQObject(cls, QScriptEngine::ScriptOwnership);
 }
 
@@ -80,36 +67,10 @@ static QScriptValue createMongoClient (QScriptContext *ctx, QScriptEngine *engin
   return engine->newQObject(c, QScriptEngine::ScriptOwnership);
 }
 
-template <class T>
-QScriptValue objectContructor(QScriptContext *ctx,
-			      QScriptEngine *e)
-{   
-   auto parent = ctx->argument(0).toQObject(); 
-   auto object = q_check_ptr (new T(parent));
-   return e->newQObject(object, QScriptEngine::ScriptOwnership);   
-}
-
-template <class P, class T>
-static void registerPrototype (QScriptEngine *engine)
-{
-   auto prototype = q_check_ptr (new P (engine));
-   engine->setDefaultPrototype (qMetaTypeId <T*> (),
-				engine->newQObject (prototype));
-}
-
-template <class T, class Fn>
-static void registerConstructor (QScriptEngine *engine,
-				 QString const & name,
-				 Fn construct)
-{
-   auto ctor    = engine->newFunction(construct);
-   auto metaObj = engine->newQMetaObject(&T::staticMetaObject, ctor);
-   engine->globalObject().setProperty(name, metaObj);
-}
 
 void MongoPlugin :: registerPlugin (QScriptEngine *engine)
 {
-   porto::mongo::initialize();
+   Client::initialize();
 
    registerPrototype<MongoClientPrototype,     Client>     (engine);
    registerPrototype<MongoCollectionPrototype, Collection> (engine);

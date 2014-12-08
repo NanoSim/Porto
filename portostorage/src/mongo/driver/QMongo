@@ -1,6 +1,5 @@
 #include "portons.h"
 #include "mongons.h"
-#include "qmongoinitialize.h"
 #include "qmongoclient.h"
 #include "qmongocollection.h"
 #include "qmongocursor.h"

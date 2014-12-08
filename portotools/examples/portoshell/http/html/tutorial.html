@@ -915,14 +915,14 @@ that will present the unit library as tables.
     collection: 'units'
 };
 
-Collection = require('soft.collection').db(driverInfo);
+Collection = require('porto.collection').db(driverInfo);
 
 /* Instanciate our unitLibrary collection */
 var collectionID = '79fe6b02-7b9e-4339-b238-983333b37552';
 var unitLibrary  = new Collection(collectionID);
 
 /* Create a generate function*/
-var generate = require('soft.mvc').create({
+var generate = require('porto.mvc').create({
     model: unitLibrary.get(),
     view: 'webtemplate.jshtml'
 });
@@ -942,7 +942,7 @@ We will also need our template. It looks a bit ugly, but hey - it is what it is:
 
 
 <pre class="example">@{
-  var entity = require('soft.entity').db(porto.bag);
+  var entity = require('porto.entity').db(porto.bag);
   Unit = entity.using('unit', '1.0-SNAPSHOT-1');
   createTable = function(unit){
     return "&lt;table style=\"width:300px\"&gt;&lt;tr&gt;&lt;th colspan=\"2\"&gt;unit:" +
@@ -1163,7 +1163,7 @@ ControlDict object and give it some data:
 
 
 
-<pre class="example">var entity = require('soft.entity').db({
+<pre class="example">var entity = require('porto.entity').db({
   driver:     'mongodb',
   database:   'porto',
   collection: 'openfoam'
@@ -1287,7 +1287,7 @@ The last step is to generate the code that makes the controlDict.
 
 
 <pre class="example">
-var entity = require('soft.entity').db({
+var entity = require('porto.entity').db({
   driver:     'mongodb',
   database:   'porto',
   collection: 'openfoam'});
@@ -1295,7 +1295,7 @@ var entity = require('soft.entity').db({
 ControlDict = entity.using('controlDict', '0.1');
 
 var controlDict = new ControlDict('e12686f9-b677-49dc-ad9d-07944f9b053e');
-var generate = require('soft.mvc').create({
+var generate = require('porto.mvc').create({
   model: controlDict.get(),
   view : 'controlDict.foamjs'});
 

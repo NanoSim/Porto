@@ -535,14 +535,14 @@ that will present the unit library as tables.
         collection: 'units'
     };
 
-    Collection = require('soft.collection').db(driverInfo);
+    Collection = require('porto.collection').db(driverInfo);
 
     /* Instantiate our unitLibrary collection */
     var collectionID = '79fe6b02-7b9e-4339-b238-983333b37552';
     var unitLibrary  = new Collection(collectionID);
 
     /* Create a generate function*/
-    var generate = require('soft.mvc').create({
+    var generate = require('porto.mvc').create({
         model: unitLibrary.get(),
         view: 'webtemplate.jshtml'
     });
@@ -558,7 +558,7 @@ We will also need our template. It looks a bit ugly, but hey - it is what it is:
 
 #+BEGIN_SRC html
 @{
-  var entity = require('soft.entity').db(porto.bag);
+  var entity = require('porto.entity').db(porto.bag);
   Unit = entity.using('unit', '1.0-SNAPSHOT-1');
   createTable = function(unit){
     return "<table style=\"width:300px\"><tr><th colspan=\"2\">unit:" +
@@ -720,7 +720,7 @@ Now that we have the meta-data available, we can instantiate the
 ControlDict object and give it some data:
 
 #+BEGIN_SRC js
-  var entity = require('soft.entity').db({
+  var entity = require('porto.entity').db({
     driver:     'mongodb',
     database:   'porto',
     collection: 'openfoam'

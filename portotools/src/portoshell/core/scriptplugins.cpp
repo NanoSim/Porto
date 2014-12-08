@@ -31,7 +31,7 @@ void ScriptPlugins :: load(QScriptEngine *engine)
   QCoreApplication::addLibraryPath (qApp->applicationDirPath() + "/modules");
    auto const pluginPath = qApp->applicationDirPath() + "/plugins";
    QDir pluginsDir(pluginPath);
-   auto files = pluginsDir.entryList(QDir::Files | QDir::Executable);
+   auto files = pluginsDir.entryList(QDir::Files);
    foreach( auto const &file, files ) 
    {
       if( QLibrary::isLibrary(file) ) 
@@ -43,6 +43,10 @@ void ScriptPlugins :: load(QScriptEngine *engine)
 	    auto pluginPtr = qobject_cast<ISoftPlugin*>(loader->instance());
 	    if( pluginPtr ) {
 	       pluginPtr->registerPlugin(engine);
+//	       QTextStream(stdout) << "[loaded: " << file << "]\n";
+	    }
+	    else {
+	      QTextStream(stdout) << "failed to register";
 	    }
 	 }
 	 else {

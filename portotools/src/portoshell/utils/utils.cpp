@@ -2,7 +2,7 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 #include "utils.h"
-#include "process.h"
+#include "procs.h"
 #include "application.h"
 #include "eventloop.h"
 #include "udpsocket.h"
@@ -10,13 +10,17 @@
 #include "filesystem.h"
 #include "filesystemwatcher.h"
 #include "httpd.h"
+#include "hostinfo.h"
+#include "concurrent.h"
+#include "asyncinterface.h"
+#include "base64.h"
 using porto::ScriptEngine;
 
 class Utils::Private
 {
    friend class Utils;
    Private(QScriptEngine *engine)
-      : process     (new Process     (engine))
+      : procs       (new Process     (engine))
       , application (new Application (engine))
       , eventLoop   (new EventLoop   (engine))
       , udpSocket   (new UdpSocket   (engine))
@@ -24,9 +28,13 @@ class Utils::Private
       , httpd       (new Httpd       (engine))
       , fileSystem  (new FileSystem  (engine))
       , fileSystemWatcher (new FileSystemWatcher (engine))
+      , hostInfo    (new HostInfo    (engine))
+      , concurrent  (new Concurrent  (engine))
+      , async       (new AsyncInterface (engine))
+      , base64      (new Base64      (engine))
    {}
   
-   QScopedPointer<Process>     process;
+   QScopedPointer<Process>     procs;
    QScopedPointer<Application> application;
    QScopedPointer<EventLoop>   eventLoop;
    QScopedPointer<UdpSocket>   udpSocket;
@@ -34,6 +42,10 @@ class Utils::Private
    QScopedPointer<Httpd>       httpd;
    QScopedPointer<FileSystem>  fileSystem;
    QScopedPointer<FileSystemWatcher> fileSystemWatcher;
+   QScopedPointer<HostInfo>    hostInfo;
+   QScopedPointer<Concurrent>  concurrent;
+   QScopedPointer<AsyncInterface> async;
+   QScopedPointer<Base64>       base64;
 };
 
 Utils :: Utils (ScriptEngine const &engine, QObject *parent)

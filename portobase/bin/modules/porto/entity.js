@@ -15,11 +15,19 @@
 	    };
 	    
 	    A.prototype.read = function(){
+
 		var self = this;
 		storage.read(this.id, function(bson){
 		    if (isQObject(bson)) {
-			self.set(JSON.parse(bson.asString()));
-		    }
+
+			var obj = JSON.parse(bson.asString());
+			if (obj.__name__ !== self.__name__ || obj.__version__ !== self.__version__) {
+			    self.translate(obj);
+			}
+			else {
+			    self.set(obj);
+			}
+ 		    }
 		});
 	    };
 	    

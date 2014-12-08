@@ -40,14 +40,15 @@ AutoRun.run = function(obj, parent) {
     if( obj.workflow !== undefined ) {
         for( var i = 0; i < obj.workflow.length; ++i ) {
             obj.workflow[i](obj);
-	    sys.waitForFinished();
+//	    print("waiting");
+//	    sys.waitForFinished();
         }
 
     }
     else if( parent.workflow !== undefined ) {
         for( var i = 0; i < parent.workflow.length; ++i ) {
             parent.workflow[i](obj);
-	    sys.waitForFinished();
+//	    sys.waitForFinished();
         }
     }
     else

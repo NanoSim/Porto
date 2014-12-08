@@ -35,7 +35,7 @@
 	Collection.prototype.findInstance = function(label) {
 	    return this.entities.filter (function(obj){
 		return (obj.label == label);
-	    });
+	    }).shift();
 	};
 
 	Collection.prototype.registerRelation = function(_fromLabel, _toLabel, _relation) {

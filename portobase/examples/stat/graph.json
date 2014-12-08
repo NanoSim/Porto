@@ -1,0 +1,30 @@
+{
+    "name": "Graph",
+    "version": "0.1-SNAPSHOT-1",
+    "properties": [
+	{
+	    "name": "title",
+	    "type": "string"
+	},
+	{
+	    "name": "name",
+	    "type": "string"
+	},
+	{
+	    "name": "xsize",
+	    "type": "double"
+	},
+	{
+	    "name": "ysize",
+	    "type": "double"
+	},
+	{
+	    "name": "xlabel",
+	    "type": "string"
+	},
+	{
+	    "name": "ylabel"
+	    "type": "string"
+	}
+    ]
+}

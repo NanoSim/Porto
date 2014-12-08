@@ -4,7 +4,6 @@ DEPENDPATH  += $$PWD $$(PORTOBASE)/include
 INCLUDEPATH += $$PWD $$(PORTOBASE)/include
 
 HEADERS  += $$PWD/mongons.h                 \
-	    $$PWD/qmongoinitialize.h        \
             $$PWD/qmongoclient.h            \
 	    $$PWD/qmongoclientpool.h        \
             $$PWD/qmongocollection.h        \
@@ -21,8 +20,7 @@ HEADERS  += $$PWD/mongons.h                 \
 	    $$PWD/qmongoqueryflags.h        \
 	    $$PWD/qbson.h
 
-SOURCES  += $$PWD/qmongoinitialize.cpp      \
-            $$PWD/qmongoclient.cpp          \
+SOURCES  += $$PWD/qmongoclient.cpp          \
 	    $$PWD/qmongoclientpool.cpp      \
             $$PWD/qmongocollection.cpp      \
 	    $$PWD/qmongocursor.cpp          \

@@ -6,8 +6,8 @@
 #include <QVector>
 #include <QString>
 #include <QTextStream>
-#include "process.h"
-#include "processprototype.h"
+#include "procs.h"
+#include "procsprototype.h"
 
 Q_DECLARE_METATYPE(QProcess*)
 namespace process {

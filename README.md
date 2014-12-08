@@ -19,7 +19,7 @@ development process, which is currently a tedious and cumbersome task.
 
 ## Installation
 
-This guide assumes that the following software has been configured and
+This guide assumes that the following portoware has been configured and
 installed:
 
 * Qt 5.x  [Qt Downloads](http://qt-project.org/downloads)
@@ -29,7 +29,7 @@ installed:
 * valgrind [Valgrind Home](http://valgrind.org/) (optional)
 * Google Closure Compiler [Google Developers](https://developers.google.com/closure/compiler/) (optional)
 
-Be sure you have included the bin and lib directories of the above software tools in the PATH and LD_LIBRARY_PATH of your operating system!
+Be sure you have included the bin and lib directories of the above portoware tools in the PATH and LD_LIBRARY_PATH of your operating system!
 
 Define the following environmental variables in your .bashrc or .cshrc
 

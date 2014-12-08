@@ -1,7 +1,7 @@
-# Building and installing the Porto Shell
+# Building and installing the Soft Shell
 
 This document will contain the necessary steps for compiling and
-installing Porto Shell on your computer
+installing Soft Shell on your computer
 
 
 ## System Requirements

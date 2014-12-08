@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QTextStream>
 #include "filesystem.h"
@@ -108,6 +109,17 @@ namespace filesystem {
 
     return engine->toScriptValue(true);
   }
+  
+  static QScriptValue baseName(QScriptContext *context, QScriptEngine *engine)
+  {
+    if (context->argumentCount() < 1)
+      return engine->undefinedValue();
+
+    auto filename = context->argument(0).toString();
+    QFileInfo info(filename);
+    auto baseName = info.baseName();
+    return engine->toScriptValue(baseName);
+  }
 
   
 } // end of namespace
@@ -134,14 +146,15 @@ FileSystem :: FileSystem (QScriptEngine *engine)
    auto fs = engine->newObject();
    globalObj.setProperty("fs", fs);
 
-   registerFunction (engine, "exists", filesystem::exists, &fs, "Returns true if the file specified by fileName exists; otherwise returns false.");
-   registerFunction (engine, "copy", filesystem::copy, &fs, "Copies the file fileName to newName. Returns true if successful; otherwise returns false.");
-   registerFunction (engine, "remove", filesystem::remove, &fs, "Removes the file specified by fileName(). Returns true if successful; otherwise returns false.");
-   registerFunction (engine, "rename", filesystem::rename, &fs, "Renames the file oldName to newName. Returns true if successful; otherwise returns false.");
-   registerFunction (engine, "currentPath", filesystem::currentPath, &fs, "Returns the absolute path of the application's current directory.");
+   registerFunction (engine, "exists",         filesystem::exists,         &fs, "Returns true if the file specified by fileName exists; otherwise returns false.");
+   registerFunction (engine, "copy",           filesystem::copy,           &fs, "Copies the file fileName to newName. Returns true if successful; otherwise returns false.");
+   registerFunction (engine, "remove",         filesystem::remove,         &fs, "Removes the file specified by fileName(). Returns true if successful; otherwise returns false.");
+   registerFunction (engine, "rename",         filesystem::rename,         &fs, "Renames the file oldName to newName. Returns true if successful; otherwise returns false.");
+   registerFunction (engine, "currentPath",    filesystem::currentPath,    &fs, "Returns the absolute path of the application's current directory.");
    registerFunction (engine, "setCurrentPath", filesystem::setCurrentPath, &fs, "Sets the application's current working directory. Returns true if the directory was successfully changed; otherwise returns false.");    
-   registerFunction (engine, "readFile", filesystem::readFile, &fs, "Asynchronously reads the entire contents of a file.");
-   registerFunction (engine, "writeFile", filesystem::writeFile, &fs, "Write data to a file, creating the file if it does not yet exists.");
+   registerFunction (engine, "readFile",       filesystem::readFile,       &fs, "Asynchronously reads the entire contents of a file.");
+   registerFunction (engine, "writeFile",      filesystem::writeFile,      &fs, "Write data to a file, creating the file if it does not yet exists.");
+   registerFunction (engine, "baseName",       filesystem::baseName,       &fs, "Returns the base name of the file.");
 }
 
 FileSystem :: ~FileSystem()

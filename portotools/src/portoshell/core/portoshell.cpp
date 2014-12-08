@@ -1,4 +1,5 @@
 #include <Porto>
+#include <QtGlobal>
 #include <QtScript>
 #include <QtCore>
 
@@ -104,6 +105,13 @@ QScriptValue uuidgen(QScriptContext *context, QScriptEngine *engine)
    
    QScriptValue const ret(QUuid::createUuid().toString());
    return ret;
+}
+
+QScriptValue isValidModule(QScriptContext *context, QScriptEngine *engine)
+{
+   if(context->argumentCount() != 1) return QScriptValue(false);
+   const QString moduleName = context->argument(0).toString(); 
+   return QScriptValue (!findModule(moduleName).isEmpty());
 }
 
 QScriptValue require(QScriptContext *context, QScriptEngine *engine)
@@ -377,6 +385,30 @@ QScriptValue load(QScriptContext *context, QScriptEngine *engine)
    return context->throwError("Could not open " + filename + " for reading.");
 }
 
+QScriptValue clearExceptions (QScriptContext *ctx, QScriptEngine *engine)
+{
+  Q_UNUSED(ctx);
+  engine->clearExceptions();
+  return engine->undefinedValue();
+}
+
+QScriptValue collectGarbage (QScriptContext *ctx, QScriptEngine *engine)
+{
+  Q_UNUSED(ctx);
+  engine->collectGarbage();
+  return engine->undefinedValue();
+}
+
+QScriptValue reportAdditionalMemoryCost (QScriptContext *ctx, QScriptEngine *engine)
+{
+  if (ctx->argumentCount() != 1)
+    return ctx->throwError("reportAdditionalMemoryCost(int) missing argument");
+
+  auto size = ctx->argument(0).toInt32();
+  engine->reportAdditionalMemoryCost(size);
+  return engine->undefinedValue();
+}
+
 void loadPortoModule()
 {
    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/modules");
@@ -408,6 +440,20 @@ static void registerFunction (QScriptEngine *engine,
    engine->globalObject().setProperty(name, scriptFunction);
 }
 
+template <class Function>
+static void registerFunction (QScriptEngine *engine, 
+			      QString const & name, 
+			      Function fn, 
+			      QScriptValue *obj,
+			      QString const & doc = QString())
+{
+   auto scriptFunction = engine->newFunction(fn);
+   if (!doc.isEmpty()) {
+      scriptFunction.setProperty("^doc", doc);
+   }
+   obj->setProperty(name, scriptFunction);
+}
+
 void registerBase(QScriptEngine *engine)
 {
    engine->globalObject().setProperty("__global__", engine->globalObject());
@@ -422,11 +468,15 @@ void registerBase(QScriptEngine *engine)
    registerFunction(engine, "exceptionBacktrace", exceptionBacktrace);
    registerFunction(engine, "uuidgen", uuidgen);
    registerFunction(engine, "require", require);
+   registerFunction(engine, "isValidModule", isValidModule, "Check if a module is present");
    registerFunction(engine, "writeFile", writeFile, "Syntax: writeFile( path, buffer )");
    registerFunction(engine, "isValidSyntax", isValidSyntax);
    registerFunction(engine, "isErrorSyntax", isErrorSyntax);
    registerFunction(engine, "isIncompleteSyntax", isIncompleteSyntax);
    registerFunction(engine, "errorMessage", errorMessage);
+   registerFunction(engine, "clearExceptions", clearExceptions, "Clears any uncaught exceptions");
+   registerFunction(engine, "collectGarbage", collectGarbage, "Runs the garbage collector");
+   registerFunction(engine, "reportAdditionalMemoryCost", reportAdditionalMemoryCost, "Reports and additional memory cost of the given size, measured in bytes, to the garbage collector");
 
    registerFunction(engine, "isArray", isArray);
    registerFunction(engine, "isBool", isBool);
@@ -456,7 +506,7 @@ int startRepl (porto::ScriptEngine const &e)
    QString programFile = (QCoreApplication::arguments().count() < 2 ?
 			  QString(":/resources/repl.js") :
 			  QCoreApplication::arguments()[1]);
-
+   
    QFile file(programFile);
    if (!file.open (QIODevice::ReadOnly | QIODevice::Text)) {
      QTextStream(stderr) << file.errorString() << endl;
