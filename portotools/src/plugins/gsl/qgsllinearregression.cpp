@@ -80,7 +80,7 @@ int QGSLLinearRegression :: linear (QVariantList const &data1, QVariantList cons
 }
 
 /**
-   @broef Computes the best-fit linear regression coefficients
+   @brief Computes the best-fit linear regression coefficients
    This function computes the best-fit linear regression coefficients
    \f$(c0,c1)\f$ of the model \f$Y = c_0 + c_1 X\f$ for the weighted
    dataset \f$(x, y)\f$, two vectors of length n. The vector \f$w\f$,

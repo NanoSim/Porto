@@ -36,6 +36,17 @@ static bool writeAttributeInt (hid_t dataset, QString const &key, int value)
    return (status >= 0);
 }
 
+static bool writeAttributeDouble (hid_t dataset, QString const &key, double const &value)
+{
+   auto datatype  = H5T_IEEE_F64LE;
+   auto dataspace = H5Screate(H5S_SCALAR);
+   auto attr = H5Acreate(dataset, qPrintable(key), datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT);
+   auto status = H5Awrite(attr, datatype, &value);
+   H5Aclose(attr);
+   H5Sclose(dataspace);
+   return (status >= 0);
+}
+
 static bool writeAttribute (hid_t dataset, QString const &key, QVariant const &value)
 {
    switch (value.type()) {
@@ -43,6 +54,8 @@ static bool writeAttribute (hid_t dataset, QString const &key, QVariant const &v
 	 return writeAttributeString (dataset, key, value.toString());
       case QVariant::Int:
 	 return writeAttributeInt (dataset, key, value.toInt());
+      case QVariant::Double:
+	 return writeAttributeDouble (dataset, key, value.toDouble());
       default:
 	 return false;
    } 
@@ -68,7 +81,7 @@ static bool writeString(hid_t file_id, QString const &path, QString const &buff,
    return (status >= 0);
 }
 
-static bool writeStringList(hid_t file_id, QString const &path, QStringList const &xs)
+static bool writeStringList(hid_t file_id, QString const &path, QStringList const &xs, QVariantMap const &attr)
 {
    auto datatype = H5Tcopy(H5T_C_S1);
    H5Tset_size (datatype, H5T_VARIABLE);
@@ -83,29 +96,43 @@ static bool writeStringList(hid_t file_id, QString const &path, QStringList cons
    auto output = joined.toLocal8Bit().constData();
    auto status = H5Dwrite(dataset, datatype, H5S_ALL, H5S_ALL, H5P_DEFAULT, output);
 
+   for (auto a : attr.keys()) {
+      writeAttribute(dataset, a, attr[a]);
+   }
+
    H5Dclose(dataset);
    H5Sclose(dataspace);
   
    return (status >= 0);
 }
 
-static bool writeInt(hid_t file_id, QString const &path, int value)
+static bool writeInt(hid_t file_id, QString const &path, int value, QVariantMap const &attr)
 {
    auto datatype  = H5T_STD_I32LE;
    auto dataspace = H5Screate(H5S_SCALAR);
    auto dataset   = H5Dcreate(file_id, qPrintable(path), datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
    auto status    = H5Dwrite(dataset, datatype, H5S_ALL, H5S_ALL, H5P_DEFAULT, &value);
+
+   for (auto a : attr.keys()) {
+      writeAttribute(dataset, a, attr[a]);
+   }
+
    H5Dclose(dataset);
    H5Sclose(dataspace);
    return (status >= 0);
 }
 
-static bool writeDouble(hid_t file_id, QString const &path, double const & value)
+static bool writeDouble(hid_t file_id, QString const &path, double const & value, QVariantMap const &attr)
 {
    auto datatype  = H5T_IEEE_F64LE;
    auto dataspace = H5Screate(H5S_SCALAR);
    auto dataset   = H5Dcreate(file_id, qPrintable(path), datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
    auto status    = H5Dwrite(dataset, datatype, H5S_ALL, H5S_ALL, H5P_DEFAULT, &value);
+
+   for (auto a : attr.keys()) {
+      writeAttribute(dataset, a, attr[a]);
+   }
+
    H5Dclose(dataset);
    H5Sclose(dataspace);
    return (status >= 0); 
@@ -188,7 +215,7 @@ public:
    }
 }; // class StringListData
 
-static bool writeVariantStringList(QH5File *file, QString const &path, QVariantList const &lst)
+static bool writeVariantStringList(QH5File *file, QString const &path, QVariantList const &lst, QVariantMap const &attr)
 {
    auto datatype  = QH5Datatype::String;
    auto dims      = getListDims(lst);
@@ -197,10 +224,14 @@ static bool writeVariantStringList(QH5File *file, QString const &path, QVariantL
    QStringList input = variantListToStringList(lst);
    StringListData sd(input);
    auto result = dataset->write(sd.constData());  
+   for (auto a : attr.keys()) {
+      writeAttribute(dataset->id(), a, attr[a]);
+   }
+
    return result;
 }
 
-static bool writeVariantIntList(QH5File *file, QString const &path, QVariantList const &list)
+static bool writeVariantIntList(QH5File *file, QString const &path, QVariantList const &list, QVariantMap const &attr)
 {
    auto datatype  = QH5Datatype::Int32;
    auto dims      = getListDims(list);
@@ -209,12 +240,15 @@ static bool writeVariantIntList(QH5File *file, QString const &path, QVariantList
    auto qvec      = stdFlat<int>(list);
    auto ptr       = qvec.data();
    auto status    = dataset->write(ptr);
+   for (auto a : attr.keys()) {
+      writeAttribute(dataset->id(), a, attr[a]);
+   }
   
    delete dataspace;
-   return (status >= 0);
+   return status;
 }
 
-static bool writeVariantDoubleList(QH5File *file, QString const &path, QVariantList const &list)
+static bool writeVariantDoubleList(QH5File *file, QString const &path, QVariantList const &list, QVariantMap const &attr)
 {
    auto datatype  = QH5Datatype::Double;
    auto dims      = getListDims(list);
@@ -223,23 +257,26 @@ static bool writeVariantDoubleList(QH5File *file, QString const &path, QVariantL
    auto qvec      = stdFlat<double>(list);
    auto ptr       = qvec.data();
    auto status    = dataset->write(ptr);
+   for (auto a : attr.keys()) {
+      writeAttribute(dataset->id(), a, attr[a]);
+   }
   
    delete dataspace;
-   return (status >= 0);
+   return status;
 }
 
-static bool writeVariantList(QH5File *file, QString const &path, QVariantList const &list)
+static bool writeVariantList(QH5File *file, QString const &path, QVariantList const &list, QVariantMap const &attr)
 {
    auto type = getListType(list);
    switch (type) {
      case QVariant::String:
-	 return writeVariantStringList(file, path, list);
+	return writeVariantStringList(file, path, list, attr);
 	 break;
       case QVariant::Int:
-	 return writeVariantIntList(file, path, list);
+	 return writeVariantIntList(file, path, list, attr);
 	 break;
       case QVariant::Double:
-	 return writeVariantDoubleList(file, path, list);
+	 return writeVariantDoubleList(file, path, list, attr);
 	 break;
       default:
 	 return false;
@@ -338,13 +375,13 @@ bool QH5 :: write (QString const &path, QVariant const &value, QVariantMap const
       case QVariant::String:
 	 return writeString(d->file->id(), path, value.toString(), attributes);
       case QVariant::Int:
-	 return writeInt(d->file->id(), path, value.toInt());
+	 return writeInt(d->file->id(), path, value.toInt(), attributes);
       case QVariant::Double:
-	 return writeDouble(d->file->id(), path, value.toDouble());
+	 return writeDouble(d->file->id(), path, value.toDouble(), attributes);
       case QVariant::StringList:
-	 return writeStringList(d->file->id(), path, value.toStringList());  
+	 return writeStringList(d->file->id(), path, value.toStringList(), attributes);  
       case QVariant::List:
-	 return writeVariantList(d->file, path, value.toList());
+	 return writeVariantList(d->file, path, value.toList(), attributes);
       default:
 	 QTextStream(stderr) << "Undefined type";
 	 return false;
@@ -364,8 +401,8 @@ bool QH5 :: describeType (QVariant const &v)
 
 
 
-static herr_t op (hid_t loc_id, const char *name, const H5O_info_t *info,
-		  void *op_data)
+static herr_t op (hid_t /*loc_id*/, const char *name, const H5O_info_t *info,
+		  void */*op_data*/)
 {
 //   OpData *od = (OpData*)op_data;
    if (name[0] == '.') {
@@ -384,15 +421,16 @@ static herr_t op (hid_t loc_id, const char *name, const H5O_info_t *info,
 	 default:
 	    QTextStream (stdout) << "Unknown: " << name << endl;
       }
-      return 0;
    }
+   return 0;
 }
 
-static herr_t op_L (hid_t loc_id, const char *name, const H5L_info_t *info,
-		    void *op_data)
+static herr_t op_L (hid_t loc_id, const char *name, const H5L_info_t */*info*/,
+		    void */*op_data*/)
 {
    H5O_info_t infobuf;
    auto status = H5Oget_info_by_name (loc_id, name, &infobuf, H5P_DEFAULT);
+   Q_UNUSED(status);
    return op (loc_id, name, &infobuf, nullptr);
 }
 
@@ -409,7 +447,7 @@ struct OpData {
    QStringList datasets;
 };
 
-herr_t myop(hid_t loc_id, const char *name, const H5L_info_t *info,void *op_data)
+herr_t myop(hid_t loc_id, const char *name, const H5L_info_t */*info*/,void *op_data)
 {  
    OpData *od = (OpData *)op_data;
    H5O_info_t  infobuf;
@@ -509,7 +547,7 @@ QVariant QH5 :: read (QString const &key)
     return QVariant(strbuff);
   }
   
-  void *data;
+  void *data= nullptr;
   switch (dclass) {
   case H5T_INTEGER:
     data = allocateBuffer<qint32>(dims);    
@@ -547,6 +585,7 @@ QStringList QH5 :: datasets()
 {
    OpData od;
    herr_t status = H5Lvisit(d->file->id(), H5_INDEX_NAME, H5_ITER_NATIVE, myop, (void*)&od);
+   Q_UNUSED(status);
    return od.datasets;
 }
 

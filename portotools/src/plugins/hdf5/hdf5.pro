@@ -32,8 +32,9 @@ include($$(PORTOBASE)/../portostorage/src/hdf5/driver/driver.pri)
 include(h5prototypes.pri)
 
 # Input
-HEADERS += h5plugin.h 
-SOURCES += h5plugin.cpp 
+HEADERS += h5plugin.h
+SOURCES += h5plugin.cpp
+           
 
 # Install
 target.path = $$(PORTOBASE)/bin/plugins

@@ -5,7 +5,9 @@ HEADERS = qgslstatistics.h \
 	  qgslpolynomials.h \
 	  qgslpolynomialsprototype.h \
 	  qgslvector.h \
-	  qgslmatrix.h
+	  qgslmatrix.h \
+	  qgslspecial.h \
+	  qgslspecialprototype.h
 
 SOURCES = qgslstatistics.cpp \
           qgsllinearregression.cpp \
@@ -14,4 +16,6 @@ SOURCES = qgslstatistics.cpp \
 	  qgslpolynomials.cpp \
 	  qgslpolynomialsprototype.cpp \
 	  qgslvector.cpp \
-	  qgslmatrix.cpp
+	  qgslmatrix.cpp \
+	  qgslspecial.cpp \
+	  qgslspecialprototype.cpp

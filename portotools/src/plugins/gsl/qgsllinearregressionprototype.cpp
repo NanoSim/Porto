@@ -15,12 +15,12 @@ QGSLLinearRegressionPrototype :: ~QGSLLinearRegressionPrototype()
 
 QScriptValue QGSLLinearRegressionPrototype :: linear(QVariantList const &xs, QVariantList const &ys, QScriptValue callback)
 {
-   double c0, c1, cov00, cov01, cov11, sumsq;
    auto l = qscriptvalue_cast<QGSLLinearRegression*>(thisObject());
    if (!l) {
       context()->throwError (QString (tr ("Cannot instanciate QGSLLinearRegression")));
    }
 
+   double c0, c1, cov00, cov01, cov11, sumsq;
    l->linear(xs, ys, c0, c1, cov00, cov01, cov11, sumsq);
 
    auto act = context()->activationObject();

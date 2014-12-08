@@ -19,6 +19,8 @@
 #include "qgsllinearregressionprototype.h"
 #include "qgslvector.h"
 #include "qgslmatrix.h"
+#include "qgslspecial.h"
+#include "qgslspecialprototype.h"
 #include "register.hh"
 
 using porto::gsl::QGSLConstants;
@@ -27,13 +29,15 @@ using porto::gsl::QGSLLinearRegression;
 using porto::gsl::QGSLPolynomials;
 using porto::gsl::QGSLVector;
 using porto::gsl::QGSLMatrix;
+using porto::gsl::QGSLSpecial;
 
-Q_DECLARE_METATYPE(porto::gsl::QGSLConstants*);
-Q_DECLARE_METATYPE(porto::gsl::QGSLStatistics*);
-Q_DECLARE_METATYPE(porto::gsl::QGSLLinearRegression*);
-Q_DECLARE_METATYPE(porto::gsl::QGSLPolynomials*);
-Q_DECLARE_METATYPE(porto::gsl::QGSLVector*);
-Q_DECLARE_METATYPE(porto::gsl::QGSLMatrix*);
+Q_DECLARE_METATYPE(porto::gsl::QGSLConstants*)
+Q_DECLARE_METATYPE(porto::gsl::QGSLStatistics*)
+Q_DECLARE_METATYPE(porto::gsl::QGSLLinearRegression*)
+Q_DECLARE_METATYPE(porto::gsl::QGSLPolynomials*)
+Q_DECLARE_METATYPE(porto::gsl::QGSLVector*)
+Q_DECLARE_METATYPE(porto::gsl::QGSLMatrix*)
+Q_DECLARE_METATYPE(porto::gsl::QGSLSpecial*)
 
 GSLPlugin :: ~GSLPlugin()
 {}
@@ -104,9 +108,11 @@ void GSLPlugin :: registerPlugin(QScriptEngine *engine)
 
    registerPrototype<QGSLLinearRegressionPrototype, QGSLLinearRegression> (engine);
    registerPrototype<QGSLPolynomialsPrototype, QGSLPolynomials> (engine);
+   registerPrototype<QGSLSpecialPrototype, QGSLSpecial> (engine);
    registerClass<QGSLStatistics>(gsl, "stats", gslconst);
    registerClass<QGSLLinearRegression>(gsl, "fit", gslconst);
    registerClass<QGSLPolynomials>(gsl, "poly", gslconst);
+   registerClass<QGSLSpecial>(gsl, "sf", gslconst);
 
    registerConstructor<QGSLVector>(engine, gsl, "Vector", createVector);
    registerConstructor<QGSLMatrix>(engine, gsl, "Matrix", createMatrix);
