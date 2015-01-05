@@ -1,5 +1,5 @@
 {
-  "name": "PORTO_correlation_dragCoefficient",
+  "name": "SOFT_correlation_dragCoefficient",
   "description": "Correlation for the drag coefficient to be used in Euler-Euler Simulations",
   "version": "0.1-SNAPSHOT-1",
   "dimensions": [

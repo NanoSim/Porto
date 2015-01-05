@@ -1,0 +1,6 @@
+isEmpty (softmongo_defined) {
+  CONFIG *= soft
+  CONFIG *= mongo bson
+  LIBS   += -lsoftmongo
+  softmongo_defined = true
+}

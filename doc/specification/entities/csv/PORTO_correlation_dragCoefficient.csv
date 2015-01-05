@@ -1,4 +1,4 @@
-Entity (Dataset) Name:;PORTO_correlation_dragCoefficient;Correlation for the drag coefficient to be used in Euler-Euler Simulations;;;
+Entity (Dataset) Name:;SOFT_correlation_dragCoefficient;Correlation for the drag coefficient to be used in Euler-Euler Simulations;;;
 Dimensions:;nParams;Number of the parameters required to specify the correlation;;;
 ;nInfluence;Number of variables that influence the correlation;;;
 Properties:;name;char;-;;Name of the data entity

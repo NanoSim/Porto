@@ -1,4 +1,0 @@
-LIBS += -L$$(PORTOBASE)/lib
-LIBS += -lporto
-DEPENDPATH += $$(PORTOBASE)/include
-INCLUDEPATH += $$(PORTOBASE)/include

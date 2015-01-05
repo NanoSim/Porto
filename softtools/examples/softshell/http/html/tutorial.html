@@ -1,0 +1,1527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Soft tutorial</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Soft tutorial"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-06-20T18:48+0200"/>
+<meta name="author" content="Thomas Hagelien"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Soft tutorial</h1>
+
+<p>Dette er en test
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 A brief introduction to softshell</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Standard Build in utility extensions</a></li>
+<li><a href="#sec-1-2">1.2 External modules</a></li>
+<li><a href="#sec-1-3">1.3 Plugin-in support (C++)</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Creating your first script</a></li>
+<li><a href="#sec-3">3 Working with metadata</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Example: Unit metadata</a></li>
+<li><a href="#sec-3-2">3.2 Creating instances of entities</a></li>
+<li><a href="#sec-3-3">3.3 Storing data to the database</a></li>
+<li><a href="#sec-3-4">3.4 Reading data back from a database</a></li>
+<li><a href="#sec-3-5">3.5 Introducing Collections</a></li>
+<li><a href="#sec-3-6">3.6 Introducing the Soft MVC code generator</a></li>
+<li><a href="#sec-3-7">3.7 Summary</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 Working with OpenFOAM</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Defining meta-data</a></li>
+<li><a href="#sec-4-2">4.2 Storing the meta-data</a></li>
+<li><a href="#sec-4-3">4.3 Instanciate an ControlDict entity</a></li>
+<li><a href="#sec-4-4">4.4 Create the template view for the generated file</a></li>
+<li><a href="#sec-4-5">4.5 Generate a controlDict file</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Using UDP to communicate and run external processes</a></li>
+<li><a href="#sec-6">6 Displaying contents in a web browser</a></li>
+<li><a href="#sec-7">7 Final notes</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> A brief introduction to softshell</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Softshell is a scripting tool for performing various tasks related to
+the NanoSim platform development, data and process management and
+simulator connectivity. The scripting language is based on ECMAScript,
+better known as JavaScript (although the language is not related to
+Java, and has a completely different semantics). For more background
+on the JavaScript language, please consult your nearest google search
+engine.
+</p>
+<p>
+In addition the being ECMA-262 compatible, the Softshell also
+supports custom extensions. These comes in different flavours:
+</p>
+<ul>
+<li>Standard build-in utility extensions (modules)
+</li>
+<li>External modules (written JavaScript)
+</li>
+<li>Plugin-in support (Written or wrapped in C++)
+</li>
+</ul>
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Standard Build in utility extensions</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>Add the current moment of writing, the Soft standard build-in modules are
+</p><ul>
+<li>Process Module
+</li>
+<li>EventLoop Module
+</li>
+<li>UDP Socket Module
+</li>
+<li>Console Module
+</li>
+<li>File System Module
+</li>
+<li>File System Watcher Module
+</li>
+<li>Httpd Module 
+</li>
+</ul>
+
+
+<p>
+These modules are considered core featured and provide functionality
+to increase producitivy.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> External modules</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>The external JavaScript modules are extensions that are easy to
+manipulate and reload at runtime. They are containers of data and
+functions that can be loaded through the build-in function:
+</p>
+
+
+
+<pre class="example">require (modulename)
+</pre>
+
+
+<p>
+The modulename can either be a javascript file, or a modulename including namespace
+</p>
+
+
+
+<pre class="example">require ('soft.mvc');  // fetching a registered module
+</pre>
+
+
+
+<pre class="example">require ('/path/to/file.js'); // fetching a module scriptfile
+</pre>
+
+
+<p>
+The difference between a module and a regular script file is that a
+module is captured within a javascript closure, accessing an object
+named 'exports'. Only variables and functions that are set as
+properties to exports will be available from the callee. This avoids
+naming pollution and provides nice module APIs.
+</p>
+
+
+
+<pre class="example">(function (mymodule){
+  mymodule.hello = function (){ 
+    console.log ("Hello Soft Modules!");
+  }
+})(exports);
+</pre>
+
+
+
+<pre class="example">require('mymodule.js').hello();
+// =&gt; Hello Soft Modules!
+</pre>
+
+
+<p>
+At the time of writing we currently have the following 'standard'
+external modules:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Module</th><th scope="col" class="left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">soft.entity</td><td class="left"><i>Simplifies working with entities</i></td></tr>
+<tr><td class="left">soft.collection</td><td class="left"><i>Defines the API for Collections</i></td></tr>
+<tr><td class="left">soft.macro</td><td class="left"><i>Macro expansion module</i></td></tr>
+<tr><td class="left">soft.mvc</td><td class="left"><i>Model View Controller code generator framework</i></td></tr>
+<tr><td class="left">soft.storage</td><td class="left"><i>Storage context class with factory</i></td></tr>
+<tr><td class="left">soft.storage.json</td><td class="left"><i>Experimental ultralight JSON storage extension</i></td></tr>
+<tr><td class="left">soft.storage.mongo</td><td class="left"><i>MongoDB wrapper utility</i></td></tr>
+<tr><td class="left">soft.utils.metastore</td><td class="left"><i>Utility for storing metadata in the metadata database</i></td></tr>
+<tr><td class="left">soft.factory.entity</td><td class="left"><i>Factory for dynamic runtime generation of entity classes</i></td></tr>
+</tbody>
+</table>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Plugin-in support (C++)</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>The last method of extending Softshell is through pre-compiled
+plugins that are loaded at startup. These plugins can provide access
+to C/C++/++ libraries through C++/Scripting interfaces. Details of how
+this is performed is beyond the scope of this tutorial. There is
+currently only on plug-in available in Soft, namely the
+<i>MongoDB-plugin</i> which gives a low-level access to the mongodb
+C-driver API.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Creating your first script</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+In this section you will be introduced to scripting in softshell. We'll start with the cliché hello-world:
+</p>
+
+
+
+<pre class="example">__main__ = function (args)
+{
+    print ("Hello, World");
+}
+</pre>
+
+
+<p>
+To execute this script from command-line, save this script to a file <i>hello.js</i> and call
+</p>
+
+
+
+<pre class="example">softshell hello.js
+</pre>
+
+
+<p>
+The key idea here is that the script file will need to have defined an entry body
+</p>
+
+
+
+<pre class="example">__main__ = function (args)
+</pre>
+
+
+<p>
+that will be called from the script engine. 
+</p>
+<p>
+If no arguments are given to softshell, you will start the interactive
+REPL (Read-evaluate-print-loop). This is a useful environment for
+experimenting and interactive development.
+</p>
+
+
+
+<pre class="example">$ softshell
+SoftShell 0.1.32
+Source license: LGPLv3
+
+For help, type :help
+
+&gt; print ("Hello");
+Hello
+undefined
+&gt; 
+
+</pre>
+
+
+<p>
+Notice the text <i>undefined</i> that gets printed after the output is
+written. This is return value of the expression evaluation. If the
+expression doesn't return av valid value, the value <i>undefined</i> gets
+written.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Working with metadata</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+Now you have the fundamentals covered to get started working with data
+and metadata. Meta-data is a high-level description of data that
+identifies how data from any source can be interpreted. Meta-data
+should be uniquely indentified with a name and version
+number. Furthermore, the metadata should defined a list of properties
+that identifies names, type, units, dimensions etc for each element.
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Example: Unit metadata</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>Let's start with a simple example: Define meta-data for the entity
+<i>unit</i>. The unit-entity should contain the following fields:
+</p>
+<ul>
+<li>abbreviation
+</li>
+<li>code
+</li>
+<li>conversionMultiplier
+</li>
+<li>conversionOffset
+</li>
+<li>quantityKind
+</li>
+<li>symbol
+</li>
+<li>unit
+</li>
+</ul>
+
+
+<p>  
+This follows the structure defined by <a href="http://qudt.org/">QUDT</a>
+</p>
+<p>
+The formal meta-entity is specified in JSON like this:
+</p>
+
+
+
+<pre class="example">{
+    "name": "unit",
+    "version": "1.0-SNAPSHOT-1",
+    "description": "Unit definitions",
+    "properties": [
+       {
+         "name": "abbreviation",
+         "type": "string"
+       },
+       {
+         "name": "code",
+         "type": "string"
+       },
+       {
+         "name": "conversionMultiplier",
+         "type": "double"
+       },
+       {
+         "name": "conversionOffset",
+         "type": "double"
+       },
+       {
+         "name": "quantityKind",
+         "type": "string"
+       },
+       {
+         "name": "symbol",
+         "type": "string"
+       },
+       {
+         "name": "unit",
+         "type": "string"
+       }
+    ]
+}
+</pre>
+
+
+<p>
+Save this contents in a file named 'unit.json'. To insert this file
+into the meta-database, perform the following operation from a shell
+</p>
+
+
+
+<pre class="example">$ register-entity.sh unit.json
+
+2014/06/14 15:00:40.0110: [18265]: INFO: cluster: Client
+initialized in direct mode.
+{"name":"unit","version":"1.0-SNAPSHOT-1","description":"Unit     
+definitions","properties":[{"name":"abbreviation","type":"string"},
+{"name":"code","type":"string"},{"name":"conversionMultiplier",
+"type":"double"},{"name":"conversionOffset","type":"double"},{"name":
+"quantityKind","type":"string"},{"name":"symbol","type":"string"},
+{"name":"unit","type":"string"}]}
+</pre>
+
+
+<p>
+The <i>register-entity.sh</i> script is a utility that inserts a json-file
+into MongoDB. If we take a look at the file <i>register-entity.sh</i>, you
+will find that this is not a regular shell-script at all, but a script
+that actually gets run by softshell
+</p>
+
+
+
+<pre class="example">#!/usr/bin/env softshell
+
+/*
+ * register-entity.sh
+ * A utility to commit meta-data into the metadata-database
+ */
+
+__main__ = function (args)
+{
+    if (args.length == 0) {
+           console.error("fatal error: no input files");
+           return undefined;
+       }
+    var metaStorage = require ('soft.utils.metastore').connect(
+        {
+            uri: 'mongodb://localhost',
+            database: 'meta',
+            collection: 'entities'
+        });
+    args.forEach(function(file){
+        fs.readFile(file, function(err, data) {
+            if (err) {
+                print ("error:", err);
+                return;
+            }
+            if (!metaStorage.store (data)) {
+                print ("Failed to write data");
+            }
+        });
+    });
+}
+
+</pre>
+
+
+<p>
+If you look closely, you will see that our meta-database is (here)
+hard-coded to be the database: '<i>meta</i>', collection: '<i>entities</i>' in a
+mongodb server running on <i>localhost</i>. Don't worry if you don't
+understand the rest of the script.
+</p>
+<p>
+The file <i>all-units.json</i> is a collection of all the documented units
+available from <a href="#qudt.org">qudt.org</a>. Our goal now is to create an instance of the
+entity <i>Unit</i>, fill it with the contents of the existing data, and
+store the data as an entity in MongoDB.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Creating instances of entities</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+<p>
+Creating an entity of type unit can now be performed runtime in the scripting environment:
+</p>
+
+
+
+<pre class="example">var entity = require('soft.entity').db(driverInfo);   
+Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
+</pre>
+
+
+<p>
+Notice that we never implement the object <i>Unit</i>. This is generated
+for us, based on the metadata that we just stored. The return value
+from <i>entity.using</i> is actually the <i>Unit.protocol.constructor</i>
+reference.  The variable '<i>u</i>' is now holding a new instance of the
+class '<i>Unit</i>'. It is also possible to call createEntity with a
+callback function that will capture errors and the class definition
+(the function that creates the class passed as text).
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Storing data to the database</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+<p>
+The storage where we want to store the entity values could be a number
+of different locations. The storage-module contains a factory pattern
+that allows us to specify the name of the driver we want to use,
+together with other info. We are not bound to a single driver such as
+MongoDB at this point. Any supported driver can be loaded runtime and
+used for storage and data retrieval.
+</p>
+
+
+
+<pre class="example">/* connectivity information */
+var driverInfo = {
+    driver:     'mongodb',
+    database:   'soft',
+    collection: 'units'
+};
+</pre>
+
+
+<p>
+In this case we want to store our data in a database called '<i>soft</i>',
+in a collection we call '<i>mydata</i>'.  Let's fill an entity with some
+data and store the contents to the database:
+</p>
+
+
+
+<pre class="example">var unit = new Unit();
+u.set({
+    abbreviation: "Gy/s",
+    code: "0780",
+    conversionMultiplier: "1.0e0",
+    conversionOffset: "0.0",
+    quantityKind: "quantity:AbsorbedDoseRate",
+    symbol: "Gy/s",
+    unit: "GrayPerSecond"
+});
+</pre>
+
+
+<p>
+The <i>Unit</i> object is generated with a set of getter and setter
+functions. We could equally well have written something like this:
+</p>
+
+
+
+<pre class="example">...
+u.setAbbrevation ("Gy/s");
+u.setCode ("0780");
+
+...
+</pre>
+
+
+<p>
+To finalize the process, we can now store the data as a value in our database:
+</p>
+
+
+
+<pre class="example">u.store();
+</pre>
+
+
+<p>
+The complete example should now look like this:
+</p>
+
+
+
+<pre class="example">/* connectivity information */
+var driverInfo = {
+    driver:     'mongodb',
+    database:   'soft',
+    collection: 'units'
+};
+
+/* Entity creator */
+var entity = require('soft.entity').db(driverInfo);   
+Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
+
+var u = new Unit();
+
+u.set({
+    abbreviation: "Gy/s",
+    code: "0780",
+    conversionMultiplier: "1.0e0",
+    conversionOffset: "0.0",
+    quantityKind: "quantity:AbsorbedDoseRate",
+    symbol: "Gy/s",
+    unit: "GrayPerSecond"
+});
+
+u.store();
+print (u.id);
+</pre>
+
+
+<p>
+In this example we've seen how an entity can be generated runtime for
+us, based on meta-data. In other languages, the code generation might
+have to be performed compile-time, and included in the code-base. This
+is, however, semantically equal to what we've shown here. The key
+concept is that '<i>meta-data</i>' defines the schema, the storage driver
+is completely seperated from the implementation of the Entity
+instance, and the correct coupling can be performed runtime, giving
+extreme flexibility.
+</p>
+<p>
+The last command in the example prints the unique identifier of the
+entity. This value as an <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier">universally unique identifier</a> and needs to be
+communicated between processes that work with the same data.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Reading data back from a database</h3>
+<div class="outline-text-3" id="text-3-4">
+
+
+<p>
+Our storage device have defined both read and write operations, so we
+can reuse our storage from the previous example. To read back data
+(from a different application) we can simply instanciate our entity
+with the UUID generated be the instance.
+</p>
+
+
+
+<pre class="example">/* let's pretend the UUID we got was
+8dd10147-d0b9-48ee-ae9b-2ef41d56add9 */
+
+var id = '8dd10147-d0b9-48ee-ae9b-2ef41d56add9';
+var entity = require('soft.entity').db(driverInfo);   
+Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
+
+var u = new Unit(id);    
+</pre>
+
+
+<p>
+Notice that working Soft doesn't really require the developer to
+fight a lot of different APIs. Hiding the boilerplate code in
+configuration files leaves the developers to simply instanciate a
+class/module/object and start working with the data in a language
+native way.
+</p>
+<p>
+There is another important thing to consider as well. In our client
+code we have said (made a contract) that we want to use the entity
+<i>unit:1.0-SNAPHOT-1</i>. However, we don't say anything about the source
+type. This is one of the more sophisticated features of the Soft
+design. If the datasource that stored the contents of the entity with
+the id= '<i>8dd10147-d0b9-48ee-ae9b-2ef41d56add9</i>', was of a different
+kind, the framework would notice that the client entity and source
+entity was different, and it would search for an explicit
+<i>translator</i>. The translators are simply code that accepts a given
+entity type and returns a different one. The client code will never
+have to include its own version control to accomodate for changes in
+file formats etc. We can simply just state <i>what</i> entity we want to
+use, and that's the end of that. 
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Introducing Collections</h3>
+<div class="outline-text-3" id="text-3-5">
+
+
+<p>
+Collections are simply a formal specification of an entity that
+contains information about other entities and their relations. One of
+the key design principles of the Proto data centric design is the
+separation of data (entities) and structures (relations). The
+Collection constructor is defined in the external module
+'/soft.collection'/.
+</p>
+
+
+
+<pre class="example">Collection = require('soft.collection').db(driverInfo);
+var myCollection = new Collection();
+</pre>
+
+
+<p>
+The Collection class has the following API
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Function</th><th scope="col" class="left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">setName(name)</td><td class="left">Set the collection name</td></tr>
+<tr><td class="left">name()</td><td class="left">Get the name of the collection</td></tr>
+<tr><td class="left">setVersion(version)</td><td class="left">Set the version of the collection</td></tr>
+<tr><td class="left">version()</td><td class="left">Get the version of the collection</td></tr>
+<tr><td class="left">count()</td><td class="left">Return the number of registered entities</td></tr>
+<tr><td class="left">instances()</td><td class="left">Return the label of each entity instance</td></tr>
+<tr><td class="left">findInstance(label)</td><td class="left">Return the entity object with the given label</td></tr>
+<tr><td class="left">registerRelation(from,to,rel)</td><td class="left">Creates a relation between two entities</td></tr>
+<tr><td class="left">registerEntity(entity,label)</td><td class="left">Registeres an entity with a given (locally unique) label</td></tr>
+</tbody>
+</table>
+
+
+
+<p>
+This will create an empty collection.
+</p>
+<p>
+Let's create a script that does the following
+</p><ol>
+<li>Read the complete file of units 
+</li>
+<li>Create a collection that should contain the complete set of unit entities
+</li>
+<li>Create new entities for each unit and store the value
+</li>
+<li>Register the entity in the collection
+</li>
+<li>Store the collection and report the UUID:
+</li>
+</ol>
+
+
+
+
+
+<pre class="example">var unitsJSON = fs.readFile('units.json', function(err, data){
+    if (err) throw(err);
+
+    /* connectivity information */
+    var driverInfo = {
+        driver:     'mongodb',
+        database:   'soft',
+        collection: 'units'
+    };
+
+    /* Entity and Collection creators */
+    Collection = require('soft.collection').db(driverInfo);
+    var entity = require('soft.entity').db(driverInfo);   
+    Unit       = entity.using('unit', '1.0-SNAPSHOT-1');
+
+    /* Parse the external file into a javascript object */
+    var obj = JSON.parse(data);
+
+    /* Instanciate a new Collection class */
+    var unitLibrary = new Collection();
+    unitLibrary.setName('UnitCollection');
+    unitLibrary.setVersion('1.0');
+
+    /* Iterate through all the units and make a call the callback function */
+    obj.units != undefined &amp;&amp; obj.units.forEach (function(unitObj) {
+        /* Create a new Entity for each element in the list */
+        var unitEntity = new Unit();
+        unitEntity.set(unitObj);
+        unitEntity.store();
+
+        /* Register the entity in the Collection class*/
+        unitLibrary.registerEntity (unitEntity, 'entity'+unitEntity.code);
+    });
+
+    /* Store the Collection */
+    unitLibrary.store();
+
+    /* Display the id of the collection */
+    console.log (unitLibrary.id);
+});
+
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Introducing the Soft MVC code generator</h3>
+<div class="outline-text-3" id="text-3-6">
+
+
+<p>
+The code generator is implemented in the external module
+'soft.mvc'. This module contains only one function (<i>create()</i>),
+which takes as the argument a model (object) and a view (template
+file), and returns a new function that will expand the
+javascript-markup contents of the view template and return a
+string. The generate method takes a '<i>bag</i>' object as an optional
+argument. Every property connected to bag will be available in the
+view template js-code. In addition to <i>bag</i>, the soft.model - defined
+in the <i>create(obj)</i> function call, will be available.
+</p>
+<p>
+Let's create an example where we instanciate our unit library that we
+just stored. Then we pass the collection contents to the view template
+which expands the contents from the MongoDB and into a HTML-document,
+that will present the unit library as tables.
+</p>
+
+
+
+<pre class="example">var driverInfo = {
+    driver: 'mongodb',
+    database: 'soft',
+    collection: 'units'
+};
+
+Collection = require('soft.collection').db(driverInfo);
+
+/* Instanciate our unitLibrary collection */
+var collectionID = '79fe6b02-7b9e-4339-b238-983333b37552';
+var unitLibrary  = new Collection(collectionID);
+
+/* Create a generate function*/
+var generate = require('soft.mvc').create({
+    model: unitLibrary.get(),
+    view: 'webtemplate.jshtml'
+});
+
+/* Store the result to an output file */
+fs.writeFile ('output.html', generate(driverInfo), function(err){
+    if (err) throw (err);
+});
+
+</pre>
+
+
+<p>
+We will also need our template. It looks a bit ugly, but hey - it is what it is:
+</p>
+
+
+
+<pre class="example">@{
+  var entity = require('soft.entity').db(soft.bag);
+  Unit = entity.using('unit', '1.0-SNAPSHOT-1');
+  createTable = function(unit){
+    return "&lt;table style=\"width:300px\"&gt;&lt;tr&gt;&lt;th colspan=\"2\"&gt;unit:" +
+    unit.unit + "&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th&gt;Property&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;abbreviation&lt;/td&gt;&lt;td&gt;"+
+    unit.abbreviation+"&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;code&lt;/td&gt;&lt;td&gt;"+
+    unit.code+"&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;conversionMultiplier&lt;/td&gt;&lt;td&gt;"+
+    unit.conversionMultiplier+"&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;conversion offset&lt;/td&gt;&lt;td&gt;"+
+    unit.conversionOffset + "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;quantityKind&lt;/td&gt;&lt;td&gt;"+
+    unit.quantityKind+"&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;symbol&lt;/td&gt;&lt;td&gt;"+ unit.symbol+"&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"
+  }
+}
+&lt;html&gt;
+  &lt;head&gt;Generated at @{new Date().toString()}
+  &lt;link rel="stylesheet" type="text/css" href="http://www.qudt.org/qudt/owl/1.0.0/styles/nexiom.css"/&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Generated from @{soft.model.__name__} version @{soft.model.__version__}&lt;/h1&gt;
+    The original data is available from &lt;a href="http://www.qudt.org"&gt;qudt&lt;/a&gt;
+    @{soft.model.entities.map(function(obj){
+      var unit = new Unit(obj.uid);
+      return createTable(unit);
+    }).join("&lt;br/&gt;");}
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+
+<p>
+Run the script and enjoy the results.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Summary</h3>
+<div class="outline-text-3" id="text-3-7">
+
+
+<p>
+In this chapter we've touched upon some key features of Soft:1
+</p><ul>
+<li>Defining meta-data schemas and storing them in a database
+</li>
+<li>Creating instances of entities that are bound the meta-data schema
+</li>
+<li>Creating collections of entities
+</li>
+<li>Storing and retreiving data using the generic storage interface
+</li>
+<li>Generating code based on data contents stored in the MongoDB database
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Working with OpenFOAM</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+In this chapter we show how Soft can be used to generate inputs for
+OpenFOAM. This is a partial example and should be extended to a
+complete simulation environment run from within Soft.
+</p>
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Defining meta-data</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<p>As always, we start with the data modelling and implementing our
+meta-data schemas. The simplest OpenFOAM entity to define is proably
+the OpenFOAM control dictionary <i>controlDict</i>
+</p>
+<p>
+We could be more explicit in the definition and give the properties
+units etc. It would also be better to use enumerators instead of
+string-types for some of the properties.
+</p>
+
+
+
+<pre class="example">{
+    "name"        : "controlDict",
+    "version"     : "0.1",
+    "description" : "Time and data input/output control",
+    "properties"  : [
+        {
+            "name": "application",
+            "type": "string"
+        },
+        {
+            "name": "startFrom",
+            "type": "string"
+        },
+        {
+            "name": "startTime",
+            "type": "double"
+        },
+        {
+            "name": "stopAt",
+            "type": "string"
+        },
+        {
+            "name": "endTime",
+            "type": "double"
+        },
+        {
+            "name": "deltaT",
+            "type": "double"
+        },
+        {
+            "name": "writeControl",
+            "type": "string"
+        },
+        {
+            "name": "writeInterval",
+            "type": "double"
+        },
+        {
+            "name": "purgeWrite",
+            "type": "integer"
+        },
+        {
+            "name": "writeFormat",
+            "type": "string"
+        },
+        {
+            "name": "writePrecision",
+            "type": "integer"
+        },
+        {
+            "name": "writeCompression",
+            "type": "string"
+        },
+        {
+            "name": "timeFormat",
+            "type": "string"
+        },
+        {
+            "name": "timePrecision",
+            "type": "integer"
+        },
+        {
+            "name": "runTimeModifiable",
+            "type": "string"
+        },
+        {
+            "name": "adjustTimeStep",
+            "type": "string"
+        }
+    ]
+}
+
+</pre>
+
+
+<p>
+Let's save this file under the name '<i>controldict.json</i>'
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Storing the meta-data</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+<p>
+The next step is to store this data to the meta-data database. We can
+do this by using the utility <i>register-entity.sh</i>.
+</p>
+
+
+
+<pre class="example">$ register-entity.sh controldict.json 
+
+2014/06/20 15:08:27.0408: [16726]: INFO: cluster: Client initialized
+in direct mode.
+{"name":"controlDict","version":"0.1","description":"Time and data
+input/output
+control","properties":[{"name":"application","type":"string"},
+{"name":"startFrom","type":"string"},{"name":"startTime","type":"double"},
+{"name":"stopAt","type":"string"},{"name":"endTime","type":"double"},{"name":
+"deltaT","type":"double"},{"name":"writeControl","type":"string"},{"name":
+"writeInterval","type":"double"},{"name":"purgeWrite","type":"integer"},
+{"name":"writeFormat","type":"string"},{"name":"writePrecision","type":"integer"},
+{"name":"writeCompression","type":"string"},{"name":"timeFormat","type":"string"},
+{"name":"timePrecision","type":"integer"},{"name":"runTimeModifiable","type":"string"},
+{"name":"adjustTimeStep","type":"string"}]}
+
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Instanciate an ControlDict entity</h3>
+<div class="outline-text-3" id="text-4-3">
+
+
+<p>
+Now that we have the meta-data available, we can instanciate the
+ControlDict object and give it some data:
+</p>
+
+
+
+<pre class="example">var entity = require('soft.entity').db({
+  driver:     'mongodb',
+  database:   'soft',
+  collection: 'openfoam'
+});
+
+ControlDict = entity.using('controlDict', '0.1');
+
+/* Create an instance and give it some data*/
+var nozzleControlDict = new ControlDict();
+nozzleControlDict.set({
+  application       : 'mdFoam',
+  startFrom         : 'startTime',
+  startTime         : 0,
+  stopAt            : 'endTime',
+  endTime           : 2e-13,
+  deltaT            : 1e-15,
+  writeControl      : 'runTime',
+  writeInterval     : 5e-14,
+  purgeWrite        : 0,    
+  writeFormat       : 'ascii',
+  writePrecision    : 12,
+  writeCompression  : 'off',
+  timeFormat        : 'general',
+  timePrecision     : '6',
+  runTimeModifiable : 'true',    
+  adjustTimeStep    : 'no'
+});
+
+/* Store the entity in the database */
+nozzleControlDict.store();
+
+/* Display the UUID for further use */
+print (nozzleControlDict.id);
+
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Create the template view for the generated file</h3>
+<div class="outline-text-3" id="text-4-4">
+
+
+<p>
+The next step is to make a template view for the file to be generated.
+</p>
+
+
+
+<pre class="example">/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+|-----------------------------------------------------------------------------|
+    Generated by Soft @{new Date().toString()}
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     @{soft.model.application};
+
+startFrom       @{soft.model.startFrom};
+
+startTime       @{soft.model.startTime};
+
+stopAt          @{soft.model.stopAt};
+
+endTime         @{soft.model.endTime};
+
+deltaT          @{soft.model.deltaT};
+
+writeControl    @{soft.model.writeControl};
+
+writeInterval   @{soft.model.writeInterval};
+
+purgeWrite      @{soft.model.purgeWrite};
+
+writeFormat     @{soft.model.writeFormat};
+
+writePrecision  @{soft.model.writePrecision};
+
+writeCompression @{soft.model.writeCompression};
+
+timeFormat      @{soft.model.timeFormat};
+
+timePrecision   @{soft.model.timePrecision};
+
+runTimeModifiable @{soft.model.runTimeModifiable};
+
+adjustTimeStep  @{soft.model.adjustTimeStep};
+
+// ************************************************************************* //
+
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Generate a controlDict file</h3>
+<div class="outline-text-3" id="text-4-5">
+
+
+<p>
+The last step is to generate the code that makes the controlDict.
+</p>
+
+
+
+<pre class="example">
+var entity = require('soft.entity').db({
+  driver:     'mongodb',
+  database:   'soft',
+  collection: 'openfoam'});
+
+ControlDict = entity.using('controlDict', '0.1');
+
+var controlDict = new ControlDict('e12686f9-b677-49dc-ad9d-07944f9b053e');
+var generate = require('soft.mvc').create({
+  model: controlDict.get(),
+  view : 'controlDict.foamjs'});
+
+fs.writeFile('controlDict', generate(), function(err){
+  if (err) throw (err);
+});
+
+</pre>
+
+
+<p>
+Running this script will create a completely heatly OpenFOAM
+controlDict dictionary file.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Using UDP to communicate and run external processes</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+The Soft framework is not limited to just storing and retrieving
+data. It can also be utilized for controlling the process
+workflows. One syncronization mechanism that is supported is <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">User Datagram Protocol</a>. This a lightweight protocol with no handshaking and
+setup. UDP works by emitting datagrams. The datagram can be any
+text. In our example code, we want to create to script
+applications. One is the client-code that emits a JSON datagram that
+contains some info, along with a program w/arguments that it wants the
+receiver to run.
+</p>
+<p>
+The other is the server code. This is a scipt application that creates
+a callback that is called when it receives a datagram. It will then
+parse the datagram and execute the application. Note that this method
+of calling remote procedure is <b>not</b> recommended due to the security
+hazard this exposes.
+</p>
+<p>
+UdpSocket is a build-in utility class, and does not require us to call <i>require</i>.
+</p>
+
+
+<pre class="example">__main__ = function (args)
+{
+  var udpSocket = new UdpSocket();
+  var msg = {
+      name: "test",
+      version: "1.0",
+      program: "ls",
+      args: ["-al"]
+  };
+  udpSocket.writeDatagram(JSON.stringify (msg), "127.0.0.1", 1234);
+}
+</pre>
+
+
+<p>
+When executed, this script will simply emit the datagram and exit. The
+server code is a bit more elaborate and contains some features of
+Soft that has not yet been discussed. The server is a script that
+should set up an event loop. The event loop makes it possible to
+create asyncrounous callbacks that is build in the Qt signal/slot
+mechanism, and is a build-in utility class called <i>EventLoop</i>.
+</p>
+<p>
+In addition we also need to use the utility class <i>Process</i> which can
+control the execution of an application, with asyncronous callback to
+catch output coming from stdout, stderr, along with messages giving
+the status of the running application, and a callback for the
+termination of the application.
+</p>
+
+
+
+
+<pre class="example">__main__ = function (args)
+{
+    /* Create the event loop */
+    var event = new EventLoop ();
+
+    var udpSocket = require ('./udpsocket.js');
+    var u = udpSocket.create (function (udp) {  
+        /* Create a callback for the event 'readyRead' */
+        udp.readyRead.connect (function () {
+
+            /* Parse the datagram received and print its contents to the console */
+            var datagram = udp.readDatagram ();
+            var o = JSON.parse(datagram.datagram);
+            print(o.name, o.version, o.program);
+
+            /* Instanciate a new Process and create callbacks for when the process
+               starts, have available standard output contents, and termination.
+             */ 
+            var proc = new Process();
+            (function (p) {
+                p.started.connect (function (){
+                    print ("process started");
+                });
+
+                p.readyReadStandardOutput.connect (function() {
+                    print (p.readAllStandardOutput ());
+                });
+
+                p["finished(int)"].connect (function (){
+                    print ("process finished");
+                    event.quit(); /* Quit the server when the program finishes*/
+                });
+            })(proc);
+
+            /* Set up the process with the program and arguments given in the datagram */
+            proc.setProgram(o.program);
+            proc.setArguments(o.args);
+
+            /* Run the application */
+            proc.start();
+        });
+    });
+
+    /* Make the socket listen for activity on port 1234 coming from localhost */
+    u.bind ("127.0.0.1", 1234);
+
+    /* Enter the event loop */
+    event.exec();
+}
+</pre>
+
+
+<p>
+The module udpsocket.js is just a simple high-level function that
+instanciates the UdpSocket and pass it to a function argument.
+</p>
+
+
+
+<pre class="example">exports.create = function(fn) {
+    var udp = new UdpSocket();
+    fn (udp);
+
+    return udp;
+}
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Displaying contents in a web browser</h2>
+<div class="outline-text-2" id="text-6">
+
+
+<p>
+Working in a scripting shell environment is sometimes not practical
+when it comes to presenting information. Creating or generating HTML
+for presenting contents is therefore good options. One could also
+consider to build <i>Soft User Interfaces</i> as web services. This
+chapter will demonstrate the functionality of the tiny webserver
+functionality available in <i>Soft</i>, in the build-in utility HttpServer.
+</p>
+
+
+
+<pre class="example">__main__ = function (args)
+{
+  var event = new EventLoop();
+  var port  = 8081;
+  var httpd = new HttpServer(port);
+  httpd.setRootDir("html/");
+  httpd.start();
+  event.exec();
+}
+</pre>
+
+
+<p>
+By pointing the browser to <a href="http://localhost:8081">http://localhost:8081</a> we should now be able
+to view the contents defined under the given root directory. 
+</p>
+<p>
+Note hoewever, that is not a production web server, and it is limited
+to GET requests of type text/html.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Final notes</h2>
+<div class="outline-text-2" id="text-7">
+
+
+<p>
+This tutorial/overview was intended to give the reader some hands-on
+to get started on working with Soft. There are many more things that
+Soft is able to do in terms of features, but the key concepts are the
+most important. I wish this document has left the reader with a little
+deeper understanding of the data-centric design philosophy, and also
+inspiration to contribute and extend the framework to fit other tasks
+and activities. After all, software is supposed to make work easier,
+more fun, and inspire new ideas.
+</p>
+<p>
+Also note that Soft is in a <b>very early stage of development</b>. Do not
+expect everything to be smooth and easy, but please make a note of
+annoyances, problems, improvement suggestions, and feel free to make
+these requirements for the development interation.
+</p>
+<p>
+Thomas Hagelien
+Trondheim 2014
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-06-20T18:48+0200</p>
+<p class="author">Author: Thomas Hagelien</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

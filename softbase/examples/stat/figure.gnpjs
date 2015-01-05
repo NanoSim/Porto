@@ -1,0 +1,47 @@
+set autoscale
+set terminal postscript portrait enhanced color "Helvetica" 15
+set size @{soft.model.xsize}, @{soft.model.ysize}
+set output '@{soft.model.name +".eps"}'
+set xlabel @{"\"" + soft.model.xlabel +"\""}
+set ylabel @{"\"" + soft.model.ylabel + "\""}
+plot @{ 
+   accum =""
+    for (var i = 0; i < soft.model.curves.length; ++i)
+    {
+       var curve = soft.model.curves[i];
+       accum += "'-' u 1:2";
+       if (curve.type == 'line') 
+       {
+           accum += ' w l ls 1 lt rgb '
+       } else if (curve.type == 'dashed line')
+       {
+           accum += ' w l ls 2 lt rgb '
+       } else if (curve.type == 'sdashed line')
+       {
+           accum += ' w l ls 3 lt rgb '
+       } else if (curve.type == 'dotted line')
+       {
+           accum += ' w l ls 4 lt rgb '
+       } else if (curve.type == 'dashdot line')
+       {
+           accum += ' w l ls 5 lt rgb '
+       } else if (curve.type == 'sdashdot line')
+       {
+           accum += ' w l ls 6 lt rgb '
+       }
+       accum += "\"" + curve.color + "\""
+       accum += " lw " + curve.width.toString()
+       accum += " ti " + "\"" + curve.title + "\""
+       accum += (i+1==soft.model.curves.length) ? "\n" : ", \\\n"
+    }
+    for (var i = 0; i < soft.model.curves.length; ++i)
+    {
+       var curve = soft.model.curves[i];
+       for (var j = 0; j < curve.xdata.length; ++j)
+       {
+          accum += curve.xdata[j].toString() +  " " + curve.ydata[j].toString() + "\n"
+       }
+       accum += "e\n"
+    }
+    accum
+}

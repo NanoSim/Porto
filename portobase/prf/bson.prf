@@ -1,4 +1,0 @@
-INCLUDEPATH += $$(PORTOBASE)/include/3rdparty/libbson-1.0
-DEPENDPATH  += $$(PORTOBASE)/include/3rdparty/libbson-1.0
-LIBS        *= -L$$(BSON_LIBRARY_PATH)
-LIBS        *= -lbson-1.0

@@ -9,7 +9,7 @@
 *.Release
 *~
 moc_*.cpp
-portobase/include/3rdparty
-portotools/src/parashell
-portobase/include/Porto
-portobase/include/*.h
+softbase/include/3rdparty
+softtools/src/parashell
+softbase/include/Soft
+softbase/include/*.h
