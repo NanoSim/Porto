@@ -1,0 +1,4 @@
+isEmpty(softc_defined) {
+  LIBS += -lsoftc
+  softc_defined = true
+}

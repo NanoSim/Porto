@@ -1,0 +1,7 @@
+
+#include "qmongoclient.h"
+#include "qmongocollection.h"
+#include "qmongocursor.h"
+#include "qbson.h"
+#include "qbsoniter.h"
+#include "qbsonvalue.h"

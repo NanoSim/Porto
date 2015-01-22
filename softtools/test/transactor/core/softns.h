@@ -1,0 +1,5 @@
+#ifndef NAMESPACE_SOFT_BEGIN
+#define NAMESPACE_SOFT_NAME soft
+#define NAMESPACE_SOFT_BEGIN namespace NAMESPACE_SOFT_NAME {
+#define NAMESPACE_SOFT_END }
+#endif
