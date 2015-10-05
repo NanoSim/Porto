@@ -1,0 +1,29 @@
+{
+  "name": "C3PO_bin_temperatureParticleBin",
+  "description": "Set of bins for the particle temperature in JSON or HDF5 format",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nbins",
+      "description": "Number of bins"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the entity"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "-",
+      "dims": [
+        "nBins"
+      ],
+      "description": "A list of scalars representing the particle temperature bins"
+    }
+  ]
+}
