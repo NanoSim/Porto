@@ -19,7 +19,7 @@
     {
       "name": "data",
       "type": "double",
-      "unit": "-",
+      "unit": "K",
       "dims": [
         "nBins"
       ],
