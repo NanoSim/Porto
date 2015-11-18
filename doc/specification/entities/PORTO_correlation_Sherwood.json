@@ -1,0 +1,66 @@
+{
+  "name": "PORTO_correlation_Sherwood.json",
+  "description": "Correlation for the Sherwood number to be used in Euler-Lagrange Simulations",
+  "version": "0.1-SNAPSHOT-1",
+  "dimensions": [
+    {
+      "name": "nParams",
+      "description": "Number of the parameters required to specify the correlation"
+    },
+    {
+      "name": "nInfluence",
+      "description": "Number of variables that influence the correlation"
+    }
+  ],
+  "properties": [
+    {
+      "name": "name",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Name of the data entity"
+    },
+    {
+      "name": "version",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Version of the drag correlation"
+    },
+    {
+      "name": "code origin",
+      "type": "char",
+      "unit": "-",
+      "dims": [],
+      "description": "Code name, version that was used to produce data for the correlation"
+    },
+    {
+      "name": "nameInfluenceVariables",
+      "type": "char",
+      "unit": "-",
+      "dims": [
+        "nInfluence"
+      ],
+      "description": "Name of variables that influence the correlation"
+    },
+    {
+      "name": "eqnType",
+      "type": "char",
+      "unit": "-",
+      "dims": [
+        "nInfluence"
+      ],
+      "description": "Name of the function used to interpret parameters and compute the result of the correlation"
+    },
+    {
+      "name": "data",
+      "type": "double",
+      "unit": "-",
+      "dims": [
+        "nParams",
+        "nInfluence"
+      ],
+      "description": "The actual particle radius"
+    }
+  ]
+}
