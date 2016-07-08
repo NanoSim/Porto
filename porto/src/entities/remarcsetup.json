@@ -1,0 +1,69 @@
+{
+    "name": "remarcsetup",
+    "version": "0.1-SNAPSHOT-1",
+    "namespace": "http://info.emmc.eu",
+    "description": "Setup for REMARC",
+    "dimensions": [],
+    "properties": [
+        {
+            "name": "T_min",
+            "type": "double",
+            "unit": "K"
+        },
+        {
+            "name": "T_max",
+            "type": "double",
+            "unit": "K"
+        },
+        {
+            "name": "Delta_T",
+            "type": "double",
+            "unit": "K"
+        },
+        {
+            "name": "barrierHeight",
+            "type": "double",
+            "unit": "eV",
+            "description": "Estimated uncertainty in barrier height"
+        },
+        {
+            "name": "adsoptionEnergy",
+            "type": "double",
+            "unit": "eV",
+            "description": "Estimated uncertainty in adsorption energy"
+        },
+        {
+            "name": "p",
+            "type": "double",
+            "unit": "atm",
+            "description": "Gas pressure"
+        },
+        {
+            "name": "useFreqToCalcRateConstants",
+            "type": "bool",
+            "description": "Should frequencies be used to calculate rate constants?"
+        },
+        {
+            "name": "useFreqToCleanSurface",
+            "type": "bool",
+            "description": "Should frequencies be used for clean surface?"
+        },
+        {
+            "name": "useQuantum",
+            "type": "bool",
+            "description": "Quantum (true) or classical (false) vibrational partition functions for rate constant calcuations"
+        },
+        {
+            "name": "rateConstPrefactor",
+            "type": "double",
+            "unit": "s-1",
+            "description": "Prefactor for rate constant calculations if frequencies are not used"
+        },
+        {
+            "name": "desorptionRatePrefactor",
+            "type": "double",
+            "unit": "s-1",
+            "description": "Prefactor for desorption rate constant calculations (s-1) if frequencies are not used"
+        }
+    ]
+}

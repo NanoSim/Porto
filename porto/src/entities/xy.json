@@ -1,0 +1,28 @@
+{
+    "name": "xy",
+    "namespace": "nanosim",
+    "version": "0.1-SNAPSHOT-1",
+    "dimensions": [
+        {
+            "name": "NI"
+        },
+        {
+            "name": "NJ"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "type": "string",
+            "dims": ["NJ"]
+        },
+        {
+            "name": "data",
+            "type": "double",
+            "dims": [
+                "NI",
+                "NJ"
+            ]
+        }
+    ]
+}

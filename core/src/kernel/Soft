@@ -1,0 +1,18 @@
+#ifndef SOFT_DEF_H
+#define SOFT_DEF_H
+
+#include <collection.h>
+#include <soft.h>
+#include <istoragestrategy.h>
+#include <idatamodel.h>
+#include <pluginloader.h>
+#include <softns.h>
+#include <transactor.h>
+#include <ientity.h>
+#include <scriptengine.h>
+#include <storage.h>
+#include <storagefactory.h>
+#include <tripletstore.h>
+#include <softtypes.h>
+
+#endif // SOFT_DEF_H

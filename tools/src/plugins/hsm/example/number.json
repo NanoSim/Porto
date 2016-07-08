@@ -1,0 +1,12 @@
+{
+    "name": "Number",
+    "version":"0.1",
+    "description":"Guess My Number Example Input",
+    "properties":[
+	{
+	    "name": "value",
+	    "type": "integer",
+	    "description": "Some number"
+	}
+    ]
+}

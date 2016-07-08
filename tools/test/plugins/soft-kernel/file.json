@@ -1,0 +1,28 @@
+{
+    "name": "file",
+    "version": "0.1-SNAPSHOT-1",
+    "namespace": "http:\/\/info.emmc.eu",
+    "description": "Entity to represent files in",
+    "properties": [
+        {
+            "name": "filename",
+            "type": "string",
+            "description": "Name of file"
+        },
+        {
+            "name": "suffix",
+            "type": "string",
+            "description": "The suffix of the file"
+        },
+        {
+            "name": "size",
+            "type": "int64",
+            "description": "Size of file"
+        },
+        {
+            "name": "data",
+            "type": "blob",
+            "description": "The file contents"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "name": "GuessMyNumber",
+    "version": "0.1",
+    "initialState": "guess",
+    "states": [
+	{
+	    "name": "guess",
+	    "command": "proc-guess.js",
+	    "transitions":[
+		{
+		    "target": "evaluate",
+		    "name": "normalExit"
+		}	
+	    ]
+	},
+	{
+	    "name": "evaluate",
+	    "command": "proc-evaluate.js",
+	    "transitions":[
+		{
+		    "target": "guess",
+		    "name": "exitFailure"
+		},
+		{
+		    "target": "finished",
+		    "name": "normalExit"
+		}
+	    ]
+	},
+	{
+	    "name": "finished",
+	    "type": "final"
+	}
+    ]    
+}

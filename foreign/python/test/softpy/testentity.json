@@ -1,0 +1,51 @@
+{
+    "name": "TestEntity",
+    "version": "0.1",
+    "namespace": "sintef.soft.softpy.test",
+    "description": "",
+    "dimensions": [
+        {
+            "name": "N",
+            "description": ""
+        }
+    ],
+    "properties": [
+        {
+            "name": "teststring",
+            "type": "string",
+            "description": ""
+        },
+        {
+            "name": "testdouble",
+            "type": "double",
+            "description": ""
+        },
+        {
+            "name": "testint32",
+            "type": "int32",
+            "description": ""
+        },
+        {
+            "name": "testbool",
+            "type": "bool",
+            "description": ""
+        },
+        {
+            "name": "teststring_list",
+            "type": "string_list",
+	    "dims": [
+		"N"
+	    ],
+            "description": ""
+        },
+        {
+            "name": "testarray_double",
+            "type": "array_double",
+            "unit": "m",
+	    "dims": [
+		"N"
+	    ],
+            "description": ""
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "chemkin_meta",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "CHEMKIN input meta information.",
+    "dimensions": [],
+    "properties": [
+        {
+            "name": "description",
+            "type": "string",
+            "description": "Description of the system."
+        }
+    ]
+}

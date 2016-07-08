@@ -1,0 +1,31 @@
+if (SOFT5_INCLUDE_DIR)
+  set (SOFT5_FIND_QUIETLY TRUE)
+endif()
+
+
+find_package(PkgConfig QUIET)
+pkg_check_modules(_SOFT5 QUIET soft5)
+
+find_path(SOFT5_INCLUDE_DIR
+  NAMES
+    soft5/soft.h
+  HINTS
+    ${SOFT5_ROOT_DIR}
+    ${_SOFT5_INCLUDEDIR}
+  PATH_SUFFIXES
+    include
+  )
+
+find_library (SOFT5_KERNEL_LIBRARY        NAMES soft-kernel)
+find_library (SOFT5_SOFTC_LIBRARY         NAMES softc)
+find_library (SOFT5_NUMERICS_LIBRARY      NAMES soft-numerics-sim)
+
+set (SOFT5_INCLUDE_DIR "${SOFT5_INCLUDE_DIR}/soft5")
+
+INCLUDE (FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS (SOFT5 DEFAULT_MSG 
+  SOFT5_KERNEL_LIBRARY SOFT5_SOFTC_LIBRARY
+  SOFT5_INCLUDE_DIR)
+
+
+mark_as_advanced (SOFT5_KERNEL_LIBRARY SOFT5_SOFTC_LIBRARY SOFT5_NUMERICS_LIBRARY SOFT5_INCLUDE_DIR)

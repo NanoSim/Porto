@@ -1,0 +1,9 @@
+*.pyc
+
+softpy-test-datamodel.h5
+softpy-test-factory.h5
+softpy-test-entity.h5
+
+.gdb_history
+
+eu.nanosim.vasp.extraction.json

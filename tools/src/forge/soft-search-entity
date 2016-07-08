@@ -1,0 +1,88 @@
+#!/usr/bin/env softshell
+
+function ArgParse() {
+    this.ctx = {};
+};
+
+ArgParse.prototype.addArgument = function(xs,fn)
+{
+    for (var i = 0; i < xs.length; ++i) {
+	this.ctx[xs[i]] = fn;
+    }
+};
+
+ArgParse.prototype.parse = function(args)
+{
+    for (var i = 1; i < args.length; ++i) {
+	var keyvalue = args[i].split("=");	
+	if (this.ctx[keyvalue[0]] != undefined) {
+	    this.ctx[keyvalue[0]](keyvalue[1]);
+	}
+    }
+};
+
+metadata = function(obj) {    
+    var entities = [];
+    console.error(JSON.stringify(obj));
+    var client = new MongoClient(obj.uri);
+    var coll   = client.collection(obj.db, obj.coll);
+    var query = {"name":obj.entity_name};
+    var cursor = coll.find(query);
+    var bson   = cursor.next();
+    while (cursor.more()) {    
+	var o    = JSON.parse(bson.asString());
+	entities.push(o);
+	bson   = cursor.next();
+    }
+    return entities;
+};
+
+__main__ = function (args)
+{
+    try {
+	var parse = new ArgParse();
+	parse.addArgument(['-h', '--help'], function(v){
+	    print("help not available");
+	    return 0;
+	});
+
+	var state = (function(s){
+	    s.set = function(key, value){
+		s[key] = value;
+	    };
+	    return s;
+	})({});
+
+	parse.addArgument(['-db','--database'], function(db){
+	    state.set('db', db);
+	});
+	parse.addArgument(['--collection'], function(coll){
+	    state.set('coll', coll);
+	});
+	parse.addArgument(['--uri'], function(uri){
+	    state.set('uri', uri);
+	});
+	parse.addArgument(['--entity-name'], function(name){
+	    state.set('entity_name', name);
+	});
+	parse.addArgument(['--entity-version'], function(version){
+	    state.set('entity_version', version);
+	});
+	parse.addArgument(['--entity-namespace'], function(ns){
+	    state.set('entity_namespace', ns);
+	});
+	
+	parse.parse(args);
+	var entities = metadata(state);
+	print (entities.length);
+	
+	print(JSON.stringify(entities, undefined, 2));
+	
+	print('db = ' + state.db + '\nuri = ' + state.uri);
+    } catch (err) {
+	console.raw(err);
+	console.raw('\r\n');
+	return 1;
+    }
+    return 0;
+};

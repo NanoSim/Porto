@@ -1,0 +1,65 @@
+{
+    "name": "kmc_layers",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Describe the adsorbate layers for kinetic Monte Carlo simulations.  We do not factor out the sites into own entities, since a site position make no sence without a common reference.",
+    "dimensions": [
+	{
+	    "name": "nlayers",
+	    "description": "Number of layers."
+	},
+	{
+	    "name": "nsites",
+	    "description": "Number of sites."
+	}
+    ],
+    "properties": [
+        {
+            "name": "layers",
+            "type": "string_list",
+	    "dims": ["nlayers"],
+            "description": "Name of each layer."
+        },
+        {
+            "name": "site_types",
+            "type": "string_list",
+	    "dims": ["nsites"],
+            "description": "Unique name of each site (e.g. top_0, bridge_1)."
+        },
+        {
+            "name": "layer_index",
+            "type": "int",
+	    "dims": ["nsites"],
+            "description": "Index of layer that each site belongs to. First index is zero."
+        },
+        {
+            "name": "site_positions",
+            "type": "double",
+	    "dims": ["nsites", "ncoords"],
+	    "unit": "Angstrom",
+            "description": "Position of each site."
+        },
+        {
+            "name": "initial_species",
+            "type": "string_list",
+	    "dims": ["nsites"],
+            "description": "Name of initial species occupying each site (default_species in xml)."
+        },
+        {
+            "name": "site_tags",
+            "type": "string_list",
+	    "dims": ["nsites"],
+            "description": "Tags associated with each site (unsure what it is used for...)."
+        },
+        {
+            "name": "default_layer",
+            "type": "string",
+            "description": "Name of default layer (the layer facing the gas phase???)."
+        },
+        {
+            "name": "substrate_layer",
+            "type": "string",
+            "description": "Name of substrate layer (the layer facing the substrate???)."
+        }
+    ]
+}

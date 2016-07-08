@@ -1,0 +1,84 @@
+@{
+  var cppapi = require('soft.forge.cppapi');
+
+  ENTITY = soft.model.name.toUpperCase();
+  entity = soft.model.name.toLowerCase();
+  Entity = entity.charAt(0).toUpperCase() + entity.slice(1);
+
+  propertyType = function(type, rank){
+    var rank = typeof rank !== 'undefined' ?  rank : 0;
+
+  };
+
+  attributes = (function(){
+      var attr = [];
+      soft.model.properties.forEach(function (entry){
+    var o = {};
+    var rank = (typeof entry.dims !== 'undefined' ? entry.dims.length : 0);
+    o.name = entry.name;
+    o.rank = rank
+      o.type = cppapi.type_to_cpp(entry.type, rank);
+    o.desc = (entry.description != undefined ? "/* " + entry.description + " */" : "");
+    o.dims = entry.dims;
+    attr.push(o);
+  })
+  return attr;
+    })();
+
+  createArgs = (function(){
+      var ret = [];
+      if (soft.model.dimensions != undefined) {
+  soft.model.dimensions.forEach(function (d){
+      ret.push("StdUInt " + d.name);
+    });
+      }
+      return ret;
+    })();
+
+  attrDeclList = (function(){
+      var as = [];
+      attributes.forEach(function(entry){
+    as.push(entry.type + " " + entry.name + ";" + entry.desc);
+  });
+      return as;
+    })();
+
+  undefined;
+}
+#ifndef @{ENTITY}_ENTITY_H_DEF
+#define @{ENTITY}_ENTITY_H_DEF
+
+#include <softns.h>
+#include <softtypes.h>
+#include <ientity.h>
+
+
+SOFT_BEGIN_NAMESPACE
+
+class @{Entity} : public IEntity
+{
+ public:
+
+  SOFT_ENTITY_METADATA("@{entity}", "@soft.model.namespace", "@soft.model.version")
+    @{createArgs.length == 1 ? "explicit " : ""}@{Entity} (@{createArgs.join(", ")});
+  explicit @{Entity}(std::string const &);
+  explicit @{Entity}(IEntity const *);
+  explicit @{Entity}(IDataModel const *);
+  virtual ~@{Entity}();
+
+  static IEntity* create (std::string const &uuid = std::string());
+  virtual void save (IDataModel *) const override;
+  virtual void load (IDataModel const *) override;
+
+  virtual std::vector<std::string> dimensions() const override;
+  virtual int getDimensionSize(std::string const &) const override;
+
+  @{attrDeclList.join("\n  ");}
+ private:
+  class Private;
+  Private *d;
+};
+
+SOFT_END_NAMESPACE
+
+#endif // @{ENTITY}_ENTITY_H_DEF

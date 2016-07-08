@@ -1,0 +1,46 @@
+{
+    "name": "chemkin_thermo",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Thermodynamic data for a species represented with NASA polynomials as used by Chemkin.",
+    "dimensions": [
+	{
+	    "name": "nranges",
+	    "description": "Number temperature ranges.  Normally 2."
+	},
+	{
+	    "name": "npar",
+	    "description": "Number of thermodynamical coefficients.  Always 7."
+	}
+    ],
+    "properties": [
+        {
+            "name": "species",
+            "type": "string",
+            "description": "Name of the species whos thermodynamics is described by this instance."
+        },
+        {
+            "name": "formula",
+            "type": "string",
+            "description": "Chemical formula of the species."
+        },
+        {
+            "name": "description",
+            "type": "string",
+            "description": "Description of the system."
+        },
+        {
+            "name": "temperatures",
+            "type": "double",
+	    "dims": ["nranges+1"],
+	    "unit": "C",
+            "description": "Temperatures T0 < T1 < ... < Tn defining the borders of the temperature ranges."
+        },
+        {
+            "name": "coefficients",
+            "type": "double",
+	    "dims": ["nranges", "npar"],
+            "description": "Thermodynamical coefficients a1,.., a7."
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "simple",
+    "version": "0.1",
+    "namespace": "ns",
+    "dimensions:":  [
+	{ "name": "N" }
+    ],
+    "properties": [
+        {
+            "name": "a",
+            "type": "int"
+        },
+	{
+	    "name": "b",
+	    "type": "int",
+	    "dims": ["N"]
+	},
+	{
+	    "name": "c",
+	    "type": "double",
+	},
+	{
+	    "name": "d",
+	    "type": "double",
+	    "dims": ["N"]
+	},
+	{
+	    "name": "e",
+	    "type": "string"
+	}
+    ]
+}

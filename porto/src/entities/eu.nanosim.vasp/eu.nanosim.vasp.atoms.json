@@ -1,0 +1,124 @@
+{
+    "name": "Atoms",
+    "version": "0.1",
+    "namespace": "http://sintef.no/meta/soft",
+    "description": "An ASE Atoms object",
+    "dimensions": [
+        {
+            "name": "natoms",
+            "description": "Number of atoms."
+        },
+        {
+            "name": "ncellvecs",
+            "description": "Number of cell vectors (a, b, c). Always 3."
+        },
+        {
+            "name": "ncoords",
+            "description": "Number coordinates (x, y, z). Always 3."
+        },
+        {
+            "name": "nconstraints",
+            "description": "Number of constraints."
+        },
+        {
+            "name": "ninfo",
+            "description": "Length of list with additional info."
+        },
+        {
+            "name": "nadsorbate_info",
+            "description": "Length of list with adsorbate info."
+        }
+    ],
+    "properties": [
+        {
+            "name": "positions",
+            "type": "double",
+	    "dims": ["natoms", "ncoords"],
+	    "unit": "Angstrom",
+            "description": "Atomic positions in Cartesian coordinates."
+        },
+        {
+            "name": "numbers",
+            "type": "int32",
+	    "dims": ["natoms"],
+            "description": "Atomic numbers."
+        },
+        {
+            "name": "tags",
+            "type": "int32",
+	    "dims": ["natoms"],
+            "description": "Special purpose tags."
+        },
+        {
+            "name": "momenta",
+            "type": "double",
+	    "dims": ["natoms", "ncoords"],
+	    "unit": "u Å/fs",
+            "description": "Momenta."
+        },
+        {
+            "name": "masses",
+            "type": "double",
+	    "dims": ["natoms"],
+	    "unit": "u",
+            "description": "Atomic masses."
+        },
+        {
+            "name": "initial_magnetic_moments",
+            "type": "double",
+	    "dims": ["natoms"],
+	    "unit": "Bohr",
+            "description": "Initial local magnetic moments (magmoms)."
+        },
+        {
+            "name": "initial_charges",
+            "type": "double",
+	    "dims": ["natoms"],
+	    "unit": "e",
+            "description": "Initial charges."
+        },
+	{
+            "name": "cell",
+            "type": "double",
+	    "dims": ["ncellvecs", "ncoords"],
+	    "unit": "Angstrom",
+            "description": "Unit cell vectors."
+        },
+	{
+            "name": "celldisp",
+            "type": "double",
+	    "dims": ["ncoords"],
+	    "unit": "Angstrom",
+            "description": "Displacement of unit cell."
+        },
+	{
+            "name": "pbc",
+            "type": "int32",
+	    "dims": ["ncellvecs"],
+            "description": "Whether we have periodic boundary conditions along the a, b, or c directions.  Change this to an array of bools when that is supported by SOFT."
+        },
+	{
+            "name": "constraints",
+            "type": "string_list",
+	    "dims": ["nconstraints"],
+            "description": "String representations of all constraints.  Special purpose."
+        },
+	{
+            "name": "calculator_pickle",
+            "type": "string",
+            "description": "Pickled value of attached calculator.  This has no physical meaning, but is convinient for storing and retriving an attached ASE calculator."
+        },
+	{
+            "name": "info",
+            "type": "string_list",
+	    "dims": ["ninfo"],
+            "description": "Additional information in the form of key=value pairs.  Typically used for attaching information about space group etc..."
+        },
+	{
+            "name": "adsorbate_info",
+            "type": "string_list",
+	    "dims": ["nadsorbate_info"],
+            "description": "Additional information about adsorbates in the form of key=value pairs.  Special purpose."
+        }
+    ]
+}

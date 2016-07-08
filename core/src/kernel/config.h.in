@@ -1,0 +1,12 @@
+/* -*- Mode: C -*- */
+
+/* SOFT version number */
+#define SOFT_MAJOR_VERSION @SOFT_MAJOR_VERSION@
+#define SOFT_MINOR_VERSION @SOFT_MINOR_VERSION@
+#define SOFT_PATCH_VERSION @SOFT_PATCH_VERSION@
+
+
+/* SOFT base library, e.g. "/usr/local/lib/soft5" */
+#ifndef SOFTBASE
+# define SOFTBASE "@CMAKE_INSTALL_PREFIX@/@SOFTBASE@"
+#endif

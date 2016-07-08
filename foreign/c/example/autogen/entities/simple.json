@@ -1,0 +1,30 @@
+{
+    "name": "simple",
+    "version": "1.0",
+    "namespace": "http://sintef.no/TR/metadata",
+    "dimensions":[
+	{
+	    "name": "NI"
+	},
+	{
+	    "name": "NJ"
+	}
+    ],
+    "properties":[
+	{
+	    "name": "A",
+	    "type": "double",
+	    "dims": ["NI","NJ"]
+	},
+	{
+	    "name": "x",
+	    "type": "double",
+	    "dims": ["NI"]
+	},
+	{
+	    "name": "Ax",
+	    "type": "double",
+	    "dims": ["NJ"]
+	}
+    ]
+}

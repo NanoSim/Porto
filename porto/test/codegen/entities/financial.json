@@ -1,0 +1,11 @@
+{
+    "name": "financial",
+    "version": "0.1-SNAPSHOT-1",
+    "namespace": "glassburet",
+    "properties":[
+	{
+	    "name": "amount",
+	    "type": "double"
+	}
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "name": "kmos",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Collection of input data for KMOS.",
+    "dimensions": [
+	{
+	    "name": "nspecies",
+	    "description": "Number of species."
+	},
+	{
+	    "name": "nprocesses",
+	    "description": "Number of processes."
+	}
+    ],
+    "properties": [
+        {
+            "name": "meta",
+            "type": "eu.nanosim.vasp.kmos_meta",
+            "description": "KMOS meta information like author, model name, etc."
+        },
+        {
+            "name": "species",
+            "type": "eu.nanosim.vasp.atoms",
+	    "dims": ["nspecies"],
+            "description": "List of all species.  Can occupy the sites.  An empth species is represented by an empty atoms entity (natoms=0)."
+        },
+        {
+            "name": "lattice",
+            "type": "eu.nanosim.vasp.atoms",
+            "description": "Atoms entity specifying the lattice structure as well as the cell size."
+        },
+        {
+            "name": "layers",
+            "type": "eu.nanosim.vasp.kmc_layers",
+            "description": "Entity defining the layers and associated sites."
+        },
+        {
+            "name": "processes",
+            "type": "eu.nanosim.vasp.kmc_process",
+	    "dims": ["nprocesses"],
+            "description": "List of possible processes with associated reaction rates."
+        },
+        {
+            "name": "process_parameters",
+            "type": "eu.nanosim.vasp.kmc_process_parameters",
+            "description": "Process parameters used in the equations for the reaction rates."
+        },
+        {
+            "name": "model_parameters",
+            "type": "eu.nanosim.vasp.kmos_model_parameters",
+            "description": "Model parameters used by KMOS."
+        },
+        {
+            "name": "fillvalues",
+            "type": "eu.nanosim.vasp.kmos_fillvalues",
+            "description": "Special values of different types indicating that no data is available."
+        }
+    ]
+}

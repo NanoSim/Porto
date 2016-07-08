@@ -1,0 +1,33 @@
+{
+    "name": "reference",
+    "version": "1.0-SNAPSHOT-1",
+    "namespace": "http://info.emmc.eu",
+    "description": "Generic data source reference entity",
+    "properties": [
+	{
+	    "name": "uri",
+	    "type": "string",
+	    "description": "Resource locator"
+	},
+	{
+	    "name": "created",
+	    "type": "string",
+	    "description": "Date and time of the resource creation"
+	},
+	{
+	    "name": "owner",
+	    "type": "string",
+	    "description": "Owner of the resource"
+	},
+	{
+	    "name": "lastModified",
+	    "type": "string",
+	    "description": "Date and time when the resource was last modified"
+	},
+	{
+	    "name": "sha1",
+	    "type": "blob",
+	    "description": "SHA-1 hash checksum"
+	}
+    ]
+}

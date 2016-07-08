@@ -1,0 +1,56 @@
+{
+    "name": "simple",
+    "version": "1.0",
+    "namespace": "local",
+    "dimensions": [
+	{"name": "NI", "description": "Number of columns"},
+	{"name": "NJ", "description": "Number of rows"},
+	{"name": "NK", "description": "Number of K"},
+	{"name": "NL", "description": "Number of L"}
+    ],
+    "properties": [
+	{
+	    "name": "text",
+	    "type": "string"
+	},
+	{
+	    "name": "textlist",
+	    "type": "string",
+	    "dims": ["NI"]
+	},
+	{
+	    "name": "number",
+	    "type": "int32", 
+	    "description": "some number"
+	},
+	{
+	    "name": "numberarray",
+	    "type": "int32",
+	    "dims": ["NI"],
+	    "description": "some number"
+	},
+	{
+	    "name": "doubleNumber",
+	    "type": "double"
+	},
+	{
+	    "name": "doubleArray1",
+	    "type": "double",
+	    "dims": ["NI"]
+	},
+	{
+	    "name": "doubleArray2",
+	    "type": "double",
+	    "dims": ["NI", "NJ"]
+	},
+	{
+	    "name": "doubleArray3",
+	    "type": "double",
+	    "dims": ["NI", "NJ", "NK"]
+	},
+	{
+	    "name": "FloatNumber",
+	    "type": "float"
+	}
+    ]
+}

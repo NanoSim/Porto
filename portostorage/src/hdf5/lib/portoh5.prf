@@ -1,6 +1,0 @@
-isEmpty (portoh5_defined) {
-  CONFIG *= porto
-  CONFIG *= hdf5
-  LIBS   += -lportoh5  
-  portoh5_defined = true
-}

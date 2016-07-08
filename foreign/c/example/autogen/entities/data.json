@@ -1,0 +1,50 @@
+{
+    "name": "data",
+    "version": "0.1-SNAPSHOT-3",
+    "namespace": "http://sintef.no/TR/metadata",
+    "dimensions":[
+	{"name": "ni"},
+	{"name": "nj"},
+	{"name": "nx"},
+	{"name": "newdim"}
+    ],
+    "properties":[
+	{
+	    "name": "new_property",
+	    "type": "double",
+	    "dims": ["newdim*3"]
+	},
+	{
+	    "name": "thelist",
+	    "type": "double",
+	    "description": "some list",
+	    "dims": ["nx", "ni", "nj"]
+	},
+	{
+	    "name": "value",
+	    "type": "double",
+	    "description": "foo as in bar"
+	},
+	{
+	    "name": "jesper",
+	    "type": "double",
+	    "dims": ["ni-1","nj"]
+	},
+	{
+	    "name": "baz",
+	    "type": "double",
+	    "dims": ["(ni-1)*nj"]
+	},
+	{
+	    "name": "ia",
+	    "type": "int",
+	    "dims": ["ni", "nj-2"]
+	},
+	{
+	    "name": "uia",
+	    "type": "int",
+	    "dims": ["(ni-2)*nj"]
+	}
+	
+    ]
+}

@@ -1,8 +1,0 @@
-isEmpty(doxyfilePrfDefined) {
-  doxygen.target = doxygen
-  doxygen.commands = doxygen
-  QMAKE_EXTRA_TARGETS += doxygen 
-  QMAKE_CLEAN += doc/html/* doc/latex/*
-	   
-  doxyfilePrfDefined = true
-}

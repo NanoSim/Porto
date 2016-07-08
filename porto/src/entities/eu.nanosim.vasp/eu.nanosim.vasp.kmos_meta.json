@@ -1,0 +1,29 @@
+{
+    "name": "kmos_meta",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "KMOS input meta information.",
+    "dimensions": [],
+    "properties": [
+        {
+            "name": "author",
+            "type": "string",
+            "description": "Name of author of this simulation."
+        },
+        {
+            "name": "email",
+            "type": "string",
+            "description": "Email of author."
+        },
+        {
+            "name": "model_name",
+            "type": "string",
+            "description": "Name of this simulation."
+        },
+        {
+            "name": "model_dimension",
+            "type": "int32",
+            "description": "Index of the cell axis pointing out of the surface (??)."
+        }
+    ]
+}

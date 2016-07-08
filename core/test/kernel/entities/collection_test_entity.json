@@ -1,0 +1,13 @@
+{
+    "name": "collection_test_entity",
+    "version": "1.0",
+    "namespace": "porto",
+    "properties": [
+        {
+            "name": "coefficient",
+            "type": "double",
+            "description": "Some ratio"
+        }
+    ]
+}
+

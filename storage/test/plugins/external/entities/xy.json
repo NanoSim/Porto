@@ -1,0 +1,16 @@
+{
+    "name": "XY",
+    "version": "0.1",
+    "namespace": "sintef",
+    "dimensions": [
+	{"name": "I"},
+	{"name": "J"}
+    ],
+    "properties": [
+	{
+	    "name": "data",
+	    "type": "double",
+	    "dims": ["I","J"]
+	}
+    ]
+}

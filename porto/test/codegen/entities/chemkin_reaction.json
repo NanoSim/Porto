@@ -1,0 +1,135 @@
+{
+    "name": "chemkin_reaction",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Description of a thermodynamical reaction with rate constant: k(T) = A * T**b * exp(-Ea/(R*T)) where A, b and Ea are parameters, T the temperature and R the molar gas constant (8.31451 J/(mol K)).  See http://www.frad.t.u-tokyo.ac.jp/public/chemkin/CKm_inp.html.en for more details.",
+    "dimensions": [
+        {
+            "name": "nreactants",
+            "description": "Number of reactants (Chemkin requires 0 < nreactants < 4)."
+        },
+        {
+            "name": "nproducts",
+            "description": "Number of products (Chemkin requires 0 < nreactants < 4)."
+        },
+        {
+            "name": "ntroe",
+            "description": "Number of parameters for evaluating the pressure dependence using Troe's formula.  Can be 0 (not used), 3 or 4."
+        },
+        {
+            "name": "nenhancement_factors",
+            "description": "Number of enhancement factors.  Zero indicates that they are not used."
+        },
+        {
+            "name": "nplog",
+            "description": "Number of intervals the pressure dependency of the rate coefficients is described.  May be zero for no pressure dependency."
+        }
+    ],
+    "properties": [
+        {
+            "name": "reactants",
+            "type": "string",
+            "dims": [
+                "nreactants"
+            ],
+            "description": "Name of each reactant species."
+        },
+        {
+            "name": "products",
+            "type": "string",
+            "dims": [
+                "nproducts"
+            ],
+            "description": "Name of each product species."
+        },
+        {
+            "name": "third_body",
+            "type": "bool",
+            "description": "Whether the reaction occurs in precense of catalytical third-body (e.g. a surface)."
+        },
+        {
+            "name": "A",
+            "type": "double",
+            "description": "Preexponential factor in the rate constant. [FIXME define the unit. As formulated in the documentation of the CHEMKIN II file format, it depends on b and the reaction order... consider use a saner expression for the reaction constant for this entity.]"
+        },
+        {
+            "name": "b",
+            "type": "double",
+            "description": "Parameter in the rate constant, see entity description."
+        },
+        {
+            "name": "Ea",
+            "type": "double",
+            "unit": "J/mol",
+            "description": "Activation energy."
+        },
+        {
+            "name": "A_low",
+            "type": "double",
+            "description": "Preexponential factor for the low-pressure limit.  Support fillvalues.  FIXME: define the unit."
+        },
+        {
+            "name": "b_low",
+            "type": "double",
+            "description": "Value of b in the low-pressure limit.  Support fillvalues."
+        },
+        {
+            "name": "Ea_low",
+            "type": "double",
+            "unit": "J/mol",
+            "description": "Activation energy in the low-pressure limit.  Support fillvalues."
+        },
+        {
+            "name": "troe",
+            "type": "double",
+            "dims": [
+                "ntroe"
+            ],
+            "description": "Parameters a, T***, T* and T** when using Troe's formula to express pressure dependency.  The last parameter T** is optional."
+        },
+        {
+            "name": "enhancement_species",
+            "type": "string",
+            "dims": [
+                "nenhancement_factors"
+            ],
+            "description": "Name of species in the buffer gas corresponding to the enhancement_factors."
+        },
+        {
+            "name": "enhancement_factors",
+            "type": "double",
+            "dims": [
+                "nenhancement_factors"
+            ],
+            "description": "Enhancement factors for describing dependency of the rate parameters on the buffer gas."
+        },
+        {
+            "name": "P_plog",
+            "type": "double",
+            "dims": [
+                "nplog+1"
+            ],
+            "unit": "Pa",
+            "description": "Pressures defining the borders of the nplog pressure intervals for defining pressure dependency of the rate constant.  Should be increasing."
+        },
+        {
+            "name": "A_plog",
+            "type": "double",
+            "dims": [
+                "nplog"
+            ],
+            "description": "Preexponential factors for pressure dependency of the rate constant.  FIXME: define the unit."
+        },
+        {
+            "name": "b_plog",
+            "type": "double",
+            "description": "Values of b for pressure dependency of the rate constant."
+        },
+        {
+            "name": "Ea_plog",
+            "type": "double",
+            "unit": "J/mol",
+            "description": "Activation energy for pressure dependency of the rate constant."
+        }
+    ]
+}

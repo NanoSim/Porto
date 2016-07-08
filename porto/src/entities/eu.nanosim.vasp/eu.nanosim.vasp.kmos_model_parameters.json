@@ -1,0 +1,10 @@
+{
+    "name": "kmos_model_parameters",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Input model parameters for KMOS.",
+    "dimensions": [
+    ],
+    "properties": [
+    ]
+}

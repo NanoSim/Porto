@@ -1,7 +1,0 @@
-Makefile
-Makefile.*
-*~
-*.pdb
-[#]*[#]
-[dD]ebug/
-[rR]elease/

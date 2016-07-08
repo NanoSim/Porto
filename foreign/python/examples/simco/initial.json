@@ -1,0 +1,41 @@
+{
+    "name": "initial",
+    "version": "0.1-SNAPSHOT-1",
+    "namespace": "http://simcoflow.sintef.no/metadata",
+    "dimensions":[
+	{
+	    "name": "m"
+	},
+	{
+	    "name": "n"
+	}
+    ],
+    "properties":[
+	{
+	    "name": "startt",
+	    "type": "double",
+	    "unit": "s"
+	},
+	{
+	    "name": "endt",
+	    "type": "double",
+	    "unit": "s"
+	},
+	{
+	    "name": "sample_interval",
+	    "type": "double",
+	    "unit": "s"
+	},
+	{
+	    "name": "dt",
+	    "type": "double",
+	    "unit": "s"
+	},
+	{
+	    "name": "nu",
+	    "type": "double",	    
+	    "unit": "Pa*s",
+	    "description": "Viscosity"		
+	}
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "Person",
+    "version": "0.2.4",
+    "namespace": "http://sintef.no/meta/soft",
+    "description": "",
+    "dimensions": [
+        {
+            "name": "number_of_skills",
+            "description": ""
+        }
+    ],
+    "properties": [
+        {
+            "name": "name",
+            "type": "string",
+            "description": ""
+        },
+        {
+            "name": "age",
+            "type": "int32",
+            "description": ""
+        },
+        {
+            "name": "skills",
+            "type": "string_list",
+	    "dims": [
+		"number_of_skills"
+	    ],
+            "description": ""
+        }
+    ]
+}

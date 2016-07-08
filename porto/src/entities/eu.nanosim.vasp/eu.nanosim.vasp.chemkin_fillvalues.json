@@ -1,0 +1,24 @@
+{
+    "name": "chemkin_fillvalues",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Special values for different types that indicate that no data is available..",
+    "dimensions": [],
+    "properties": [
+        {
+            "name": "double_fill",
+            "type": "double",
+            "description": "A special value indicating that no data is available."
+        },
+        {
+            "name": "int32_fill",
+            "type": "int32",
+            "description": "A special value indicating that no data is available."
+        },
+        {
+            "name": "string_fill",
+            "type": "string",
+            "description": "A special value indicating that no data is available."
+        }
+    ]
+}

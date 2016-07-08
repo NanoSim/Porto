@@ -1,0 +1,50 @@
+{
+    "name": "chemkin",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Collection of input to CHEMKIN.",
+    "dimensions": [
+	{
+	    "name": "nspecies",
+	    "description": "Number of species."
+	},
+	{
+	    "name": "ntermo",
+	    "description": "Number of species that we define the thermodynamic data for."
+	},
+	{
+	    "name": "nreactions",
+	    "description": "Number of reactions."
+	}
+    ],
+    "properties": [
+        {
+            "name": "meta",
+            "type": "eu.nanosim.vasp.chemkin_meta",
+            "description": "KMOS meta information like description, etc."
+        },
+        {
+            "name": "species",
+            "type": "eu.nanosim.vasp.atoms",
+	    "dims": ["nspecies"],
+            "description": "List of all species."
+        },
+        {
+            "name": "termo",
+            "type": "eu.nanosim.vasp.chemkin_termo",
+	    "dims": ["ntermo"],
+            "description": "List of entities with thermo dynamic data for species that we are not using default values for."
+        },
+        {
+            "name": "reactions",
+            "type": "eu.nanosim.vasp.chemkin_termo",
+	    "dims": ["nreactions"],
+            "description": "List of reaction entities."
+        },
+        {
+            "name": "fillvalues",
+            "type": "eu.nanosim.vasp.chemkin_fillvalues",
+            "description": "Special values of different types indicating that no data is available."
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "name": "physics",
+    "version": "0.1-SNAPSHOT-2",
+    "namespace": "glassburet",
+    "properties":[
+	{
+	    "name": "coefficient",
+	    "type": "double"
+	}
+    ]
+}

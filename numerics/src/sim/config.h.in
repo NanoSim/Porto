@@ -1,0 +1,4 @@
+#ifndef PLUGIN_DIR
+#define PLUGIN_DIR "@CMAKE_INSTALL_PREFIX@/@SIMUDF_PLUGINS_DIR@"
+#endif
+

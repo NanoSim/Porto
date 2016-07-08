@@ -1,0 +1,25 @@
+#!/usr/bin/env softshell
+
+__main__ = function (args)
+{
+    if (args.length < 4) {
+	console.raw("usage: " + args[0] + " [schema] [template] [output]\n");
+	return 1;
+    }
+    try {
+
+	var entitySchema      = args[1],
+	    generatorTemplate = args[2],
+	    targetFile        = args[3],
+	    entityObj         = JSON.parse(readFile(entitySchema)),
+	    controller        = require('soft.mvc').create({
+		model: entityObj,
+		view: generatorTemplate	   
+	    }),
+	    output = controller();
+	
+	writeFile(targetFile, output);
+    } catch (err) {
+	console.raw(err + "\n");
+    }
+};

@@ -1,0 +1,17 @@
+{
+    "name": "Range",
+    "version":"0.1",
+    "description":"Guess My Number Range",
+    "properties":[
+	{
+	    "name": "min",
+	    "type": "integer",
+	    "description": "Lowest legal value"
+	},
+	{
+	    "name": "max",
+	    "type": "integer",
+	    "description": "Highest legal value"
+	}
+    ]
+}
