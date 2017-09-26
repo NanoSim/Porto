@@ -8,23 +8,30 @@ set (CMAKE_AUTOMOC ON)
 configure_file("config.h.in" "config.h")
 
 set (LINK_LIBS ${LINK_LIBS}
-  ${BSON_LIBRARIES}
+  # ${BSON_LIBRARIES} # TODO: It seems this is not needed for the minimal build
   Qt5::Core
   Qt5::Network
   Qt5::Script
-  Qt5::Concurrent) 
+  Qt5::Concurrent)
 
 aux_source_directory(. SRC_LIST)
 add_library (${PROJECT_NAME} SHARED ${SRC_LIST})
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${BSON_INCLUDE_DIR})
+include_directories(
+   ${CMAKE_CURRENT_BINARY_DIR}
+   # ${BSON_INCLUDE_DIR} # TODO: It seems this is not needed for the minimal build
+   )
+
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_constexpr)
 target_link_libraries(${PROJECT_NAME} ${LINK_LIBS})
 
+# Export/import declaration for Windows
+generate_export_header(${PROJECT_NAME})
+
 # Expose public includes to other subprojects
-set(${PROJECT_NAME}_INCLUDE_DIRS 
-  ${PROJECT_SOURCE_DIR} 
-  ${CMAKE_CURRENT_BINARY_DIR} 
+set(${PROJECT_NAME}_INCLUDE_DIRS
+  ${PROJECT_SOURCE_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}
   ${BSON_INCLUDE_DIR}
   CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
 
@@ -33,7 +40,7 @@ set(${PROJECT_NAME}_LIBS
   ${LINK_LIBS}
   CACHE INTERNAL "${PROJECT_NAME}: Link Libs" FORCE)
 
-install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${LIB_INSTALL_DIR})
+install_runtime_library(${PROJECT_NAME} ${LIB_INSTALL_DIR})
 install(DIRECTORY .
   DESTINATION ${INCLUDE_INSTALL_DIR}
   FILES_MATCHING PATTERN "*.h")

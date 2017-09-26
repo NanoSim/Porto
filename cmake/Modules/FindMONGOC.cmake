@@ -18,11 +18,9 @@ find_path(MONGOC_INCLUDE_DIR
   PATH_SUFFIXES
     include
 )
-
 set(MONGOC_INCLUDE_DIR "${MONGOC_INCLUDE_DIR}/libmongoc-1.0")
 
-if(WIN32 AND NOT CYGWIN)
-  if(MSVC)
+if(WIN32 AND MSVC)
     find_library(MONGOC
       NAMES
         "mongoc-1.0"
@@ -32,23 +30,20 @@ if(WIN32 AND NOT CYGWIN)
         bin
         lib
     )
-
     mark_as_advanced(MONGOC)
     set(MONGOC_LIBRARIES ${MONGOC} ws2_32)
-  else()
-      # bother supporting this?
-  endif()
+
 else()
 
   find_library(MONGOC_LIBRARY
     NAMES
       mongoc-1.0
     HINTS
+      ${MONGOC_ROOT_DIR}
       ${_MONGOC_LIBDIR}
     PATH_SUFFIXES
       lib
   )
-
   mark_as_advanced(MONGOC_LIBRARY)
 
   find_package (Threads REQUIRED)
@@ -82,7 +77,7 @@ if (MONGOC_VERSION)
       "Could NOT find MONGOC version"
   )
 else ()
-   find_package_handle_standard_args(MONGOC "Could NOT find MONGOC uuuurh"
+   find_package_handle_standard_args(MONGOC DEFAULT_MSG
       MONGOC_LIBRARIES
       MONGOC_INCLUDE_DIR
   )

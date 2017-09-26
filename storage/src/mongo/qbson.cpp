@@ -1,5 +1,6 @@
 #include <QVector>
 #include <QList>
+#include <QStringList>
 #include <list>
 #include <string>
 #include <bson.h>
@@ -82,9 +83,10 @@ bool Bson :: appendString (char const * key, char const * value)
 bool Bson :: append (const char *key, soft::StdString const &value)
 {
   appendString(key, value.c_str());
+  return true;
 }
 
-bool Bson :: append (const char *key, Bson const &value) 
+bool Bson :: append (const char *key, Bson const &value)
 {
   return appendBson(key, value);
 }
@@ -155,11 +157,13 @@ bool Bson :: getBool (const char *key, bool &value) const
 bool Bson :: appendDouble(char const * key, double const &value)
 {
   auto isOk = BSON_APPEND_DOUBLE(bson.get(), key, value);
+  return isOk;
 }
 
 bool Bson :: appendFloat(char const * key, float const &value)
 {
   auto isOk = BSON_APPEND_DOUBLE(bson.get(), key, value);
+  return isOk;
 }
 
 bool Bson :: appendBinary (char const *key, QByteArray const &value)
@@ -173,7 +177,7 @@ bool Bson :: appendIntArray(char const *key, soft::StdIntArray const &value)
   bson_t array;
   uint idx = 0;
   bson_append_array_begin(bson.get(), key, strlen(key), &array);
-  for (auto v : value) {    
+  for (auto v : value) {
     bson_append_int32(&array, qPrintable(QString::number(idx++)), -1, v);
   }
   auto isOk = bson_append_array_end(bson.get(), &array);
@@ -195,7 +199,7 @@ bool Bson :: appendDoubleArray(char const *key, soft::StdDoubleArray const &valu
   bson_t array;
   uint idx = 0;
   bson_append_array_begin(bson.get(), key, strlen(key), &array);
-  for (auto v : value) {    
+  for (auto v : value) {
     bson_append_double(&array, qPrintable(QString::number(idx++)), -1, v);
   }
   auto isOk = bson_append_array_end(bson.get(), &array);
@@ -220,10 +224,10 @@ bool Bson :: appendDoubleArray2D(char const *key, soft::StdDoubleArray2D const &
       bson_append_double(&inner, qPrintable(QString::number(inner_idx++)), -1, d);
     }
     bson_append_array_end(&array, &inner);
-    
+
   }
   auto isOk = bson_append_array_end(bson.get(), &array);
-  return isOk; 
+  return isOk;
 }
 
 bool Bson :: append(char const *key, soft::StdDoubleArray2D const &value)
@@ -248,13 +252,13 @@ bool Bson :: appendDoubleArray3D(char const *key, soft::StdDoubleArray3D const &
 	bson_append_double(&inner2, qPrintable(QString::number(inner_idx2++)), -1, x);
       }
       bson_append_array_end(&inner, &inner2);
-      
+
     }
     bson_append_array_end(&array, &inner);
-    
+
   }
   auto isOk = bson_append_array_end(bson.get(), &array);
-  return isOk; 
+  return isOk;
 }
 
 bool Bson :: append(char const *key, soft::StdDoubleArray3D const &value)
@@ -339,12 +343,12 @@ bool Bson :: getStringList (char const * key, QStringList &value) const
 	   BSON_ITER_HOLDS_UTF8(&subiter)) {
       auto v = bson_iter_value(&subiter);
       QByteArray ba(v->value.v_utf8.str, v->value.v_utf8.len);
-      value << QString::fromUtf8(ba);      
+      value << QString::fromUtf8(ba);
     }
     return true;
   }
   return false;
-}  
+}
 
 bool Bson :: getIntArray(char const *key, soft::StdIntArray &value) const
 {
@@ -377,7 +381,7 @@ bool Bson :: get(char const *key, soft::StdIntArray &value) const
     while (bson_iter_next(&subiter) &&
 	   BSON_ITER_HOLDS_INT32(&subiter)) {
       auto v = bson_iter_value(&subiter);
-      value.push_back(v->value.v_int32);      
+      value.push_back(v->value.v_int32);
     }
     return true;
   }
@@ -395,7 +399,7 @@ bool Bson :: get(char const *key, soft::StdDoubleArray &value) const
     while (bson_iter_next(&subiter) &&
 	   BSON_ITER_HOLDS_DOUBLE(&subiter)) {
       auto v = bson_iter_value(&subiter);
-      value.push_back(v->value.v_double);      
+      value.push_back(v->value.v_double);
     }
     return true;
   }
@@ -418,7 +422,7 @@ bool Bson :: get(char const *key, soft::StdDoubleArray2D &value) const
       while (bson_iter_next(&subsubiter) &&
 	     BSON_ITER_HOLDS_DOUBLE(&subsubiter)) {
 	auto v = bson_iter_value(&subsubiter);
-	inner.push_back(v->value.v_double);      
+	inner.push_back(v->value.v_double);
       }
       value.push_back(inner);
     }
@@ -437,8 +441,8 @@ Bson Bson :: getBson(char const *key) const
     uint32_t len = 0;
     bson_iter_document(&iter, &len, &data);
     bson_t *bson = bson_new_from_data(data, len);
-    return Bson(bson);    
-  }  
+    return Bson(bson);
+  }
   return Bson();
 }
 
@@ -463,7 +467,7 @@ bool Bson :: get(char const *key, soft::StdDoubleArray3D &value) const
 	while (bson_iter_next(&subsubsubiter) &&
 	       BSON_ITER_HOLDS_DOUBLE(&subsubsubiter)) {
 	  auto v = bson_iter_value(&subsubsubiter);
-	  innerinner.push_back(v->value.v_double);      
+	  innerinner.push_back(v->value.v_double);
 	}
 	inner.push_back(innerinner);
       }
@@ -548,6 +552,7 @@ bson_t* Bson :: data() const
 Bson& Bson :: operator=(Bson const &other)
 {
   bson = other.bson;
+  return *this;
 }
 
 std::shared_ptr<struct _bson_t> Bson :: bsonPtr()
@@ -557,4 +562,3 @@ std::shared_ptr<struct _bson_t> Bson :: bsonPtr()
 
 BSON_END_NAMESPACE
 SOFT_END_NAMESPACE
-

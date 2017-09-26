@@ -2,7 +2,7 @@
 #define SOFTC_PRIVATE_H_DEF
 
 #ifdef __cplusplus
-#  define EXTERN extern "C" 
+#  define EXTERN extern "C"
 #else
 #  define EXTERN
 #endif
@@ -16,6 +16,7 @@ EXTERN struct _softc_t *softc_private_init(int argc, char *argv[]);
 EXTERN int softc_private_registered_storage_driver_count();
 EXTERN char **softc_private_get_storage_drivers();
 EXTERN const char *softc_private_uuidgen();
+EXTERN const char *softc_private_uuid_from_entity(const char *name, const char *version, const char *ns);
 EXTERN void softc_private_cleanup(struct _softc_t *self);
 
 #endif /* SOFTC_PRIVATE_H_DEF */

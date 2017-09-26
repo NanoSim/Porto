@@ -12,6 +12,11 @@ const unsigned char *from_softc_bytearray(const softc_bytearray_s bytearray)
   return bytearray->data();
 }
 
+size_t softc_bytearray_size(const softc_bytearray_s bytearray)
+{
+  return bytearray->size();
+}
+
 void softc_bytearray_destroy(softc_bytearray_s bytearray)
 {
   delete (bytearray);

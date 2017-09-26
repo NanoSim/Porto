@@ -107,11 +107,11 @@ void TripletStore::fromCSV(std::string const &csv) {
  */
 std::list<std::string> TripletStore :: findTriplets(const std::string &subj_, const std::string &pred_) const
 {
-  QString const &&subj = QString::fromStdString(subj_);
-  QString const &&pred = QString::fromStdString(pred_);
+  auto const subj = QString::fromStdString(subj_);
+  auto const pred = QString::fromStdString(pred_);
   std::list<std::string>retval;
 
-  Private::TripletHash::const_iterator i = d->triplets.find(subj);
+  auto i = d->triplets.find(subj);
   while (i != d->triplets.cend() && i.key() == subj) {
     if (pred.isNull() || pred == i.value().first) {
       retval.push_back(i.value().second.toStdString());
@@ -157,5 +157,12 @@ std::string TripletStore :: toRdf() const
   return byteArray.toStdString();
 }
 
+/*!
+  return number of triples
+ */
+int TripletStore :: size() const
+{
+  return d->triplets.size();
+}
 
 SOFT_END_NAMESPACE

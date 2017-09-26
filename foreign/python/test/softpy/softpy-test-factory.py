@@ -87,7 +87,7 @@ s2 = Structure(uuid=s.soft_get_id(), driver='hdf5',
 for name in 'id', 'meta_name', 'meta_version', 'meta_namespace':
     f = getattr(softpy, 'get_' + name)
     assert f(s) == f(s2)
-    
+
 assert s.soft_get_property_names() == s2.soft_get_property_names()
 
 for name in s.soft_get_property_names():
@@ -111,5 +111,11 @@ s4 = Structure3(uuid=s.soft_get_id(), driver='hdf5',
                 uri='softpy-test-factory.h5')
 
 
-Person = softpy.entity(open(os.path.join(thisdir, 'person.json')))
+Person = softpy.load_entity(os.path.join(thisdir, 'person.json'))
 jack = Person(name='Jack Daniels', age=42, skills=['tasting', 'Python', 'C'])
+
+
+import pickle
+import dill
+ss = pickle.dumps(jack)
+jack2 = pickle.loads(ss)

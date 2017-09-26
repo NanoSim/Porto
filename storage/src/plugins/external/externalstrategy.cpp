@@ -96,7 +96,10 @@ ExternalStrategy :: ExternalStrategy(const char *uri, const char *options)
   auto scheme = url.scheme();
   auto s = Singleton::get();
   if (!s.libraryMap.contains(scheme)) {
-    throw std::runtime_error("External Storage Strategy cannot load scheme plugin");
+    QString errormsg = QString("External Storage Strategy cannot load scheme plugin: %1 (%2)")
+      .arg(scheme)
+      .arg(uri);
+    throw std::runtime_error(errormsg.toStdString());
   }
   d = new ExternalStrategy::Private(uri, options);
   d->extPlugin = s.libraryMap[scheme];

@@ -22,6 +22,11 @@ const char * softc_uuidgen()
   return softc_private_uuidgen();
 }
 
+const char * softc_uuid_from_entity(const char *name, const char *version, const char *ns)
+{
+  return softc_private_uuid_from_entity(name, version, ns);
+}
+
 void softc_cleanup(softc_t* self)
 {
   softc_private_cleanup(self);

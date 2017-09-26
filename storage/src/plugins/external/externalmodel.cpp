@@ -30,7 +30,7 @@ ExternalModel :: ~ExternalModel()
 
 IDataModel *ExternalModel :: createModel()
 {
-  return new ExternalModel;
+  return new ExternalModel();
 }
 
 bool ExternalModel :: appendDimension (const char *key, StdUInt value)
@@ -151,6 +151,7 @@ bool ExternalModel :: appendInt32Array (const char *key, const std::vector<int32
       jsonArray.append(QJsonValue(v));
     }
     d->jsonObject.insert(key, jsonArray);
+    return true;
 }
 
 bool ExternalModel :: appendDoubleArray(const char *key, const std::vector<double> &value)
@@ -160,6 +161,7 @@ bool ExternalModel :: appendDoubleArray(const char *key, const std::vector<doubl
     jsonArray.append(QJsonValue(v));
   }
   d->jsonObject.insert(key, jsonArray);
+  return true;
 }
 
 bool ExternalModel :: appendByteArray  (const char *, const std::vector<unsigned char> &)

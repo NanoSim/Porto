@@ -15,8 +15,9 @@ softc_t * softc_init(int argc, char *argv[]);
 int       softc_storage_driver_count();
 char   ** softc_get_storage_drivers();
 const char * softc_uuidgen();
+const char * softc_uuid_from_entity(const char *name, const char *version, const char *ns);
 void      softc_cleanup(softc_t*);
 
 SOFTC_END_DECLS
 
-#endif 
+#endif

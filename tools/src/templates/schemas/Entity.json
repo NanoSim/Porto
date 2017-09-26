@@ -1,0 +1,87 @@
+{
+    "schema_name": "Entity",
+    "schema_version": "0.3",
+    "schema_namespace": "http://meta.emmc.eu",
+    "schema_dimensions": [
+    	{
+    	    "schema_name": "n-dimensions",
+    	    "schema_description": "Number of dimensions."
+    	},
+    	{
+    	    "schema_name": "n-properties",
+    	    "schema_description": "Number of properties."
+    	}
+    ],
+    "schema_forms": [
+	{
+	    "schema_name": "dimension",
+	    "schema_version": "0.3",
+	    "schema_namespace": "http://meta.emmc.eu/entity_form",
+	    "schema_properties": [
+		{
+		    "schema_name": "name",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "description",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		}
+	    ]
+	},
+	{
+	    "schema_name": "property",
+	    "schema_version": "0.3",
+	    "schema_namespace": "http://meta.emmc.eu",
+	    "schema_properties": [
+		{
+		    "schema_name": "name",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "type",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "unit",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "dims",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "description",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		}
+	    ]
+	}
+    ],
+    "schema_properties": [
+	{
+	    "schema_name": "name",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "version",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "namespace",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "description",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "dimensions",
+	    "schema_type": "http://meta.emmc.eu/entity_form/dimension/0.3",
+	    "schema_dimensions": ["ndimensions"]
+	},
+	{
+	    "schema_name": "properties",
+	    "schema_type": "http://meta.emmc.eu/entity_form/property/0.3",
+	    "schema_dimensions": ["nproperties"]
+	}
+    ]
+}

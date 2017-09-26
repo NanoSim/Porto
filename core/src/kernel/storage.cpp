@@ -11,13 +11,13 @@ class Storage::Private
   Private(char const *driver, char const *uri, const char *options)
     : strategy (createStrategy(driver, uri, options))
   {}
-  
+
   ~Private()
   {
     delete strategy;
     strategy = nullptr;
   }
-    
+
   IStorageStrategy *strategy;
 };
 
@@ -52,6 +52,7 @@ void Storage :: save (IEntity const *entity)
 
   entity->save(dataModel);
   d->strategy->store(dataModel);
+  delete dataModel;
 }
 
 /*!
@@ -66,7 +67,7 @@ void Storage :: load (IEntity *entity)
   dataModel->setMetaVersion(entity->metaVersion());
   dataModel->setMetaNamespace(entity->metaNamespace());
 
-  d->strategy->startRetrieve(dataModel);  
+  d->strategy->startRetrieve(dataModel);
   entity->load(dataModel);
   d->strategy->endRetrieve(dataModel);
 }

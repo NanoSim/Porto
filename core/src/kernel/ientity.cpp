@@ -59,7 +59,9 @@ IEntity* create (const std::string &uuid)
  */
 std::string IEntity :: id() const
 {
-  return d->uuid.toString().toStdString();
+  // QUuid will return curly the UUID with curly braces,
+  // we strip these off when returning the uuid-string
+  return d->uuid.toString().mid(1,36).toStdString();
 }
 
 /*!

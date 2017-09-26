@@ -1,0 +1,112 @@
+[ Size = 4
+    Reaction Data
+    (
+        Reversible  : 0
+        P Dependent : 0
+        Duplicate : 0
+        Reactants
+        (
+            Name :    CH4(S1) | Stoich : 1
+        )
+        Products
+        (
+            Name :        CH4 | Stoich : 1
+        )
+        Arrhenius
+        (
+            Forward A = 6.159e+20
+                    n = -2.54
+                    E = 23.999
+            Reverse A = 0
+                    n = 0
+                    E = 0
+        )
+        Third Bodies
+        (
+            Third Body : 0
+        )
+    )
+    Reaction Data
+    (
+        Reversible  : 0
+        P Dependent : 0
+        Duplicate : 0
+        Reactants
+        (
+            Name :        CH4 | Stoich : 1
+        )
+        Products
+        (
+            Name :    CH4(S1) | Stoich : 1
+        )
+        Arrhenius
+        (
+            Forward A = 7.553e+09
+                    n = -0.5
+                    E = -0
+            Reverse A = 0
+                    n = 0
+                    E = 0
+        )
+        Third Bodies
+        (
+            Third Body : 0
+        )
+    )
+    Reaction Data
+    (
+        Reversible  : 0
+        P Dependent : 0
+        Duplicate : 0
+        Reactants
+        (
+            Name :    CH4(S1) | Stoich : 1
+        )
+        Products
+        (
+            Name :    CH3(S1) | Stoich : 1
+            Name :      H(S2) | Stoich : 1
+        )
+        Arrhenius
+        (
+            Forward A = 3.711e+06
+                    n = 0.21
+                    E = 100.494
+            Reverse A = 0
+                    n = 0
+                    E = 0
+        )
+        Third Bodies
+        (
+            Third Body : 0
+        )
+    )
+    Reaction Data
+    (
+        Reversible  : 0
+        P Dependent : 0
+        Duplicate : 0
+        Reactants
+        (
+            Name :    CH3(S1) | Stoich : 1
+            Name :      H(S2) | Stoich : 1
+        )
+        Products
+        (
+            Name :    CH4(S1) | Stoich : 1
+        )
+        Arrhenius
+        (
+            Forward A = 3.254e+11
+                    n = 0.2
+                    E = 80.207
+            Reverse A = 0
+                    n = 0
+                    E = 0
+        )
+        Third Bodies
+        (
+            Third Body : 0
+        )
+    )
+]

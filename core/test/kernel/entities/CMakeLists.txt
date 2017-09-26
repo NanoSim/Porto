@@ -8,10 +8,9 @@ set (SRC_LIST ${SRC_LIST})
 # soft-forge
 FILE(GLOB json-sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.json)
 foreach(JSON_SRC ${json-sources})
-#  message("${CMAKE_CURRENT_SOURCE_DIR}/${JSON_SRC}")
   string(REGEX REPLACE "\.json$" ".c" GEN_SRC ${JSON_SRC})
   string(REGEX REPLACE "\.json$" ".h" GEN_HDR ${JSON_SRC})
-#  message("${CMAKE_CURRENT_SOURCE_DIR}/${JSON_SRC} - ${GEN_SRC}")
+
   add_forge(${CMAKE_CURRENT_SOURCE_DIR}/${JSON_SRC}
     ${C_SOURCE_TEMPLATE} ${test-entities_BINARY_DIR}/${GEN_SRC}
     ${C_HEADER_TEMPLATE} ${test-entities_BINARY_DIR}/${GEN_HDR})
@@ -21,7 +20,6 @@ foreach(JSON_SRC ${json-sources})
 endforeach(JSON_SRC ${json-sources})
 
 set_source_files_properties(${SRC_LIST} PROPERTIES GENERATED TRUE)
-#message ("softc include dirs: ${softc_INCLUDE_DIRS}")
 include_directories(${soft-kernel_INCLUDE_DIRS} ${softc_INCLUDE_DIRS})
 set (LINK_LIBS ${LINK_LIBS}
   ${soft-kernel_LIBS}

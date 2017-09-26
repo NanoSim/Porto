@@ -1,0 +1,344 @@
+#+Title: Connecting Scales with Porto
+#+Author: Thomas F. Hagelien
+
+* [#B] REMARC -> Ansys FLUENT
+
+Demonstrate that data from atomic scale can be used in the generation
+of a FLUENT UDF utilizing offline coupling with Porto. This simple
+demo uses some important fundamental features of Porto:
+
+  1. The ability to work with Entities and MetaData independent of storage mechanisms.
+  2. Make use of the Porto internal storage for storing both meta-data and data.
+  3. Work with Collections for building Domain Specific Relationships.
+  4. Utilize custom external plugins for retrieving data from proprietary formats.
+  5. Seamless mixing of compiled and scriped languages (C++/JavaScript).
+
+** Prerequistite
+  
+DFT data from VASP simulations
+
+  Gas Phase Species (large static folder of data)
+  Thermo Data (needed as input for REMARC later)
+
+We will demonstrate the us of a 'Reference' entity to simply store the
+location of the Gas Phase Species Data. For the accompanying
+thermo-properties we want to store the entire file in our database for
+later use.
+
+** Preparing with dft-prepare
+The dft-prepare is a tool written in C++ that takes the Gas Phase
+Species directory and the thermo-file as argument. It will first
+instanciate a 'Collection' and then populate this with the 'Reference'
+and 'File' entities. Then the collection is stored in the MongoDb
+backend database.
+
+  1. Create a collection
+  2. Create a File-entity and populate it with the contents of thermo-data
+  3. Create a Reference-entity and populate it with the gas phase folder info 
+  4. Attach the File and Reference entity in the collection
+  5. Store the collection using an internal storage (MongoDb)
+  6. Return the identity (UUID) of the collection for further use.
+
+Screenshot:
+#+begin_src shell
+[thomash@sintefutv006]$ dft-prepare dft/Fe2O3/ dft/thermo.dat 
+{cc3bc435-159c-4e96-b53f-1b97a526d5ce}
+#+end_src
+
+** Run the REMARC simulation
+REMARC consist of a set of Pyhon-scripts. REMARC requires an
+interactive session that has been automated for this demo. We can show
+that this interaction can be replaced with using Porto scriping and an
+entity for Remarc Setup.
+
+The REMARC-wrapper consist of three distinct parts.
+  1. Porto Input
+  2. REMARC Simulation
+  3. Porto Output
+
+The wrapper assumes that there exist a Collection with correctly
+registered entities. (From dft-prepare).  The "Porto Input" fetches the
+File and Reference entities from the collection.
+
+The REMARC Simulation starts the Python scripts for a shell-process
+with the path to the Gas Species directory as argument. When the
+process has finished, a new Reference Entity is created - pointing to
+the SurfaceChemkin.inp file - for later reference. Additional metadata
+about the simulation can also be attached (version of the simulation
+software, ++) for later use.
+
+The Porto Output will prepare the CHEMKIN-II data format produced by
+the REMARC-simulation. Here, the external storage backend 'chemkin' is
+used to read CHEMKIN-II data into a set of Chemkin-Entities that will
+be stored in the internal storage (mongodb). This data can be further
+used to reproduce the original CHEMKIN-II data files if needed.
+
+Screenshot:
+#+begin_src shell
+[thomash@sintefutv006]$ ./remarc-wrapper {cc3bc435-159c-4e96-b53f-1b97a526d5ce}
+bin size: == 1
+started
+Extracting VASP data from: /home/thomash/nanosim-demo/dft/Fe2O3
+
+************ GAS PHASE SPECIES ****************
+
+Directories containing gasphase species: 
+['CH3', 'CH4', 'H']
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/gasphase/CH3
+   'vib' directory found
+    ['gasphase', 'C1H3', 'CH3', 'gasphase', 'None', -18.16762837]
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/gasphase/CH4
+   'vib' directory found
+    ['gasphase', 'C1H4', 'CH4', 'gasphase', 'None', -24.04210642]
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/gasphase/H
+    ['gasphase', 'H1', 'H', 'gasphase', 'None', -1.11720612]
+
+************ GAS PHASE SPECIES ****************
+
+Directories containing gasphase species: 
+['CH3', 'CH4', 'H']
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/gasphase/CH3
+   'vib' directory found
+    ['gasphase', 'C1H3', 'CH3', 'gasphase', 'None', -18.16762837]
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/gasphase/CH4
+   'vib' directory found
+    ['gasphase', 'C1H4', 'CH4', 'gasphase', 'None', -24.04210642]
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/gasphase/H
+    ['gasphase', 'H1', 'H', 'gasphase', 'None', -1.11720612]
+
+************ SYSTEM - surface *******************
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/surface/clean
+   'vib' directory found
+    WARNING --- 3 imaginary frequencies found
+    ['Fe2O3', 'Fe48O72', 'Fe48O72', 'surface', 'None', -806.91622291]
+
+************ ADSORBATE STRUCTURES ****************
+
+Directories containing adsorbed/bulk structures found: 
+['CH3+H', 'CH4']
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/surface/CH3+H/1+1/site1+site2
+   'vib' directory found
+    WARNING --- 3 imaginary frequencies found
+    ['Fe2O3', 'C1H4Fe48O72', 'CH4', 'CH3+H', 'site1+site2', -830.98730485]
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/surface/CH4/1/site1
+   'vib' directory found
+    WARNING --- 3 imaginary frequencies found
+    ['Fe2O3', 'C1H4Fe48O72', 'CH4', 'CH4', 'site1', -831.19146894]
+
+************ TRANSITION STATES ****************
+
+Directories containing transition states found: 
+['CH4-CH3+H']
+
+Checking dependencies for transition: CH4-CH3+H
+   found sites directory for state CH4: /home/thomash/nanosim-demo/dft/Fe2O3/surface/CH4/1/site1
+   found sites directory for state CH3+H: /home/thomash/nanosim-demo/dft/Fe2O3/surface/CH3+H/1+1/site1+site2
+    --- OK
+
+Checking --- /home/thomash/nanosim-demo/dft/Fe2O3/surface/ts/CH4-CH3+H/site1-site1+site2/dim
+    Dimer method - used
+   'vib' directory found
+    WARNING --- 4 imaginary frequencies found - is this a true transition state?
+    ['Fe2O3', 'C1H4Fe48O72', 'CH4', 'CH4-CH3+H', 'site1-site1+site2', -830.06777737]
+
+====================================================
+SEARCHING FOR ADSORBED SPECIES AND SURFACE REACTIONS
+====================================================
+
+
+Adsorbed species: CH4 at site site1 at Fe2O3
+
+How many sites of type site1 are there in the simulation cell?
+Area of simulation cell =  90.6564 Angstrom2
+Site density =  7.327e-10 moles/cm2
+
+How many adsorption sites for CH4 are there in total
+in the simulation cell for surface Fe2O3 (all sites)?
+Average area per adsorption site =  22.6641 Angstrom2
+Quantum vibrational partition functions used for desorption and adsorption rate calculation!
+Moments of inertia:
+  3.2277 amu*Angstrom2
+  3.2280 amu*Angstrom2
+  3.2287 amu*Angstrom2
+Rotational temperatures:
+    7.51 K
+    7.51 K
+    7.51 K
+This is a non-linear molecule
+What is its symmetry number? Ex. H2O = 2, NH3 = 3, CH4 = 12
+
+Gas-phase molecular species: get energy and frequency/ies
+ZPE =   1.1878 eV
+
+Adsorbed species: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+5.42790194129j
+3.75179511341j
+2.56798677785j
+ZPE =   8.8092 eV
+
+Clean surface: get energy and frequencies
+All 120 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+4.48272138092j
+2.84927320213j
+2.3196805537j
+ZPE =   7.5964 eV
+
+DeltaE desorption =   0.2331 eV (   22.49 kJ/mol)
+DeltaE desorption incl. ZPE =   0.2081 eV (   20.08 kJ/mol)
+
+
+========================================================
+
+
+Transition state: CH4-CH3+H at site site1-site1+site2 at Fe2O3
+Reactant: CH4 at site site1 at Fe2O3
+Product: CH3+H at site site1+site2 at Fe2O3
+
+How many sites of type site2 are there in the simulation cell?
+Area of simulation cell =  90.6564 Angstrom2
+Site density =  7.327e-10 moles/cm2
+
+
+Quantum vibrational partition functions used for rate calculation!
+
+Reactant: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+5.42790194129j
+3.75179511341j
+2.56798677785j
+ZPE =   8.8092 eV
+
+Product: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+5.09570902268j
+4.39542754503j
+2.91763156438j
+ZPE =   8.8845 eV
+
+Transition state: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+27.8989145597j
+14.7084304837j
+11.8700907205j
+Imaginary frequency =   1289.59i cm-1
+Crossover temperature for tunneling (Tc) = 295.30 K
+ZPE =   8.8351 eV
+
+Barrier height forward =   1.1237 eV (  108.42 kJ/mol)
+Barrier height forward incl. ZPE =   1.1496 eV (  110.92 kJ/mol)
+
+Barrier height reverse =   0.9195 eV (   88.72 kJ/mol)
+Barrier height reverse incl. ZPE =   0.8702 eV (   83.96 kJ/mol)
+
+Reaction energy forward =   0.2042 eV (   19.70 kJ/mol)
+Reaction energy forward incl. ZPE =   0.2794 eV (   26.96 kJ/mol)
+
+==============================================================
+
+
+=========================================
+DESORPTION AND SURFACE REACTIONS FINISHED
+=========================================
+
+bin size: == 6845
+Checking the format of the chem.inp file.
+chem.inp file format check PASSED.
+Parsing NASA thermo file: /HOME/THOMASH/NANOSIM-DEMO/REMARC/THERMO.DAT
+End of Parsing NASA thermo file: /HOME/THOMASH/NANOSIM-DEMO/REMARC/THERMO.DAT
+Global Units are NO GLOBAL UNITS
+Data output to speciesParsed and reactionsParsed.
+ 
+Parsing NASA thermo file: /HOME/THOMASH/NANOSIM-DEMO/REMARC/THERMO.DAT
+End of Parsing NASA thermo file: /HOME/THOMASH/NANOSIM-DEMO/REMARC/THERMO.DAT
+
+#+end_src
+
+** Run the ANSYS Fluent UDF Code Generator
+The code generator is a Porto-script that utilizes the 'soft.mvc' to
+create a text based on a template-file and a data source. In our case
+the template is based on an existing UDF. We will show that we can
+generate (a set of) UDFs from reaction data stored in a database.
+
+Screenshot:
+#+begin_src shell
+[thomash@sintefutv006]$ ./genudf.js {cc3bc435-159c-4e96-b53f-1b97a526d5ce}
+/* Fluent UDF using id{fcf0db6f-3961-4f67-920a-8c5f4733994f}*/ 
+
+#include "udf.h"
+
+real min_cutoff = 0.000001;			/* Adjust to ensure stability */
+real dp = 0.00001;					/* Grain diameter */
+real Temp = 1173;					/* Adjust to experimental run */
+real Gas_Const = 8.314; 
+real k0 = 2.5;						/* Pre-exponential factor */
+real EA = 23.999;					/* Activation energy */
+
+DEFINE_HET_RXN_RATE(NiO_CH4,c,t,r,mw,yi,rr,rr_t)
+{
+	real Rrate, k, S0, X_CH4, MW_CH4, vol_frac_solid;
+	Thread *gas_thread = THREAD_SUB_THREAD(t,0);
+	Thread *solid_thread = THREAD_SUB_THREAD(t,1);
+
+	vol_frac_solid = C_VOF(c,solid_thread);
+	X_CH4 = yi[0][2];    /*   Check second index if order of species in gas is altered */
+	MW_CH4 = mw[0][2];	 /*   Check second index if order of species in gas is altered */
+
+	S0 = 6.0 * 0.2066 * vol_frac_solid / dp; 
+	k = k0 * exp(-EA/(Gas_Const*Temp));
+	Rrate = k * S0 * pow((C_R(c,gas_thread) * X_CH4 / MW_CH4 * 1000.0 ),0.6);  
+
+	if (X_CH4 < min_cutoff) Rrate = 0;     
+
+	if (vol_frac_solid < min_cutoff) Rrate = 0;		  
+
+	*rr = Rrate / 1000.0;
+}
+
+/* Fluent UDF using id{688c0ccd-acc4-41f8-832f-d4c8112df049}*/ 
+
+#include "udf.h"
+
+real min_cutoff = 0.000001;			/* Adjust to ensure stability */
+real dp = 0.00001;					/* Grain diameter */
+real Temp = 1173;					/* Adjust to experimental run */
+real Gas_Const = 8.314; 
+real k0 = 2.5;						/* Pre-exponential factor */
+real EA = 0;					/* Activation energy */
+
+DEFINE_HET_RXN_RATE(NiO_CH4,c,t,r,mw,yi,rr,rr_t)
+{
+	real Rrate, k, S0, X_CH4, MW_CH4, vol_frac_solid;
+	Thread *gas_thread = THREAD_SUB_THREAD(t,0);
+	Thread *solid_thread = THREAD_SUB_THREAD(t,1);
+
+	vol_frac_solid = C_VOF(c,solid_thread);
+	X_CH4 = yi[0][2];    /*   Check second index if order of species in gas is altered */
+	MW_CH4 = mw[0][2];	 /*   Check second index if order of species in gas is altered */
+
+	S0 = 6.0 * 0.2066 * vol_frac_solid / dp; 
+	k = k0 * exp(-EA/(Gas_Const*Temp));
+	Rrate = k * S0 * pow((C_R(c,gas_thread) * X_CH4 / MW_CH4 * 1000.0 ),0.6);  
+
+	if (X_CH4 < min_cutoff) Rrate = 0;     
+
+	if (vol_frac_solid < min_cutoff) Rrate = 0;		  
+
+	*rr = Rrate / 1000.0;
+}
+
+#+end_src

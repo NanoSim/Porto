@@ -1,0 +1,20 @@
+--- a/src/H5win32defs.h
++++ b/src/H5win32defs.h
+@@ -67,10 +67,12 @@
+
+ #endif /* H5_HAVE_VISUAL_STUDIO */
+
++/*
+ struct timezone {
+     int tz_minuteswest;
+     int tz_dsttime;
+ };
++*/
+
+ #ifdef __cplusplus
+ extern "C" {
+@@ -104,4 +106,3 @@
+ #endif /* H5_HAVE_MINGW */
+
+ #endif /* H5_HAVE_WIN32_API */
+-

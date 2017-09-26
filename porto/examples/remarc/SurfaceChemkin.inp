@@ -1,0 +1,24 @@
+! SURFACE CHEMKIN file produced by REMARC for T =  600.00 - 5000.00 K and P =   0.50 atm
+! Rate constant units are: s, kJ/mole
+   SITE / SITE1 /  SDEN/ 7.33e-10/
+    CH4(S1) S1 CH3(S1) 
+   END 
+   SITE / SITE2 /  SDEN/ 7.33e-10/
+    H(S2) 
+   END 
+
+   ELEMENTS C H FE O 
+   END
+
+   SPECIES
+    CH4 CH4(S1) CH3(S1) H(S2) 
+   END
+
+
+   REACTIONS ! KJOULES/MOLE
+
+      CH4(S1) => CH4         6.159e+20   -2.54   23.999
+      CH4 => CH4(S1)         7.553e+09   -0.50   -0.000
+      CH4(S1) => CH3(S1) + H(S2)      3.711e+06    0.21  100.494
+      CH3(S1) + H(S2) => CH4(S1)      3.254e+11    0.20   80.207
+   END 

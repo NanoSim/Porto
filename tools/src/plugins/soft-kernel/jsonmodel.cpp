@@ -147,6 +147,7 @@ bool JSONModel :: appendInt32Array (const char *key, const std::vector<int32_t> 
     jsonArray.append(QJsonValue(v));
   }
   d->jsonObject.insert(key, jsonArray);
+  return true;
 }
 
 bool JSONModel :: appendDoubleArray(const char *key, const std::vector<double> &value)
@@ -156,6 +157,7 @@ bool JSONModel :: appendDoubleArray(const char *key, const std::vector<double> &
     jsonArray.append(QJsonValue(v));
   }
   d->jsonObject.insert(key, jsonArray);
+  return true;
 }
 
 bool JSONModel :: appendByteArray  (const char *, const std::vector<unsigned char> &)

@@ -34,6 +34,5 @@ set(${PROJECT_NAME}_APPDIR
   CACHE INTERNAL "${PROJECT_NAME}: appdir" FORCE)
 
 set(${PROJECT_NAME}_APP
-  ${softshell_BINARY_DIR}/softshell
+  ${softshell_BINARY_DIR}/softshell${EXEEXT}
   CACHE INTERNAL "${PROJECT_NAME}: app" FORCE)
-

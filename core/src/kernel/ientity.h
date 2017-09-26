@@ -4,6 +4,7 @@
 #include "softns.h"
 #include <string>
 #include <vector>
+#include "soft-kernel_export.h"
 
 SOFT_BEGIN_NAMESPACE
 
@@ -16,7 +17,7 @@ class IDataModel;
   virtual std::string metaNamespace() const override {return ns;} \
   virtual std::string metaVersion() const override {return ver;}
 
-class IEntity
+class SOFT_KERNEL_EXPORT IEntity
 {
 public:
   IEntity();

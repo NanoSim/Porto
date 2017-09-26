@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <QScriptEngine>
 #include <QScriptContext>
 #include <QScriptValue>
@@ -23,7 +25,7 @@ static QScriptValue createNLopt(QScriptContext *ctx, QScriptEngine *engine)
   QNLopt *opt = nullptr;
   if (ctx->argumentCount() >= 2 && ctx->argument(0).isNumber() && ctx->argument(1).isNumber()) {
     auto algorithm = ctx->argument(0).toInt32();
-    auto dims      = ctx->argument(1).toUInt32();    
+    auto dims      = ctx->argument(1).toUInt32();
     opt = new QNLopt(algorithm, dims, engine);
   } else {
     ctx->throwError (QScriptContext::SyntaxError, "Illegal arguments");
@@ -33,7 +35,7 @@ static QScriptValue createNLopt(QScriptContext *ctx, QScriptEngine *engine)
 }
 
 template <class T>
-inline void registerClass(QScriptValue &parentObj, QString const &name, QObject *that) 
+inline void registerClass(QScriptValue &parentObj, QString const &name, QObject *that)
 {
    auto module = new T(that);
    auto qobj = parentObj.engine()->newQObject(module, QScriptEngine::ScriptOwnership);

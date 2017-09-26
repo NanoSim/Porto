@@ -1,0 +1,29 @@
+# -*- Mode: cmake -*-
+# This file is processed by BuildExternalProject.cmake
+cmake_minimum_required(VERSION 2.8)
+include(ExternalProject)
+
+if("@CROSS_TARGET@" STREQUAL "win64")
+  set(initial_cache_opt "-C@soft5_SOURCE_DIR@/cmake/Dependencies/TryRunResults-win64-hdf5.cmake")
+else()
+  set(initial_cache_opt "")
+endif()
+
+ExternalProject_Add(
+  hdf5
+  PREFIX         "@SOFT_DEPS_PREFIX@"
+
+  URL            "https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.0-patch1/src/hdf5-1.10.0-patch1.tar.gz"
+  URL_MD5        "9180ff0ef8dc2ef3f61bd37a7404f295"
+
+  UPDATE_COMMAND ""
+  PATCH_COMMAND  ""
+
+  CMAKE_ARGS
+    ${initial_cache_opt}
+    -DCMAKE_TOOLCHAIN_FILE=@CMAKE_TOOLCHAIN_FILE@
+    -DHDF5_BUILD_FORTRAN=OFF
+    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_INSTALL_PREFIX=@SOFT_DEPS_PREFIX@
+  )
+#    --debug-trycompile

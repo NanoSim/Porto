@@ -1,0 +1,88 @@
+{
+    "name": "dftdata",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "DFT results for REMARC.",
+    "dimensions": [
+        {
+            "name": "natoms",
+            "description": "Number of atoms."
+        },
+        {
+            "name": "ncellvecs",
+            "description": "Number of cell vectors (a, b, c). Always 3."
+        },
+        {
+            "name": "ncoords",
+            "description": "Number coordinates (x, y, z). Always 3."
+        },
+        {
+            "name": "nfreq",
+            "description": "Number of frequences."
+        }
+    ],
+    "properties": [
+        {
+            "name": "phase_name",
+            "type": "string",
+            "description": "Name of phase."
+        },
+        {
+            "name": "composition",
+            "type": "string",
+            "description": "Chemical composition."
+        },
+        {
+            "name": "species_name",
+            "type": "string",
+            "description": "Name of species."
+        },
+        {
+            "name": "state",
+            "type": "string",
+            "description": "State of this phase (gasphase, bulk)."
+        },
+        {
+            "name": "site_name",
+            "type": "string",
+            "description": "Name of current site."
+        },
+        {
+            "name": "total_energy",
+            "type": "double",
+	    "unit": "eV",
+            "description": "Total energy."
+        },
+        {
+            "name": "frequencies",
+            "type": "double",
+	    "dims": ["nfreq"],
+	    "unit": "1/s",
+            "description": "Vibration frequencies."
+        },
+        {
+            "name": "cell",
+            "type": "double",
+	    "dims": ["ncellvecs", "ncoords"],
+	    "unit": "Angstrom",
+            "description": "Unit cell vectors."
+        },
+        {
+            "name": "symbols",
+            "type": "string_list",
+	    "dims": ["natoms"],
+            "description": "List of atom chemical symbols."
+        },
+        {
+            "name": "positions",
+            "type": "double",
+	    "dims": ["natoms", "ncoords"],
+            "description": "Atom positions in Cartesian coordinates."
+        },
+        {
+            "name": "info",
+            "type": "string",
+            "description": "Additional information, like directory path."
+        }
+    ]
+}

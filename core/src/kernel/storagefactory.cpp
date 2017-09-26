@@ -50,6 +50,7 @@ IStorageStrategy* StorageFactory :: create(const char *name, const char *uri, co
 {
   auto it = d->map.find(name);
   if(it == d->map.end()) {
+    // @TODO Better error handling here -- this will simply crash
     QTextStream(stderr) << "StorageFactory cannot create storage strategy: " << name << " " << uri << endl;
     return nullptr;
   }

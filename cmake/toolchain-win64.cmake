@@ -1,7 +1,7 @@
 # A toolchain file to cross compiling for win64 configured for
 # bamboo.code.sintef.no. For other systems, make a private copy of
 # this file.
-# 
+#
 # To use it, do:
 #     $ ccmake -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchain-win64.cmake ..
 #
@@ -19,8 +19,14 @@ set(CMAKE_SYSTEM_NAME Windows)
 
 
 # set COMPILER_PREFIX, see http://www.mingw.org/
-set(COMPILER_PREFIX "x86_64-w64-mingw32-")
+set(MINGW_NAME "x86_64-w64-mingw32")
+set(COMPILER_PREFIX "${MINGW_NAME}-")
 
+# insert mingw's cmake modules into the search path
+set(MINGW_PREFIX "/usr")
+list(INSERT CMAKE_PREFIX_PATH 0
+  "${MINGW_PREFIX}/${MINGW_NAME}/sys-root/mingw/lib/cmake")
+set(MINGW_BINDIR "${MINGW_PREFIX}/${MINGW_NAME}/sys-root/mingw/bin")
 
 # which compilers to use
 find_program(CMAKE_RC_COMPILER NAMES ${COMPILER_PREFIX}windres)
@@ -32,14 +38,13 @@ find_program(CMAKE_Fortran_COMPILER NAMES ${COMPILER_PREFIX}gfortran)
 find_program(WINE NAMES wine64)
 set(RUNNER ${WINE})
 
-
 # here is the target environment located
-set(CMAKE_FIND_ROOT_PATH /usr/${COMPILER_PREFIX} ${CMAKE_INSTALL_PREFIX})
+set(CMAKE_FIND_ROOT_PATH ${MINGW_PREFIX}/${MINGW_NAME} ${CMAKE_INSTALL_PREFIX})
+
 
 # adjust the default behaviour of the FIND_XXX() commands:
-# search headers and libraries in the target environment, search 
+# search headers and libraries in the target environment, search
 # programs in the host environment
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-

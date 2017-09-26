@@ -3,9 +3,9 @@
 
 #include "chemkinreaction.hxx"
 
-TEST (ChemkinTest, DISABLED_construct)
+TEST (ChemkinTest, Construct)
 {
-  auto storage = new soft::Storage("external", "chemkin:///home/thomas/Project/REMARC/src?chem=SurfaceChemkin.inp&thermo=thermo.dat", "");
+  auto storage = new soft::Storage("external", "chemkin:/home/sintef/source/soft5/porto/examples/remarc?chem=SurfaceChemkin.inp&thermo=thermo.dat", "");
   ASSERT_TRUE(nullptr != storage);
   auto collection = new soft::Collection();
   ASSERT_TRUE(nullptr != collection);
@@ -20,7 +20,18 @@ TEST (ChemkinTest, DISABLED_construct)
 	    << reaction_0.b << " "
 	    << reaction_0.Ea << " "
 	    << std::endl;
-  
+
+  const auto &reactants = reaction_0.reactants;
+  const auto &products = reaction_0.products;
+
+  std::cout << "Reaction: ";
+  for(const auto &v: reactants) std::cout << v << " ";
+  std::cout << std::endl;
+
+  std::cout << "Products: ";
+  for(const auto &v: products) std::cout << v << " ";
+  std::cout << std::endl;
+ 
   delete collection;
   delete storage;
 }

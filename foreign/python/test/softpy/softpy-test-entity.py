@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+import sys
 import pickle
 
 import numpy as np
@@ -23,7 +24,7 @@ def store(e, datamodel):
     softpy.datamodel_append_int32(datamodel, 'spacegroup_no', 225)
     softpy.datamodel_append_double(datamodel, 'lattice_parameter', 5.64)
     softpy.datamodel_append_array_double(
-        datamodel, 'positions', 
+        datamodel, 'positions',
         np.array([(0.0, 0.0, 0.0), (0.5, 0.5, 0.5)]).flatten())
 
 def load(e, datamodel):
@@ -33,15 +34,17 @@ def load(e, datamodel):
     d.latt = softpy.datamodel_get_double(datamodel, 'lattice_parameter')
     d.posi = softpy.datamodel_get_array_double(datamodel, 'positions')
 
-e = softpy.entity_t(get_meta_name='MyStructure',
-                    #get_meta_version='0.1.1',
-                    get_meta_version=lambda self: '0.1.1',
-                    get_meta_namespace='http://sintef.no/meta/soft',
-                    get_dimensions=['I', 'J'],
-                    get_dimension_size=[3, 4],
-                    load=load,
-                    store=store, 
-                    user_data=Data())
+e = softpy.entity_t(
+    'MyStructure',                  # get_meta_name
+    lambda self: '0.1.1',           # get_meta_version
+    'http://sintef.no/meta/soft',   # get_meta_namespace
+    ['I', 'J'],                     # get_dimensions
+    [3, 4],                         # get_dimension_size
+    store,                          # store
+    load,                           # load
+    None,                           # id
+    Data(),                         # user_data
+)
 
 assert softpy.entity_get_meta_name(e) == 'MyStructure'
 assert softpy.entity_get_meta_version(e) == '0.1.1'
@@ -67,7 +70,7 @@ assert d.spgr == 225
 assert d.latt == 5.64
 assert np.allclose(
     d.posi, np.array([(0.0, 0.0, 0.0), (0.5, 0.5, 0.5)]).flatten())
-                   
+
 del e
 
 
@@ -77,27 +80,29 @@ class Person(object):
         self.age = age
         self.distances = distances  # km walked the last n days
         self.__soft_entity__ = softpy.entity_t(
-            get_meta_name='Person',
-            get_meta_version='0.1',
-            get_meta_namespace='http://sintef.no/meta/soft',
-            get_dimensions=['ndays'],
-            get_dimension_size=[len(distances)],
-            load=self.load,
-            store=self.store, 
-            id=uuid)
+            'Person',                       # get_meta_name
+            '0.1',                          # get_meta_version
+            'http://sintef.no/meta/soft',   # get_meta_namespace
+            ['ndays'],                      # get_dimensions
+            [len(distances)],               # get_dimension_size
+            self.store,                     # store
+            self.load,                      # load
+            uuid,                           # id
+            None,                           # user_data
+        )
 
     def store(self, e, datamodel):
         softpy.datamodel_append_string(datamodel, 'name', self.name)
         softpy.datamodel_append_int32(datamodel, 'age', self.age)
         softpy.datamodel_append_array_double(
             datamodel, 'distances', self.distances)
-        
+
     def load(self, e, datamodel):
         self.name = softpy.datamodel_get_string(datamodel, 'name')
         self.age = softpy.datamodel_get_int32(datamodel, 'age')
         self.distances = softpy.datamodel_get_array_double(
             datamodel, 'distances')
-        
+
 person = Person('Jack', 42, [5.4, 7.6, 1.1])
 
 with softpy.Storage('hdf5', 'x.h5') as s:
@@ -113,9 +118,12 @@ assert p.age == 42
 assert np.all(p.distances == person.distances)
 
 
-# Ensure that entities are pickleable
-if HAVE_DILL:
+# Ensure that entity instances are pickleable
+# Seems not to work for py3<3.5
+if HAVE_DILL and (
+        sys.version_info.major < 3 or
+        (sys.version_info.major == 3 and sys.version_info.minor >= 5)):
     dump = pickle.dumps(person)
     person2 = pickle.loads(dump)
     for k in person.__dict__:
-        assert getattr(person2, k) == getattr(person, k)
+        assert getattr(person2, k) == getattr(person, k), k

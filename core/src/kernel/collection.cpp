@@ -3,18 +3,19 @@
 #include "idatamodel.h"
 #include "collection.h"
 #include "tripletstore.h"
+#include <assert.h>
 
 SOFT_BEGIN_NAMESPACE
 
 #define NOT_IMPLEMENTED throw std::runtime_error("Not implemented");
 
-/*! 
-  \todo 
+/*!
+  \todo
   How do we check for correctness after a load?
   How do we specify the Collection schema? We have a name/version field, but
   is this suficient? Probably not!
   Dimension maps using triples should be implemented and tested
-  
+
 */
 
 class Collection :: Private
@@ -22,6 +23,7 @@ class Collection :: Private
   friend class Collection;
   std::string name;
   std::string version;
+  std::string ns;
   std::map<std::string, IEntity*> entityMap;
 
   TripletStore tripletStore;
@@ -45,7 +47,7 @@ Collection :: Collection(std::string const &uuid)
 }
 
 /*!
-  Constructs a collection from another \a entity 
+  Constructs a collection from another \a entity
   \sa IEntity
  */
 Collection :: Collection(const IEntity *entity)
@@ -117,6 +119,22 @@ void Collection :: setVersion(std::string const &version)
 }
 
 /*!
+  Get the namespace of the collection
+ */
+std::string Collection :: ns() const
+{
+  return d->ns;
+}
+
+/*!
+  Sets the \a namespace of the collection
+ */
+void Collection :: setNamespace(std::string const &ns)
+{
+  d->ns = ns;
+}
+
+/*!
   Register an entity with a given \a label.
   \a label is the internal name of the entity instance
   \a entity a reference to an IEntity
@@ -134,11 +152,11 @@ void Collection :: registerEntity(std::string const &label, IEntity const *entit
 
 /*!
   Add entity information to the collection using
-  \a label is the internal name of the entity instance	
-  \a name the formal entity meta-name		
-  \a version the formal entity meta-version		
+  \a label is the internal name of the entity instance
+  \a name the formal entity meta-name
+  \a version the formal entity meta-version
   \a ns the formal entity meta-namespace
-  \a uuid the identity of the entity		
+  \a uuid the identity of the entity
   \todo: Remove one of these duplicates?
 */
 void Collection :: addEntity(std::string const &label,
@@ -154,7 +172,7 @@ void Collection :: addEntity(std::string const &label,
   addRelation(label, "id", uuid);
 }
 
-/*!  
+/*!
   Find objects where the subject has a give predicate. Note that
   reverse predicates can be employed by using the prefix ^
  */
@@ -184,14 +202,14 @@ void Collection :: findEntity(std::string const &label,
     if (t.size() > 0) return t.front();
     return std::string();
   };
-  
+
   name = findFirstTriplet("name");
   version = findFirstTriplet("version");
   ns = findFirstTriplet("namespace");
   uuid = findFirstTriplet("id");
 }
 
-/*! 
+/*!
   Attaches the entity to this collection so that it is loaded and stored
   with the collection.
 */
@@ -242,12 +260,12 @@ void Collection :: connect (std::string const &subject,
 
 int Collection :: numRelations() const
 {
-  NOT_IMPLEMENTED
+  return d->tripletStore.size();
 }
 
 /*!
   Restore state from a given \dataModel
- 
+
   \sa IDataModel
  */
 void Collection :: load (IDataModel const *dataModel)
@@ -282,7 +300,7 @@ void Collection :: load (IDataModel const *dataModel)
 
 /*!
   Store the collection state to a given \dataModel
- 
+
   \sa IDataModel
  */
 void Collection :: save (IDataModel *dataModel) const
@@ -300,6 +318,10 @@ void Collection :: save (IDataModel *dataModel) const
     // TODO: Who owns this data model now? Needs to be freed at some point?
     auto dm = dataModel->createModel();
     IEntity *e = ie.second;
+    // TODO: Note that this part may crash if the datamodel is free'd
+    // (for example by using a smart pointer) before passing it on
+    // here. This indicates that there is an ownership issue here that
+    // we MUST resolve.
     dm->setId(e->id());
     dm->setMetaName(e->metaName());
     dm->setMetaVersion(e->metaVersion());
@@ -327,7 +349,7 @@ std::vector<std::string> Collection :: dimensions() const {
   NOT_IMPLEMENTED
 }
 
-int Collection :: getDimensionSize(std::string const &dim) const 
+int Collection :: getDimensionSize(std::string const &dim) const
 {
   NOT_IMPLEMENTED
 }

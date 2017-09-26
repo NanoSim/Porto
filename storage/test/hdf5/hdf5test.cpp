@@ -7,15 +7,15 @@ class HDF5Test : public ::testing::Test {
 protected:
   static void SetUpTestCase() {
   }
-  
+
   static void TearDownTestCase() {
   }
-  
+
   virtual void SetUp() {
   }
-  
+
   virtual void TearDown() {
-  }  
+  }
 };
 
 TEST_F (HDF5Test, create)
@@ -25,4 +25,5 @@ TEST_F (HDF5Test, create)
 
   bool createOk = h5->create("myfile.h5");
   ASSERT_TRUE(createOk);
+  delete h5;
 }

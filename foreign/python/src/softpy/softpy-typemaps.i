@@ -5,20 +5,20 @@
  * --------------
  *     char **IN_STRING_LIST, size_t LEN
  *     unsigned char *IN_BYTES, size_t LEN
- *     
+ *
  * Argout typemaps
  * ---------------
  *     char ***ARGOUT_STRING_LIST, size_t *LEN
  *     char ***ARGOUT_NULLTERM_STRING_LIST
  *     unsigned char **ARGOUT_BYTES, size_t *LEN
- *     
+ *
  * Out typemaps
  * ------------
  *     char **
  *     const_char **
  *     bool
  *     INT_LIST
- *     
+ *
  * NumPy
  * -----
  *     DATA_TYPE** ARGOUTVIEWM_ARRAY1, DIM_TYPE* DIM1
@@ -27,7 +27,7 @@
  *     double ***IN_ARRAY3D, size_t DIM1, size_t DIM2, size_t DIM3
  *     double ***ARGOUT_ARRAY2D, size_t *DIM1, size_t *DIM2
  *     double ****ARGOUT_ARRAY3D, size_t *DIM1, size_t *DIM2, size_t *DIM3
- *     
+ *
  ***************************************************************************/
 
 
@@ -185,7 +185,11 @@
   PyObject* obj = PyArray_SimpleNewFromData(1, dims, DATA_TYPECODE, (void*)(*$1));
   PyArrayObject* array = (PyArrayObject*) obj;
   if (!array) SWIG_fail;
-  PyObject* cap = PyCObject_FromVoidPtr((void*)(*$1), free);
+%#ifdef SWIGPY_USE_CAPSULE
+   PyObject* cap = PyCapsule_New((void*)(*$1), SWIGPY_CAPSULE_NAME, free_cap);
+%#else
+   PyObject* cap = PyCObject_FromVoidPtr((void*)(*$1), free);
+%#endif
 %#if NPY_API_VERSION < 0x00000007
   PyArray_BASE(array) = cap;
 %#else

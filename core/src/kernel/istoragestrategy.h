@@ -2,12 +2,13 @@
 #define STORAGESTRATEGY_H_DEF
 
 #include "softns.h"
+#include "soft-kernel_export.h"
 
 SOFT_BEGIN_NAMESPACE
 
 class IDataModel;
 
-class IStorageStrategy
+class SOFT_KERNEL_EXPORT IStorageStrategy
 {
 public:
   IStorageStrategy();

@@ -1,0 +1,132 @@
+Read from input file remarc.in:
+Start temperature (K):
+600.
+End temperature (K):
+5000.
+Temperature step size (K):
+10.
+Typical uncertainty in barrier height (eV):
+0.2
+Typical uncertainty in adsorption energy (eV):
+0.1
+Pressure (in atm):
+.5
+Use frequencies for rate calculations? (Y or N)
+Y
+Use frequencies for clean surfaces? (Y or N)
+Y
+Quantum or classical partion functions for rate calculations?(Q or C)
+Q
+Fixed prefactor for surface reactions (Default: 1E13 s-1):
+1.0E13
+Fixed prefactor for desorption (Default: 1E13 s-1):
+1.0E13
+
+Output from RMC-rate:
+
+====================================================
+SEARCHING FOR ADSORBED SPECIES AND SURFACE REACTIONS
+====================================================
+
+
+Adsorbed species: CH4 at site site1 at Fe2O3
+
+How many sites of type site1  are there in the simulation cell?
+4
+Area of simulation cell =  90.6564 Angstrom2
+Site density =  7.327e-10 moles/cm2
+
+How many adsorption sites for CH4 are there in total
+in the simulation cell for surface Fe2O3 (all sites)?
+4 
+Average area per adsorption site =  22.6641 Angstrom2
+Quantum vibrational partition functions used for desorption and adsorption rate calculation!
+Moments of inertia:
+  3.2277 amu*Angstrom2
+  3.2280 amu*Angstrom2
+  3.2287 amu*Angstrom2
+Rotational temperatures:
+    7.51 K
+    7.51 K
+    7.51 K
+This is a non-linear molecule
+What is its symmetry number? Ex. H2O = 2, NH3 = 3, CH4 = 12
+12
+
+Gas-phase molecular species: get energy and frequency/ies
+ZPE =   1.1878 eV
+
+Adsorbed species: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+5.42790194129j
+3.75179511341j
+2.56798677785j
+ZPE =   8.8092 eV
+
+Clean surface: get energy and frequencies
+All 120 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+4.48272138092j
+2.84927320213j
+2.3196805537j
+ZPE =   7.5964 eV
+
+DeltaE desorption =   0.2331 eV (   22.49 kJ/mol)
+DeltaE desorption incl. ZPE =   0.2081 eV (   20.08 kJ/mol)
+
+===============================================
+
+
+Transition state: CH4-CH3+H at site site1-site1+site2 at Fe2O3
+Reactant: CH4 at site site1 at Fe2O3
+Product: CH3+H at site site1+site2 at Fe2O3
+
+How many sites of type site2 are there in the simulation cell?
+4
+Area of simulation cell =  90.6564 Angstrom2
+Site density =  7.327e-10 moles/cm2
+
+Quantum vibrational partition functions used for rate calculation!
+
+Reactant: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+5.42790194129j
+3.75179511341j
+2.56798677785j
+ZPE =   8.8092 eV
+
+Product: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+5.09570902268j
+4.39542754503j
+2.91763156438j
+ZPE =   8.8845 eV
+
+Transition state: get energy and frequencies
+All 125 atoms in slab are included in frequency calculation.
+Removing 3 lowest frequencies:
+27.8989145597j
+14.7084304837j
+11.8700907205j
+Imaginary frequency =   1289.59i cm-1
+Crossover temperature for tunneling (Tc) = 295.30 K
+ZPE =   8.8351 eV
+
+Barrier height forward =   1.1237 eV (  108.42 kJ/mol)
+Barrier height forward incl. ZPE =   1.1496 eV (  110.92 kJ/mol)
+
+Barrier height reverse =   0.9195 eV (   88.72 kJ/mol)
+Barrier height reverse incl. ZPE =   0.8702 eV (   83.96 kJ/mol)
+
+Reaction energy forward =   0.2042 eV (   19.70 kJ/mol)
+Reaction energy forward incl. ZPE =   0.2794 eV (   26.96 kJ/mol)
+
+=====================================================
+
+
+=========================================
+DESORPTION AND SURFACE REACTIONS FINISHED
+=========================================

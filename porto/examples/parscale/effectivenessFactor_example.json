@@ -1,0 +1,9 @@
+{
+   "name": "effectivenessFactor",
+   "nparameters": 1,
+   "functionalForm": "constant",
+   "parameters": [
+      0.1234
+   ],
+   "argumentCount": 0
+}

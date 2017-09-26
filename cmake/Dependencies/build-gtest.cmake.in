@@ -1,0 +1,29 @@
+# -*- Mode: cmake -*-
+# This file is processed by BuildExternalProject.cmake
+cmake_minimum_required(VERSION 2.8)
+include(ExternalProject)
+
+if(@WIN32@)
+  set(disable_pthreads ON)
+else()
+  set(disable_pthreads OFF)
+endif()
+
+
+ExternalProject_Add(
+  gtest
+  PREFIX "@SOFT_DEPS_PREFIX@"
+
+  GIT_REPOSITORY "https://github.com/google/googletest.git"
+  GIT_TAG "release-1.8.0"
+
+  UPDATE_COMMAND ""
+  PATCH_COMMAND ""
+
+  CMAKE_ARGS
+    -DCMAKE_TOOLCHAIN_FILE=@CMAKE_TOOLCHAIN_FILE@
+    -DCMAKE_INSTALL_PREFIX=@SOFT_DEPS_PREFIX@
+    -DBUILD_GTEST=ON
+    -DBUILD_GMOCK=OFF
+    -Dgtest_disable_pthreads=ON
+  )

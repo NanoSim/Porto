@@ -148,6 +148,7 @@ bool JSONModel :: appendDoubleArray(const char *key, const std::vector<double> &
     jsonArray.append(QJsonValue(v));
   }
   d->jsonObject.insert(key, jsonArray);
+  return true;
 }
 
 bool JSONModel :: appendByteArray  (const char *, const std::vector<unsigned char> &)
@@ -162,6 +163,7 @@ bool JSONModel :: appendStringArray(const char *key, const std::vector<std::stri
     jsonArray.append(QJsonValue(QString(v.c_str())));
   }
   d->jsonObject.insert(key, jsonArray);
+  return true;
 }
 
 bool JSONModel :: appendArray      (const char *, const IDataModel *)

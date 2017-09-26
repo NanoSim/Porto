@@ -1,0 +1,12 @@
+{
+    "name": "C",
+    "version": "0.1",
+    "namespace": "http://sintef.no/meta/soft",
+    "dimensions": [],
+    "properties": [
+        {
+            "name": "s",
+            "type": "string"
+        }
+    ]
+}

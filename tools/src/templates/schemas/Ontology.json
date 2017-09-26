@@ -1,0 +1,119 @@
+{
+    "schema_name": "Ontology",
+    "schema_version": "0.2",
+    "schema_namespace": "http://meta.emmc.eu",
+    "schema_dimensions": [
+    	{
+    	    "schema_name": "n-dimensions",
+    	    "schema_description": "Number of dimensions."
+    	},
+    	{
+    	    "schema_name": "n-entities",
+    	    "schema_description": "Number of entities (e-CUDS)."
+    	},
+    	{
+    	    "schema_name": "n-relations",
+    	    "schema_description": "Number of entity relations."
+    	}
+    ],
+    "schema_forms": [
+	{
+	    "schema_name": "dimension",
+	    "schema_version": "0.2",
+	    "schema_namespace": "http://meta.emmc.eu/ontology_form",
+	    "schema_properties": [
+		{
+		    "schema_name": "name",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "description",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		}
+	    ]
+	},
+	{
+	    "schema_name": "entity",
+	    "schema_version": "0.2",
+	    "schema_namespace": "http://meta.emmc.eu/ontology_form",
+	    "schema_properties": [
+		{
+		    "schema_name": "label",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "name",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "version",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "namespace",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "description",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		}
+	    ]
+	},
+	{
+	    "schema_name": "relation",
+	    "schema_version": "0.2",
+	    "schema_namespace": "http://meta.emmc.eu/ontology_form",
+	    "schema_properties": [
+		{
+		    "schema_name": "subject",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "predicate",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "object",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		},
+		{
+		    "schema_name": "description",
+		    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+		}
+	    ]
+	}
+    ],
+    "schema_properties": [
+	{
+	    "schema_name": "name",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "version",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "namespace",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "description",
+	    "schema_type": "http://meta.emmc.eu/basic_type/alphanumeric/1.0"
+	},
+	{
+	    "schema_name": "dimensions",
+	    "schema_type": "http://meta.emmc.eu/ontology_form/dimension/0.2",
+	    "schema_dimensions": ["ndimensions"]
+	},
+	{
+	    "schema_name": "entities",
+	    "schema_type": "http://meta.emmc.eu/ontology_form/entity/0.2",
+	    "schema_dimensions": ["nentities"]
+	},
+	{
+	    "schema_name": "relations",
+	    "schema_type": "http://meta.emmc.eu/ontology_form/relation/0.2",
+	    "schema_dimensions": ["nrelations"]
+	}
+    ]
+}

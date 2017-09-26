@@ -20,6 +20,8 @@ The source code is divided into multiple nested CMake projects.
 
 Presently only the 64bit Linux platform is directly supported in SOFT5.
 
+*NOTE: Windows is presently only supported with the options -DWITH_FOREIGN_C=Off -DWITH_TESTS=Off -DWITH_STORAGE_MONGO=Off -DWITH_STORAGE_EXTERNAL=Off passed to CMake.*
+
 This guide assumes that the following dependencies has been configured and
 installed:
 

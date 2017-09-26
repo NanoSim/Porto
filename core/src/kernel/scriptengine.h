@@ -1,12 +1,13 @@
 #ifndef SCRIPTENGINE_H_DEF
 #define SCRIPTENGINE_H_DEF
 #include "softns.h"
+#include "soft-kernel_export.h"
 
 #include <string>
 
 SOFT_BEGIN_NAMESPACE
 
-class ScriptEngine
+class SOFT_KERNEL_EXPORT ScriptEngine
 {
 public:
    ScriptEngine();

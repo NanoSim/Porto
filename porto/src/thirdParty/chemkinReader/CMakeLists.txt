@@ -1,6 +1,6 @@
 project (porto-chemkinreader C CXX)
 
-find_package(Boost 1.59.0 REQUIRED COMPONENTS regex)
+find_package(Boost 1.58.0 REQUIRED COMPONENTS regex)
 
 set (CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set (CMAKE_INCLUDE_CURRENT_DIR ON)

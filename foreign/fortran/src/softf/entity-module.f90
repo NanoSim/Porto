@@ -15,7 +15,7 @@ module entity_mod
   type, abstract :: TEntity     
      type (C_PTR) :: ref
    contains     
-     procedure, public, pass(self) :: get_id => entity_get_id3
+     procedure, public, pass(self) :: get_id => entity_get_id
 
   end type TEntity
 

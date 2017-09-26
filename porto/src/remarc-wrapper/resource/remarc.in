@@ -1,0 +1,11 @@
+600.   #T_min (K)
+5000.  #T_max (K)
+10.   #Delta_T (K)
+0.2    #estimated uncertainty in barrier height (electron volts)
+0.1    #estimated uncertainty in adsorption energy (electron volts) 
+.5    #Gas pressure (atm)
+Y      #Should frequencies be used to calculate rate constants? (Y or N)
+Y      #Should frequencies be used for clean surface? (Y or N)
+Q      #Quantum (Q) or classical (C) vibrational partition functions for rate constant calcuations?
+1.0E13 #Prefactor for rate constant calculations (s-1) if frequencies are not used
+1.0E13 #Prefactor for desorption rate constant calculations (s-1) if frequencies are not used

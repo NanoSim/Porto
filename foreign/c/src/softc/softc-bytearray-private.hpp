@@ -25,6 +25,11 @@ struct _softc_bytearray_s
     return (const unsigned char *)bytearray.constData();
   }
 
+  size_t size()
+  {
+    return (size_t)bytearray.size();
+  }
+
   QByteArray bytearray;
 };
 

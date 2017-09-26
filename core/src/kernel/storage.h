@@ -10,7 +10,7 @@ SOFT_BEGIN_NAMESPACE
   class Storage is a context class for the IStorageStrategy
  */
 class IStorageStrategy;
-class Storage
+class SOFT_KERNEL_EXPORT  Storage
 {
 public:
   Storage(char const *driver, char const *uri, const char *options = nullptr);

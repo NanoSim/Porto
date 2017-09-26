@@ -113,6 +113,7 @@ bool BsonDataModel :: appendDouble (const char *key, StdDouble value)
 
 bool BsonDataModel :: appendBool (const char *key, StdBool value) 
 {
+  // @TODO It appears that BSON objects cannot contain bools, and that the mongo insert fails if it does
   return propertyObject.appendBool(key, value);
 }
 

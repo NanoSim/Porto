@@ -1,0 +1,62 @@
+# -*- Mode: cmake -*-
+project(dependencies-bson)
+
+include(ExternalProject)
+
+
+# Create targets for downloading, configuring, building and installing bson
+#
+# Note: cross-compiling with mingw using cmake does not work, but autotools
+#       seems to do the job..
+get_filename_component(toolchain_file ${CMAKE_TOOLCHAIN_FILE} ABSOLUTE)
+ExternalProject_Add(
+  bson
+  PREFIX            "${SOFT_DEPS_ROOT_DIR}"
+
+  GIT_REPOSITORY    "git://github.com/mongodb/libbson.git"
+  GIT_TAG           "1.5.3"
+
+  UPDATE_COMMAND    ""
+  PATCH_COMMAND     ""
+
+  SOURCE_DIR        "${SOFT_DEPS_SOURCE_DIR}/bson-src"
+  CONFIGURE_COMMAND cd ${SOFT_DEPS_SOURCE_DIR}/bson-src && ./autogen.sh --host=${MINGW_NAME} --prefix=${SOFT_DEPS_INSTALL_PREFIX}
+
+  BUILD_COMMAND     cd ${SOFT_DEPS_SOURCE_DIR}/bson-src && make
+
+  INSTALL_COMMAND   cd ${SOFT_DEPS_SOURCE_DIR}/bson-src && make install
+  )
+#  CMAKE_ARGS
+#    -DCMAKE_TOOLCHAIN_FILE=${toolchain_file}
+#    -DCMAKE_INSTALL_PREFIX=${soft5_BINARY_DIR}/dependencies
+
+
+# Make sure that bson is installed before compiling tests
+# Hmm, seems not really work when compiling with -j
+ExternalProject_Add_StepTargets(bson bson-install
+  DEPENDEES install)
+
+add_custom_target(bson-dummy
+  DEPENDS bson-install)
+
+
+# Calling find_package(BSON) here would fail, since bson is first
+# build at compile time.
+#
+# We therefore manually set the variables that find_package(BSON)
+# would have set.
+#
+# We assume that we are cross-compiling with mingw64 for win64 on linux,
+# which produces static libraries.
+set(BSON_FOUND TRUE
+  CACHE PATH "" FORCE)
+set(BSON_INCLUDE_DIR "${SOFT_DEPS_INSTALL_PREFIX}/include"
+  CACHE PATH "" FORCE)
+set(BSON_LIBRARIES "${SOFT_DEPS_INSTALL_PREFIX}/lib/libbson.a"
+  CACHE FILEPATH "" FORCE)
+
+mark_as_advanced(
+  BSON_FOUND
+  BSON_INCLUDE_DIR
+  BSON_LIBRARIES
+  )

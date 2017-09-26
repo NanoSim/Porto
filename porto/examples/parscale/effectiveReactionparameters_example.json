@@ -1,0 +1,11 @@
+{
+	"name": "effectiveReactionparameters",
+	"nparameters": 2,
+	"multiplyByParticleVolumeFraction": true,
+	"functionalForm": "OneMinusConversionTimesConcentration",
+	"parameters": [
+		0.6667,
+		1
+	],
+	"argumentCount": 3
+}

@@ -166,8 +166,8 @@
 	    } else {    
 	      str += " (data_model, \"" + entry.name + "\", (const " + entry.type + capi.dims_to_ptr(entry.rank) + ")self->props." + entry.name;
 	    }	      
-	    if (entry.rank > 0) {
-		str += ", " + entry.dims.join(",");
+	    if (entry.rank > 0 && entry.type != "softc_string_s") {
+          str += ", " + entry.dims.join(",");
 	    }
 	    str += ");";
 	    setList.push(str);
@@ -196,13 +196,15 @@
 	    var str = dataModelGetFunction(entry);
 	    str += " (data_model, \"" + entry.name + "\", &self->props." + entry.name;
 	    if (entry.rank > 0) {
-		var idx = 0;
-		var dl = [];
-		entry.dims.forEach(function(dim){
-		    dl.push("&" + entry.name + "_" + idx.toString());
-		    idx++;
-		});
-		str += ", " + dl.join(",");
+			var idx = 0;
+			var dl = [];
+			if (entry.type != "softc_string_s") {
+				entry.dims.forEach(function(dim){
+					dl.push("&" + entry.name + "_" + idx.toString());
+					idx++;
+				});
+				str += ", " + dl.join(",");
+			}
 	    }
 	    str += ");";
 	    getList.push(str);

@@ -1,0 +1,102 @@
+{
+    "name": "kmc_process",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Entity describing reaction processes for kinetic Monte Carlo.",
+    "dimensions": [
+	{
+	    "name": "nconf",
+	    "description": "Number of configurations, i.e. number conditions and actions."
+	},
+	{
+	    "name": "nrc",
+	    "description": "Number of reaction coordinates."
+	},
+        {
+            "name": "ncoords",
+            "description": "Number Cartesian coordinates (x, y, z). Always 3."
+        },
+	{
+	    "name": "ntof_count",
+	    "description": "Length of tof_count."
+	}
+    ],
+    "properties": [
+        {
+            "name": "name",
+            "type": "string",
+            "description": "Process name."
+        },
+        {
+            "name": "enabled",
+            "type": "bool",
+            "description": "Whether this process is enabled.  (Is this really a model parameter?)"
+        },
+        {
+            "name": "rate_constant",
+            "type": "string",
+            "description": "Mathematical expression defining the rate constant in terms of rate parameters (activation energies, prefactors, ...) and external paramters (temperature, pressure...)."
+        },
+        {
+            "name": "coordinate_names",
+            "type": "string_list",
+	    "dims": ["nrc"],
+            "description": "Name of the site that each reaction coordinate is associated with."
+        },
+        {
+            "name": "coordinate_layers",
+            "type": "string_list",
+	    "dims": ["nrc"],
+            "description": "Name of layer that the site of each reaction coordinate is associated with."
+        },
+        {
+            "name": "coordinate_offsets",
+            "type": "double",
+	    "dims": ["nrc", "ncoords"],
+	    "unit": "Angstrom",
+            "description": "Offset of each coordinate relative to its associated site."
+        },
+        {
+            "name": "condition_names",
+            "type": "string_list",
+	    "dims": ["nconf"],
+            "description": "Name of each condition (i.e. configuration before the reaction)."
+        },
+        {
+            "name": "condition_coordinate",
+            "type": "string_list",
+	    "dims": ["nconf"],
+            "description": "Name reaction coordinate associated with each condition."
+        },
+        {
+            "name": "condition_species",
+            "type": "string_list",
+	    "dims": ["nconf"],
+            "description": "Name of the species occupying each condition before the reaction."
+        },
+        {
+            "name": "action_names",
+            "type": "string_list",
+	    "dims": ["nconf"],
+            "description": "Name of each action (i.e. configuration after the reaction)."
+        },
+        {
+            "name": "action_coordinate",
+            "type": "string_list",
+	    "dims": ["nconf"],
+            "description": "Name reaction coordinate associated with each condition."
+        },
+        {
+            "name": "action_species",
+            "type": "string_list",
+	    "dims": ["nconf"],
+            "description": "Name of the species occupying each condition after the reaction."
+        },
+        {
+            "name": "tof_count",
+            "type": "string_list",
+	    "dims": ["ntof_count"],
+            "description": "Stoichiometric factor for observable products in the form of key=value paris.  (Not sure how it is used, but seems to be needed when ``nconf > 1``, like 'TOF=1'??)"
+        }
+    ]
+}

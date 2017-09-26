@@ -20,9 +20,17 @@ typedef struct {
 Model *create_model(const char *uuid)
 {
   Model *m = (Model *)calloc(1, sizeof(Model));
+  if (!m) return nullptr;
+
   m->storage = softc_storage_create("hdf5", "datamodel-test.h5", "");
+  if (!m->storage) return nullptr;
+
   m->strategy = softc_storage_get_storage_strategy(m->storage);
+  if (!m->strategy) return nullptr;
+
   m->datamodel = softc_storage_strategy_get_datamodel(m->strategy);
+  if (!m->datamodel) return nullptr;
+
   softc_datamodel_set_id(m->datamodel, uuid);
   softc_datamodel_set_meta_name(m->datamodel, "softc-datamodel-test");
   softc_datamodel_set_meta_version(m->datamodel, "0.1");

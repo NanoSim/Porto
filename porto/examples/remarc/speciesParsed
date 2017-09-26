@@ -1,0 +1,120 @@
+[ Size = 4
+(H, 0)
+(C, 0)
+(FE, 0)
+(O, 0)
+]
+[ Size = 4
+(
+    Species: 
+    (
+        Name      : "CH4"
+        Mol. Mass : -1
+    )
+    Transport Data:
+    (
+        Mol. Index      : -1
+        Pot. Well Depth : -1
+        Collision Diam. : -1
+        Dipole Moment   : -1
+        Polarizability  : -1
+        Rot. Relax. No. : -1
+    )
+    Thermo Data:
+    (
+        Species  : CH4
+        Elements : {C:1, H:4}
+        Note     : UST)
+        Phase    :  
+        T_low    : 300
+        T_common : 1000
+        T_high   : 5000
+        AHs      : {1.68348, 0.0102372, -3.87513e-06, 6.78558e-10, -4.50342e-14, -10080.8, 9.62339}
+        ALs      : {0.778741, 0.0174767, -2.78341e-05, 3.04971e-08, -1.22393e-11, -9825.23, 13.7222}
+    )
+)
+(
+    Species: 
+    (
+        Name      : "CH4(S1)"
+        Mol. Mass : -1
+    )
+    Transport Data:
+    (
+        Mol. Index      : -1
+        Pot. Well Depth : -1
+        Collision Diam. : -1
+        Dipole Moment   : -1
+        Polarizability  : -1
+        Rot. Relax. No. : -1
+    )
+    Thermo Data:
+    (
+        Species  : CH4(S1)
+        Elements : {C:1, H:4}
+        Note     : UST)
+        Phase    : 0
+        T_low    : 500
+        T_common : 0
+        T_high   : 0
+        AHs      : {0.347651, 0.00992277, -2.01747e-06, -1.06405e-09, 4.18759e-13, -13899.7, -4.61646}
+        ALs      : {0.347651, 0.00992277, -2.01747e-06, -1.06405e-09, 4.18759e-13, -13899.7, -4.61646}
+    )
+)
+(
+    Species: 
+    (
+        Name      : "CH3(S1)"
+        Mol. Mass : -1
+    )
+    Transport Data:
+    (
+        Mol. Index      : -1
+        Pot. Well Depth : -1
+        Collision Diam. : -1
+        Dipole Moment   : -1
+        Polarizability  : -1
+        Rot. Relax. No. : -1
+    )
+    Thermo Data:
+    (
+        Species  : CH3(S1)
+        Elements : {C:1, H:3, NI:1}
+        Note     : UST)
+        Phase    :  
+        T_low    : 500
+        T_common : 2000
+        T_high   : 2000
+        AHs      : {-0.610761, 0.00861613, -2.17715e-06, -6.63815e-10, 3.13819e-13, -8897.92, -2.00829}
+        ALs      : {-0.610761, 0.00861613, -2.17715e-06, -6.63815e-10, 3.13819e-13, -8897.92, -2.00829}
+    )
+)
+(
+    Species: 
+    (
+        Name      : "H(S2)"
+        Mol. Mass : -1
+    )
+    Transport Data:
+    (
+        Mol. Index      : -1
+        Pot. Well Depth : -1
+        Collision Diam. : -1
+        Dipole Moment   : -1
+        Polarizability  : -1
+        Rot. Relax. No. : -1
+    )
+    Thermo Data:
+    (
+        Species  : H(S2)
+        Elements : {:1}
+        Note     : UST)
+        Phase    :  
+        T_low    : 500
+        T_common : 2000
+        T_high   : 2000
+        AHs      : {1.38522, -3.60292e-05, 1.01483e-06, -6.39234e-10, 1.26065e-13, -5458.87, -5.04263}
+        ALs      : {1.38522, -3.60292e-05, 1.01483e-06, -6.39234e-10, 1.26065e-13, -5458.87, -5.04263}
+    )
+)
+]

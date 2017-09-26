@@ -22,6 +22,7 @@ public:
   std::list<std::string> findTriplets(const std::string &subj,
               const std::string &pred = std::string()) const;
 
+  int size() const;
   std::string toRdf() const;
 
   std::string toCSV() const;

@@ -34,7 +34,7 @@ TEST_F(VariantTest, asString)
 }
 
 TEST_F(VariantTest, asInteger)
-{ 
+{
   StdVar d;
 
   d.set<StdInt>(42);
@@ -89,8 +89,8 @@ TEST_F(VariantTest, blob)
   Blob data = {'a','C','b'};
   var.set<Blob>(data);
   ASSERT_EQ(var.get<Blob>()[0], data[0]);
-  ASSERT_EQ(var.get<Blob>()[1], data[1]);  
-  ASSERT_EQ(var.get<Blob>()[2], data[2]);  
+  ASSERT_EQ(var.get<Blob>()[1], data[1]);
+  ASSERT_EQ(var.get<Blob>()[2], data[2]);
 }
 
 TEST_F(VariantTest, types)
@@ -119,7 +119,7 @@ TEST_F(VariantTest, typeId)
   auto vtype = [](soft::StdVariant &variant) -> std::string{
     switch(variant.type()) {
     case soft::StdTypes::String:
-      return std::string("string");      
+      return std::string("string");
     case soft::StdTypes::Int:
       return std::string("int");
     }
@@ -145,7 +145,6 @@ TEST_F(VariantTest, passingArg)
 
 TEST_F(VariantTest, toInt)
 {
-  myVariant.set<soft::StdUInt8>(32);
+  myVariant.set<soft::StdInt>(32);
   ASSERT_EQ(32, myVariant.toInt());
 }
-

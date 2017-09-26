@@ -1,0 +1,34 @@
+{
+    "name": "effectivenessFactor",
+    "version": "0.1",
+    "namespace": "eu.nanosim.parscale",
+    "description": "Description of the effect of intra-particle diffusivity on a chemical reaction taking place within a single particle. The result is a dimensionless number that modifies (typically reduces) the calculated reaction rate assuming idealized conditions.",
+    "dimensions": 
+	[
+        {
+            "name": "nparameters",
+            "description": "Number of parameters that are needed to evaluate the function."
+        }
+    ],
+    "properties": 
+	[
+        {
+            "name": "functionalForm",
+            "type": "string",
+            "description": "The mathematical expression that defines the effectivenessFactor."
+        },
+		{
+            "name": "parameters",
+            "type": "double",
+            "dims": [
+                "nparameters"
+            ],
+            "description": "The list of parameters that is needed to evaluate the mathematical expression."
+        },
+		{
+            "name": "argumentCount",
+            "type": "int",
+            "description": "The number of arguments needed to evaluate the mathematical expression."
+        }
+    ]
+}

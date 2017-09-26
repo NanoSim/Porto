@@ -3,6 +3,7 @@
 #include "softc-datamodel-private.hpp"
 #include "softc-string.h"
 #include "softc-string-private.hpp"
+#include "softc-string-list.h"
 #include "softc-bytearray-private.hpp"
 #include <cstring>
 #include <cstdlib>      // for malloc
@@ -174,13 +175,15 @@ bool softc_datamodel_append_blob (softc_datamodel_t *model, const char *key, con
   return false;
 }
 
-bool softc_datamodel_append_string_list (softc_datamodel_t *model, const char *key, const softc_string_s *value, size_t n_elements)
+bool softc_datamodel_append_string_list (softc_datamodel_t *model, const char *key, const softc_string_list_s *value)
 {
+  int n_elements = softc_string_list_count(value);
   if (model->ref) {
     soft::StdStringList stringList(n_elements);
     for (size_t i = 0; i < n_elements; ++i) {
-      if (value[i]) {     // Silently treat nullptr as empty strings (no error returned)
-        stringList[i] = value[i]->str;      
+      softc_string_s s = softc_string_at(value, i);
+      if (s) {   // Silently treat nullptr as empty strings (no error returned)
+        stringList[i] = s->str;
       }
     }
     return model->ref->appendStringArray(key, stringList);
@@ -444,23 +447,22 @@ bool softc_datamodel_get_blob (const softc_datamodel_t *model, const char *key, 
     auto isOk = model->ref->getByteArray(key, ret);
     if (isOk) {
       (*value)->bytearray =QByteArray((const char*)ret.data(), (int)ret.size());
+      return true;
     }
   }
   return false;
 }
 
-bool softc_datamodel_get_string_list (const softc_datamodel_t *model, const char *key, softc_string_s **value, size_t *n_elements)
+bool softc_datamodel_get_string_list (const softc_datamodel_t *model, const char *key, softc_string_list_s **value)
 {
   if (model->ref) {
     soft::StdStringList source;
     auto isOk = model->ref->getStringArray(key, source);
     if (isOk) {
-      auto siz = source.size();
-      *value = (softc_string_s *)malloc(siz*sizeof(softc_string_s));
-      for (size_t i = 0; i < siz; ++i) {
-        (*value)[i] = softc_string_create( source[i].c_str() );
-      }      
-      *n_elements = source.size();
+      *value = softc_string_list_create();
+      for (size_t i = 0; i < source.size(); ++i) {
+	softc_string_list_append_cstr( *value, source[i].c_str() );
+      }
       return true;
     }
   }

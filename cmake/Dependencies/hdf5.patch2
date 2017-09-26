@@ -1,0 +1,96 @@
+--- a/src/hdf5/config/cmake/HDF5UseFortran.cmake
++++ b/src/hdf5/config/cmake/HDF5UseFortran.cmake
+@@ -32,15 +32,16 @@
+         ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/testFortranCompiler1.f90
+         "${CODE}"
+     )
+-    TRY_RUN (RUN_RESULT_VAR COMPILE_RESULT_VAR
++
++    TRY_RUN (${RUN_RESULT_VAR1} ${COMPILE_RESULT_VAR}
+         ${CMAKE_BINARY_DIR}
+         ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/testFortranCompiler1.f90
+         CMAKE_FLAGS "${CHECK_FUNCTION_EXISTS_ADD_LIBRARIES}"
+         RUN_OUTPUT_VARIABLE OUTPUT
+     )
+
+-
+-
++    set(RUN_RESULT_VAR ${RUN_RESULT_VAR1})
++    set(COMPILE_RESULT_VAR ${COMPILE_RESULT_VAR})
+     set(${RETURN} ${OUTPUT})
+
+     #message ( "Test result1 ${RETURN} ")
+@@ -199,8 +200,8 @@
+
+          END PROGRAM main
+   "
+-  XX
+-  YY
++  H5_Fortran_REAL_AND_INTEGER_KIND_RUN
++  H5_Fortran_REAL_AND_INTEGER_KIND_RUN__TRYRUN_OUTPUT
+   PROG_OUTPUT
+ )
+ # dnl The output from the above program will be:
+@@ -250,8 +251,8 @@
+      "
+   )
+   FORTRAN_RUN("INTEGER KIND SIZEOF" ${PROG_SRC}
+-  XX
+-  YY
++  H5_Fortran_INTEGER_KIND_SIZEOF_RUN
++  H5_Fortran_INTEGER_KIND_SIZEOF_RUN__TRYRUN_OUTPUT
+   PROG_OUTPUT1
+   )
+   string(REGEX REPLACE "\n" "" PROG_OUTPUT1 "${PROG_OUTPUT1}")
+@@ -290,8 +291,8 @@
+      "
+   )
+   FORTRAN_RUN("REAL KIND SIZEOF" ${PROG_SRC}
+-  XX
+-  YY
++  H5_Fortran_KIND_${KIND}_RUN
++  H5_Fortran_KIND_${KIND}_RUN__TRYRUN_OUTPUT
+   PROG_OUTPUT1
+   )
+   string(REGEX REPLACE "\n" "" PROG_OUTPUT1 "${PROG_OUTPUT1}")
+@@ -335,8 +336,8 @@
+           WRITE(*,*) kind(c)
+        END
+   "
+-  XX
+-  YY
++  H5_Fortran_SIZEOF_NATIVE_KIND_RUN
++  H5_Fortran_SIZEOF_NATIVE_KIND_RUN__TRYRUN_OUTPUT
+   PROG_OUTPUT
+ )
+ # dnl The output from the above program will be:
+@@ -392,7 +393,7 @@
+ # The provided CMake C macros don't provide a general compile/run function
+ # so this one is used.
+ #-----------------------------------------------------------------------------
+-MACRO (C_RUN FUNCTION CODE RETURN)
++MACRO (C_RUN FUNCTION CODE RUN_RESULT_VAR RETURN)
+     message (STATUS "Detecting C ${FUNCTION}")
+     if (CMAKE_REQUIRED_LIBRARIES)
+       set (CHECK_FUNCTION_EXISTS_ADD_LIBRARIES
+@@ -404,7 +405,8 @@
+         ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/testCCompiler1.c
+         ${CODE}
+     )
+-    TRY_RUN (RUN_RESULT_VAR COMPILE_RESULT_VAR
++    set (COMPILE_RESULT_VAR "${RUN_RESULT_VAR}__TRYRUN_OUTPUT")
++    TRY_RUN (${RUN_RESULT_VAR} ${COMPILE_RESULT_VAR}
+         ${CMAKE_BINARY_DIR}
+         ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/testCCompiler1.c
+         CMAKE_FLAGS "${CHECK_FUNCTION_EXISTS_ADD_LIBRARIES}"
+@@ -468,7 +470,9 @@
+      "
+   )
+
+-C_RUN("maximum decimal precision for C" ${PROG_SRC} PROG_OUTPUT)
++C_RUN("maximum decimal precision for C" ${PROG_SRC}
++  H5_C_MAXIMAL_DECIMAL_PRECISION_RUN
++  PROG_OUTPUT)
+
+ # dnl The output from the above program will be:
+ # dnl    -- LINE 1 --  long double decimal precision

@@ -1,0 +1,39 @@
+{
+    "name": "effectiveReactionparameters",
+    "version": "0.1",
+    "namespace": "eu.nanosim.parscale",
+    "description": "Description of an effective reaction to be used in a continuum simulation. This function uses the reaction rate constant k (that might be calculated using a different expression) as the first argument.",
+    "dimensions": 
+	[
+        {
+            "name": "nparameters",
+            "description": "Number of parameters that are needed to evaluate the function."
+        }
+    ],
+    "properties": 
+	[
+        {
+            "name": "multiplyByParticleVolumeFraction",
+            "type": "int",
+            "description": "Decide whether the results needs to multiplied with the particle volume fraction."
+        },
+        {
+            "name": "functionalForm",
+            "type": "string",
+            "description": "The mathematical expression that defines the effective reaction rate."
+        },
+		{
+            "name": "parameters",
+            "type": "double",
+            "dims": [
+                "nparameters"
+            ],
+            "description": "The list of parameters that is needed to evaluate the mathematical expression. Typically, these parameters will be exponents to the concentrations"
+        },
+		{
+            "name": "argumentCount",
+            "type": "int",
+            "description": "The number of arguments needed to evaluate the mathematical expression."
+        }
+    ]
+}

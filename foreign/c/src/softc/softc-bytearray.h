@@ -7,6 +7,7 @@ typedef struct _softc_bytearray_s* softc_bytearray_s;
 
 softc_bytearray_s softc_bytearray_create(const unsigned char *str, size_t len);
 const unsigned char *from_softc_bytearray(const softc_bytearray_s s);
+size_t softc_bytearray_size(const softc_bytearray_s bytearray);
 void softc_bytearray_destroy(softc_bytearray_s str);
 
 SOFTC_END_DECLS

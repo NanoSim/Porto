@@ -15,7 +15,7 @@ static void *refmalloc(size_t size)
   void *ptr = malloc(sizeof(size_t) + size);
   size_t *cnt = (size_t *)ptr;
   *cnt = 0;
-  ptr += sizeof(size_t);
+  ptr = (char*)ptr + sizeof(size_t);
   return ptr;
 }
 
@@ -25,11 +25,11 @@ static void *refmalloc(size_t size)
  */
 static void *refrealloc(void *data, size_t size)
 {
-  void *ptr = data - sizeof(size_t);
+  void *ptr = (char*)data - sizeof(size_t);
   ptr = realloc(ptr, sizeof(size_t) + size);
   size_t *cnt = (size_t *)ptr;
   *cnt = 0;
-  ptr += sizeof(size_t);
+  ptr = (char*)ptr + sizeof(size_t);
   return ptr;
 }
 
@@ -39,7 +39,7 @@ static void *refrealloc(void *data, size_t size)
  */
 size_t softc_block_data_refs(const void *ptr)
 {
-  size_t *cnt = (size_t*)(ptr - sizeof(size_t));
+  size_t *cnt = (size_t*)((char*)ptr - sizeof(size_t));
   return *cnt;
 }
 
@@ -48,7 +48,7 @@ size_t softc_block_data_refs(const void *ptr)
  */
 static size_t inc(void **mem)
 {
-  size_t *cnt = (size_t*)((*mem) - sizeof(size_t));
+  size_t *cnt = (size_t*)((char*)(*mem) - sizeof(size_t));
   return ++(*cnt);
 }
 
@@ -58,11 +58,11 @@ static size_t inc(void **mem)
  */
 static size_t dec(void **mem)
 {
-  size_t *cnt = (size_t*)((*mem) - sizeof(size_t));
+  size_t *cnt = (size_t*)((char*)(*mem) - sizeof(size_t));
   if (*cnt > 0)
     return --(*cnt);
 	    
-  free((void*)(*mem)-sizeof(size_t));
+  free((char*)(*mem)-sizeof(size_t));
   *mem = NULL;
   return 0;
 }

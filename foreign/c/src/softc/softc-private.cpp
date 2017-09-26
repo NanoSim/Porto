@@ -6,7 +6,7 @@
 
 struct _softc_t *softc_private_init(int argc, char *argv[])
 {
-  struct _softc_t *ret;  
+  struct _softc_t *ret;
   ret = (struct _softc_t*) malloc (sizeof (struct _softc_t));
   ret->app = 0;
   soft::init(argc, argv);
@@ -25,7 +25,7 @@ char **softc_private_get_storage_drivers()
   for (auto &driver : soft::registeredStorageDrivers()) {
     retval[i] = (char*)malloc (sizeof(char*) * driver.length());
     strcpy(retval[i], driver.data());
-    retval[++i] = NULL;	   
+    retval[++i] = NULL;
   }
   return retval;
 }
@@ -33,6 +33,15 @@ char **softc_private_get_storage_drivers()
 const char *softc_private_uuidgen()
 {
   auto uuid = soft::uuidGen();
+  char *ret = (char *)malloc(sizeof (char) * (uuid.length() + 1));
+  memcpy(ret, uuid.data(), uuid.length());
+  ret[uuid.length()] = '\0';
+  return (const char*) ret;
+}
+
+const char *softc_private_uuid_from_entity(const char *name, const char *version, const char *ns)
+{
+  auto uuid = soft::uuidFromEntity(name, version, ns);
   char *ret = (char *)malloc(sizeof (char) * (uuid.length() + 1));
   memcpy(ret, uuid.data(), uuid.length());
   ret[uuid.length()] = '\0';

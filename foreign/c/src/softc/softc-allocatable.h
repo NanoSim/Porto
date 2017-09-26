@@ -26,6 +26,7 @@ void softc_allocatable_dimensions(const softc_allocatable_s *, size_t *rank, siz
 void *softc_allocatable_data(softc_allocatable_s *);
 void *softc_allocatable_raw_data(softc_allocatable_s *);
 
+DECL_ALLOCATABLE(char);
 DECL_ALLOCATABLE(softc_string_s);
 DECL_ALLOCATABLE(double);
 DECL_ALLOCATABLE(float);
@@ -38,7 +39,6 @@ DECL_ALLOCATABLE(int32_t);
 DECL_ALLOCATABLE(uint32_t);
 DECL_ALLOCATABLE(int64_t);
 DECL_ALLOCATABLE(uint64_t);
-DECL_ALLOCATABLE(char);
 
 typedef void (*allocatable_free_fptr)(softc_allocatable_s*);
 

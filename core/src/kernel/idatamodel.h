@@ -6,10 +6,11 @@
 #include <cstdint>
 #include "softns.h"
 #include "softtypes.h"
+#include "soft-kernel_export.h"
 
 SOFT_BEGIN_NAMESPACE
 
-class IDataModel
+class SOFT_KERNEL_EXPORT IDataModel
 {
 public:
   IDataModel();

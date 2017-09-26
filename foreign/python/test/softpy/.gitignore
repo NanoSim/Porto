@@ -1,8 +1,11 @@
 *.pyc
+*.pytc
 
 softpy-test-datamodel.h5
 softpy-test-factory.h5
 softpy-test-entity.h5
+softpy-test-collection.h5
+x.h5
 
 .gdb_history
 

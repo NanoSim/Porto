@@ -3,6 +3,12 @@
 #include <string>
 #include <new>
 
+softc_string_s softc_string_create0()
+{
+  softc_string_s s = new _softc_string_s(nullptr);
+  return s;
+}
+
 softc_string_s softc_string_create(const char *str)
 {
   softc_string_s s = new _softc_string_s(str);
@@ -19,23 +25,23 @@ void softc_string_destroy(softc_string_s str)
   delete (str);
 }
 
-typedef _softc_string_s* string_p;
-
-softc_string_s* softc_string_createlist(const char *str[], size_t n)
+void softc_string_assign(softc_string_s s, const char *text)
 {
-  string_p* a = new string_p[n];
-  for (size_t i = 0; i < n; ++i) {
-    a[i] = softc_string_create( str[i] );
+  if (text) {
+    s->str.assign(text);
   }
-  return a;
 }
 
-void softc_string_destroylist(softc_string_s* strlist, size_t n)
+int softc_string_compare(softc_string_s s, const char *text)
 {
-  if (strlist) {
-    for (size_t i = 0; i < n; ++i) {
-      softc_string_destroy( strlist[i] );
-    }
-    delete[] strlist;
+  if (text) {
+    return s->str.compare(text);
+  } else {
+    return -1;
   }
+}
+
+bool softc_string_isequal(softc_string_s first, softc_string_s second)
+{
+  return (first->str == second->str);
 }

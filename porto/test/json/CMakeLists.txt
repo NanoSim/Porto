@@ -9,15 +9,15 @@ if(GTEST_FOUND)
   aux_source_directory(. SRC_LIST)
   add_executable(${PROJECT_NAME} ${SRC_LIST})
   include_directories(
-    ${porto-json_INCLUDE_DIRS} 
+    ${porto-json_INCLUDE_DIRS}
     ${soft-storage-plugins-json_INCLUDE_DIRS}
     ${porto-codegen-entities_INCLUDE_DIRS}
     ${GTEST_INCLUDE_DIRS}
     )
 
   # TODO: Make this more elegant through using porto-json_LIBS?
-  target_link_libraries(${PROJECT_NAME} 
-    porto-json 
+  target_link_libraries(${PROJECT_NAME}
+    porto-json
     ${soft-storage-plugins-json_LIBS}
     ${porto-codegen-entities_LIBS}
     ${GTEST_LIBRARIES}
@@ -39,7 +39,7 @@ if(GTEST_FOUND)
   set_property(TEST ${PROJECT_NAME} APPEND PROPERTY
     ENVIRONMENT "SOFTSTORAGE=${SOFTSTORAGE}:$ENV{SOFTSTORAGE}")
 
- 
+
 else(GTEST_FOUND)
   message("Google test not found - skipping tests")
 endif(GTEST_FOUND)

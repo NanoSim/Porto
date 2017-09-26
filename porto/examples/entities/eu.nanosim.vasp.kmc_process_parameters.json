@@ -1,0 +1,66 @@
+{
+    "name": "kmc_process_parameters",
+    "version": "0.1",
+    "namespace": "eu.nanosim.vasp",
+    "description": "Process parameters for surface reactions.",
+    "dimensions": [
+	{
+	    "name": "nactivation_energies",
+	    "description": "Number activation energies."
+	},
+	{
+	    "name": "npartial_pressures",
+	    "description": "Number partial pressures (of the species)."
+	},
+	{
+	    "name": "nother_rate_eq_par",
+	    "description": "Other parameters defined in the rate equations."
+	}
+    ],
+    "properties": [
+        {
+            "name": "temperature",
+            "type": "double",
+	    "unit": "K",
+            "description": "System temperature."
+        },
+        {
+            "name": "activation_energy_names",
+            "type": "string_list",
+	    "dims": ["nactivation_energies"],
+            "description": "Name of activation energies used in the rate equations."
+        },
+        {
+            "name": "activation_energy_values",
+            "type": "double",
+	    "dims": ["nactivation_energies"],
+	    "unit": "eV",
+            "description": "Value of each activation energy."
+        },
+        {
+            "name": "partial_pressure_names",
+            "type": "string_list",
+	    "dims": ["nactivation_energies"],
+            "description": "Name of partial pressures used in the rate equations."
+        },
+        {
+            "name": "partial_pressure_values",
+            "type": "double",
+	    "dims": ["nactivation_energies"],
+	    "unit": "bar",
+            "description": "Value of each partial pressure."
+        },
+        {
+            "name": "other_rate_eq_par_names",
+            "type": "string_list",
+	    "dims": ["nother_rate_eq_par"],
+            "description": "Name of other rate equation parameters."
+        },
+        {
+            "name": "other_rate_eq_par_values",
+            "type": "double",
+	    "dims": ["nother_rate_eq_par"],
+            "description": "Value of other rate equation parameters."
+        }
+    ]
+}
