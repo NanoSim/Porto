@@ -1,0 +1,91 @@
+<!--
+    @{
+    dimensions=(function(dims){
+    if (dims === undefined) return undefined;
+    var tbl="<th colspan=\"4\">Dimensions</th><tr><th><font size=\"-1\">Name</font></th><th colspan=\"3\"><font size=\"-1\">Description</font></th></tr>";
+    for (var i in dims) {
+    tbl+="<tr><td><span title=\""+ dims[i].description +"\">"+dims[i].name+"</td><td colspan=\"3\">"+dims[i].description+"</td></tr>";
+    }
+    return tbl;
+    })(soft.model.entity[0].dimensions);
+
+    enumerators=(function(enums){
+    if (enums === undefined || enums.length === 0) return undefined;
+    var tbl="<tr><th colspan=\"4\">Enumerators</th><tr><th><font size=\"-1\">Name</font></th><th><font size=\"-1\">Values</font></th></tr>";
+    for (var i in enums) {
+    tbl+="<tr><td>"+enums[i].name+"</td><td>"+enums[i].value+"</td></tr>";
+    }
+    return tbl
+    })(soft.model.entity[0].enums);
+
+    properties=(function(props){
+    if (props === undefined) return undefined;
+    var tbl="<tr><th colspan=\"4\">Properties</th></tr><tr><th><font size=\"-1\">Name</font></th><th><font size=\"-1\">Type</font></th><th><font size=\"-1\">Dims</font></th><th><font size=\"-1\">Description</font></th></tr>";
+    for (var i in props) {
+    tbl+="<tr>" +
+    "<td><span title=\"" + props[i].description + "\">"+props[i].name+"</span></td>" +
+    "<td>"+props[i].type+"</td>" +
+    (props[i].dims!==undefined?"<td>["+props[i].dims.join(",")+"]</td>":"<td></td>") +
+    "<td>"+(props[i].description!==undefined?props[i].description:"")+"</td>" +
+    "</tr>";
+    }
+    return tbl;
+    })(soft.model.entity[0].properties);    
+    undefined;
+    }
+
+    
+    !-->
+<html>
+  <head><title>@soft.model.entity[0].name (@soft.model.entity[0].version)</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
+  <body>
+    <div class="inset">      
+      <div class="login-head">
+	<h1><a href="/index.html" target="_blank"><img height="32" alt="Home" src="/image/back-icon.png"/></a>Schema Description:  @soft.model.entity[0].name (@soft.model.entity[0].version)</h1>
+      </div>
+      <br/>
+      <!--      <table style="width:100%" id="tbl2" border="1" cellpadding="3" cellspacing="0"><tr><th align="center" colspan="4"><font size="+1">Metadata Schema: @soft.model.entity[0].name (@soft.model.entity[0].version)</font></th></tr> !-->
+      <table style="width:100%" id="tbl2" border="1" cellpadding="3" cellspacing="0">
+	<tr>
+	  <th colspan="1"><font size="-1">Name</font></th>
+	  <th colspan="1"><font size="-1">Namespace (context)</font></th>
+	  <th colspan="2"><font size="-1">Version</font></th>
+	</tr>
+	<tr>
+	  <td colspan="1">@soft.model.entity[0].name</td>
+	  <td colspan="1">@soft.model.entity[0].namespace</td>
+	  <td colspan="2">@soft.model.entity[0].version</td>
+	</tr>
+	<tr>
+	  <th colspan="4"><font size="-1">Description</font></th>
+	</tr>
+	<tr>
+	  <td colspan="4">@soft.model.entity[0].description</td>
+	</tr>
+	@dimensions
+	@enumerators   
+	@properties
+	
+      </table>
+      <br/>
+      
+      <h2> Formal Meta-Data Schema (JSON) </h2>
+      <div style="padding: 5px; border: dotted; background-color: #e1e1f1;">
+	<br/>
+	<code><pre>
+@{
+var o = soft.model.entity[0];
+o._id = undefined;
+JSON.stringify(o, undefined, 4)
+}
+	</pre></code>
+	<br/>
+      </div>
+    </div>
+  </body>
+</html>
+

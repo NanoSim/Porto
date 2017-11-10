@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Entity Search</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+    <div class="login-head">
+      <h1><a href="/index.html" target="_blank"><img height="48" alt="Home" src="/image/home-icon.png"/></a>Entity Search</h1>
+    </div>
+
+    <form action="/entitysearch.jscript" method="get">
+      <li> 
+	<input type="text" name="uri" class="text" value="mongodb://localhost">
+      </li>
+      <li> 
+	<input type="text" name="database" class="text" value="demo">
+      </li>
+      <li> 
+	<input type="text" name="collection" class="text" value="guess"> 
+      </li>
+      <li> 
+	<input type="text" name="name" class="text" value="entity-name"> 
+      </li>
+      <li> 
+	<input type="text" name="version" class="text" value="entity-version"> 
+      </li>
+
+      <div class="submit">		  
+	<input type="submit" value="Search" />
+	<div class="clear">  </div>	
+      </div>
+    </form>					
+
+    <div id="footer" align=right>
+      <footer>
+	<p>Powered by SOFT5-Technology</p>
+      </footer>
+    </div>    
+  </body>
+</html>

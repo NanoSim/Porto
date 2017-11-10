@@ -1,0 +1,79 @@
+<!--
+@{
+    colNames = (function(){
+      var cols = [];
+      for (var i in soft.model.metaData.properties) {
+         cols.push(soft.model.metaData.properties[i].name);
+      }
+      return cols;
+    })();
+
+    dataColumns = (function(){
+      var cols = [];
+      for (var i in soft.model.metaData.properties) {
+        var name = soft.model.metaData.properties[i].name;
+	var vec = (soft.model.data[name][0].length !== undefined && soft.model.data[name][0].length > 0);
+	var type = soft.model.metaData.properties[i].type == "string" ? "string" : "number";
+	if (vec) type = 'string';
+	cols.push("data.addColumn('" + type + "', '" + name + "');");
+      }
+      return cols.join("\n");
+    })();
+
+    dataRows = (function(){
+        var rows = [];
+        var size = soft.model.data[colNames[0]].length;
+        for (var i = 0; i < size; ++i) {
+            var r = [];
+            for (var c in colNames) {
+	      var value = soft.model.data[colNames[c]][i];
+	      if (value.length > 0) 
+                r.push("\"[" + value + "]\"");	
+              else
+                r.push(value);
+  	    }
+            rows.push("[" + r.join(",") + "]");
+        }
+        return rows.join(",\n");
+    })();
+
+    undefined
+}
+!-->
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      google.load("visualization", "1", {packages:["table", "corechart"]});
+      google.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        @dataColumns
+        data.addRows([
+          @dataRows       
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {showRowNumber: true, allowHtml: true});            
+      }
+    </script>
+  
+  </head>
+  
+  <body>
+    <div class="login-head">
+      <h1><a href="/index.html" target="_blank"><img height="48" alt="Home" src="/image/home-icon.png"/></a>Search Results</h1>
+    </div>
+
+    <div id="chart_div"></div>
+    <div id="table_div"></div>
+  </body>
+</html>

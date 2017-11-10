@@ -1,0 +1,11 @@
+<!--
+@{
+  var res = (new Process).execute("dot", ["-Tpng", "state_machine.dot", "-o", "sm2.png"]);
+  undefined;
+} !-->
+<html>
+  <body>
+    <h1>image</h1>
+    <img src="sm2.png"/>
+   </body>
+</html>

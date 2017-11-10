@@ -1,0 +1,68 @@
+#!/usr/bin/env softshell
+
+var parseQuery = function (args)
+{
+    var query = {};
+    var vars = args[1].split("&");
+    for (var i = 0; i < vars.length; ++i) {
+	var pair = vars[i].split('=');
+	query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+    }
+    return query;
+};
+
+var data = function(obj) {    
+    var entities = [];
+    console.error(JSON.stringify(obj));
+    var client = new MongoClient(obj.uri);
+    var coll   = client.collection(obj.database, obj.collection);
+    var query = {};
+    if (obj.name !== undefined && obj.name !== "") query.__name__ = obj.name;
+    if (obj.version !== undefined && obj.version !== "") query.__version__ = obj.version;
+    
+    var cursor = coll.find(query);
+    var bson   = cursor.next();
+    while (cursor.more()) {    
+	var o    = JSON.parse(bson.asString());
+	entities.push(o);
+	bson   = cursor.next();
+    }
+    return entities;
+};
+
+__main__ = function (args)
+{
+    try {
+	var queryObj = parseQuery(args);
+	var entities = data(queryObj);
+
+	var controller = require('soft.mvc').create({
+	    model: {
+		query: queryObj,
+		entities: entities
+	    },
+	    view: "./template/entitysearchpage.htmljs"
+	});
+	
+	console.raw ("HTTP/1.1 200 OK\r\n");
+	console.raw ("Content-Type: text/html; charset=UTF-8\r\n");
+	console.raw ("Date: "+ (new Date).toLocaleString().trim() + "\r\n");
+	console.raw ("Connection: close\r\n\r\n");
+	console.raw (controller());
+
+/*	  
+	console.raw ("<pre>\r\n");
+    	console.raw (JSON.stringify(queryObj, undefined, 4));
+	for(var i in entities) {
+	    console.raw (JSON.stringify(entities[i], undefined, 4));
+	}
+	console.raw ("</pre>\r\n");
+*/	
+    } catch (err) {
+	console.raw ("HTTP/1.1 400 Bad Request\r\n\r\n");
+	console.raw ("<h1>400 Bad Request</h1>\r\n");
+	console.raw(err);
+	return 1;
+    }    
+    return 0;
+};

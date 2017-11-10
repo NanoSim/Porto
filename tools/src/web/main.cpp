@@ -5,7 +5,21 @@
 int main (int argc, char **argv)
 {
   QCoreApplication app(argc, argv);
-  auto daemon = new HttpDaemon(":res/configure.js", &app);
+  QCoreApplication::setApplicationName("softweb");
+  QCoreApplication::setApplicationVersion("1.1");
+  QCommandLineParser commandLineParser;
+  commandLineParser.setApplicationDescription("SoftWeb helper");
+  commandLineParser.addHelpOption();
+  commandLineParser.addVersionOption();
+  QCommandLineOption configOption({"c", "config"},
+				  QCoreApplication::translate("main", "Read <config> file"),
+				  QCoreApplication::translate("main", "config"),
+				  QString(":res/configure.js"));
+
+  commandLineParser.addOption(configOption);
+  commandLineParser.process(app);
+  QString const configFile = commandLineParser.value(configOption);
+  auto daemon = new HttpDaemon(configFile, &app);
   daemon->run();
   return app.exec();
 }

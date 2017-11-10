@@ -1,0 +1,40 @@
+#!/usr/bin/env softshell
+
+__main__ = function (args)
+{
+    var event = new EventLoop(),
+	proc  = new Process(),
+	prog  = args[1],
+	arg   = args[2];
+	
+    fs.setCurrentPath(fs.filePath(prog));
+
+    proc["error(int)"].connect (function(err){
+	console.error("Process error " + err);
+	event.quit();
+    });
+
+    proc["readyReadStandardOutput()"].connect (function (){
+	var stdout = proc.readAllStandardOutput();
+	console.raw(stdout);
+    });
+
+    proc["readyReadStandardError()"].connect (function (){
+	var stderr = proc.readAllStandardOutput();
+	console.error(stderr);
+    });
+
+    proc["finished(int)"].connect (function (exitCode){
+	print(proc.readAllStandardError());
+	event.quit();
+    });
+
+    try {
+	proc.start(prog, [arg]);
+    } catch (err) {
+	console.error("Exception error: " + err);
+	event.quit();
+    }
+
+    return event.exec();
+};

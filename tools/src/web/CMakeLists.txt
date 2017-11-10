@@ -11,7 +11,7 @@ include_directories (
 
 set (LINK_LIBS ${LINK_LIBS} ${soft-kernel_LIBS})
 aux_source_directory (. SRC_LIST)
-add_executable(softweb ${SRC_LIST} ${QT_RESOURCE} webserver.qrc)
+add_executable(${PROJECT_NAME} ${SRC_LIST} ${QT_RESOURCE} webserver.qrc)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_constexpr)
 target_link_libraries (${PROJECT_NAME} ${LINK_LIBS})
 

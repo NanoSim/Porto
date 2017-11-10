@@ -16,6 +16,7 @@
 #include "httpdaemon.h"
 
 static constexpr auto settings_conf          = "configure";
+static constexpr auto settings_directory_index = "directory_index";
 static constexpr auto settings_types         = "types";
 static constexpr auto settings_port          = "port";
 static constexpr auto settings_document_root = "document_root";
@@ -84,6 +85,17 @@ static QScriptValue setErrorLog(QScriptContext *context, QScriptEngine *engine)
   return engine->undefinedValue();
 }
 
+static QScriptValue setDirectoryIndex(QScriptContext *context, QScriptEngine *engine)
+{
+  qDebug() << "QScriptValue setDirectoryIndex";
+  auto directoryIndex = context->argument(0).toString();
+  qDebug() << "\t" << directoryIndex;
+  auto global   = engine->globalObject();   
+  auto settings = global.property(settings_conf);
+  settings.setProperty(settings_directory_index, directoryIndex);
+  return  engine->undefinedValue();
+}
+
 static QScriptValue setPort (QScriptContext *context, QScriptEngine *engine)
 {
   auto port     = context->argument(0).toUInt16();
@@ -119,7 +131,8 @@ class HttpDaemon :: Private
   friend class HttpDaemon;
   QString configScript;
   QJsonDocument serverSettings;
-  
+
+  QString directoryIndex() const;
   quint16 port() const;
   QString findType(QString const &filename) const;
   QString findHandler(QString const &filename) const;
@@ -128,6 +141,14 @@ class HttpDaemon :: Private
   
   bool initialize();
 };
+
+QString HttpDaemon::Private::directoryIndex() const
+{
+  auto idx = serverSettings.object().value(settings_directory_index).toString();
+  qDebug() << "HttpDaemon::Private::directoryIndex" << idx;
+    
+  return idx;
+}
 
 quint16 HttpDaemon::Private::port() const
 {
@@ -146,7 +167,6 @@ QByteArray HttpDaemon::Private::performAction(QString const &handler, QString co
   auto actionObj = action.toObject();
   auto actionScript = actionObj.value(handler).toString();
 
-  //  auto docRoot = documentRoot();
   qDebug() << "-----------------HttpDaemon::Private::performAction-----------------------------";
   qDebug() << "action: " << actionScript;
   qDebug() << " handler: " << handler;
@@ -218,6 +238,7 @@ bool HttpDaemon::Private::initialize()
   auto setServNamFn = engine.newFunction(setServerName);
   auto setServAdmFn = engine.newFunction(setServerAdmin);
   auto setErrLogFn  = engine.newFunction(setErrorLog);
+  auto setIndexDefFn= engine.newFunction(setDirectoryIndex);
   auto actionFn     = engine.newFunction(action);
   auto addHandlerFn = engine.newFunction(addHandler);
   
@@ -234,6 +255,7 @@ bool HttpDaemon::Private::initialize()
   configObject.setProperty("setServerName", setServNamFn);
   configObject.setProperty("setServerAdmin", setServAdmFn);
   configObject.setProperty("setErrorLog", setErrLogFn);
+  configObject.setProperty("setDirectoryIndex", setIndexDefFn);
   
   auto const program = stream.readAll();
   auto const result = engine.evaluate(program, file.fileName(), 1);
@@ -244,7 +266,6 @@ bool HttpDaemon::Private::initialize()
   }
   auto configValue = engine.evaluate("(function(){return (JSON.stringify(configure));})();");
   serverSettings = QJsonDocument::fromJson(configValue.toString().toLocal8Bit());
-  //  qDebug () << serverSettings.toJson();
   return true;
 }
 
@@ -291,7 +312,10 @@ QByteArray readFile(QString const &filename)
 void HttpDaemon :: handleToken(QStringList const &token, QTcpSocket *socket)
 {
   if (token[0] == "GET") {
-    QUrl url("file://" + token[1]);
+    auto tok = (token[1].trimmed().right(1) == "/" ?
+		(token[1].trimmed() + d->directoryIndex()) :
+		token[1].trimmed());
+    QUrl url("file://" + tok);
     auto fileName = d->documentRoot() + url.path();
     auto handler = d->findHandler(fileName);
 
@@ -350,6 +374,7 @@ void HttpDaemon :: readClient()
   QTcpSocket *socket = (QTcpSocket*) sender();
   if (socket->canReadLine()) {
     QStringList tokens = QString(socket->readLine()).split(QRegExp("[ \r\n][ \r\n]*"));
+    qDebug() << "reading token: " << tokens.join(",");
     handleToken(tokens, socket);
     if (socket->state() == QTcpSocket::UnconnectedState) {
       delete socket;
