@@ -58,82 +58,8 @@ runner.
 
 # Installation
 
-This chapter describes how to install the SOFT5/Porto system. The
-software is available on github: https://github.com/nanosim/porto. The
-software is currently only distributed as source code, and requires
-some preparation, compilation and installation steps. Here we will
-show the necessary steps for installing the software on Ubuntu 16.04
-LTS.
-
-## Preparation
-The software is available as a Git repository, and a local
-installation of git is required. Either become root to perform the
-following operations, or use the sudo command (assumes the current
-user have sudo access)
-
-	$ sudo apt-get update
-	$ sudo apt-get install -y git
-	
-Download the source code to an appropriate folder using git.
-	
-	$ git clone git@github.com:NanoSim/Porto.git soft5
-	
-Before the code can be compiled, a set of dependencies needs to be
-installed. First of all the development tools (compilers++) is
-needed. We will also need CMake, HDF5 (development), GTest
-(development), boost (development)
-
-	$ git install -y build-essential cmake libhdf5-dev cmake libgtest-dev libboost-all-dev
-	
-Before we can use GTest, it needs to be build as a shared library
-
-	$ cd /usr/src/gtest
-	$ sudo cmake -DEBUILD_SHARED_LIBS=On . && sudo make
-	$ ln *.so /usr/lib
-	
-In order to use MongoDB, we need to add the official repository.
-
-	$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
-	  --recv 0C49F3730359A14518585931BC711F9BA15703C6
-	$ echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 \
-	  multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
-	$ sudo apt-get update
-	$ sudo apt-get install -y mongodb-org libmongoc-1.0.0
-
-SOFT5 is built on Qt5. Qt5 comes with its own online installer which
-can be downloaded and run for the official website. Here we use Qt 5.7 (any Qt 5.x should be ok)
-
-	$ wget http://download.qt.io/official_releases/qt/5.7/5.7.0/qt-opensource-linux-x64-5.7.0.run
-	$ chmod +x qt-opensource-linux-x64-5.7.0.run
-	$ ./qt-opensource-linux-x64-5.7.0.run
-	
-
-Now that all external dependencies have been resolved, we will also
-need to set up our local command prompt environment. If you are using
-bash, add the following to your .bashrc
-
-	$ export QTDIR=<path-to-installed-Qt>/5.7/<platform>
-	$ export PATH=$QTDIR/bin:$PATH
-	$ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
-
-here <platform> will typically be gcc_64 on GNU/Linux.
-
-## Configuration, compilation and installation
-The next step is to configure and install SOFT5.
-
-	$ mkdir build-soft5
-	$ cd build-soft5
-	$ cmake -DCMAKE_INSTALL_PREFIX=/usr/local/soft5 -DWITH_PORTO=yes ../soft5
-	
-Note that your local installation may need help to find different
-software components. It is therefore recommended to use ccmake (CMake
-with curses interface) when configuring the build process.
-	
-	$ make 
-	$ make test
-	$ sudo make install
-	
-
+Please see the file "INSTALL.md" for detailed instructions on how to
+configure and compile the software.
 
 # SOFT5 Features
 
@@ -159,7 +85,7 @@ describing many aspects of the domain. While each entity describes a
 single unit of information, a collection of entities can describe the
 complete domain. See collections below.
 
-### Uniqueness
+## Uniqueness
 Each published entity needs to be uniquely identified in order to
 avoid confusion. The entity identifier has therefore 3 separate
 elements: a name, a namespace and a version number. An entity named
